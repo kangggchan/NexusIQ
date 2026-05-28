@@ -1,0 +1,469 @@
+{
+  "company": "NovaDrive AI",
+  "generated_at": "2026-05-23T17:00:00Z",
+  "services": [
+    {
+      "service_id": "SVC-LID-001",
+      "name": "lidar-ingestion-service",
+      "project": "LiDAR Object Detection System for Autonomous Vehicles",
+      "team": "LiDAR Perception Team",
+      "owner_employee_id": "EMP-001",
+      "description": "Receives raw point clouds from roof LiDAR and publishes normalized packets to ROS2 topics.",
+      "apis": [
+        {
+          "name": "POST /v1/frames/import",
+          "protocol": "HTTP",
+          "purpose": "Inject recorded point cloud frames for replay."
+        },
+        {
+          "name": "ROS2 /lidar/points_raw",
+          "protocol": "ROS2 topic",
+          "purpose": "Primary point cloud topic consumed by inference."
+        },
+        {
+          "name": "GET /healthz",
+          "protocol": "HTTP",
+          "purpose": "Container health and backlog stats."
+        }
+      ],
+      "dependencies": [],
+      "databases": [
+        "frame-buffer-cache"
+      ],
+      "message_queues": [
+        "ros2:/lidar/points_raw"
+      ],
+      "deployment_targets": [
+        "jetson-orin-dev-01",
+        "jetson-xavier-edge-02"
+      ],
+      "infrastructure": {
+        "runtime": "ROS2 Humble container",
+        "language": "C++",
+        "compute": "Jetson Orin"
+      }
+    },
+    {
+      "service_id": "SVC-LID-002",
+      "name": "object-detection-service",
+      "project": "LiDAR Object Detection System for Autonomous Vehicles",
+      "team": "LiDAR Perception Team",
+      "owner_employee_id": "EMP-002",
+      "description": "Handles PointPillars preprocessing, postprocessing, and box decoding around the TensorRT engine.",
+      "apis": [
+        {
+          "name": "POST /v1/detections/run",
+          "protocol": "HTTP",
+          "purpose": "Replay a frame through preprocessing and decode pipeline."
+        },
+        {
+          "name": "ROS2 /lidar/detections",
+          "protocol": "ROS2 topic",
+          "purpose": "Publishes decoded 3D detections."
+        },
+        {
+          "name": "GET /metrics",
+          "protocol": "HTTP",
+          "purpose": "Exports latency and decode counters."
+        }
+      ],
+      "dependencies": [
+        "lidar-ingestion-service",
+        "edge-inference-service"
+      ],
+      "databases": [
+        "model-registry"
+      ],
+      "message_queues": [
+        "ros2:/lidar/detections"
+      ],
+      "deployment_targets": [
+        "jetson-orin-dev-01",
+        "jetson-xavier-edge-02"
+      ],
+      "infrastructure": {
+        "runtime": "PyTorch + TensorRT container",
+        "language": "Python",
+        "compute": "Jetson Orin GPU"
+      }
+    },
+    {
+      "service_id": "SVC-LID-003",
+      "name": "tracking-service",
+      "project": "LiDAR Object Detection System for Autonomous Vehicles",
+      "team": "LiDAR Perception Team",
+      "owner_employee_id": "EMP-001",
+      "description": "Associates detections into short horizon object tracks and forwards tracked objects to planning mocks.",
+      "apis": [
+        {
+          "name": "ROS2 /lidar/tracks",
+          "protocol": "ROS2 topic",
+          "purpose": "Publishes tracked objects for visualization."
+        },
+        {
+          "name": "POST /v1/tracks/reset",
+          "protocol": "HTTP",
+          "purpose": "Reset tracker state between replay runs."
+        },
+        {
+          "name": "GET /healthz",
+          "protocol": "HTTP",
+          "purpose": "Reports queue depth and stale track count."
+        }
+      ],
+      "dependencies": [
+        "object-detection-service",
+        "telemetry-service"
+      ],
+      "databases": [
+        "track-state-cache"
+      ],
+      "message_queues": [
+        "ros2:/lidar/tracks"
+      ],
+      "deployment_targets": [
+        "jetson-orin-dev-01",
+        "jetson-xavier-edge-02"
+      ],
+      "infrastructure": {
+        "runtime": "ROS2 node",
+        "language": "C++",
+        "compute": "Jetson CPU/GPU hybrid"
+      }
+    },
+    {
+      "service_id": "SVC-LID-004",
+      "name": "edge-inference-service",
+      "project": "LiDAR Object Detection System for Autonomous Vehicles",
+      "team": "LiDAR Perception Team",
+      "owner_employee_id": "EMP-003",
+      "description": "Owns TensorRT engine lifecycle, CUDA stream orchestration, quantized engine loading, and Jetson specific profiling hooks.",
+      "apis": [
+        {
+          "name": "POST /v1/engine/reload",
+          "protocol": "HTTP",
+          "purpose": "Reload TensorRT engine after calibration artifact update."
+        },
+        {
+          "name": "POST /v1/infer",
+          "protocol": "gRPC",
+          "purpose": "Low latency inference endpoint used by detection pipeline."
+        },
+        {
+          "name": "GET /v1/profile/memory",
+          "protocol": "HTTP",
+          "purpose": "Expose GPU allocator and buffer pool counters."
+        }
+      ],
+      "dependencies": [
+        "lidar-ingestion-service",
+        "telemetry-service"
+      ],
+      "databases": [
+        "engine-cache"
+      ],
+      "message_queues": [
+        "grpc:edge-inference"
+      ],
+      "deployment_targets": [
+        "jetson-orin-dev-01",
+        "jetson-xavier-edge-02"
+      ],
+      "infrastructure": {
+        "runtime": "CUDA/TensorRT container",
+        "language": "C++",
+        "compute": "Jetson Orin GPU"
+      }
+    },
+    {
+      "service_id": "SVC-LID-005",
+      "name": "telemetry-service",
+      "project": "LiDAR Object Detection System for Autonomous Vehicles",
+      "team": "LiDAR Perception Team",
+      "owner_employee_id": "EMP-004",
+      "description": "Collects runtime counters, rollout metadata, and replay experiment metrics from LiDAR services.",
+      "apis": [
+        {
+          "name": "POST /v1/events",
+          "protocol": "HTTP",
+          "purpose": "Ingest structured runtime events from edge services."
+        },
+        {
+          "name": "GET /v1/deployments/{service}",
+          "protocol": "HTTP",
+          "purpose": "Query the last rollout summary for a service."
+        },
+        {
+          "name": "GET /metrics",
+          "protocol": "HTTP",
+          "purpose": "Prometheus style telemetry scrape."
+        }
+      ],
+      "dependencies": [],
+      "databases": [
+        "telemetry-timeseries"
+      ],
+      "message_queues": [
+        "nats:telemetry-events"
+      ],
+      "deployment_targets": [
+        "ops-vm-01"
+      ],
+      "infrastructure": {
+        "runtime": "FastAPI container",
+        "language": "Python",
+        "compute": "x86 VM"
+      }
+    },
+    {
+      "service_id": "SVC-ADAS-001",
+      "name": "camera-ingestion-service",
+      "project": "Lane Keeping Assist System using 2D Camera in ADAS ECU",
+      "team": "ADAS Vision Team",
+      "owner_employee_id": "EMP-006",
+      "description": "Captures frames from front camera, timestamps them, and publishes synchronized frame packets to the lane stack.",
+      "apis": [
+        {
+          "name": "POST /v1/replay/frame",
+          "protocol": "HTTP",
+          "purpose": "Replay a recorded camera frame into the ECU rig."
+        },
+        {
+          "name": "IPC /camera/front_center",
+          "protocol": "shared-memory",
+          "purpose": "Primary image stream for lane detection."
+        },
+        {
+          "name": "GET /v1/timing",
+          "protocol": "HTTP",
+          "purpose": "Returns last sensor timestamp and jitter stats."
+        }
+      ],
+      "dependencies": [
+        "calibration-service"
+      ],
+      "databases": [
+        "frame-index-cache"
+      ],
+      "message_queues": [
+        "ipc:camera-front-center"
+      ],
+      "deployment_targets": [
+        "adas-ecu-rig-01",
+        "adas-ecu-rig-02"
+      ],
+      "infrastructure": {
+        "runtime": "Embedded Linux service",
+        "language": "C++",
+        "compute": "NXP prototype ECU"
+      }
+    },
+    {
+      "service_id": "SVC-ADAS-002",
+      "name": "lane-detection-service",
+      "project": "Lane Keeping Assist System using 2D Camera in ADAS ECU",
+      "team": "ADAS Vision Team",
+      "owner_employee_id": "EMP-007",
+      "description": "Runs experimental lane extraction pipelines and emits lane models with confidence values.",
+      "apis": [
+        {
+          "name": "POST /v1/lane/infer",
+          "protocol": "HTTP",
+          "purpose": "Replay a single frame through the current lane model."
+        },
+        {
+          "name": "IPC /lane/model",
+          "protocol": "shared-memory",
+          "purpose": "Publishes lane geometry for the controller."
+        },
+        {
+          "name": "GET /v1/experiments",
+          "protocol": "HTTP",
+          "purpose": "Lists active algorithm toggles."
+        }
+      ],
+      "dependencies": [
+        "camera-ingestion-service",
+        "calibration-service"
+      ],
+      "databases": [
+        "experiment-config"
+      ],
+      "message_queues": [
+        "ipc:lane-model"
+      ],
+      "deployment_targets": [
+        "adas-ecu-rig-01",
+        "adas-ecu-rig-02"
+      ],
+      "infrastructure": {
+        "runtime": "ONNX Runtime process",
+        "language": "C++",
+        "compute": "Prototype ECU"
+      }
+    },
+    {
+      "service_id": "SVC-ADAS-003",
+      "name": "steering-control-service",
+      "project": "Lane Keeping Assist System using 2D Camera in ADAS ECU",
+      "team": "ADAS Vision Team",
+      "owner_employee_id": "EMP-008",
+      "description": "Transforms lane model output into steering corrections and CAN bus commands for the rig controller.",
+      "apis": [
+        {
+          "name": "POST /v1/controller/reset",
+          "protocol": "HTTP",
+          "purpose": "Reset controller integral state during testing."
+        },
+        {
+          "name": "CAN steer.command.v2",
+          "protocol": "CAN",
+          "purpose": "Publishes steering torque setpoints."
+        },
+        {
+          "name": "GET /v1/controller/state",
+          "protocol": "HTTP",
+          "purpose": "Returns current gain profile and jitter counters."
+        }
+      ],
+      "dependencies": [
+        "camera-ingestion-service",
+        "lane-detection-service"
+      ],
+      "databases": [
+        "controller-profile-store"
+      ],
+      "message_queues": [
+        "can:steer.command.v2"
+      ],
+      "deployment_targets": [
+        "adas-ecu-rig-01",
+        "adas-ecu-rig-02"
+      ],
+      "infrastructure": {
+        "runtime": "Embedded Linux daemon",
+        "language": "C++",
+        "compute": "Prototype ECU"
+      }
+    },
+    {
+      "service_id": "SVC-ADAS-004",
+      "name": "calibration-service",
+      "project": "Lane Keeping Assist System using 2D Camera in ADAS ECU",
+      "team": "ADAS Vision Team",
+      "owner_employee_id": "EMP-009",
+      "description": "Stores camera intrinsic and extrinsic calibration bundles and exposes the active profile to perception services.",
+      "apis": [
+        {
+          "name": "POST /v1/calibration/upload",
+          "protocol": "HTTP",
+          "purpose": "Upload a new camera calibration bundle."
+        },
+        {
+          "name": "GET /v1/calibration/active",
+          "protocol": "HTTP",
+          "purpose": "Returns the active calibration profile and checksum."
+        },
+        {
+          "name": "POST /v1/calibration/cache/flush",
+          "protocol": "HTTP",
+          "purpose": "Clears cached profile state after a rig restart."
+        }
+      ],
+      "dependencies": [],
+      "databases": [
+        "calibration-state"
+      ],
+      "message_queues": [
+        "redis:calibration-updates"
+      ],
+      "deployment_targets": [
+        "adas-ecu-rig-01",
+        "adas-ecu-rig-02"
+      ],
+      "infrastructure": {
+        "runtime": "FastAPI sidecar",
+        "language": "Python",
+        "compute": "x86 calibration laptop + ECU sync"
+      }
+    },
+    {
+      "service_id": "SVC-ADAS-005",
+      "name": "diagnostics-service",
+      "project": "Lane Keeping Assist System using 2D Camera in ADAS ECU",
+      "team": "ADAS Vision Team",
+      "owner_employee_id": "EMP-006",
+      "description": "Aggregates prototype rig diagnostics, controller anomalies, and calibration warnings for engineering runs.",
+      "apis": [
+        {
+          "name": "POST /v1/diag/events",
+          "protocol": "HTTP",
+          "purpose": "Store diagnostic events during road replay tests."
+        },
+        {
+          "name": "GET /v1/diag/session/{session_id}",
+          "protocol": "HTTP",
+          "purpose": "Fetch a compact run summary."
+        },
+        {
+          "name": "GET /metrics",
+          "protocol": "HTTP",
+          "purpose": "Expose controller oscillation counters and frame gaps."
+        }
+      ],
+      "dependencies": [
+        "lane-detection-service",
+        "steering-control-service",
+        "calibration-service"
+      ],
+      "databases": [
+        "diagnostics-sqlite"
+      ],
+      "message_queues": [
+        "nats:diag-events"
+      ],
+      "deployment_targets": [
+        "adas-ecu-rig-01",
+        "ops-vm-01"
+      ],
+      "infrastructure": {
+        "runtime": "Sidecar service",
+        "language": "Python",
+        "compute": "x86 VM + ECU sync"
+      }
+    }
+  ],
+  "infrastructure_summary": {
+    "deployment_targets": [
+      "jetson-orin-dev-01",
+      "jetson-xavier-edge-02",
+      "adas-ecu-rig-01",
+      "adas-ecu-rig-02",
+      "ops-vm-01"
+    ],
+    "databases": [
+      "frame-buffer-cache",
+      "model-registry",
+      "track-state-cache",
+      "engine-cache",
+      "telemetry-timeseries",
+      "frame-index-cache",
+      "experiment-config",
+      "controller-profile-store",
+      "calibration-state",
+      "diagnostics-sqlite"
+    ],
+    "message_queues": [
+      "ros2:/lidar/points_raw",
+      "ros2:/lidar/detections",
+      "ros2:/lidar/tracks",
+      "grpc:edge-inference",
+      "nats:telemetry-events",
+      "ipc:camera-front-center",
+      "ipc:lane-model",
+      "can:steer.command.v2",
+      "redis:calibration-updates",
+      "nats:diag-events"
+    ]
+  }
+}

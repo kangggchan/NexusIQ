@@ -1,0 +1,3288 @@
+{
+  "channel": "#adas-vision",
+  "messages": [
+    {
+      "message_id": "MSG-0235",
+      "timestamp": "2026-02-21T01:00:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-008",
+      "employee_name": "Lucas Moreau",
+      "text": "Heads up, ADAS-208 is active. I pushed a rough first pass around camera-ingestion-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "ADAS-208"
+      ],
+      "referenced_commits": [
+        "b4dd56958e9f283963311976df1b5e03431399b7"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "camera-ingestion-service",
+        "steering-control-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0236",
+      "timestamp": "2026-02-21T06:11:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-008",
+      "employee_name": "Lucas Moreau",
+      "text": "Latest branch has b4dd5695. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "ADAS-208"
+      ],
+      "referenced_commits": [
+        "b4dd56958e9f283963311976df1b5e03431399b7"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "camera-ingestion-service",
+        "steering-control-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0237",
+      "timestamp": "2026-02-21T08:22:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "steering oscillation starts only when the faster timing profile is enabled",
+      "referenced_tickets": [
+        "ADAS-208"
+      ],
+      "referenced_commits": [
+        "b4dd56958e9f283963311976df1b5e03431399b7",
+        "cfe46254cdb483e4aee41bdf2f06bf06153d9a77"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "camera-ingestion-service",
+        "steering-control-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0238",
+      "timestamp": "2026-02-21T13:33:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "Keep every commit tied back to ADAS-208. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "ADAS-208"
+      ],
+      "referenced_commits": [
+        "b4dd56958e9f283963311976df1b5e03431399b7",
+        "cfe46254cdb483e4aee41bdf2f06bf06153d9a77"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "camera-ingestion-service",
+        "steering-control-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0239",
+      "timestamp": "2026-02-21T18:44:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Small ops note: if this touches steering-control-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "ADAS-208"
+      ],
+      "referenced_commits": [
+        "b4dd56958e9f283963311976df1b5e03431399b7",
+        "cfe46254cdb483e4aee41bdf2f06bf06153d9a77"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "camera-ingestion-service",
+        "steering-control-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0240",
+      "timestamp": "2026-02-21T20:55:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-008",
+      "employee_name": "Lucas Moreau",
+      "text": "fwiw, diagnostics reports controller delta spikes without lane confidence collapsing. I do not think that is the whole story, but it keeps showing up in traces.",
+      "referenced_tickets": [
+        "ADAS-208"
+      ],
+      "referenced_commits": [
+        "b4dd56958e9f283963311976df1b5e03431399b7",
+        "cfe46254cdb483e4aee41bdf2f06bf06153d9a77"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "camera-ingestion-service",
+        "steering-control-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0241",
+      "timestamp": "2026-02-22T04:00:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-008",
+      "employee_name": "Lucas Moreau",
+      "text": "Heads up, ADAS-209 is active. I pushed a rough first pass around steering-control-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "ADAS-209"
+      ],
+      "referenced_commits": [
+        "89a38a2c8ae560a932b189ecf2c8417a03740972"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0242",
+      "timestamp": "2026-02-22T09:11:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-008",
+      "employee_name": "Lucas Moreau",
+      "text": "Latest branch has 89a38a2c. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "ADAS-209"
+      ],
+      "referenced_commits": [
+        "89a38a2c8ae560a932b189ecf2c8417a03740972"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0243",
+      "timestamp": "2026-02-22T11:22:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-008",
+      "employee_name": "Lucas Moreau",
+      "text": "steering oscillation starts only when the faster timing profile is enabled",
+      "referenced_tickets": [
+        "ADAS-209"
+      ],
+      "referenced_commits": [
+        "89a38a2c8ae560a932b189ecf2c8417a03740972",
+        "0283047cdc542907c51ef79c9f217219eba02312"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0244",
+      "timestamp": "2026-02-22T16:33:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "Keep every commit tied back to ADAS-209. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "ADAS-209"
+      ],
+      "referenced_commits": [
+        "89a38a2c8ae560a932b189ecf2c8417a03740972",
+        "0283047cdc542907c51ef79c9f217219eba02312",
+        "eda1f6063249037dfc0d631b5c018a557a6013e3"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0245",
+      "timestamp": "2026-02-22T21:44:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Small ops note: if this touches steering-control-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "ADAS-209"
+      ],
+      "referenced_commits": [
+        "89a38a2c8ae560a932b189ecf2c8417a03740972",
+        "0283047cdc542907c51ef79c9f217219eba02312",
+        "eda1f6063249037dfc0d631b5c018a557a6013e3"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0246",
+      "timestamp": "2026-02-22T23:55:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-008",
+      "employee_name": "Lucas Moreau",
+      "text": "fwiw, diagnostics reports controller delta spikes without lane confidence collapsing. I do not think that is the whole story, but it keeps showing up in traces.",
+      "referenced_tickets": [
+        "ADAS-209"
+      ],
+      "referenced_commits": [
+        "89a38a2c8ae560a932b189ecf2c8417a03740972",
+        "0283047cdc542907c51ef79c9f217219eba02312",
+        "eda1f6063249037dfc0d631b5c018a557a6013e3"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0247",
+      "timestamp": "2026-02-23T10:00:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-007",
+      "employee_name": "Priya Raman",
+      "text": "Heads up, ADAS-210 is active. I pushed a rough first pass around lane-detection-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "ADAS-210"
+      ],
+      "referenced_commits": [
+        "4da5d20b8c494fc53a2c15fc2668ca4c5188a913"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0248",
+      "timestamp": "2026-02-23T15:11:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-007",
+      "employee_name": "Priya Raman",
+      "text": "Latest branch has 4da5d20b. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "ADAS-210"
+      ],
+      "referenced_commits": [
+        "4da5d20b8c494fc53a2c15fc2668ca4c5188a913"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0249",
+      "timestamp": "2026-02-23T17:22:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-007",
+      "employee_name": "Priya Raman",
+      "text": "The tweak in ADAS-210 looks small on paper, but it changes timing just enough that we should watch the next replay closely.",
+      "referenced_tickets": [
+        "ADAS-210"
+      ],
+      "referenced_commits": [
+        "4da5d20b8c494fc53a2c15fc2668ca4c5188a913",
+        "79e5b294354436c8ad8b79765e8232ec8a222fba"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0250",
+      "timestamp": "2026-02-23T22:33:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "Keep every commit tied back to ADAS-210. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "ADAS-210"
+      ],
+      "referenced_commits": [
+        "4da5d20b8c494fc53a2c15fc2668ca4c5188a913",
+        "79e5b294354436c8ad8b79765e8232ec8a222fba",
+        "c2f2026b621de6d6bf05374f6ae55260cb7a137a"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0251",
+      "timestamp": "2026-02-24T03:44:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Small ops note: if this touches lane-detection-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "ADAS-210"
+      ],
+      "referenced_commits": [
+        "4da5d20b8c494fc53a2c15fc2668ca4c5188a913",
+        "79e5b294354436c8ad8b79765e8232ec8a222fba",
+        "c2f2026b621de6d6bf05374f6ae55260cb7a137a"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0252",
+      "timestamp": "2026-02-24T05:55:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-007",
+      "employee_name": "Priya Raman",
+      "text": "I left the change narrow around lane-detection-service. If anyone sees side effects outside that boundary, please drop the replay id in-thread instead of saying it was 'kind of weird'.",
+      "referenced_tickets": [
+        "ADAS-210"
+      ],
+      "referenced_commits": [
+        "4da5d20b8c494fc53a2c15fc2668ca4c5188a913",
+        "79e5b294354436c8ad8b79765e8232ec8a222fba",
+        "c2f2026b621de6d6bf05374f6ae55260cb7a137a"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0253",
+      "timestamp": "2026-02-24T13:00:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "Heads up, ADAS-211 is active. I pushed a rough first pass around calibration-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "ADAS-211"
+      ],
+      "referenced_commits": [
+        "f620c9d2e8de30cd3ea5f01a832e0bae931fba48"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service",
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0254",
+      "timestamp": "2026-02-24T18:11:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "Latest branch has f620c9d2. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "ADAS-211"
+      ],
+      "referenced_commits": [
+        "f620c9d2e8de30cd3ea5f01a832e0bae931fba48"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service",
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0255",
+      "timestamp": "2026-02-24T20:22:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "lane center error is small after cold boot but grows after a warm restart",
+      "referenced_tickets": [
+        "ADAS-211"
+      ],
+      "referenced_commits": [
+        "f620c9d2e8de30cd3ea5f01a832e0bae931fba48",
+        "66b4be252a3e4581bf9b964ebd3f40e974e71056"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service",
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0256",
+      "timestamp": "2026-02-25T01:33:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "Keep every commit tied back to ADAS-211. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "ADAS-211"
+      ],
+      "referenced_commits": [
+        "f620c9d2e8de30cd3ea5f01a832e0bae931fba48",
+        "66b4be252a3e4581bf9b964ebd3f40e974e71056"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service",
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0257",
+      "timestamp": "2026-02-25T06:44:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Small ops note: if this touches diagnostics-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "ADAS-211"
+      ],
+      "referenced_commits": [
+        "f620c9d2e8de30cd3ea5f01a832e0bae931fba48",
+        "66b4be252a3e4581bf9b964ebd3f40e974e71056"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service",
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0258",
+      "timestamp": "2026-02-25T08:55:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "fwiw, active calibration checksum looks correct while reported extrinsic age is stale. I do not think that is the whole story, but it keeps showing up in traces.",
+      "referenced_tickets": [
+        "ADAS-211"
+      ],
+      "referenced_commits": [
+        "f620c9d2e8de30cd3ea5f01a832e0bae931fba48",
+        "66b4be252a3e4581bf9b964ebd3f40e974e71056"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service",
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0259",
+      "timestamp": "2026-02-26T16:00:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "Heads up, ADAS-212 is active. I pushed a rough first pass around calibration-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "ADAS-212"
+      ],
+      "referenced_commits": [
+        "9281d2a5b324160c69e8e4560e0f7f2fcabcf4a6"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0260",
+      "timestamp": "2026-02-26T21:11:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "Latest branch has 9281d2a5. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "ADAS-212"
+      ],
+      "referenced_commits": [
+        "9281d2a5b324160c69e8e4560e0f7f2fcabcf4a6"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0261",
+      "timestamp": "2026-02-26T23:22:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "lane center error is small after cold boot but grows after a warm restart",
+      "referenced_tickets": [
+        "ADAS-212"
+      ],
+      "referenced_commits": [
+        "9281d2a5b324160c69e8e4560e0f7f2fcabcf4a6",
+        "0162305312d1322380485baa941b04037e7abc27"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0262",
+      "timestamp": "2026-02-27T04:33:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "Keep every commit tied back to ADAS-212. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "ADAS-212"
+      ],
+      "referenced_commits": [
+        "9281d2a5b324160c69e8e4560e0f7f2fcabcf4a6",
+        "0162305312d1322380485baa941b04037e7abc27",
+        "8eed07ddba8d598dfe0bf4c5c43f8886e669e2cd"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0263",
+      "timestamp": "2026-02-27T09:44:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Small ops note: if this touches calibration-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "ADAS-212"
+      ],
+      "referenced_commits": [
+        "9281d2a5b324160c69e8e4560e0f7f2fcabcf4a6",
+        "0162305312d1322380485baa941b04037e7abc27",
+        "8eed07ddba8d598dfe0bf4c5c43f8886e669e2cd"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0264",
+      "timestamp": "2026-02-27T11:55:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "fwiw, active calibration checksum looks correct while reported extrinsic age is stale. I do not think that is the whole story, but it keeps showing up in traces.",
+      "referenced_tickets": [
+        "ADAS-212"
+      ],
+      "referenced_commits": [
+        "9281d2a5b324160c69e8e4560e0f7f2fcabcf4a6",
+        "0162305312d1322380485baa941b04037e7abc27",
+        "8eed07ddba8d598dfe0bf4c5c43f8886e669e2cd"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0265",
+      "timestamp": "2026-02-27T19:00:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "Heads up, ADAS-213 is active. I pushed a rough first pass around diagnostics-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "ADAS-213"
+      ],
+      "referenced_commits": [
+        "8a116c801661924d2f9a6ba31e540e12a97f3ff6"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0266",
+      "timestamp": "2026-02-28T00:11:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "Latest branch has 8a116c80. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "ADAS-213"
+      ],
+      "referenced_commits": [
+        "8a116c801661924d2f9a6ba31e540e12a97f3ff6"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0267",
+      "timestamp": "2026-02-28T02:22:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "The tweak in ADAS-213 looks small on paper, but it changes timing just enough that we should watch the next replay closely.",
+      "referenced_tickets": [
+        "ADAS-213"
+      ],
+      "referenced_commits": [
+        "8a116c801661924d2f9a6ba31e540e12a97f3ff6",
+        "d9034444099283fe1ff3ffc78bb85a608f2dc328"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0268",
+      "timestamp": "2026-02-28T07:33:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "Keep every commit tied back to ADAS-213. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "ADAS-213"
+      ],
+      "referenced_commits": [
+        "8a116c801661924d2f9a6ba31e540e12a97f3ff6",
+        "d9034444099283fe1ff3ffc78bb85a608f2dc328",
+        "e19acbe997bd86423f2d8e31b3afa7d7e31b9ba3"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0269",
+      "timestamp": "2026-02-28T12:44:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Small ops note: if this touches diagnostics-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "ADAS-213"
+      ],
+      "referenced_commits": [
+        "8a116c801661924d2f9a6ba31e540e12a97f3ff6",
+        "d9034444099283fe1ff3ffc78bb85a608f2dc328",
+        "e19acbe997bd86423f2d8e31b3afa7d7e31b9ba3"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0270",
+      "timestamp": "2026-02-28T14:55:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "I left the change narrow around diagnostics-service. If anyone sees side effects outside that boundary, please drop the replay id in-thread instead of saying it was 'kind of weird'.",
+      "referenced_tickets": [
+        "ADAS-213"
+      ],
+      "referenced_commits": [
+        "8a116c801661924d2f9a6ba31e540e12a97f3ff6",
+        "d9034444099283fe1ff3ffc78bb85a608f2dc328",
+        "e19acbe997bd86423f2d8e31b3afa7d7e31b9ba3"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0271",
+      "timestamp": "2026-03-01T22:00:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Heads up, ADAS-214 is active. I pushed a rough first pass around camera-ingestion-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "ADAS-214"
+      ],
+      "referenced_commits": [
+        "715356038ad6bc4bdce9f06120dfad8caf31339a"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "camera-ingestion-service",
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0272",
+      "timestamp": "2026-03-02T03:11:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Latest branch has 71535603. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "ADAS-214"
+      ],
+      "referenced_commits": [
+        "715356038ad6bc4bdce9f06120dfad8caf31339a"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "camera-ingestion-service",
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0273",
+      "timestamp": "2026-03-02T05:22:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "steering oscillation starts only when the faster timing profile is enabled",
+      "referenced_tickets": [
+        "ADAS-214"
+      ],
+      "referenced_commits": [
+        "715356038ad6bc4bdce9f06120dfad8caf31339a",
+        "10912fb160977d90a695308660a6c0300d976bd0"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "camera-ingestion-service",
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0274",
+      "timestamp": "2026-03-02T10:33:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "Keep every commit tied back to ADAS-214. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "ADAS-214"
+      ],
+      "referenced_commits": [
+        "715356038ad6bc4bdce9f06120dfad8caf31339a",
+        "10912fb160977d90a695308660a6c0300d976bd0",
+        "3e00595f5e66df809f4b7254652131977b92863a"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "camera-ingestion-service",
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0275",
+      "timestamp": "2026-03-02T15:44:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Small ops note: if this touches diagnostics-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "ADAS-214"
+      ],
+      "referenced_commits": [
+        "715356038ad6bc4bdce9f06120dfad8caf31339a",
+        "10912fb160977d90a695308660a6c0300d976bd0",
+        "3e00595f5e66df809f4b7254652131977b92863a"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "camera-ingestion-service",
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0276",
+      "timestamp": "2026-03-02T17:55:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "fwiw, diagnostics reports controller delta spikes without lane confidence collapsing. I do not think that is the whole story, but it keeps showing up in traces.",
+      "referenced_tickets": [
+        "ADAS-214"
+      ],
+      "referenced_commits": [
+        "715356038ad6bc4bdce9f06120dfad8caf31339a",
+        "10912fb160977d90a695308660a6c0300d976bd0",
+        "3e00595f5e66df809f4b7254652131977b92863a"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "camera-ingestion-service",
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0277",
+      "timestamp": "2026-03-03T01:00:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-007",
+      "employee_name": "Priya Raman",
+      "text": "Heads up, ADAS-215 is active. I pushed a rough first pass around lane-detection-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "ADAS-215"
+      ],
+      "referenced_commits": [
+        "7182b71c21311bbd14afc0a857b8a481a482960d"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0278",
+      "timestamp": "2026-03-03T06:11:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-007",
+      "employee_name": "Priya Raman",
+      "text": "Latest branch has 7182b71c. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "ADAS-215"
+      ],
+      "referenced_commits": [
+        "7182b71c21311bbd14afc0a857b8a481a482960d"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0279",
+      "timestamp": "2026-03-03T08:22:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-007",
+      "employee_name": "Priya Raman",
+      "text": "I can reproduce ADAS-215 on the current branch, but only after a couple of reruns through lane-detection-service.",
+      "referenced_tickets": [
+        "ADAS-215"
+      ],
+      "referenced_commits": [
+        "7182b71c21311bbd14afc0a857b8a481a482960d",
+        "e18a46d5237b6d656de3f9403e1a76665863ece8"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0280",
+      "timestamp": "2026-03-03T13:33:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "Keep every commit tied back to ADAS-215. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "ADAS-215"
+      ],
+      "referenced_commits": [
+        "7182b71c21311bbd14afc0a857b8a481a482960d",
+        "e18a46d5237b6d656de3f9403e1a76665863ece8",
+        "8901e9125f006aeebd7f0c28cfa8ef853390957e"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0281",
+      "timestamp": "2026-03-03T18:44:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Small ops note: if this touches lane-detection-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "ADAS-215"
+      ],
+      "referenced_commits": [
+        "7182b71c21311bbd14afc0a857b8a481a482960d",
+        "e18a46d5237b6d656de3f9403e1a76665863ece8",
+        "8901e9125f006aeebd7f0c28cfa8ef853390957e"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0282",
+      "timestamp": "2026-03-03T20:55:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-007",
+      "employee_name": "Priya Raman",
+      "text": "I left the change narrow around lane-detection-service. If anyone sees side effects outside that boundary, please drop the replay id in-thread instead of saying it was 'kind of weird'.",
+      "referenced_tickets": [
+        "ADAS-215"
+      ],
+      "referenced_commits": [
+        "7182b71c21311bbd14afc0a857b8a481a482960d",
+        "e18a46d5237b6d656de3f9403e1a76665863ece8",
+        "8901e9125f006aeebd7f0c28cfa8ef853390957e"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0283",
+      "timestamp": "2026-03-05T04:00:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "Heads up, ADAS-216 is active. I pushed a rough first pass around steering-control-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "ADAS-216"
+      ],
+      "referenced_commits": [
+        "1bc52272e5094d78d9edb2e30834d4e149369bd3"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service",
+        "camera-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0284",
+      "timestamp": "2026-03-05T09:11:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "Latest branch has 1bc52272. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "ADAS-216"
+      ],
+      "referenced_commits": [
+        "1bc52272e5094d78d9edb2e30834d4e149369bd3"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service",
+        "camera-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0289",
+      "timestamp": "2026-03-05T10:00:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-008",
+      "employee_name": "Lucas Moreau",
+      "text": "Heads up, ADAS-217 is active. I pushed a rough first pass around camera-ingestion-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "ADAS-217"
+      ],
+      "referenced_commits": [
+        "827088e085d57c4464f4c004fc27ab14e3f268b0"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "camera-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0285",
+      "timestamp": "2026-03-05T11:22:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-008",
+      "employee_name": "Lucas Moreau",
+      "text": "steering oscillation starts only when the faster timing profile is enabled",
+      "referenced_tickets": [
+        "ADAS-216"
+      ],
+      "referenced_commits": [
+        "1bc52272e5094d78d9edb2e30834d4e149369bd3",
+        "4bf3d74fa05ea973c0621aae1e9e379cf610f7ed"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service",
+        "camera-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0290",
+      "timestamp": "2026-03-05T15:11:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-008",
+      "employee_name": "Lucas Moreau",
+      "text": "Latest branch has 827088e0. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "ADAS-217"
+      ],
+      "referenced_commits": [
+        "827088e085d57c4464f4c004fc27ab14e3f268b0"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "camera-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0286",
+      "timestamp": "2026-03-05T16:33:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "Keep every commit tied back to ADAS-216. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "ADAS-216"
+      ],
+      "referenced_commits": [
+        "1bc52272e5094d78d9edb2e30834d4e149369bd3",
+        "4bf3d74fa05ea973c0621aae1e9e379cf610f7ed"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service",
+        "camera-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0291",
+      "timestamp": "2026-03-05T17:22:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "steering oscillation starts only when the faster timing profile is enabled",
+      "referenced_tickets": [
+        "ADAS-217"
+      ],
+      "referenced_commits": [
+        "827088e085d57c4464f4c004fc27ab14e3f268b0",
+        "f4835c570f5f0e5b769c08cacb8bf319e61519b8"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "camera-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0287",
+      "timestamp": "2026-03-05T21:44:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Small ops note: if this touches camera-ingestion-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "ADAS-216"
+      ],
+      "referenced_commits": [
+        "1bc52272e5094d78d9edb2e30834d4e149369bd3",
+        "4bf3d74fa05ea973c0621aae1e9e379cf610f7ed"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service",
+        "camera-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0292",
+      "timestamp": "2026-03-05T22:33:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "Keep every commit tied back to ADAS-217. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "ADAS-217"
+      ],
+      "referenced_commits": [
+        "827088e085d57c4464f4c004fc27ab14e3f268b0",
+        "f4835c570f5f0e5b769c08cacb8bf319e61519b8"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "camera-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0288",
+      "timestamp": "2026-03-05T23:55:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "fwiw, diagnostics reports controller delta spikes without lane confidence collapsing. I do not think that is the whole story, but it keeps showing up in traces.",
+      "referenced_tickets": [
+        "ADAS-216"
+      ],
+      "referenced_commits": [
+        "1bc52272e5094d78d9edb2e30834d4e149369bd3",
+        "4bf3d74fa05ea973c0621aae1e9e379cf610f7ed"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service",
+        "camera-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0293",
+      "timestamp": "2026-03-06T03:44:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Small ops note: if this touches camera-ingestion-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "ADAS-217"
+      ],
+      "referenced_commits": [
+        "827088e085d57c4464f4c004fc27ab14e3f268b0",
+        "f4835c570f5f0e5b769c08cacb8bf319e61519b8"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "camera-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0294",
+      "timestamp": "2026-03-06T05:55:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-008",
+      "employee_name": "Lucas Moreau",
+      "text": "fwiw, diagnostics reports controller delta spikes without lane confidence collapsing. I do not think that is the whole story, but it keeps showing up in traces.",
+      "referenced_tickets": [
+        "ADAS-217"
+      ],
+      "referenced_commits": [
+        "827088e085d57c4464f4c004fc27ab14e3f268b0",
+        "f4835c570f5f0e5b769c08cacb8bf319e61519b8"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "camera-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0295",
+      "timestamp": "2026-03-07T13:00:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "Heads up, ADAS-218 is active. I pushed a rough first pass around calibration-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "ADAS-218"
+      ],
+      "referenced_commits": [
+        "24d3d39c8bd7909af0dab0b0a60ae878ee096967"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0296",
+      "timestamp": "2026-03-07T18:11:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "Latest branch has 24d3d39c. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "ADAS-218"
+      ],
+      "referenced_commits": [
+        "24d3d39c8bd7909af0dab0b0a60ae878ee096967"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0297",
+      "timestamp": "2026-03-07T20:22:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "lane center error is small after cold boot but grows after a warm restart",
+      "referenced_tickets": [
+        "ADAS-218"
+      ],
+      "referenced_commits": [
+        "24d3d39c8bd7909af0dab0b0a60ae878ee096967",
+        "f9617a46d442d69a0ad2971a543c504301ef0da3"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0298",
+      "timestamp": "2026-03-08T01:33:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "Keep every commit tied back to ADAS-218. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "ADAS-218"
+      ],
+      "referenced_commits": [
+        "24d3d39c8bd7909af0dab0b0a60ae878ee096967",
+        "f9617a46d442d69a0ad2971a543c504301ef0da3",
+        "bf99cdb0ac5756366d426505d7652260f09d25bd"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0299",
+      "timestamp": "2026-03-08T06:44:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Small ops note: if this touches calibration-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "ADAS-218"
+      ],
+      "referenced_commits": [
+        "24d3d39c8bd7909af0dab0b0a60ae878ee096967",
+        "f9617a46d442d69a0ad2971a543c504301ef0da3",
+        "bf99cdb0ac5756366d426505d7652260f09d25bd"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0300",
+      "timestamp": "2026-03-08T08:55:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "fwiw, active calibration checksum looks correct while reported extrinsic age is stale. I do not think that is the whole story, but it keeps showing up in traces.",
+      "referenced_tickets": [
+        "ADAS-218"
+      ],
+      "referenced_commits": [
+        "24d3d39c8bd7909af0dab0b0a60ae878ee096967",
+        "f9617a46d442d69a0ad2971a543c504301ef0da3",
+        "bf99cdb0ac5756366d426505d7652260f09d25bd"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0301",
+      "timestamp": "2026-03-08T16:00:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "Heads up, ADAS-219 is active. I pushed a rough first pass around diagnostics-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "ADAS-219"
+      ],
+      "referenced_commits": [
+        "01bc0107e6f89ac7dc111ac880fe9ab13e578e3a"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service",
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0302",
+      "timestamp": "2026-03-08T21:11:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "Latest branch has 01bc0107. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "ADAS-219"
+      ],
+      "referenced_commits": [
+        "01bc0107e6f89ac7dc111ac880fe9ab13e578e3a"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service",
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0303",
+      "timestamp": "2026-03-08T23:22:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "The branch for ADAS-219 is usable, but the API shape is still moving and I do not want other work to build against it yet.",
+      "referenced_tickets": [
+        "ADAS-219"
+      ],
+      "referenced_commits": [
+        "01bc0107e6f89ac7dc111ac880fe9ab13e578e3a",
+        "53abcd403a2229a318d35407c896ec57f79ac70b"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service",
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0304",
+      "timestamp": "2026-03-09T04:33:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "Keep every commit tied back to ADAS-219. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "ADAS-219"
+      ],
+      "referenced_commits": [
+        "01bc0107e6f89ac7dc111ac880fe9ab13e578e3a",
+        "53abcd403a2229a318d35407c896ec57f79ac70b",
+        "de864ff50c30f5f595d6ad50918b965665d29bef"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service",
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0305",
+      "timestamp": "2026-03-09T09:44:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Small ops note: if this touches lane-detection-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "ADAS-219"
+      ],
+      "referenced_commits": [
+        "01bc0107e6f89ac7dc111ac880fe9ab13e578e3a",
+        "53abcd403a2229a318d35407c896ec57f79ac70b",
+        "de864ff50c30f5f595d6ad50918b965665d29bef"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service",
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0306",
+      "timestamp": "2026-03-09T11:55:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "I left the change narrow around lane-detection-service. If anyone sees side effects outside that boundary, please drop the replay id in-thread instead of saying it was 'kind of weird'.",
+      "referenced_tickets": [
+        "ADAS-219"
+      ],
+      "referenced_commits": [
+        "01bc0107e6f89ac7dc111ac880fe9ab13e578e3a",
+        "53abcd403a2229a318d35407c896ec57f79ac70b",
+        "de864ff50c30f5f595d6ad50918b965665d29bef"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service",
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0307",
+      "timestamp": "2026-03-10T19:00:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-008",
+      "employee_name": "Lucas Moreau",
+      "text": "Heads up, ADAS-220 is active. I pushed a rough first pass around steering-control-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "ADAS-220"
+      ],
+      "referenced_commits": [
+        "17b55b26e724c563ddd239dc0feb3f9fe118c5d5"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0308",
+      "timestamp": "2026-03-11T00:11:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-008",
+      "employee_name": "Lucas Moreau",
+      "text": "Latest branch has 17b55b26. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "ADAS-220"
+      ],
+      "referenced_commits": [
+        "17b55b26e724c563ddd239dc0feb3f9fe118c5d5"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0309",
+      "timestamp": "2026-03-11T02:22:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-008",
+      "employee_name": "Lucas Moreau",
+      "text": "I can reproduce ADAS-220 on the current branch, but only after a couple of reruns through steering-control-service.",
+      "referenced_tickets": [
+        "ADAS-220"
+      ],
+      "referenced_commits": [
+        "17b55b26e724c563ddd239dc0feb3f9fe118c5d5",
+        "e4668fa0e5fc50a8d9a8e311703421a629707011"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0310",
+      "timestamp": "2026-03-11T07:33:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "Keep every commit tied back to ADAS-220. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "ADAS-220"
+      ],
+      "referenced_commits": [
+        "17b55b26e724c563ddd239dc0feb3f9fe118c5d5",
+        "e4668fa0e5fc50a8d9a8e311703421a629707011",
+        "119baaa335f1b28ad9798ca3061b363ba2ead173"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0311",
+      "timestamp": "2026-03-11T12:44:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Small ops note: if this touches steering-control-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "ADAS-220"
+      ],
+      "referenced_commits": [
+        "17b55b26e724c563ddd239dc0feb3f9fe118c5d5",
+        "e4668fa0e5fc50a8d9a8e311703421a629707011",
+        "119baaa335f1b28ad9798ca3061b363ba2ead173"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0312",
+      "timestamp": "2026-03-11T14:55:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-008",
+      "employee_name": "Lucas Moreau",
+      "text": "I left the change narrow around steering-control-service. If anyone sees side effects outside that boundary, please drop the replay id in-thread instead of saying it was 'kind of weird'.",
+      "referenced_tickets": [
+        "ADAS-220"
+      ],
+      "referenced_commits": [
+        "17b55b26e724c563ddd239dc0feb3f9fe118c5d5",
+        "e4668fa0e5fc50a8d9a8e311703421a629707011",
+        "119baaa335f1b28ad9798ca3061b363ba2ead173"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0313",
+      "timestamp": "2026-03-11T22:00:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Heads up, ADAS-221 is active. I pushed a rough first pass around camera-ingestion-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "ADAS-221"
+      ],
+      "referenced_commits": [
+        "c68e6c02174a542ad80f6c69b022e78f080d3cf7"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "camera-ingestion-service",
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0314",
+      "timestamp": "2026-03-12T03:11:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Latest branch has c68e6c02. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "ADAS-221"
+      ],
+      "referenced_commits": [
+        "c68e6c02174a542ad80f6c69b022e78f080d3cf7"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "camera-ingestion-service",
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0315",
+      "timestamp": "2026-03-12T05:22:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "This is mostly plumbing for ADAS-221, but it touches enough config that I do not trust it without another replay pass.",
+      "referenced_tickets": [
+        "ADAS-221"
+      ],
+      "referenced_commits": [
+        "c68e6c02174a542ad80f6c69b022e78f080d3cf7",
+        "99d4eee79dbb37e00346ec2b4e2b660f49842aa9"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "camera-ingestion-service",
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0316",
+      "timestamp": "2026-03-12T10:33:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "Keep every commit tied back to ADAS-221. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "ADAS-221"
+      ],
+      "referenced_commits": [
+        "c68e6c02174a542ad80f6c69b022e78f080d3cf7",
+        "99d4eee79dbb37e00346ec2b4e2b660f49842aa9"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "camera-ingestion-service",
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0317",
+      "timestamp": "2026-03-12T15:44:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Small ops note: if this touches diagnostics-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "ADAS-221"
+      ],
+      "referenced_commits": [
+        "c68e6c02174a542ad80f6c69b022e78f080d3cf7",
+        "99d4eee79dbb37e00346ec2b4e2b660f49842aa9"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "camera-ingestion-service",
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0318",
+      "timestamp": "2026-03-12T17:55:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "I left the change narrow around diagnostics-service. If anyone sees side effects outside that boundary, please drop the replay id in-thread instead of saying it was 'kind of weird'.",
+      "referenced_tickets": [
+        "ADAS-221"
+      ],
+      "referenced_commits": [
+        "c68e6c02174a542ad80f6c69b022e78f080d3cf7",
+        "99d4eee79dbb37e00346ec2b4e2b660f49842aa9"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "camera-ingestion-service",
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0319",
+      "timestamp": "2026-03-14T01:00:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "Heads up, ADAS-222 is active. I pushed a rough first pass around calibration-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "ADAS-222"
+      ],
+      "referenced_commits": [
+        "3f4726e374d80af99cb76ad350eb2371f33f0919"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0320",
+      "timestamp": "2026-03-14T06:11:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "Latest branch has 3f4726e3. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "ADAS-222"
+      ],
+      "referenced_commits": [
+        "3f4726e374d80af99cb76ad350eb2371f33f0919"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0321",
+      "timestamp": "2026-03-14T08:22:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "lane center error is small after cold boot but grows after a warm restart",
+      "referenced_tickets": [
+        "ADAS-222"
+      ],
+      "referenced_commits": [
+        "3f4726e374d80af99cb76ad350eb2371f33f0919",
+        "b499d3957ca146da1768e8b3449f776eb12ac816"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0322",
+      "timestamp": "2026-03-14T13:33:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "Keep every commit tied back to ADAS-222. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "ADAS-222"
+      ],
+      "referenced_commits": [
+        "3f4726e374d80af99cb76ad350eb2371f33f0919",
+        "b499d3957ca146da1768e8b3449f776eb12ac816",
+        "c43e2e1f3d99fdf388e38a682bbf5018a1d7143c"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0323",
+      "timestamp": "2026-03-14T18:44:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Small ops note: if this touches calibration-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "ADAS-222"
+      ],
+      "referenced_commits": [
+        "3f4726e374d80af99cb76ad350eb2371f33f0919",
+        "b499d3957ca146da1768e8b3449f776eb12ac816",
+        "c43e2e1f3d99fdf388e38a682bbf5018a1d7143c"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0324",
+      "timestamp": "2026-03-14T20:55:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "fwiw, active calibration checksum looks correct while reported extrinsic age is stale. I do not think that is the whole story, but it keeps showing up in traces.",
+      "referenced_tickets": [
+        "ADAS-222"
+      ],
+      "referenced_commits": [
+        "3f4726e374d80af99cb76ad350eb2371f33f0919",
+        "b499d3957ca146da1768e8b3449f776eb12ac816",
+        "c43e2e1f3d99fdf388e38a682bbf5018a1d7143c"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0325",
+      "timestamp": "2026-03-15T04:00:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Heads up, ADAS-223 is active. I pushed a rough first pass around diagnostics-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "ADAS-223"
+      ],
+      "referenced_commits": [
+        "2699d67603c89dd2ba66622363d0edb48708fd4e"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service",
+        "camera-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0326",
+      "timestamp": "2026-03-15T09:11:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Latest branch has 2699d676. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "ADAS-223"
+      ],
+      "referenced_commits": [
+        "2699d67603c89dd2ba66622363d0edb48708fd4e"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service",
+        "camera-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0327",
+      "timestamp": "2026-03-15T11:22:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "steering oscillation starts only when the faster timing profile is enabled",
+      "referenced_tickets": [
+        "ADAS-223"
+      ],
+      "referenced_commits": [
+        "2699d67603c89dd2ba66622363d0edb48708fd4e",
+        "6acb7470481e93cd2c2afccffdadebb8c13625c1"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service",
+        "camera-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0328",
+      "timestamp": "2026-03-15T16:33:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "Keep every commit tied back to ADAS-223. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "ADAS-223"
+      ],
+      "referenced_commits": [
+        "2699d67603c89dd2ba66622363d0edb48708fd4e",
+        "6acb7470481e93cd2c2afccffdadebb8c13625c1",
+        "fff5411e0a57bc2e228f92ce93ab4ea8161252c8"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service",
+        "camera-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0329",
+      "timestamp": "2026-03-15T21:44:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Small ops note: if this touches camera-ingestion-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "ADAS-223"
+      ],
+      "referenced_commits": [
+        "2699d67603c89dd2ba66622363d0edb48708fd4e",
+        "6acb7470481e93cd2c2afccffdadebb8c13625c1",
+        "fff5411e0a57bc2e228f92ce93ab4ea8161252c8"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service",
+        "camera-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0330",
+      "timestamp": "2026-03-15T23:55:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "fwiw, diagnostics reports controller delta spikes without lane confidence collapsing. I do not think that is the whole story, but it keeps showing up in traces.",
+      "referenced_tickets": [
+        "ADAS-223"
+      ],
+      "referenced_commits": [
+        "2699d67603c89dd2ba66622363d0edb48708fd4e",
+        "6acb7470481e93cd2c2afccffdadebb8c13625c1",
+        "fff5411e0a57bc2e228f92ce93ab4ea8161252c8"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service",
+        "camera-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0331",
+      "timestamp": "2026-03-16T10:00:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "Heads up, ADAS-224 is active. I pushed a rough first pass around calibration-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "ADAS-224"
+      ],
+      "referenced_commits": [
+        "69a5a95108a6e4e2fa929a3344d3cefb8191403d"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service",
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0332",
+      "timestamp": "2026-03-16T15:11:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "Latest branch has 69a5a951. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "ADAS-224"
+      ],
+      "referenced_commits": [
+        "69a5a95108a6e4e2fa929a3344d3cefb8191403d"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service",
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0333",
+      "timestamp": "2026-03-16T17:22:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "lane center error is small after cold boot but grows after a warm restart",
+      "referenced_tickets": [
+        "ADAS-224"
+      ],
+      "referenced_commits": [
+        "69a5a95108a6e4e2fa929a3344d3cefb8191403d",
+        "ef2bdc0df9ae1c98f52a316e0c43d1bf0153d7d1"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service",
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0334",
+      "timestamp": "2026-03-16T22:33:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "Keep every commit tied back to ADAS-224. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "ADAS-224"
+      ],
+      "referenced_commits": [
+        "69a5a95108a6e4e2fa929a3344d3cefb8191403d",
+        "ef2bdc0df9ae1c98f52a316e0c43d1bf0153d7d1"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service",
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0335",
+      "timestamp": "2026-03-17T03:44:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Small ops note: if this touches lane-detection-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "ADAS-224"
+      ],
+      "referenced_commits": [
+        "69a5a95108a6e4e2fa929a3344d3cefb8191403d",
+        "ef2bdc0df9ae1c98f52a316e0c43d1bf0153d7d1"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service",
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0336",
+      "timestamp": "2026-03-17T05:55:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "fwiw, active calibration checksum looks correct while reported extrinsic age is stale. I do not think that is the whole story, but it keeps showing up in traces.",
+      "referenced_tickets": [
+        "ADAS-224"
+      ],
+      "referenced_commits": [
+        "69a5a95108a6e4e2fa929a3344d3cefb8191403d",
+        "ef2bdc0df9ae1c98f52a316e0c43d1bf0153d7d1"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service",
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0337",
+      "timestamp": "2026-03-17T13:00:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-008",
+      "employee_name": "Lucas Moreau",
+      "text": "Heads up, ADAS-225 is active. I pushed a rough first pass around steering-control-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "ADAS-225"
+      ],
+      "referenced_commits": [
+        "4e8b111ed97133572ca0e888612a936722a7d40c"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0338",
+      "timestamp": "2026-03-17T18:11:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-008",
+      "employee_name": "Lucas Moreau",
+      "text": "Latest branch has 4e8b111e. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "ADAS-225"
+      ],
+      "referenced_commits": [
+        "4e8b111ed97133572ca0e888612a936722a7d40c"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0339",
+      "timestamp": "2026-03-17T20:22:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-008",
+      "employee_name": "Lucas Moreau",
+      "text": "The branch for ADAS-225 is usable, but the API shape is still moving and I do not want other work to build against it yet.",
+      "referenced_tickets": [
+        "ADAS-225"
+      ],
+      "referenced_commits": [
+        "4e8b111ed97133572ca0e888612a936722a7d40c",
+        "eb5c48fa56a011e11bfbaf8f7b7b6a8cd0ec592d"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0340",
+      "timestamp": "2026-03-18T01:33:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "Keep every commit tied back to ADAS-225. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "ADAS-225"
+      ],
+      "referenced_commits": [
+        "4e8b111ed97133572ca0e888612a936722a7d40c",
+        "eb5c48fa56a011e11bfbaf8f7b7b6a8cd0ec592d",
+        "7bafa8f1254df90b45f56e7d0ffc628a9323eda3"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0341",
+      "timestamp": "2026-03-18T06:44:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Small ops note: if this touches steering-control-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "ADAS-225"
+      ],
+      "referenced_commits": [
+        "4e8b111ed97133572ca0e888612a936722a7d40c",
+        "eb5c48fa56a011e11bfbaf8f7b7b6a8cd0ec592d",
+        "7bafa8f1254df90b45f56e7d0ffc628a9323eda3"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0342",
+      "timestamp": "2026-03-18T08:55:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-008",
+      "employee_name": "Lucas Moreau",
+      "text": "I left the change narrow around steering-control-service. If anyone sees side effects outside that boundary, please drop the replay id in-thread instead of saying it was 'kind of weird'.",
+      "referenced_tickets": [
+        "ADAS-225"
+      ],
+      "referenced_commits": [
+        "4e8b111ed97133572ca0e888612a936722a7d40c",
+        "eb5c48fa56a011e11bfbaf8f7b7b6a8cd0ec592d",
+        "7bafa8f1254df90b45f56e7d0ffc628a9323eda3"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0343",
+      "timestamp": "2026-03-19T16:00:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-007",
+      "employee_name": "Priya Raman",
+      "text": "Heads up, ADAS-226 is active. I pushed a rough first pass around lane-detection-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "ADAS-226"
+      ],
+      "referenced_commits": [
+        "4d370701fe8609ebeccda4e4850bd49c155abdec"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0344",
+      "timestamp": "2026-03-19T21:11:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-007",
+      "employee_name": "Priya Raman",
+      "text": "Latest branch has 4d370701. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "ADAS-226"
+      ],
+      "referenced_commits": [
+        "4d370701fe8609ebeccda4e4850bd49c155abdec"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0345",
+      "timestamp": "2026-03-19T23:22:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-007",
+      "employee_name": "Priya Raman",
+      "text": "I can reproduce ADAS-226 on the current branch, but only after a couple of reruns through lane-detection-service.",
+      "referenced_tickets": [
+        "ADAS-226"
+      ],
+      "referenced_commits": [
+        "4d370701fe8609ebeccda4e4850bd49c155abdec",
+        "468d5088dccda810991ff3bf8eb6368c15d0c5d0"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0346",
+      "timestamp": "2026-03-20T04:33:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "Keep every commit tied back to ADAS-226. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "ADAS-226"
+      ],
+      "referenced_commits": [
+        "4d370701fe8609ebeccda4e4850bd49c155abdec",
+        "468d5088dccda810991ff3bf8eb6368c15d0c5d0",
+        "2af1feedeed8e3b83c294f57760eca09eae5a7b7"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0347",
+      "timestamp": "2026-03-20T09:44:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Small ops note: if this touches lane-detection-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "ADAS-226"
+      ],
+      "referenced_commits": [
+        "4d370701fe8609ebeccda4e4850bd49c155abdec",
+        "468d5088dccda810991ff3bf8eb6368c15d0c5d0",
+        "2af1feedeed8e3b83c294f57760eca09eae5a7b7"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0348",
+      "timestamp": "2026-03-20T11:55:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-007",
+      "employee_name": "Priya Raman",
+      "text": "I left the change narrow around lane-detection-service. If anyone sees side effects outside that boundary, please drop the replay id in-thread instead of saying it was 'kind of weird'.",
+      "referenced_tickets": [
+        "ADAS-226"
+      ],
+      "referenced_commits": [
+        "4d370701fe8609ebeccda4e4850bd49c155abdec",
+        "468d5088dccda810991ff3bf8eb6368c15d0c5d0",
+        "2af1feedeed8e3b83c294f57760eca09eae5a7b7"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0349",
+      "timestamp": "2026-03-20T19:00:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Heads up, ADAS-227 is active. I pushed a rough first pass around steering-control-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "ADAS-227"
+      ],
+      "referenced_commits": [
+        "2dd7f220b6aa64e892a3ad98b0bd3cf0ebf07eb1"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service",
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0350",
+      "timestamp": "2026-03-21T00:11:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Latest branch has 2dd7f220. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "ADAS-227"
+      ],
+      "referenced_commits": [
+        "2dd7f220b6aa64e892a3ad98b0bd3cf0ebf07eb1"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service",
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0193",
+      "timestamp": "2026-03-21T01:00:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-007",
+      "employee_name": "Priya Raman",
+      "text": "Heads up, ADAS-201 is active. I pushed a rough first pass around lane-detection-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "ADAS-201"
+      ],
+      "referenced_commits": [
+        "1ddf763f9eae54916bd2e784b46f732d32d6fb1e"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0351",
+      "timestamp": "2026-03-21T02:22:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-008",
+      "employee_name": "Lucas Moreau",
+      "text": "steering oscillation starts only when the faster timing profile is enabled",
+      "referenced_tickets": [
+        "ADAS-227"
+      ],
+      "referenced_commits": [
+        "2dd7f220b6aa64e892a3ad98b0bd3cf0ebf07eb1",
+        "03d08d74248dde27f4bdeee106a39e17c82b7895"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service",
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0194",
+      "timestamp": "2026-03-21T06:11:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-007",
+      "employee_name": "Priya Raman",
+      "text": "Latest branch has 1ddf763f. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "ADAS-201"
+      ],
+      "referenced_commits": [
+        "1ddf763f9eae54916bd2e784b46f732d32d6fb1e"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0352",
+      "timestamp": "2026-03-21T07:33:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "Keep every commit tied back to ADAS-227. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "ADAS-227"
+      ],
+      "referenced_commits": [
+        "2dd7f220b6aa64e892a3ad98b0bd3cf0ebf07eb1",
+        "03d08d74248dde27f4bdeee106a39e17c82b7895"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service",
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0195",
+      "timestamp": "2026-03-21T08:22:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-007",
+      "employee_name": "Priya Raman",
+      "text": "The branch for ADAS-201 is usable, but the API shape is still moving and I do not want other work to build against it yet.",
+      "referenced_tickets": [
+        "ADAS-201"
+      ],
+      "referenced_commits": [
+        "1ddf763f9eae54916bd2e784b46f732d32d6fb1e",
+        "933a42210adce7537566e95225e50c64d2c03045"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0353",
+      "timestamp": "2026-03-21T12:44:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Small ops note: if this touches diagnostics-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "ADAS-227"
+      ],
+      "referenced_commits": [
+        "2dd7f220b6aa64e892a3ad98b0bd3cf0ebf07eb1",
+        "03d08d74248dde27f4bdeee106a39e17c82b7895"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service",
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0196",
+      "timestamp": "2026-03-21T13:33:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "Keep every commit tied back to ADAS-201. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "ADAS-201"
+      ],
+      "referenced_commits": [
+        "1ddf763f9eae54916bd2e784b46f732d32d6fb1e",
+        "933a42210adce7537566e95225e50c64d2c03045",
+        "caf5b69fe7b31d6de07e55e327809c4ba18bdf51"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0354",
+      "timestamp": "2026-03-21T14:55:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "fwiw, diagnostics reports controller delta spikes without lane confidence collapsing. I do not think that is the whole story, but it keeps showing up in traces.",
+      "referenced_tickets": [
+        "ADAS-227"
+      ],
+      "referenced_commits": [
+        "2dd7f220b6aa64e892a3ad98b0bd3cf0ebf07eb1",
+        "03d08d74248dde27f4bdeee106a39e17c82b7895"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service",
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0197",
+      "timestamp": "2026-03-21T18:44:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Small ops note: if this touches lane-detection-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "ADAS-201"
+      ],
+      "referenced_commits": [
+        "1ddf763f9eae54916bd2e784b46f732d32d6fb1e",
+        "933a42210adce7537566e95225e50c64d2c03045",
+        "caf5b69fe7b31d6de07e55e327809c4ba18bdf51"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0198",
+      "timestamp": "2026-03-21T20:55:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-007",
+      "employee_name": "Priya Raman",
+      "text": "I left the change narrow around lane-detection-service. If anyone sees side effects outside that boundary, please drop the replay id in-thread instead of saying it was 'kind of weird'.",
+      "referenced_tickets": [
+        "ADAS-201"
+      ],
+      "referenced_commits": [
+        "1ddf763f9eae54916bd2e784b46f732d32d6fb1e",
+        "933a42210adce7537566e95225e50c64d2c03045",
+        "caf5b69fe7b31d6de07e55e327809c4ba18bdf51"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0355",
+      "timestamp": "2026-03-22T22:00:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "Heads up, ADAS-228 is active. I pushed a rough first pass around diagnostics-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "ADAS-228"
+      ],
+      "referenced_commits": [
+        "69672016758d56469d8ab95897a6cd62e9604537"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service",
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0356",
+      "timestamp": "2026-03-23T03:11:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "Latest branch has 69672016. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "ADAS-228"
+      ],
+      "referenced_commits": [
+        "69672016758d56469d8ab95897a6cd62e9604537"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service",
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0199",
+      "timestamp": "2026-03-23T04:00:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "Heads up, ADAS-202 is active. I pushed a rough first pass around calibration-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "ADAS-202"
+      ],
+      "referenced_commits": [
+        "609c6a6086ef565dd4ce8760dda34500d07fc92e"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service",
+        "camera-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0357",
+      "timestamp": "2026-03-23T05:22:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "This is mostly plumbing for ADAS-228, but it touches enough config that I do not trust it without another replay pass.",
+      "referenced_tickets": [
+        "ADAS-228"
+      ],
+      "referenced_commits": [
+        "69672016758d56469d8ab95897a6cd62e9604537",
+        "3cbded3c552f8de4965b7dbe531b2877c44bd604"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service",
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0200",
+      "timestamp": "2026-03-23T09:11:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "Latest branch has 609c6a60. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "ADAS-202"
+      ],
+      "referenced_commits": [
+        "609c6a6086ef565dd4ce8760dda34500d07fc92e"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service",
+        "camera-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0205",
+      "timestamp": "2026-03-23T10:00:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "Heads up, ADAS-203 is active. I pushed a rough first pass around calibration-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "ADAS-203"
+      ],
+      "referenced_commits": [
+        "aecea41221211513017c317f31157d03131a5a02"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service",
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0358",
+      "timestamp": "2026-03-23T10:33:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "Keep every commit tied back to ADAS-228. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "ADAS-228"
+      ],
+      "referenced_commits": [
+        "69672016758d56469d8ab95897a6cd62e9604537",
+        "3cbded3c552f8de4965b7dbe531b2877c44bd604"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service",
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0201",
+      "timestamp": "2026-03-23T11:22:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "lane center error is small after cold boot but grows after a warm restart",
+      "referenced_tickets": [
+        "ADAS-202"
+      ],
+      "referenced_commits": [
+        "609c6a6086ef565dd4ce8760dda34500d07fc92e",
+        "fad4a8bb82b64208bf6bc5eff24993c141aff9a9"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service",
+        "camera-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0206",
+      "timestamp": "2026-03-23T15:11:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "Latest branch has aecea412. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "ADAS-203"
+      ],
+      "referenced_commits": [
+        "aecea41221211513017c317f31157d03131a5a02"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service",
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0359",
+      "timestamp": "2026-03-23T15:44:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Small ops note: if this touches calibration-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "ADAS-228"
+      ],
+      "referenced_commits": [
+        "69672016758d56469d8ab95897a6cd62e9604537",
+        "3cbded3c552f8de4965b7dbe531b2877c44bd604"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service",
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0202",
+      "timestamp": "2026-03-23T16:33:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "Keep every commit tied back to ADAS-202. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "ADAS-202"
+      ],
+      "referenced_commits": [
+        "609c6a6086ef565dd4ce8760dda34500d07fc92e",
+        "fad4a8bb82b64208bf6bc5eff24993c141aff9a9"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service",
+        "camera-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0207",
+      "timestamp": "2026-03-23T17:22:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "lane center error is small after cold boot but grows after a warm restart",
+      "referenced_tickets": [
+        "ADAS-203"
+      ],
+      "referenced_commits": [
+        "aecea41221211513017c317f31157d03131a5a02",
+        "e4cb722f1b993ea6b58029b234c9fe5b3afd1d2e"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service",
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0360",
+      "timestamp": "2026-03-23T17:55:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "I left the change narrow around calibration-service. If anyone sees side effects outside that boundary, please drop the replay id in-thread instead of saying it was 'kind of weird'.",
+      "referenced_tickets": [
+        "ADAS-228"
+      ],
+      "referenced_commits": [
+        "69672016758d56469d8ab95897a6cd62e9604537",
+        "3cbded3c552f8de4965b7dbe531b2877c44bd604"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service",
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0203",
+      "timestamp": "2026-03-23T21:44:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Small ops note: if this touches camera-ingestion-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "ADAS-202"
+      ],
+      "referenced_commits": [
+        "609c6a6086ef565dd4ce8760dda34500d07fc92e",
+        "fad4a8bb82b64208bf6bc5eff24993c141aff9a9"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service",
+        "camera-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0208",
+      "timestamp": "2026-03-23T22:33:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "Keep every commit tied back to ADAS-203. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "ADAS-203"
+      ],
+      "referenced_commits": [
+        "aecea41221211513017c317f31157d03131a5a02",
+        "e4cb722f1b993ea6b58029b234c9fe5b3afd1d2e",
+        "b181b67a93e940b3a958f50a3333248bf31618bf"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service",
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0204",
+      "timestamp": "2026-03-23T23:55:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "fwiw, active calibration checksum looks correct while reported extrinsic age is stale. I do not think that is the whole story, but it keeps showing up in traces.",
+      "referenced_tickets": [
+        "ADAS-202"
+      ],
+      "referenced_commits": [
+        "609c6a6086ef565dd4ce8760dda34500d07fc92e",
+        "fad4a8bb82b64208bf6bc5eff24993c141aff9a9"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service",
+        "camera-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0209",
+      "timestamp": "2026-03-24T03:44:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Small ops note: if this touches lane-detection-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "ADAS-203"
+      ],
+      "referenced_commits": [
+        "aecea41221211513017c317f31157d03131a5a02",
+        "e4cb722f1b993ea6b58029b234c9fe5b3afd1d2e",
+        "b181b67a93e940b3a958f50a3333248bf31618bf"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service",
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0210",
+      "timestamp": "2026-03-24T05:55:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "fwiw, active calibration checksum looks correct while reported extrinsic age is stale. I do not think that is the whole story, but it keeps showing up in traces.",
+      "referenced_tickets": [
+        "ADAS-203"
+      ],
+      "referenced_commits": [
+        "aecea41221211513017c317f31157d03131a5a02",
+        "e4cb722f1b993ea6b58029b234c9fe5b3afd1d2e",
+        "b181b67a93e940b3a958f50a3333248bf31618bf"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service",
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0211",
+      "timestamp": "2026-03-25T13:00:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-007",
+      "employee_name": "Priya Raman",
+      "text": "Heads up, ADAS-204 is active. I pushed a rough first pass around lane-detection-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "ADAS-204"
+      ],
+      "referenced_commits": [
+        "f874892d18d51258a71c359a8d89a837ab4cd967"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0212",
+      "timestamp": "2026-03-25T18:11:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-007",
+      "employee_name": "Priya Raman",
+      "text": "Latest branch has f874892d. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "ADAS-204"
+      ],
+      "referenced_commits": [
+        "f874892d18d51258a71c359a8d89a837ab4cd967"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0213",
+      "timestamp": "2026-03-25T20:22:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-007",
+      "employee_name": "Priya Raman",
+      "text": "The tweak in ADAS-204 looks small on paper, but it changes timing just enough that we should watch the next replay closely.",
+      "referenced_tickets": [
+        "ADAS-204"
+      ],
+      "referenced_commits": [
+        "f874892d18d51258a71c359a8d89a837ab4cd967",
+        "acb5e0f527fb4486a7a881d05a4aab90b91c5021"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0214",
+      "timestamp": "2026-03-26T01:33:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "Keep every commit tied back to ADAS-204. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "ADAS-204"
+      ],
+      "referenced_commits": [
+        "f874892d18d51258a71c359a8d89a837ab4cd967",
+        "acb5e0f527fb4486a7a881d05a4aab90b91c5021",
+        "bf1fac0af9fb58a3a555022915220def7ca9eeb5"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0215",
+      "timestamp": "2026-03-26T06:44:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Small ops note: if this touches lane-detection-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "ADAS-204"
+      ],
+      "referenced_commits": [
+        "f874892d18d51258a71c359a8d89a837ab4cd967",
+        "acb5e0f527fb4486a7a881d05a4aab90b91c5021",
+        "bf1fac0af9fb58a3a555022915220def7ca9eeb5"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0216",
+      "timestamp": "2026-03-26T08:55:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-007",
+      "employee_name": "Priya Raman",
+      "text": "I left the change narrow around lane-detection-service. If anyone sees side effects outside that boundary, please drop the replay id in-thread instead of saying it was 'kind of weird'.",
+      "referenced_tickets": [
+        "ADAS-204"
+      ],
+      "referenced_commits": [
+        "f874892d18d51258a71c359a8d89a837ab4cd967",
+        "acb5e0f527fb4486a7a881d05a4aab90b91c5021",
+        "bf1fac0af9fb58a3a555022915220def7ca9eeb5"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0217",
+      "timestamp": "2026-03-26T16:00:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Heads up, ADAS-205 is active. I pushed a rough first pass around steering-control-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "ADAS-205"
+      ],
+      "referenced_commits": [
+        "6637d5ce8f4a7636787dffba7328cf4d8c0e5c4f"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service",
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0218",
+      "timestamp": "2026-03-26T21:11:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Latest branch has 6637d5ce. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "ADAS-205"
+      ],
+      "referenced_commits": [
+        "6637d5ce8f4a7636787dffba7328cf4d8c0e5c4f"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service",
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0219",
+      "timestamp": "2026-03-26T23:22:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-008",
+      "employee_name": "Lucas Moreau",
+      "text": "This is mostly plumbing for ADAS-205, but it touches enough config that I do not trust it without another replay pass.",
+      "referenced_tickets": [
+        "ADAS-205"
+      ],
+      "referenced_commits": [
+        "6637d5ce8f4a7636787dffba7328cf4d8c0e5c4f",
+        "d3df2980d4c632e6e63830189a3f7fe695bf4f2e"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service",
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0220",
+      "timestamp": "2026-03-27T04:33:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "Keep every commit tied back to ADAS-205. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "ADAS-205"
+      ],
+      "referenced_commits": [
+        "6637d5ce8f4a7636787dffba7328cf4d8c0e5c4f",
+        "d3df2980d4c632e6e63830189a3f7fe695bf4f2e"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service",
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0221",
+      "timestamp": "2026-03-27T09:44:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Small ops note: if this touches diagnostics-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "ADAS-205"
+      ],
+      "referenced_commits": [
+        "6637d5ce8f4a7636787dffba7328cf4d8c0e5c4f",
+        "d3df2980d4c632e6e63830189a3f7fe695bf4f2e"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service",
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0222",
+      "timestamp": "2026-03-27T11:55:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-008",
+      "employee_name": "Lucas Moreau",
+      "text": "I left the change narrow around diagnostics-service. If anyone sees side effects outside that boundary, please drop the replay id in-thread instead of saying it was 'kind of weird'.",
+      "referenced_tickets": [
+        "ADAS-205"
+      ],
+      "referenced_commits": [
+        "6637d5ce8f4a7636787dffba7328cf4d8c0e5c4f",
+        "d3df2980d4c632e6e63830189a3f7fe695bf4f2e"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service",
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0223",
+      "timestamp": "2026-03-28T19:00:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "Heads up, ADAS-206 is active. I pushed a rough first pass around calibration-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "ADAS-206"
+      ],
+      "referenced_commits": [
+        "30dfb6f8cf6443a31c724a2aec84c630dc6c83ba"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service",
+        "lane-detection-service",
+        "camera-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0224",
+      "timestamp": "2026-03-29T00:11:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "Latest branch has 30dfb6f8. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "ADAS-206"
+      ],
+      "referenced_commits": [
+        "30dfb6f8cf6443a31c724a2aec84c630dc6c83ba"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service",
+        "lane-detection-service",
+        "camera-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0225",
+      "timestamp": "2026-03-29T02:22:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "lane center error is small after cold boot but grows after a warm restart",
+      "referenced_tickets": [
+        "ADAS-206"
+      ],
+      "referenced_commits": [
+        "30dfb6f8cf6443a31c724a2aec84c630dc6c83ba",
+        "589d72c397a2a5f4c9c7a062d317692fef046855"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service",
+        "lane-detection-service",
+        "camera-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0226",
+      "timestamp": "2026-03-29T07:33:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "Keep every commit tied back to ADAS-206. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "ADAS-206"
+      ],
+      "referenced_commits": [
+        "30dfb6f8cf6443a31c724a2aec84c630dc6c83ba",
+        "589d72c397a2a5f4c9c7a062d317692fef046855"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service",
+        "lane-detection-service",
+        "camera-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0227",
+      "timestamp": "2026-03-29T12:44:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Small ops note: if this touches camera-ingestion-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "ADAS-206"
+      ],
+      "referenced_commits": [
+        "30dfb6f8cf6443a31c724a2aec84c630dc6c83ba",
+        "589d72c397a2a5f4c9c7a062d317692fef046855"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service",
+        "lane-detection-service",
+        "camera-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0228",
+      "timestamp": "2026-03-29T14:55:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "fwiw, active calibration checksum looks correct while reported extrinsic age is stale. I do not think that is the whole story, but it keeps showing up in traces.",
+      "referenced_tickets": [
+        "ADAS-206"
+      ],
+      "referenced_commits": [
+        "30dfb6f8cf6443a31c724a2aec84c630dc6c83ba",
+        "589d72c397a2a5f4c9c7a062d317692fef046855"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service",
+        "lane-detection-service",
+        "camera-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0229",
+      "timestamp": "2026-03-29T22:00:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-008",
+      "employee_name": "Lucas Moreau",
+      "text": "Heads up, ADAS-207 is active. I pushed a rough first pass around steering-control-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "ADAS-207"
+      ],
+      "referenced_commits": [
+        "c775fe3139bdc69e5b685b6fe4a39050a40d4a4b"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service",
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0230",
+      "timestamp": "2026-03-30T03:11:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-008",
+      "employee_name": "Lucas Moreau",
+      "text": "Latest branch has c775fe31. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "ADAS-207"
+      ],
+      "referenced_commits": [
+        "c775fe3139bdc69e5b685b6fe4a39050a40d4a4b"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service",
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0231",
+      "timestamp": "2026-03-30T05:22:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-008",
+      "employee_name": "Lucas Moreau",
+      "text": "steering oscillation starts only when the faster timing profile is enabled",
+      "referenced_tickets": [
+        "ADAS-207"
+      ],
+      "referenced_commits": [
+        "c775fe3139bdc69e5b685b6fe4a39050a40d4a4b",
+        "0741d4661c1f71bc9ff4854f9d60388152f98686"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service",
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0232",
+      "timestamp": "2026-03-30T10:33:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "Keep every commit tied back to ADAS-207. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "ADAS-207"
+      ],
+      "referenced_commits": [
+        "c775fe3139bdc69e5b685b6fe4a39050a40d4a4b",
+        "0741d4661c1f71bc9ff4854f9d60388152f98686",
+        "bdb65544c4793c8669191b0d662029d43e7aee54"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service",
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0233",
+      "timestamp": "2026-03-30T15:44:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Small ops note: if this touches diagnostics-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "ADAS-207"
+      ],
+      "referenced_commits": [
+        "c775fe3139bdc69e5b685b6fe4a39050a40d4a4b",
+        "0741d4661c1f71bc9ff4854f9d60388152f98686",
+        "bdb65544c4793c8669191b0d662029d43e7aee54"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service",
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0234",
+      "timestamp": "2026-03-30T17:55:00Z",
+      "channel": "#adas-vision",
+      "employee_id": "EMP-008",
+      "employee_name": "Lucas Moreau",
+      "text": "fwiw, diagnostics reports controller delta spikes without lane confidence collapsing. I do not think that is the whole story, but it keeps showing up in traces.",
+      "referenced_tickets": [
+        "ADAS-207"
+      ],
+      "referenced_commits": [
+        "c775fe3139bdc69e5b685b6fe4a39050a40d4a4b",
+        "0741d4661c1f71bc9ff4854f9d60388152f98686",
+        "bdb65544c4793c8669191b0d662029d43e7aee54"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service",
+        "diagnostics-service"
+      ]
+    }
+  ]
+}

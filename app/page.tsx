@@ -1,490 +1,367 @@
 'use client';
 
-import React, { useState, useMemo, useEffect, useCallback } from 'react';
+import React, { useState, useMemo, useEffect, useCallback, useRef } from 'react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Eye, X } from 'lucide-react';
-import { Switch } from '@/components/ui/switch';
-import { Label } from '@/components/ui/label';
+import { X, Search, Activity, Zap, AlertTriangle } from 'lucide-react';
 import GraphVisualizer from '@/components/GraphVisualizer';
-import Inspector from '@/components/Inspector';
-import ChatPanel from '@/components/ChatPanel';
-import CorpusPanel from '@/components/CorpusPanel';
+import InvestigationChat from '@/components/nexusiq/InvestigationChat';
+import AgentActivity from '@/components/nexusiq/AgentActivity';
+import IncidentTimeline from '@/components/nexusiq/IncidentTimeline';
+import ContextExplorer from '@/components/nexusiq/ContextExplorer';
+import ServiceInspector from '@/components/nexusiq/ServiceInspector';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
-// SettingsModal removed
-import { GraphDataLoader, GraphData, type Community } from '../lib/graphData';
+import { Badge } from '@/components/ui/badge';
+import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from '@/components/ui/resizable';
+import { type Entity, type Relationship, type Community, type GraphData } from '../lib/graphData';
 import { ForceSimulation3D, GraphLayout, Node3D, defaultForceConfig } from '../lib/forceSimulation';
 
 export default function Home() {
+  // ─── Graph state ────────────────────────────────────────────────────────
   const [layout, setLayout] = useState<GraphLayout | null>(null);
-  const [graphData, setGraphData] = useState<GraphData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
-  const [status, setStatus] = useState<string>('Initializing...');
-  // track corpus presence implicitly; no explicit corpusState passed to visualizer
-  
-  // Selection state
+  const [error] = useState<string | null>(null);
+  const [status, setStatus] = useState<string>('Loading NexusIQ data...');
   const [selectedNode, setSelectedNode] = useState<Node3D | null>(null);
   const [hoveredNode, setHoveredNode] = useState<Node3D | null>(null);
-  
-  // Filter states
+  const [searchTerm, setSearchTerm] = useState<string>('');
   const [selectedEntityTypes] = useState<Set<string>>(new Set());
   const [minRelationshipWeight] = useState<number>(1);
-  // showCommunityBoundaries state removed
-  const [inspectorMode, setInspectorMode] = useState<boolean>(false);
-  const [selectedLevel] = useState<number | null>(null);
-  const [searchTerm, setSearchTerm] = useState<string>('');
-  const [leftTab, setLeftTab] = useState<'corpus' | 'chat' | 'inspector'>('corpus');
-  const [lastNonInspectorTab, setLastNonInspectorTab] = useState<'corpus' | 'chat'>('corpus');
-  const [ragHighlightedNodeIds] = useState<Set<string>>(new Set());
-  
-  // Settings modal removed
-  
-  // Simulation instance not kept in state
-  
-  // Ref for search input to enable focus
-  const searchInputRef = React.useRef<HTMLInputElement>(null);
 
-  // Check corpus state and load data intelligently
+  // ─── NexusIQ UI state ───────────────────────────────────────────────────
+  const [leftTab, setLeftTab] = useState<'chat' | 'agents'>('chat');
+  const [rightTab, setRightTab] = useState<'timeline' | 'context' | 'inspector'>('timeline');
+  const [highlightedServiceNames, setHighlightedServiceNames] = useState<string[]>([]);
+  const [focusedIncidentId, setFocusedIncidentId] = useState<string | null>(null);
+  const [contextQuery, setContextQuery] = useState<string>('');
+  const [queryCount, setQueryCount] = useState<number>(0);
+  const [nodeCount, setNodeCount] = useState<number>(0);
+
+  const searchInputRef = useRef<HTMLInputElement>(null);
+
+  // ─── Load NexusIQ graph data ─────────────────────────────────────────────
   useEffect(() => {
-    const loadData = async () => {
+    const load = async () => {
       try {
         setLoading(true);
-        
-        // First check if we have any corpus data
-        setStatus('Checking for indexed data...');
-        const corpusRes = await fetch('/api/corpus/state', { cache: 'no-store' });
-        if (corpusRes.ok) {
-          const corpus = await corpusRes.json();
-          
-          // If no uploads or no output stats, show getting started instead of loading
-          const hasUploads = corpus.uploads && corpus.uploads.length > 0;
-          const hasIndex = corpus.outputStats && ((corpus.outputStats.entities ?? 0) + (corpus.outputStats.relationships ?? 0) + (corpus.outputStats.communities ?? 0) + (corpus.outputStats.text_units ?? 0) > 0);
-          
-          if (!hasUploads || !hasIndex) {
-            setLoading(false);
-            return; // Show getting started card
-          }
-        }
+        setStatus('Fetching service dependency data...');
 
-        setStatus('Loading JSON data files...');
+        const res = await fetch('/api/nexusiq/graph', { cache: 'no-store' });
+        if (!res.ok) throw new Error(`Graph API ${res.status}`);
 
-        const loader = new GraphDataLoader('/api/data');
-        const graphData = await loader.loadGraphData();
+        const raw = await res.json() as {
+          entities: Entity[];
+          relationships: Relationship[];
+          communities: Community[];
+          communityReports: [];
+        };
 
-        setStatus('Processing graph structure...');
-        
-        const newSimulation = new ForceSimulation3D(defaultForceConfig);
-        const layout = await newSimulation.generateLayout(graphData);
-        
-        // not retaining simulation in state
+        setStatus('Computing 3D force layout...');
+        const graphData: GraphData = {
+          entities: raw.entities,
+          relationships: raw.relationships,
+          communities: raw.communities,
+          communityReports: raw.communityReports,
+        };
 
-        setStatus('Rendering visualization...');
-        
-        setLayout(layout);
-        setGraphData(graphData);
+        setNodeCount(raw.entities.length);
+
+        const sim = new ForceSimulation3D(defaultForceConfig);
+        const computed = await sim.generateLayout(graphData);
+
+        setLayout(computed);
+        setStatus('');
         setLoading(false);
-
-      } catch (error) {
-        console.error('Error loading graph data:', error);
+      } catch (err) {
+        console.error('[NexusIQ graph]', err);
+        setStatus('Failed to load graph. Check /api/nexusiq/graph.');
         setLoading(false);
-        // Don't set error - just fall back to no data state
       }
     };
-
-    loadData();
+    load();
   }, []);
 
-  // Hot-reload graph data when the corpus pipeline finishes
-  const reloadGraphData = useCallback(async () => {
-    try {
-      setStatus('Reloading graph data...');
-      const loader = new GraphDataLoader('/api/data');
-      const newGraph = await loader.loadGraphData();
-      const sim = new ForceSimulation3D(defaultForceConfig);
-      const newLayout = await sim.generateLayout(newGraph);
-      // not retaining simulation in state
-      setLayout(newLayout);
-      setGraphData(newGraph);
-      setStatus('Graph reloaded');
-    } catch (err) {
-      console.warn('Hot reload failed:', err);
-    }
-  }, []);
-
+  // ─── Keyboard shortcuts ──────────────────────────────────────────────────
   useEffect(() => {
-    const handler = () => reloadGraphData();
-    window.addEventListener('graph-data-updated', handler);
-    const clearHandler = () => {
-      setGraphData(null);
-      setLayout(null);
-      setStatus('No graph loaded');
-      setSelectedNode(null);
-    };
-    window.addEventListener('graph-data-cleared', clearHandler);
-    return () => {
-      window.removeEventListener('graph-data-updated', handler);
-      window.removeEventListener('graph-data-cleared', clearHandler);
-    };
-  }, [reloadGraphData]);
-
-  // Handle keyboard shortcuts
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      // ESC to unselect node
-      if (event.key === 'Escape') {
-        setSelectedNode(null);
-      }
-      
-      // Cmd+K (Mac) or Ctrl+K (Windows/Linux) to focus search
-      if ((event.metaKey || event.ctrlKey) && event.key === 'k') {
-        event.preventDefault();
-        searchInputRef.current?.focus();
-      }
-      
-      // Cmd+Backspace (Mac) or Ctrl+Backspace (Windows/Linux) to clear search
-      if ((event.metaKey || event.ctrlKey) && event.key === 'Backspace') {
-        event.preventDefault();
-        setSearchTerm('');
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setSelectedNode(null);
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
         searchInputRef.current?.focus();
       }
     };
-
-    document.addEventListener('keydown', handleKeyDown);
-    
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown);
-    };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
   }, []);
 
-  // Auto-switch to Inspector on node select; restore previous tab on deselect
+  // ─── Auto-switch to inspector on node select ─────────────────────────────
   useEffect(() => {
-    if (selectedNode) {
-      if (leftTab !== 'inspector') {
-        if (leftTab === 'corpus' || leftTab === 'chat') {
-          setLastNonInspectorTab(leftTab)
-        }
-        setLeftTab('inspector')
-      }
-    } else {
-      // Restore last non-inspector tab when node deselected
-      setLeftTab(lastNonInspectorTab)
-    }
-    // Only react to selection changes; allow manual tab changes while selected
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedNode])
+    if (selectedNode) setRightTab('inspector');
+  }, [selectedNode]);
 
-  // settings-related handlers removed
+  // ─── Derived: highlighted node IDs from service names ────────────────────
+  const ragHighlightedNodeIds = useMemo(() => {
+    if (!layout || highlightedServiceNames.length === 0) return new Set<string>();
+    const names = new Set(highlightedServiceNames.map(s => s.toLowerCase()));
+    const ids = layout.nodes
+      .filter(n => names.has(n.title.toLowerCase()))
+      .map(n => n.id);
+    return new Set(ids);
+  }, [layout, highlightedServiceNames]);
 
-  const handleSearchChange = (term: string) => {
-    setSearchTerm(term);
-  };
-
+  // ─── Derived: filtered layout ────────────────────────────────────────────
   const filteredLayout = useMemo(() => {
-    if (!layout || !graphData) return null;
+    if (!layout) return null;
+    let nodes = layout.nodes;
+    let links = layout.links;
 
-    let filteredNodes = layout.nodes;
-    let filteredLinks = layout.links;
-
-    // Apply entity type filter
     if (selectedEntityTypes.size > 0) {
-      filteredNodes = filteredNodes.filter(node => selectedEntityTypes.has(node.type));
+      nodes = nodes.filter(n => selectedEntityTypes.has(n.type));
     }
 
-    // Apply level filter
-    if (selectedLevel !== null) {
-      filteredNodes = filteredNodes.filter(node => node.communityLevel === selectedLevel);
-    }
-
-    // DON'T filter by search term here - pass to GraphVisualizer instead
-    // This prevents nodes from being removed and repositioned
-
-    // Filter links based on visible nodes and weight
-    const visibleNodeIds = new Set(filteredNodes.map(node => node.id));
-    filteredLinks = filteredLinks.filter(link => 
-      link.weight >= minRelationshipWeight &&
-      visibleNodeIds.has(link.source.id) && 
-      visibleNodeIds.has(link.target.id)
+    const visibleIds = new Set(nodes.map(n => n.id));
+    links = links.filter(l =>
+      l.weight >= minRelationshipWeight &&
+      visibleIds.has(l.source.id) &&
+      visibleIds.has(l.target.id)
     );
 
-    return {
-      nodes: filteredNodes,
-      links: filteredLinks,
-      communities: layout.communities,
-    };
-  }, [layout, graphData, selectedEntityTypes, selectedLevel, minRelationshipWeight]);
+    return { nodes, links, communities: layout.communities };
+  }, [layout, selectedEntityTypes, minRelationshipWeight]);
 
+  // ─── Derived: connected node IDs for selected node (after filteredLayout) ───
+  const connectedNodeIds = useMemo(() => {
+    if (!selectedNode || !filteredLayout) return new Set<string>()
+    const ids = new Set<string>()
+    filteredLayout.links.forEach(l => {
+      if (l.source.id === selectedNode.id) ids.add(l.target.id)
+      if (l.target.id === selectedNode.id) ids.add(l.source.id)
+    })
+    return ids
+  }, [selectedNode, filteredLayout])
+
+  // Only highlight connected neighbours when a node is selected; no persistent highlights otherwise
+  const activeHighlightedNodeIds = useMemo(() => {
+    if (selectedNode) return connectedNodeIds
+    return new Set<string>()
+  }, [selectedNode, connectedNodeIds])
+
+  // ─── Connected links for inspector ───────────────────────────────────────
   const connectedLinks = useMemo(() => {
     if (!selectedNode || !filteredLayout) return [];
-    return filteredLayout.links.filter(link => 
-      link.source.id === selectedNode.id || link.target.id === selectedNode.id
+    return filteredLayout.links.filter(
+      l => l.source.id === selectedNode.id || l.target.id === selectedNode.id
     );
   }, [selectedNode, filteredLayout]);
 
-  // When chat updates highlights, reflect them (unused handler removed)
-
-  // Helper function to get complete subtree under the L0 parent of selected community
-  const getCompleteHierarchyTree = useCallback((selectedCommunity: Community, allCommunities: Community[]) => {
-    if (!selectedCommunity || !allCommunities || allCommunities.length === 0) {
-      return [];
-    }
-
-      // debug log removed in production sweep
-
-    // Create efficient lookup maps
-    const communityByHumanIdMap = new Map<string, Community>(allCommunities.map(c => [String(c.human_readable_id), c]));
-    
-    // Build parent-child map
-    const childrenByParentId = new Map<string, Community[]>();
-    allCommunities.forEach(community => {
-      if (community.parent !== undefined) {
-        const parentId = String(community.parent);
-        if (!childrenByParentId.has(parentId)) {
-          childrenByParentId.set(parentId, []);
-        }
-        childrenByParentId.get(parentId)!.push(community);
-      }
-    });
-
-    try {
-      // Step 1: Find the L0 root by walking up the tree
-      let currentCommunity: Community | undefined = selectedCommunity;
-      const pathToRoot = [currentCommunity];
-      
-      while (currentCommunity && currentCommunity.parent !== undefined) {
-        const parentId = String(currentCommunity.parent);
-        const parentCommunity = communityByHumanIdMap.get(parentId);
-        
-        if (!parentCommunity) break;
-        
-        pathToRoot.unshift(parentCommunity);
-        currentCommunity = parentCommunity;
-        
-        // Safety check to prevent infinite loops
-        if (pathToRoot.length > 10) break;
-      }
-      
-      // The first item should be the L0 root
-      const rootCommunity = pathToRoot[0];
-      // debug log removed in production sweep
-      
-      // Step 2: Collect entire subtree under this L0 root
-      const subtreeCommunities = new Set<string>();
-      const queue: Community[] = [rootCommunity];
-      const visited = new Set<string>();
-      
-      while (queue.length > 0) {
-        const community = queue.shift()!;
-        
-        if (!community || visited.has(community.id)) continue;
-        
-        visited.add(community.id);
-        subtreeCommunities.add(community.id);
-        
-        // Add all children to queue
-        const children = childrenByParentId.get(String(community.human_readable_id)) || [];
-        
-        // Also check the children array if available
-        community.children.forEach((childHumanId: string) => {
-          const childCommunity = communityByHumanIdMap.get(String(childHumanId));
-          if (childCommunity && !children.some(c => c.id === childCommunity.id)) {
-            children.push(childCommunity);
-          }
-        });
-        
-        children.forEach(childCommunity => {
-          if (!visited.has(childCommunity.id)) {
-            queue.push(childCommunity);
-          }
-        });
-      }
-
-      const result = allCommunities
-        .filter(c => subtreeCommunities.has(c.id))
-        .sort((a, b) => (a.level || 0) - (b.level || 0));
-      
-      // debug log removed in production sweep
-      
-      return result;
-      
-    } catch (error) {
-      console.warn('Error building community subtree:', error);
-      // Fallback to just the selected community
-      return [selectedCommunity];
-    }
+  // ─── Handlers ────────────────────────────────────────────────────────────
+  const handleHighlightServices = useCallback((names: string[]) => {
+    setHighlightedServiceNames(names);
+    setQueryCount(c => c + 1); // trigger agent activity
   }, []);
 
-  // Map community levels to human-readable universe terms
-  const getLevelLabel = useCallback((level: number): string => {
-    const levelMap: Record<number, string> = {
-      0: 'Sector',
-      1: 'System', 
-      2: 'Subsystem',
-      3: 'Component',
-      4: 'Element'
-    };
-    return levelMap[level] || `L${level}`;
+  const handleSelectIncident = useCallback((id: string) => {
+    setFocusedIncidentId(id);
+    setContextQuery(id);
+    setLeftTab('chat');
   }, []);
 
-  // Calculate which communities to show based on selected node and inspector mode
-  const visibleCommunities = useMemo(() => {
-    if (!layout?.communities) return [];
-    
-    // Inspector mode shows hierarchy tree when node selected
-    if (inspectorMode && selectedNode) {
-      // If node has community, show hierarchy tree
-      if (selectedNode.community) {
-        return getCompleteHierarchyTree(selectedNode.community, layout.communities);
-      }
-      // If node has no community, show no communities
-      return [];
-    }
-    
-    // Default: show all communities
-    return layout.communities;
-  }, [layout?.communities, selectedNode, inspectorMode, getCompleteHierarchyTree]);
+  const handleHighlightService = useCallback((names: string[]) => {
+    setHighlightedServiceNames(names);
+  }, []);
 
-  // Determine effective community mode for components
-  const effectiveCommunityMode = inspectorMode && selectedNode ? 'auto' : 'all';
+  const handleInvestigate = useCallback((query: string) => {
+    setLeftTab('chat');
+    // The chat panel will pick up the query via the starter question mechanism
+    // We dispatch a custom event that InvestigationChat can listen to
+    window.dispatchEvent(new CustomEvent('nexusiq:investigate', { detail: { query } }));
+    setQueryCount(c => c + 1);
+  }, []);
 
-  const handleRetry = () => {
-    setError(null);
-    window.location.reload();
-  };
-
-
-  // No key management UI in OpenAI-only mode
+  const visibleCommunities = useMemo(() => layout?.communities ?? [], [layout]);
 
   return (
-    <div className="w-screen h-screen bg-background overflow-hidden relative">
-      {/* Main Content */}
-      <div className="h-full w-full border-t  overflow-hidden flex">
-        {/* Left Panel - Fixed width */}
-        <div className="h-full flex flex-col border-r w-[520px] shrink-0 relative z-50 isolate pointer-events-auto">
-          <div className="p-2 border-b">
-            <Tabs value={leftTab} onValueChange={(v) => setLeftTab(v as 'corpus'|'chat'|'inspector')} className="w-full">
-              <TabsList className="grid grid-cols-3 w-full">
-                <TabsTrigger value="corpus">Corpus</TabsTrigger>
-                <TabsTrigger value="chat">Chat</TabsTrigger>
-                <TabsTrigger value="inspector">Inspector</TabsTrigger>
+    <div className="w-screen h-screen bg-background overflow-hidden flex flex-col">
+
+      {/* ── NexusIQ Header ───────────────────────────────────────────────── */}
+      <header className="h-12 border-b shrink-0 flex items-center px-4 gap-4 bg-background/95 backdrop-blur-sm z-50">
+        {/* Logo + name */}
+        <div className="flex items-center gap-2.5">
+          <div className="w-7 h-7 rounded-md bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center">
+            <Zap className="h-4 w-4 text-cyan-400" />
+          </div>
+          <div className="flex items-baseline gap-1.5">
+            <span className="font-bold text-base tracking-tight text-foreground">NexusIQ</span>
+            <span className="text-xs text-muted-foreground hidden sm:block">
+              Enterprise Operational Intelligence
+            </span>
+          </div>
+        </div>
+
+        <div className="w-px h-5 bg-border/50 hidden md:block" />
+
+        {/* Stats */}
+        {!loading && (
+          <div className="hidden md:flex items-center gap-3 text-xs text-muted-foreground">
+            <span className="flex items-center gap-1">
+              <span className="w-2 h-2 rounded-full bg-cyan-400" />
+              {nodeCount} nodes
+            </span>
+            <span className="flex items-center gap-1">
+              <span className="w-2 h-2 rounded-full bg-purple-400" />
+              NovaDrive AI
+            </span>
+            <span className="flex items-center gap-1">
+              <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+              Live
+            </span>
+          </div>
+        )}
+
+        {/* Spacer */}
+        <div className="flex-1" />
+
+        {/* Search */}
+        <div className="relative">
+          <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground" />
+          <Input
+            ref={searchInputRef}
+            placeholder="Search nodes..."
+            value={searchTerm}
+            onChange={e => setSearchTerm(e.target.value)}
+            className="w-48 h-8 pl-8 pr-8 text-xs bg-card/60 border-border/50"
+          />
+          {searchTerm && (
+            <button
+              onClick={() => setSearchTerm('')}
+              className="absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+            >
+              <X className="h-3 w-3" />
+            </button>
+          )}
+        </div>
+
+        {/* Incident count badge */}
+        <Badge variant="outline" className="hidden lg:flex items-center gap-1 text-xs border-red-500/30 text-red-400 bg-red-500/5">
+          <AlertTriangle className="h-3 w-3" />
+          18 incidents
+        </Badge>
+
+        <Badge variant="outline" className="hidden lg:flex items-center gap-1 text-xs border-green-500/30 text-green-400 bg-green-500/5">
+          <Activity className="h-3 w-3" />
+          54 deployments
+        </Badge>
+      </header>
+
+      {/* ── Main 3-column layout ─────────────────────────────────────────── */}
+      <ResizablePanelGroup direction="horizontal" className="flex-1 min-h-0 overflow-hidden">
+
+        {/* ── LEFT PANEL: Investigation Chat + Agents ── */}
+        <ResizablePanel defaultSize={25} minSize={15} maxSize={45}>
+          <div className="h-full border-r flex flex-col z-40">
+          <div className="p-2 border-b shrink-0">
+            <Tabs value={leftTab} onValueChange={v => setLeftTab(v as 'chat' | 'agents')} className="w-full">
+              <TabsList className="grid grid-cols-2 w-full h-8">
+                <TabsTrigger value="chat" className="text-xs">Investigation</TabsTrigger>
+                <TabsTrigger value="agents" className="text-xs">Agents</TabsTrigger>
               </TabsList>
             </Tabs>
           </div>
           <div className="flex-1 min-h-0">
-            {leftTab === 'corpus' ? (
-              <CorpusPanel />
-            ) : leftTab === 'chat' ? (
-              <ChatPanel />
+            {leftTab === 'chat' ? (
+              <InvestigationChat
+                onHighlightServices={handleHighlightServices}
+                onQueryStart={() => setHighlightedServiceNames([])}
+                focusedIncidentId={focusedIncidentId}
+              />
             ) : (
-              <Inspector
+              <AgentActivity queryCount={queryCount} />
+            )}
+          </div>
+          </div>
+
+        </ResizablePanel>
+
+        <ResizableHandle withHandle />
+
+        {/* ── CENTER: 3D Service Dependency Graph ── */}
+        <ResizablePanel defaultSize={50} minSize={25}>
+          <div className="h-full relative z-0">
+          <GraphVisualizer
+            layout={filteredLayout}
+            loading={loading}
+            error={error}
+            status={status}
+            onRetry={() => window.location.reload()}
+            selectedEntityTypes={selectedEntityTypes}
+            minRelationshipWeight={minRelationshipWeight}
+            showCommunityBoundaries={true}
+            visibleCommunities={visibleCommunities}
+            communityMode="all"
+            selectedLevel={null}
+            onNodeSelect={setSelectedNode}
+            selectedNode={selectedNode}
+            ragHighlightedNodeIds={activeHighlightedNodeIds}
+            searchTerm={searchTerm}
+            onNodeHover={setHoveredNode}
+            hoveredNode={hoveredNode}
+          />
+
+          {/* Graph legend overlay */}
+          <div className="absolute bottom-4 left-4 z-10 flex items-center gap-3 bg-background/80 backdrop-blur-sm border border-border/40 rounded-md px-3 py-2">
+            <span className="text-xs text-muted-foreground font-medium">Legend</span>
+            <div className="flex items-center gap-1.5">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#00bcd4]" />
+              <span className="text-xs text-muted-foreground">Service</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#a855f7]" />
+              <span className="text-xs text-muted-foreground">Employee</span>
+            </div>
+          </div>
+          </div>
+
+        </ResizablePanel>
+
+        <ResizableHandle withHandle />
+
+        {/* ── RIGHT PANEL: Timeline + Context + Inspector ── */}
+        <ResizablePanel defaultSize={25} minSize={15} maxSize={45}>
+          <div className="h-full border-l flex flex-col z-40">
+          <div className="p-2 border-b shrink-0">
+            <Tabs value={rightTab} onValueChange={v => setRightTab(v as 'timeline' | 'context' | 'inspector')} className="w-full">
+              <TabsList className="grid grid-cols-3 w-full h-8">
+                <TabsTrigger value="timeline" className="text-xs">Timeline</TabsTrigger>
+                <TabsTrigger value="context" className="text-xs">Context</TabsTrigger>
+                <TabsTrigger value="inspector" className="text-xs">Inspector</TabsTrigger>
+              </TabsList>
+            </Tabs>
+          </div>
+          <div className="flex-1 min-h-0">
+            {rightTab === 'timeline' && (
+              <IncidentTimeline
+                onSelectIncident={handleSelectIncident}
+                onHighlightService={handleHighlightService}
+              />
+            )}
+            {rightTab === 'context' && (
+              <ContextExplorer highlightQuery={contextQuery} />
+            )}
+            {rightTab === 'inspector' && (
+              <ServiceInspector
                 selectedNode={selectedNode}
                 connectedLinks={connectedLinks}
-                visibleCommunities={visibleCommunities}
-                communityMode={effectiveCommunityMode}
                 onClose={() => setSelectedNode(null)}
                 onNodeSelect={setSelectedNode}
+                onInvestigate={handleInvestigate}
               />
             )}
           </div>
-        </div>
-
-        {/* Right Panel - Graph Visualizer with state-aware loading */}
-        <div className="flex-1 min-w-0 h-full relative z-0">
-          <div className="h-full">
-            <GraphVisualizer
-              layout={filteredLayout}
-              loading={loading}
-              error={error}
-              status={status}
-              onRetry={handleRetry}
-              selectedEntityTypes={selectedEntityTypes}
-              minRelationshipWeight={minRelationshipWeight}
-              showCommunityBoundaries={true}
-              visibleCommunities={visibleCommunities}
-              communityMode={effectiveCommunityMode}
-              selectedLevel={selectedLevel}
-              onNodeSelect={setSelectedNode}
-              selectedNode={selectedNode}
-              ragHighlightedNodeIds={ragHighlightedNodeIds}
-              searchTerm={searchTerm}
-              onNodeHover={setHoveredNode}
-              hoveredNode={hoveredNode}
-            />
           </div>
-        </div>
-      </div>
-      
-      {/* Floating Search and Settings Controls */}
-      <div className="absolute top-4 right-4 z-10 flex items-center gap-3">
-        <div className="relative">
-          <div className="relative">
-            <Input
-              ref={searchInputRef}
-              placeholder="Search entities..."
-              value={searchTerm}
-              onChange={(e) => handleSearchChange(e.target.value)}
-              className="w-64 h-10 bg-card/90 backdrop-blur-sm border-border/50 pr-20"
-            />
-            <div className="absolute right-2 top-1/2 transform -translate-y-1/2 flex items-center gap-1">
-              {searchTerm && (
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => {
-                    setSearchTerm('');
-                    searchInputRef.current?.focus();
-                  }}
-                  className="h-6 w-6 p-0 hover:bg-background/20"
-                  title="Clear search"
-                >
-                  <X className="h-3 w-3" />
-                </Button>
-              )}
-              <kbd className="pointer-events-none inline-flex h-5 items-center gap-1 rounded border bg-muted px-1.5 font-mono text-xs font-medium opacity-100 select-none">
-                <span className="text-sm">⌘</span>K
-              </kbd>
-            </div>
-          </div>
-        </div>
-        
-        {/* GitHub Link */}
-        <Button
-          variant="outline"
-          size="sm"
-          asChild
-          className="h-10 bg-card/90 backdrop-blur-sm border-border/50"
-        >
-          <a
-            href="https://github.com/ChristopherLyon/graphrag-workbench"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2"
-          >
-            <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-            </svg>
-            <span className="text-xs font-medium">GitHub</span>
-          </a>
-        </Button>
 
-        {/* Isolator Mode Toggle */}
-        <div className="flex items-center gap-2 bg-card/90 backdrop-blur-sm border border-border/50 rounded-md px-3 h-10">
-          <Eye className="h-4 w-4" />
-          <Label htmlFor="isolator-mode" className="text-xs font-medium cursor-pointer">
-            Community Isolator
-          </Label>
-          <Switch
-            id="isolator-mode"
-            checked={inspectorMode}
-            onCheckedChange={setInspectorMode}
-            className="data-[state=checked]:bg-primary"
-          />
-        </div>
+        </ResizablePanel>
 
-        {/* Settings removed */}
-      </div>
-      
-      {/* Settings modal removed */}
+      </ResizablePanelGroup>
 
     </div>
   );

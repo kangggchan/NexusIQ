@@ -1,0 +1,4199 @@
+{
+  "generated_at": "2026-05-23T17:00:00Z",
+  "commits": [
+    {
+      "commit_id": "b41f81e462b9b60b1364b06902d8d73e71176687",
+      "short_commit_id": "b41f81e4",
+      "timestamp": "2026-01-25T02:00:00Z",
+      "author_employee_id": "EMP-002",
+      "author_name": "Aisha Khan",
+      "branch": "fix/lid-130-decoder-metrics-endpoint-reports-stale-p95-after",
+      "message": "fix(object-detection): tighten guard path for decoder metrics endpoint reports stale p95 after",
+      "jira_ticket_ids": [
+        "LID-130"
+      ],
+      "services_modified": [
+        "object-detection-service"
+      ],
+      "files_touched": [
+        "services/object-detection-service/src/decoder_metrics_endpoint_rep.py",
+        "services/object-detection-service/tests/test_lid_130_1.py"
+      ],
+      "pull_request": {
+        "id": "PR-0076",
+        "title": "LID-130 Decoder metrics endpoint reports stale p95 after service reload",
+        "merged": false,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Routine feature work in an active development branch.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "50f2f576821662f53ae04b44e6d05ee9986dbaa1",
+      "short_commit_id": "50f2f576",
+      "timestamp": "2026-01-25T04:00:00Z",
+      "author_employee_id": "EMP-002",
+      "author_name": "Aisha Khan",
+      "branch": "feature/lidar/lid-104-reduce-pointpillars-postprocess-copy-overhead",
+      "message": "perf(object-detection): tune path for reduce pointpillars postprocess copy overhead",
+      "jira_ticket_ids": [
+        "LID-104"
+      ],
+      "services_modified": [
+        "object-detection-service"
+      ],
+      "files_touched": [
+        "services/object-detection-service/src/reduce_pointpillars_postproc.py",
+        "services/object-detection-service/tests/test_lid_104_1.py"
+      ],
+      "pull_request": {
+        "id": "PR-0009",
+        "title": "LID-104 Reduce PointPillars postprocess copy overhead",
+        "merged": false,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Routine feature work in an active development branch.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "a54c60b8d64ed0ce3f7cfb56c4f9735082175b67",
+      "short_commit_id": "a54c60b8",
+      "timestamp": "2026-01-25T13:00:00Z",
+      "author_employee_id": "EMP-004",
+      "author_name": "Sofia Petrov",
+      "branch": "feature/lidar/lid-105-add-replay-counters-to-telemetry-for-edge-regres",
+      "message": "chore(telemetry): advance add replay counters to telemetry for edge regres",
+      "jira_ticket_ids": [
+        "LID-105"
+      ],
+      "services_modified": [
+        "telemetry-service"
+      ],
+      "files_touched": [
+        "services/telemetry-service/src/add_replay_counters_to_telem.py",
+        "services/telemetry-service/tests/test_lid_105_1.py"
+      ],
+      "pull_request": {
+        "id": "PR-0012",
+        "title": "LID-105 Add replay counters to telemetry for edge regression runs",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Routine feature work in an active development branch.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "17abe7bdf6cfc2baa8e941823b1b0678ce09ab1b",
+      "short_commit_id": "17abe7bd",
+      "timestamp": "2026-01-26T03:00:00Z",
+      "author_employee_id": "EMP-002",
+      "author_name": "Aisha Khan",
+      "branch": "fix/lid-130-decoder-metrics-endpoint-reports-stale-p95-after",
+      "message": "fix(object-detection): reduce regression surface around lid-130",
+      "jira_ticket_ids": [
+        "LID-130"
+      ],
+      "services_modified": [
+        "object-detection-service"
+      ],
+      "files_touched": [
+        "services/object-detection-service/src/decoder_metrics_endpoint_rep.py",
+        "services/object-detection-service/tests/test_lid_130_2.py"
+      ],
+      "pull_request": {
+        "id": "PR-0077",
+        "title": "LID-130 Decoder metrics endpoint reports stale p95 after service reload",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Routine feature work in an active development branch.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "72ddd54d63b84cfb20944506d300211967279976",
+      "short_commit_id": "72ddd54d",
+      "timestamp": "2026-01-26T05:00:00Z",
+      "author_employee_id": "EMP-002",
+      "author_name": "Aisha Khan",
+      "branch": "feature/lidar/lid-104-reduce-pointpillars-postprocess-copy-overhead",
+      "message": "perf(object-detection): tune path for reduce pointpillars postprocess copy overhead",
+      "jira_ticket_ids": [
+        "LID-104"
+      ],
+      "services_modified": [
+        "object-detection-service"
+      ],
+      "files_touched": [
+        "services/object-detection-service/src/reduce_pointpillars_postproc.py",
+        "services/object-detection-service/tests/test_lid_104_2.py"
+      ],
+      "pull_request": {
+        "id": "PR-0010",
+        "title": "LID-104 Reduce PointPillars postprocess copy overhead",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Routine feature work in an active development branch.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "f155fdaeed4b7730229296a1b6d448d4880776ab",
+      "short_commit_id": "f155fdae",
+      "timestamp": "2026-01-26T08:00:00Z",
+      "author_employee_id": "EMP-005",
+      "author_name": "Jonas Mueller",
+      "branch": "feature/lidar/lid-131-add-deployment-canary-notes-for-xavier-edge-boxe",
+      "message": "chore(edge-inference): advance add deployment canary notes for xavier edge boxe",
+      "jira_ticket_ids": [
+        "LID-131"
+      ],
+      "services_modified": [
+        "edge-inference-service"
+      ],
+      "files_touched": [
+        "services/edge-inference-service/src/add_deployment_canary_notes_.py",
+        "services/edge-inference-service/tests/test_lid_131_1.py"
+      ],
+      "pull_request": {
+        "id": "PR-0079",
+        "title": "LID-131 Add deployment canary notes for Xavier edge boxes",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Routine feature work in an active development branch.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "0781dd5ef8df306474ba75718efbd21a57e36722",
+      "short_commit_id": "0781dd5e",
+      "timestamp": "2026-01-27T18:00:00Z",
+      "author_employee_id": "EMP-005",
+      "author_name": "Jonas Mueller",
+      "branch": "fix/lid-106-latency-spike-on-jetson-xavier-edge-02-after-trt",
+      "message": "hotfix(edge-inference): mitigate latency spike on jetson xavier edge 02 after trt",
+      "jira_ticket_ids": [
+        "LID-106"
+      ],
+      "services_modified": [
+        "edge-inference-service"
+      ],
+      "files_touched": [
+        "services/edge-inference-service/src/latency_spike_on_jetson_xavi.py",
+        "services/edge-inference-service/tests/test_lid_106_1.py"
+      ],
+      "pull_request": {
+        "id": "PR-0014",
+        "title": "LID-106 Latency spike on jetson-xavier-edge-02 after TRT deployment",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "GPU free memory drops after each engine reload even when frame rate is flat",
+      "change_risk": null
+    },
+    {
+      "commit_id": "f850c1c780a2ea26895cba634c3d3cf529a9609b",
+      "short_commit_id": "f850c1c7",
+      "timestamp": "2026-01-27T21:00:00Z",
+      "author_employee_id": "EMP-001",
+      "author_name": "Minh Tran",
+      "branch": "main",
+      "message": "merge: LID-105 Add replay counters to telemetry for edge regression runs",
+      "jira_ticket_ids": [
+        "LID-105"
+      ],
+      "services_modified": [
+        "telemetry-service"
+      ],
+      "files_touched": [
+        "services/telemetry-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0013",
+        "title": "Merge LID-105 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "f926fab75a1d7994c7d981a30288b9906be3b466",
+      "short_commit_id": "f926fab7",
+      "timestamp": "2026-01-28T04:00:00Z",
+      "author_employee_id": "EMP-004",
+      "author_name": "Sofia Petrov",
+      "branch": "feature/lidar/lid-132-split-replay-experiment-tags-from-deployment-tag",
+      "message": "perf(telemetry): tune path for split replay experiment tags from deployment tag",
+      "jira_ticket_ids": [
+        "LID-132"
+      ],
+      "services_modified": [
+        "telemetry-service"
+      ],
+      "files_touched": [
+        "services/telemetry-service/src/split_replay_experiment_tags.py",
+        "services/telemetry-service/tests/test_lid_132_1.py"
+      ],
+      "pull_request": {
+        "id": "PR-0081",
+        "title": "LID-132 Split replay experiment tags from deployment tags in telemetry",
+        "merged": false,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Routine feature work in an active development branch.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "34ec818f2d976c953d8e2a12b373198a8c478811",
+      "short_commit_id": "34ec818f",
+      "timestamp": "2026-01-28T09:00:00Z",
+      "author_employee_id": "EMP-001",
+      "author_name": "Minh Tran",
+      "branch": "main",
+      "message": "merge: LID-130 Decoder metrics endpoint reports stale p95 after service reload",
+      "jira_ticket_ids": [
+        "LID-130"
+      ],
+      "services_modified": [
+        "object-detection-service"
+      ],
+      "files_touched": [
+        "services/object-detection-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0078",
+        "title": "Merge LID-130 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "f824c6caba347a9b8d0197263a40afc9fcd8904e",
+      "short_commit_id": "f824c6ca",
+      "timestamp": "2026-01-28T12:00:00Z",
+      "author_employee_id": "EMP-001",
+      "author_name": "Minh Tran",
+      "branch": "main",
+      "message": "merge: LID-131 Add deployment canary notes for Xavier edge boxes",
+      "jira_ticket_ids": [
+        "LID-131"
+      ],
+      "services_modified": [
+        "edge-inference-service"
+      ],
+      "files_touched": [
+        "services/edge-inference-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0080",
+        "title": "Merge LID-131 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "b80d5ece853e9c3b62dbf0f508538e78f4f24d68",
+      "short_commit_id": "b80d5ece",
+      "timestamp": "2026-01-28T15:00:00Z",
+      "author_employee_id": "EMP-001",
+      "author_name": "Minh Tran",
+      "branch": "main",
+      "message": "merge: LID-104 Reduce PointPillars postprocess copy overhead",
+      "jira_ticket_ids": [
+        "LID-104"
+      ],
+      "services_modified": [
+        "object-detection-service"
+      ],
+      "files_touched": [
+        "services/object-detection-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0011",
+        "title": "Merge LID-104 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "bcb52bf1efc5f538aabbab97b80e5678abb49abc",
+      "short_commit_id": "bcb52bf1",
+      "timestamp": "2026-01-28T23:00:00Z",
+      "author_employee_id": "EMP-001",
+      "author_name": "Minh Tran",
+      "branch": "fix/lid-107-tracking-delay-when-telemetry-exporter-is-enable",
+      "message": "fix(tracking): tighten guard path for tracking delay when telemetry exporter is enable",
+      "jira_ticket_ids": [
+        "LID-107"
+      ],
+      "services_modified": [
+        "tracking-service"
+      ],
+      "files_touched": [
+        "services/tracking-service/src/tracking_delay_when_telemetr.py",
+        "services/tracking-service/tests/test_lid_107_1.py"
+      ],
+      "pull_request": {
+        "id": "PR-0016",
+        "title": "LID-107 Tracking delay when telemetry exporter is enabled",
+        "merged": false,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "track age jumps after telemetry export starts on the same rig",
+      "change_risk": null
+    },
+    {
+      "commit_id": "61e8812e405f2e8b2358b8a16917c3125d8ea3c9",
+      "short_commit_id": "61e8812e",
+      "timestamp": "2026-01-29T05:00:00Z",
+      "author_employee_id": "EMP-004",
+      "author_name": "Sofia Petrov",
+      "branch": "feature/lidar/lid-132-split-replay-experiment-tags-from-deployment-tag",
+      "message": "perf(telemetry): tune path for split replay experiment tags from deployment tag",
+      "jira_ticket_ids": [
+        "LID-132"
+      ],
+      "services_modified": [
+        "telemetry-service"
+      ],
+      "files_touched": [
+        "services/telemetry-service/src/split_replay_experiment_tags.py",
+        "services/telemetry-service/tests/test_lid_132_2.py"
+      ],
+      "pull_request": {
+        "id": "PR-0082",
+        "title": "LID-132 Split replay experiment tags from deployment tags in telemetry",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Routine feature work in an active development branch.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "39fc8d9f03dfda77917c328d9e8a6d43050cc027",
+      "short_commit_id": "39fc8d9f",
+      "timestamp": "2026-01-30T00:00:00Z",
+      "author_employee_id": "EMP-001",
+      "author_name": "Minh Tran",
+      "branch": "main",
+      "message": "merge: LID-106 Latency spike on jetson-xavier-edge-02 after TRT deployment",
+      "jira_ticket_ids": [
+        "LID-106"
+      ],
+      "services_modified": [
+        "edge-inference-service",
+        "object-detection-service"
+      ],
+      "files_touched": [
+        "services/edge-inference-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0015",
+        "title": "Merge LID-106 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "fd63b939809fdfa8e2f2e8e434e68444ccc932f9",
+      "short_commit_id": "fd63b939",
+      "timestamp": "2026-01-30T00:00:00Z",
+      "author_employee_id": "EMP-001",
+      "author_name": "Minh Tran",
+      "branch": "fix/lid-107-tracking-delay-when-telemetry-exporter-is-enable",
+      "message": "fix(telemetry): reduce regression surface around lid-107",
+      "jira_ticket_ids": [
+        "LID-107"
+      ],
+      "services_modified": [
+        "telemetry-service",
+        "tracking-service"
+      ],
+      "files_touched": [
+        "services/telemetry-service/src/tracking_delay_when_telemetr.py",
+        "services/telemetry-service/tests/test_lid_107_2.py"
+      ],
+      "pull_request": {
+        "id": "PR-0017",
+        "title": "LID-107 Tracking delay when telemetry exporter is enabled",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "backlog is higher on the Xavier device than the Orin dev box",
+      "change_risk": null
+    },
+    {
+      "commit_id": "1a637e79cc98783bd15e9ff13f56cdf5d1393ec3",
+      "short_commit_id": "1a637e79",
+      "timestamp": "2026-01-30T20:00:00Z",
+      "author_employee_id": "EMP-001",
+      "author_name": "Minh Tran",
+      "branch": "feature/lidar/lid-108-compare-ros2-qos-profiles-for-track-update-strea",
+      "message": "chore(lidar-ingestion): advance compare ros2 qos profiles for track update strea",
+      "jira_ticket_ids": [
+        "LID-108"
+      ],
+      "services_modified": [
+        "lidar-ingestion-service"
+      ],
+      "files_touched": [
+        "services/lidar-ingestion-service/src/compare_ros2_qos_profiles_fo.py",
+        "services/lidar-ingestion-service/tests/test_lid_108_1.py"
+      ],
+      "pull_request": {
+        "id": "PR-0019",
+        "title": "LID-108 Compare ROS2 QoS profiles for track update stream",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "track age jumps after telemetry export starts on the same rig",
+      "change_risk": null
+    },
+    {
+      "commit_id": "69fba656f929dfe2b2e76e42cd210f228dc8f10c",
+      "short_commit_id": "69fba656",
+      "timestamp": "2026-01-31T15:00:00Z",
+      "author_employee_id": "EMP-001",
+      "author_name": "Minh Tran",
+      "branch": "main",
+      "message": "merge: LID-132 Split replay experiment tags from deployment tags in telemetry",
+      "jira_ticket_ids": [
+        "LID-132"
+      ],
+      "services_modified": [
+        "telemetry-service"
+      ],
+      "files_touched": [
+        "services/telemetry-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0083",
+        "title": "Merge LID-132 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "578ddda33e85d0a07fbf37bbceec004e3198a65f",
+      "short_commit_id": "578ddda3",
+      "timestamp": "2026-02-01T01:00:00Z",
+      "author_employee_id": "EMP-001",
+      "author_name": "Minh Tran",
+      "branch": "feature/lidar/lid-109-tune-tracking-association-thresholds-for-dense-u",
+      "message": "feat(tracking): implement slice for tune tracking association thresholds for dense u",
+      "jira_ticket_ids": [
+        "LID-109"
+      ],
+      "services_modified": [
+        "tracking-service"
+      ],
+      "files_touched": [
+        "services/tracking-service/src/tune_tracking_association_th.py",
+        "services/tracking-service/tests/test_lid_109_1.py"
+      ],
+      "pull_request": {
+        "id": "PR-0021",
+        "title": "LID-109 Tune tracking association thresholds for dense urban replay",
+        "merged": false,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Routine feature work in an active development branch.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "cc37a75d63c54c1d4cb361aaff80b41a345d6026",
+      "short_commit_id": "cc37a75d",
+      "timestamp": "2026-02-01T03:00:00Z",
+      "author_employee_id": "EMP-001",
+      "author_name": "Minh Tran",
+      "branch": "main",
+      "message": "merge: LID-107 Tracking delay when telemetry exporter is enabled",
+      "jira_ticket_ids": [
+        "LID-107"
+      ],
+      "services_modified": [
+        "tracking-service",
+        "telemetry-service"
+      ],
+      "files_touched": [
+        "services/tracking-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0018",
+        "title": "Merge LID-107 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "4db2c2b7d18f8ca34ce1451aa4ffbfe323746d32",
+      "short_commit_id": "4db2c2b7",
+      "timestamp": "2026-02-02T02:00:00Z",
+      "author_employee_id": "EMP-001",
+      "author_name": "Minh Tran",
+      "branch": "feature/lidar/lid-109-tune-tracking-association-thresholds-for-dense-u",
+      "message": "feat(tracking): implement slice for tune tracking association thresholds for dense u",
+      "jira_ticket_ids": [
+        "LID-109"
+      ],
+      "services_modified": [
+        "tracking-service"
+      ],
+      "files_touched": [
+        "services/tracking-service/src/tune_tracking_association_th.py",
+        "services/tracking-service/tests/test_lid_109_2.py"
+      ],
+      "pull_request": {
+        "id": "PR-0022",
+        "title": "LID-109 Tune tracking association thresholds for dense urban replay",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Routine feature work in an active development branch.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "30ec5958bd89d1e41f5d324cc2f0cc759345a78b",
+      "short_commit_id": "30ec5958",
+      "timestamp": "2026-02-02T06:00:00Z",
+      "author_employee_id": "EMP-001",
+      "author_name": "Minh Tran",
+      "branch": "main",
+      "message": "merge: LID-108 Compare ROS2 QoS profiles for track update stream",
+      "jira_ticket_ids": [
+        "LID-108"
+      ],
+      "services_modified": [
+        "lidar-ingestion-service",
+        "tracking-service"
+      ],
+      "files_touched": [
+        "services/lidar-ingestion-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0020",
+        "title": "Merge LID-108 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "0fca3ebbc34c3d4dfeb21223ba0b9545c95273e0",
+      "short_commit_id": "0fca3ebb",
+      "timestamp": "2026-02-03T07:00:00Z",
+      "author_employee_id": "EMP-004",
+      "author_name": "Sofia Petrov",
+      "branch": "feature/lidar/lid-110-refactor-track-reset-api-for-replay-harness",
+      "message": "perf(tracking): tune path for refactor track reset api for replay harness",
+      "jira_ticket_ids": [
+        "LID-110"
+      ],
+      "services_modified": [
+        "tracking-service"
+      ],
+      "files_touched": [
+        "services/tracking-service/src/refactor_track_reset_api_for.py",
+        "services/tracking-service/tests/test_lid_110_1.py"
+      ],
+      "pull_request": {
+        "id": "PR-0024",
+        "title": "LID-110 Refactor track reset API for replay harness",
+        "merged": false,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Routine feature work in an active development branch.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "032f70d118b8f1c232890ebcf6de13449904ceea",
+      "short_commit_id": "032f70d1",
+      "timestamp": "2026-02-04T04:00:00Z",
+      "author_employee_id": "EMP-003",
+      "author_name": "Diego Alvarez",
+      "branch": "feature/lidar/lid-111-add-tensorrt-allocator-counters-to-v1-profile-me",
+      "message": "chore(edge-inference): advance add tensorrt allocator counters to v1 profile me",
+      "jira_ticket_ids": [
+        "LID-111"
+      ],
+      "services_modified": [
+        "edge-inference-service"
+      ],
+      "files_touched": [
+        "services/edge-inference-service/src/add_tensorrt_allocator_count.py",
+        "services/edge-inference-service/tests/test_lid_111_1.py"
+      ],
+      "pull_request": {
+        "id": "PR-0027",
+        "title": "LID-111 Add TensorRT allocator counters to /v1/profile/memory",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "GPU free memory drops after each engine reload even when frame rate is flat",
+      "change_risk": null
+    },
+    {
+      "commit_id": "6116b77cafb4923a69330811a5ada7a15c1cb007",
+      "short_commit_id": "6116b77c",
+      "timestamp": "2026-02-04T08:00:00Z",
+      "author_employee_id": "EMP-001",
+      "author_name": "Minh Tran",
+      "branch": "feature/lidar/lid-110-refactor-track-reset-api-for-replay-harness",
+      "message": "perf(tracking): tune path for refactor track reset api for replay harness",
+      "jira_ticket_ids": [
+        "LID-110"
+      ],
+      "services_modified": [
+        "tracking-service"
+      ],
+      "files_touched": [
+        "services/tracking-service/src/refactor_track_reset_api_for.py",
+        "services/tracking-service/tests/test_lid_110_2.py"
+      ],
+      "pull_request": {
+        "id": "PR-0025",
+        "title": "LID-110 Refactor track reset API for replay harness",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Routine feature work in an active development branch.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "fef4d90dbbbcd828e35663a8aecaf6e3e9fbed6a",
+      "short_commit_id": "fef4d90d",
+      "timestamp": "2026-02-04T09:00:00Z",
+      "author_employee_id": "EMP-001",
+      "author_name": "Minh Tran",
+      "branch": "main",
+      "message": "merge: LID-109 Tune tracking association thresholds for dense urban replay",
+      "jira_ticket_ids": [
+        "LID-109"
+      ],
+      "services_modified": [
+        "tracking-service"
+      ],
+      "files_touched": [
+        "services/tracking-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0023",
+        "title": "Merge LID-109 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "95d8cb38b8dfae3f60800a404ba464828b2136b2",
+      "short_commit_id": "95d8cb38",
+      "timestamp": "2026-02-05T12:00:00Z",
+      "author_employee_id": "EMP-003",
+      "author_name": "Diego Alvarez",
+      "branch": "fix/lid-112-engine-cache-invalidation-can-skip-calibration-a",
+      "message": "fix(edge-inference): tighten guard path for engine cache invalidation can skip calibration a",
+      "jira_ticket_ids": [
+        "LID-112"
+      ],
+      "services_modified": [
+        "edge-inference-service"
+      ],
+      "files_touched": [
+        "services/edge-inference-service/src/engine_cache_invalidation_ca.py",
+        "services/edge-inference-service/tests/test_lid_112_1.py"
+      ],
+      "pull_request": {
+        "id": "PR-0029",
+        "title": "LID-112 Engine cache invalidation can skip calibration artifact refresh",
+        "merged": false,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "GPU free memory drops after each engine reload even when frame rate is flat",
+      "change_risk": "introduced_regression"
+    },
+    {
+      "commit_id": "0f8c87dea33eb978900ea5e456cb6cada86c5f52",
+      "short_commit_id": "0f8c87de",
+      "timestamp": "2026-02-06T12:00:00Z",
+      "author_employee_id": "EMP-001",
+      "author_name": "Minh Tran",
+      "branch": "main",
+      "message": "merge: LID-110 Refactor track reset API for replay harness",
+      "jira_ticket_ids": [
+        "LID-110"
+      ],
+      "services_modified": [
+        "tracking-service"
+      ],
+      "files_touched": [
+        "services/tracking-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0026",
+        "title": "Merge LID-110 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "1d56ec2e4604509bd9d1bc7144caecbc515c7b2f",
+      "short_commit_id": "1d56ec2e",
+      "timestamp": "2026-02-06T13:00:00Z",
+      "author_employee_id": "EMP-003",
+      "author_name": "Diego Alvarez",
+      "branch": "fix/lid-112-engine-cache-invalidation-can-skip-calibration-a",
+      "message": "fix(edge-inference): reduce regression surface around lid-112",
+      "jira_ticket_ids": [
+        "LID-112"
+      ],
+      "services_modified": [
+        "edge-inference-service"
+      ],
+      "files_touched": [
+        "services/edge-inference-service/src/engine_cache_invalidation_ca.py",
+        "services/edge-inference-service/tests/test_lid_112_2.py"
+      ],
+      "pull_request": {
+        "id": "PR-0030",
+        "title": "LID-112 Engine cache invalidation can skip calibration artifact refresh",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "latency spikes get worse after QA replays a calibration bundle twice",
+      "change_risk": null
+    },
+    {
+      "commit_id": "ec86ebc600326223a15bd7493ac35e182d484f51",
+      "short_commit_id": "ec86ebc6",
+      "timestamp": "2026-02-06T15:00:00Z",
+      "author_employee_id": "EMP-001",
+      "author_name": "Minh Tran",
+      "branch": "main",
+      "message": "merge: LID-111 Add TensorRT allocator counters to /v1/profile/memory",
+      "jira_ticket_ids": [
+        "LID-111"
+      ],
+      "services_modified": [
+        "edge-inference-service"
+      ],
+      "files_touched": [
+        "services/edge-inference-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0028",
+        "title": "Merge LID-111 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "cd5a6e961b069cd4b8018882b1d17c441ae93ee1",
+      "short_commit_id": "cd5a6e96",
+      "timestamp": "2026-02-06T18:00:00Z",
+      "author_employee_id": "EMP-004",
+      "author_name": "Sofia Petrov",
+      "branch": "feature/lidar/lid-113-cleanup-stale-protobuf-schemas-in-telemetry-expo",
+      "message": "chore(telemetry): advance cleanup stale protobuf schemas in telemetry expo",
+      "jira_ticket_ids": [
+        "LID-113"
+      ],
+      "services_modified": [
+        "telemetry-service"
+      ],
+      "files_touched": [
+        "services/telemetry-service/src/cleanup_stale_protobuf_schem.py",
+        "services/telemetry-service/tests/test_lid_113_1.py"
+      ],
+      "pull_request": {
+        "id": "PR-0032",
+        "title": "LID-113 Cleanup stale protobuf schemas in telemetry exporter",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Routine feature work in an active development branch.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "11aa1b8ecea1f5056160a1f53fd5bb6bfb1e378f",
+      "short_commit_id": "11aa1b8e",
+      "timestamp": "2026-02-08T21:00:00Z",
+      "author_employee_id": "EMP-001",
+      "author_name": "Minh Tran",
+      "branch": "main",
+      "message": "merge: LID-112 Engine cache invalidation can skip calibration artifact refresh",
+      "jira_ticket_ids": [
+        "LID-112"
+      ],
+      "services_modified": [
+        "edge-inference-service"
+      ],
+      "files_touched": [
+        "services/edge-inference-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0031",
+        "title": "Merge LID-112 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "1223c27c75ba0519e7fe43773ceb1087a0d6553d",
+      "short_commit_id": "1223c27c",
+      "timestamp": "2026-02-08T23:00:00Z",
+      "author_employee_id": "EMP-005",
+      "author_name": "Jonas Mueller",
+      "branch": "feature/lidar/lid-114-prepare-edge-deployment-checklist-for-orin-and-x",
+      "message": "feat(edge-inference): implement slice for prepare edge deployment checklist for orin and x",
+      "jira_ticket_ids": [
+        "LID-114"
+      ],
+      "services_modified": [
+        "edge-inference-service"
+      ],
+      "files_touched": [
+        "services/edge-inference-service/src/prepare_edge_deployment_chec.py",
+        "services/edge-inference-service/tests/test_lid_114_1.py"
+      ],
+      "pull_request": {
+        "id": "PR-0034",
+        "title": "LID-114 Prepare edge deployment checklist for Orin and Xavier rigs",
+        "merged": false,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Routine feature work in an active development branch.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "68e2270cc4535c15fc2fe1cb92a85e9021800bac",
+      "short_commit_id": "68e2270c",
+      "timestamp": "2026-02-09T00:00:00Z",
+      "author_employee_id": "EMP-001",
+      "author_name": "Minh Tran",
+      "branch": "main",
+      "message": "merge: LID-113 Cleanup stale protobuf schemas in telemetry exporter",
+      "jira_ticket_ids": [
+        "LID-113"
+      ],
+      "services_modified": [
+        "telemetry-service"
+      ],
+      "files_touched": [
+        "services/telemetry-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0033",
+        "title": "Merge LID-113 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "2ef310b97404912ac1890cd75cb5a57ddfee439a",
+      "short_commit_id": "2ef310b9",
+      "timestamp": "2026-02-09T20:00:00Z",
+      "author_employee_id": "EMP-002",
+      "author_name": "Aisha Khan",
+      "branch": "fix/lid-115-object-decode-precision-regresses-after-nms-refa",
+      "message": "fix(object-detection): tighten guard path for object decode precision regresses after nms refa",
+      "jira_ticket_ids": [
+        "LID-115"
+      ],
+      "services_modified": [
+        "object-detection-service"
+      ],
+      "files_touched": [
+        "services/object-detection-service/src/object_decode_precision_regr.py",
+        "services/object-detection-service/tests/test_lid_115_1.py"
+      ],
+      "pull_request": {
+        "id": "PR-0037",
+        "title": "LID-115 Object decode precision regresses after NMS refactor",
+        "merged": false,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Routine feature work in an active development branch.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "e48521c07870ac9a75ccf14906042af7c85bd511",
+      "short_commit_id": "e48521c0",
+      "timestamp": "2026-02-10T00:00:00Z",
+      "author_employee_id": "EMP-003",
+      "author_name": "Diego Alvarez",
+      "branch": "feature/lidar/lid-114-prepare-edge-deployment-checklist-for-orin-and-x",
+      "message": "feat(telemetry): implement slice for prepare edge deployment checklist for orin and x",
+      "jira_ticket_ids": [
+        "LID-114"
+      ],
+      "services_modified": [
+        "edge-inference-service",
+        "telemetry-service"
+      ],
+      "files_touched": [
+        "services/telemetry-service/src/prepare_edge_deployment_chec.py",
+        "services/telemetry-service/tests/test_lid_114_2.py"
+      ],
+      "pull_request": {
+        "id": "PR-0035",
+        "title": "LID-114 Prepare edge deployment checklist for Orin and Xavier rigs",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Routine feature work in an active development branch.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "32843bf1ee4119822dfbcfa25e7577ea0308f9a4",
+      "short_commit_id": "32843bf1",
+      "timestamp": "2026-02-10T21:00:00Z",
+      "author_employee_id": "EMP-002",
+      "author_name": "Aisha Khan",
+      "branch": "fix/lid-115-object-decode-precision-regresses-after-nms-refa",
+      "message": "fix(object-detection): reduce regression surface around lid-115",
+      "jira_ticket_ids": [
+        "LID-115"
+      ],
+      "services_modified": [
+        "object-detection-service"
+      ],
+      "files_touched": [
+        "services/object-detection-service/src/object_decode_precision_regr.py",
+        "services/object-detection-service/tests/test_lid_115_2.py"
+      ],
+      "pull_request": {
+        "id": "PR-0038",
+        "title": "LID-115 Object decode precision regresses after NMS refactor",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Routine feature work in an active development branch.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "957b808a95c67b09a2dbefd18ae1b817bcdebb82",
+      "short_commit_id": "957b808a",
+      "timestamp": "2026-02-12T02:00:00Z",
+      "author_employee_id": "EMP-001",
+      "author_name": "Minh Tran",
+      "branch": "fix/lid-116-delayed-tracks-observed-during-dense-replay-sess",
+      "message": "hotfix(lidar-ingestion): mitigate delayed tracks observed during dense replay sess",
+      "jira_ticket_ids": [
+        "LID-116"
+      ],
+      "services_modified": [
+        "lidar-ingestion-service"
+      ],
+      "files_touched": [
+        "services/lidar-ingestion-service/src/delayed_tracks_observed_duri.py",
+        "services/lidar-ingestion-service/tests/test_lid_116_1.py"
+      ],
+      "pull_request": {
+        "id": "PR-0040",
+        "title": "LID-116 Delayed tracks observed during dense replay session",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "track age jumps after telemetry export starts on the same rig",
+      "change_risk": null
+    },
+    {
+      "commit_id": "d2212be40ba38f8440259b68a4a003859ba50e25",
+      "short_commit_id": "d2212be4",
+      "timestamp": "2026-02-12T03:00:00Z",
+      "author_employee_id": "EMP-001",
+      "author_name": "Minh Tran",
+      "branch": "main",
+      "message": "merge: LID-114 Prepare edge deployment checklist for Orin and Xavier rigs",
+      "jira_ticket_ids": [
+        "LID-114"
+      ],
+      "services_modified": [
+        "edge-inference-service",
+        "telemetry-service"
+      ],
+      "files_touched": [
+        "services/edge-inference-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0036",
+        "title": "Merge LID-114 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "56317c3550413b0983d3aec37919368263279192",
+      "short_commit_id": "56317c35",
+      "timestamp": "2026-02-13T06:00:00Z",
+      "author_employee_id": "EMP-001",
+      "author_name": "Minh Tran",
+      "branch": "main",
+      "message": "merge: LID-115 Object decode precision regresses after NMS refactor",
+      "jira_ticket_ids": [
+        "LID-115"
+      ],
+      "services_modified": [
+        "object-detection-service"
+      ],
+      "files_touched": [
+        "services/object-detection-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0039",
+        "title": "Merge LID-115 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "74b1a9fc95ff5a5f802b8df666e340ac35ad01b6",
+      "short_commit_id": "74b1a9fc",
+      "timestamp": "2026-02-13T07:00:00Z",
+      "author_employee_id": "EMP-004",
+      "author_name": "Sofia Petrov",
+      "branch": "feature/lidar/lid-117-measure-telemetry-burst-impact-on-ros2-callback-",
+      "message": "chore(telemetry): advance measure telemetry burst impact on ros2 callback ",
+      "jira_ticket_ids": [
+        "LID-117"
+      ],
+      "services_modified": [
+        "telemetry-service"
+      ],
+      "files_touched": [
+        "services/telemetry-service/src/measure_telemetry_burst_impa.py",
+        "services/telemetry-service/tests/test_lid_117_1.py"
+      ],
+      "pull_request": {
+        "id": "PR-0042",
+        "title": "LID-117 Measure telemetry burst impact on ROS2 callback timing",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "track age jumps after telemetry export starts on the same rig",
+      "change_risk": null
+    },
+    {
+      "commit_id": "e5ec06262c64ee72e3d4618c6fb7c5198f3b2f48",
+      "short_commit_id": "e5ec0626",
+      "timestamp": "2026-02-14T09:00:00Z",
+      "author_employee_id": "EMP-001",
+      "author_name": "Minh Tran",
+      "branch": "main",
+      "message": "merge: LID-116 Delayed tracks observed during dense replay session",
+      "jira_ticket_ids": [
+        "LID-116"
+      ],
+      "services_modified": [
+        "lidar-ingestion-service",
+        "tracking-service"
+      ],
+      "files_touched": [
+        "services/lidar-ingestion-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0041",
+        "title": "Merge LID-116 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "baf771a857e892cda79941b12a12623868893b42",
+      "short_commit_id": "baf771a8",
+      "timestamp": "2026-02-15T12:00:00Z",
+      "author_employee_id": "EMP-001",
+      "author_name": "Minh Tran",
+      "branch": "main",
+      "message": "merge: LID-117 Measure telemetry burst impact on ROS2 callback timing",
+      "jira_ticket_ids": [
+        "LID-117"
+      ],
+      "services_modified": [
+        "telemetry-service",
+        "tracking-service"
+      ],
+      "files_touched": [
+        "services/telemetry-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0043",
+        "title": "Merge LID-117 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "7bee16446f01a159d949e6567781867b7bdf1dd7",
+      "short_commit_id": "7bee1644",
+      "timestamp": "2026-02-15T12:00:00Z",
+      "author_employee_id": "EMP-004",
+      "author_name": "Sofia Petrov",
+      "branch": "feature/lidar/lid-118-batch-telemetry-writes-during-replay-experiments",
+      "message": "perf(telemetry): tune path for batch telemetry writes during replay experiments",
+      "jira_ticket_ids": [
+        "LID-118"
+      ],
+      "services_modified": [
+        "telemetry-service"
+      ],
+      "files_touched": [
+        "services/telemetry-service/src/batch_telemetry_writes_durin.py",
+        "services/telemetry-service/tests/test_lid_118_1.py"
+      ],
+      "pull_request": {
+        "id": "PR-0044",
+        "title": "LID-118 Batch telemetry writes during replay experiments",
+        "merged": false,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "track age jumps after telemetry export starts on the same rig",
+      "change_risk": "introduced_regression"
+    },
+    {
+      "commit_id": "28c8ecf5b743232be83a35e88c9da629f5a01c14",
+      "short_commit_id": "28c8ecf5",
+      "timestamp": "2026-02-15T12:00:00Z",
+      "author_employee_id": "EMP-005",
+      "author_name": "Jonas Mueller",
+      "branch": "feature/lidar/lid-119-harden-lidar-replay-cli-for-edge-test-lab",
+      "message": "feat(telemetry): implement slice for harden lidar replay cli for edge test lab",
+      "jira_ticket_ids": [
+        "LID-119"
+      ],
+      "services_modified": [
+        "telemetry-service"
+      ],
+      "files_touched": [
+        "services/telemetry-service/src/harden_lidar_replay_cli_for_.py",
+        "services/telemetry-service/tests/test_lid_119_1.py"
+      ],
+      "pull_request": {
+        "id": "PR-0047",
+        "title": "LID-119 Harden lidar replay CLI for edge test lab",
+        "merged": false,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Routine feature work in an active development branch.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "1def3e4aff55270a3b762f835d6240fa68c09a2e",
+      "short_commit_id": "1def3e4a",
+      "timestamp": "2026-02-16T04:00:00Z",
+      "author_employee_id": "EMP-004",
+      "author_name": "Sofia Petrov",
+      "branch": "feature/lidar/lid-118-batch-telemetry-writes-during-replay-experiments",
+      "message": "perf(telemetry): tune path for batch telemetry writes during replay experiments",
+      "jira_ticket_ids": [
+        "LID-118"
+      ],
+      "services_modified": [
+        "telemetry-service"
+      ],
+      "files_touched": [
+        "services/telemetry-service/src/batch_telemetry_writes_durin.py",
+        "services/telemetry-service/tests/test_lid_118_2.py"
+      ],
+      "pull_request": {
+        "id": "PR-0045",
+        "title": "LID-118 Batch telemetry writes during replay experiments",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "backlog is higher on the Xavier device than the Orin dev box",
+      "change_risk": null
+    },
+    {
+      "commit_id": "88561296c2ec62d0d44e69031e3c5f780b93831b",
+      "short_commit_id": "88561296",
+      "timestamp": "2026-02-16T13:00:00Z",
+      "author_employee_id": "EMP-005",
+      "author_name": "Jonas Mueller",
+      "branch": "feature/lidar/lid-119-harden-lidar-replay-cli-for-edge-test-lab",
+      "message": "feat(lidar-ingestion): implement slice for harden lidar replay cli for edge test lab",
+      "jira_ticket_ids": [
+        "LID-119"
+      ],
+      "services_modified": [
+        "lidar-ingestion-service",
+        "telemetry-service"
+      ],
+      "files_touched": [
+        "services/lidar-ingestion-service/src/harden_lidar_replay_cli_for_.py",
+        "services/lidar-ingestion-service/tests/test_lid_119_2.py"
+      ],
+      "pull_request": {
+        "id": "PR-0048",
+        "title": "LID-119 Harden lidar replay CLI for edge test lab",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Routine feature work in an active development branch.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "adeb215d1ddbc23fdedbaa6acfbf58bb5eb2cb99",
+      "short_commit_id": "adeb215d",
+      "timestamp": "2026-02-17T18:00:00Z",
+      "author_employee_id": "EMP-001",
+      "author_name": "Minh Tran",
+      "branch": "fix/lid-120-tracking-reset-leaves-stale-object-ids-on-short-",
+      "message": "fix(tracking): tighten guard path for tracking reset leaves stale object ids on short ",
+      "jira_ticket_ids": [
+        "LID-120"
+      ],
+      "services_modified": [
+        "tracking-service"
+      ],
+      "files_touched": [
+        "services/tracking-service/src/tracking_reset_leaves_stale_.py",
+        "services/tracking-service/tests/test_lid_120_1.py"
+      ],
+      "pull_request": {
+        "id": "PR-0050",
+        "title": "LID-120 Tracking reset leaves stale object IDs on short clips",
+        "merged": false,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Routine feature work in an active development branch.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "ef2bb64152886da6dc6743d03ea45934c9ce01be",
+      "short_commit_id": "ef2bb641",
+      "timestamp": "2026-02-18T15:00:00Z",
+      "author_employee_id": "EMP-001",
+      "author_name": "Minh Tran",
+      "branch": "main",
+      "message": "merge: LID-118 Batch telemetry writes during replay experiments",
+      "jira_ticket_ids": [
+        "LID-118"
+      ],
+      "services_modified": [
+        "telemetry-service"
+      ],
+      "files_touched": [
+        "services/telemetry-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0046",
+        "title": "Merge LID-118 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "138f48e02e65ecc6fd483e5e719874e08e950cd5",
+      "short_commit_id": "138f48e0",
+      "timestamp": "2026-02-18T19:00:00Z",
+      "author_employee_id": "EMP-001",
+      "author_name": "Minh Tran",
+      "branch": "fix/lid-120-tracking-reset-leaves-stale-object-ids-on-short-",
+      "message": "fix(tracking): reduce regression surface around lid-120",
+      "jira_ticket_ids": [
+        "LID-120"
+      ],
+      "services_modified": [
+        "tracking-service"
+      ],
+      "files_touched": [
+        "services/tracking-service/src/tracking_reset_leaves_stale_.py",
+        "services/tracking-service/tests/test_lid_120_2.py"
+      ],
+      "pull_request": {
+        "id": "PR-0051",
+        "title": "LID-120 Tracking reset leaves stale object IDs on short clips",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Routine feature work in an active development branch.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "e17fa85102393660bc1a3f63babda0324ad9b085",
+      "short_commit_id": "e17fa851",
+      "timestamp": "2026-02-18T21:00:00Z",
+      "author_employee_id": "EMP-001",
+      "author_name": "Minh Tran",
+      "branch": "main",
+      "message": "merge: LID-119 Harden lidar replay CLI for edge test lab",
+      "jira_ticket_ids": [
+        "LID-119"
+      ],
+      "services_modified": [
+        "telemetry-service",
+        "lidar-ingestion-service"
+      ],
+      "files_touched": [
+        "services/telemetry-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0049",
+        "title": "Merge LID-119 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "bbb7bda24f06630db15ea8f5b578733b2458947a",
+      "short_commit_id": "bbb7bda2",
+      "timestamp": "2026-02-19T00:00:00Z",
+      "author_employee_id": "EMP-005",
+      "author_name": "Jonas Mueller",
+      "branch": "feature/lidar/lid-121-validate-tensorrt-engine-reload-behavior-under-w",
+      "message": "chore(edge-inference): advance validate tensorrt engine reload behavior under w",
+      "jira_ticket_ids": [
+        "LID-121"
+      ],
+      "services_modified": [
+        "edge-inference-service"
+      ],
+      "files_touched": [
+        "services/edge-inference-service/src/validate_tensorrt_engine_rel.py",
+        "services/edge-inference-service/tests/test_lid_121_1.py"
+      ],
+      "pull_request": {
+        "id": "PR-0053",
+        "title": "LID-121 Validate TensorRT engine reload behavior under watchdog restarts",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "GPU free memory drops after each engine reload even when frame rate is flat",
+      "change_risk": null
+    },
+    {
+      "commit_id": "23b6dedd39845d4bebc3d8a27fe9bd9c2d27360d",
+      "short_commit_id": "23b6dedd",
+      "timestamp": "2026-02-20T20:00:00Z",
+      "author_employee_id": "EMP-004",
+      "author_name": "Sofia Petrov",
+      "branch": "feature/lidar/lid-122-normalize-deployment-metadata-emitted-by-telemet",
+      "message": "perf(telemetry): tune path for normalize deployment metadata emitted by telemet",
+      "jira_ticket_ids": [
+        "LID-122"
+      ],
+      "services_modified": [
+        "telemetry-service"
+      ],
+      "files_touched": [
+        "services/telemetry-service/src/normalize_deployment_metadat.py",
+        "services/telemetry-service/tests/test_lid_122_1.py"
+      ],
+      "pull_request": {
+        "id": "PR-0055",
+        "title": "LID-122 Normalize deployment metadata emitted by telemetry service",
+        "merged": false,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Routine feature work in an active development branch.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "43a4fe680f5e8c99dc49b52d480f7c963593dbed",
+      "short_commit_id": "43a4fe68",
+      "timestamp": "2026-02-21T00:00:00Z",
+      "author_employee_id": "EMP-001",
+      "author_name": "Minh Tran",
+      "branch": "main",
+      "message": "merge: LID-120 Tracking reset leaves stale object IDs on short clips",
+      "jira_ticket_ids": [
+        "LID-120"
+      ],
+      "services_modified": [
+        "tracking-service"
+      ],
+      "files_touched": [
+        "services/tracking-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0052",
+        "title": "Merge LID-120 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "3075ae916645bcca20f78fefaeaf9d624927bac2",
+      "short_commit_id": "3075ae91",
+      "timestamp": "2026-02-21T03:00:00Z",
+      "author_employee_id": "EMP-001",
+      "author_name": "Minh Tran",
+      "branch": "main",
+      "message": "merge: LID-121 Validate TensorRT engine reload behavior under watchdog restarts",
+      "jira_ticket_ids": [
+        "LID-121"
+      ],
+      "services_modified": [
+        "edge-inference-service"
+      ],
+      "files_touched": [
+        "services/edge-inference-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0054",
+        "title": "Merge LID-121 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "b4dd56958e9f283963311976df1b5e03431399b7",
+      "short_commit_id": "b4dd5695",
+      "timestamp": "2026-02-21T04:00:00Z",
+      "author_employee_id": "EMP-008",
+      "author_name": "Lucas Moreau",
+      "branch": "feature/adas/adas-208-trace-frame-timestamp-source-across-camera-and-c",
+      "message": "chore(camera-ingestion): advance trace frame timestamp source across camera and c",
+      "jira_ticket_ids": [
+        "ADAS-208"
+      ],
+      "services_modified": [
+        "camera-ingestion-service"
+      ],
+      "files_touched": [
+        "services/camera-ingestion-service/src/trace_frame_timestamp_source.cpp",
+        "services/camera-ingestion-service/tests/test_adas_208_1.cpp"
+      ],
+      "pull_request": {
+        "id": "PR-0102",
+        "title": "ADAS-208 Trace frame timestamp source across camera and controller path",
+        "merged": true,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "steering oscillation starts only when the faster timing profile is enabled",
+      "change_risk": null
+    },
+    {
+      "commit_id": "35b6bf7c2f37def11a19070c544f36406a31594d",
+      "short_commit_id": "35b6bf7c",
+      "timestamp": "2026-02-21T21:00:00Z",
+      "author_employee_id": "EMP-004",
+      "author_name": "Sofia Petrov",
+      "branch": "feature/lidar/lid-122-normalize-deployment-metadata-emitted-by-telemet",
+      "message": "perf(telemetry): tune path for normalize deployment metadata emitted by telemet",
+      "jira_ticket_ids": [
+        "LID-122"
+      ],
+      "services_modified": [
+        "telemetry-service"
+      ],
+      "files_touched": [
+        "services/telemetry-service/src/normalize_deployment_metadat.py",
+        "services/telemetry-service/tests/test_lid_122_2.py"
+      ],
+      "pull_request": {
+        "id": "PR-0056",
+        "title": "LID-122 Normalize deployment metadata emitted by telemetry service",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Routine feature work in an active development branch.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "9463f461233f222e653e8d0aeb96560885d94583",
+      "short_commit_id": "9463f461",
+      "timestamp": "2026-02-22T02:00:00Z",
+      "author_employee_id": "EMP-001",
+      "author_name": "Minh Tran",
+      "branch": "fix/lid-123-tracking-subscriber-backlog-grows-on-xavier-dens",
+      "message": "fix(tracking): tighten guard path for tracking subscriber backlog grows on xavier dens",
+      "jira_ticket_ids": [
+        "LID-123"
+      ],
+      "services_modified": [
+        "tracking-service"
+      ],
+      "files_touched": [
+        "services/tracking-service/src/tracking_subscriber_backlog_.py",
+        "services/tracking-service/tests/test_lid_123_1.py"
+      ],
+      "pull_request": {
+        "id": "PR-0058",
+        "title": "LID-123 Tracking subscriber backlog grows on Xavier dense scene runs",
+        "merged": false,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "track age jumps after telemetry export starts on the same rig",
+      "change_risk": "introduced_regression"
+    },
+    {
+      "commit_id": "89a38a2c8ae560a932b189ecf2c8417a03740972",
+      "short_commit_id": "89a38a2c",
+      "timestamp": "2026-02-22T09:00:00Z",
+      "author_employee_id": "EMP-008",
+      "author_name": "Lucas Moreau",
+      "branch": "feature/adas/adas-209-prototype-adaptive-smoothing-gains-for-steering-",
+      "message": "feat(steering-control): implement slice for prototype adaptive smoothing gains for steering ",
+      "jira_ticket_ids": [
+        "ADAS-209"
+      ],
+      "services_modified": [
+        "steering-control-service"
+      ],
+      "files_touched": [
+        "services/steering-control-service/src/prototype_adaptive_smoothing.cpp",
+        "services/steering-control-service/tests/test_adas_209_1.cpp"
+      ],
+      "pull_request": {
+        "id": "PR-0104",
+        "title": "ADAS-209 Prototype adaptive smoothing gains for steering controller",
+        "merged": false,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "steering oscillation starts only when the faster timing profile is enabled",
+      "change_risk": null
+    },
+    {
+      "commit_id": "13370d831067cc8672ebe8e2c82d550ccaa508e0",
+      "short_commit_id": "13370d83",
+      "timestamp": "2026-02-23T03:00:00Z",
+      "author_employee_id": "EMP-001",
+      "author_name": "Minh Tran",
+      "branch": "fix/lid-123-tracking-subscriber-backlog-grows-on-xavier-dens",
+      "message": "fix(lidar-ingestion): reduce regression surface around lid-123",
+      "jira_ticket_ids": [
+        "LID-123"
+      ],
+      "services_modified": [
+        "lidar-ingestion-service",
+        "tracking-service"
+      ],
+      "files_touched": [
+        "services/lidar-ingestion-service/src/tracking_subscriber_backlog_.py",
+        "services/lidar-ingestion-service/tests/test_lid_123_2.py"
+      ],
+      "pull_request": {
+        "id": "PR-0059",
+        "title": "LID-123 Tracking subscriber backlog grows on Xavier dense scene runs",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "backlog is higher on the Xavier device than the Orin dev box",
+      "change_risk": null
+    },
+    {
+      "commit_id": "0283047cdc542907c51ef79c9f217219eba02312",
+      "short_commit_id": "0283047c",
+      "timestamp": "2026-02-23T10:00:00Z",
+      "author_employee_id": "EMP-008",
+      "author_name": "Lucas Moreau",
+      "branch": "feature/adas/adas-209-prototype-adaptive-smoothing-gains-for-steering-",
+      "message": "feat(steering-control): implement slice for prototype adaptive smoothing gains for steering ",
+      "jira_ticket_ids": [
+        "ADAS-209"
+      ],
+      "services_modified": [
+        "steering-control-service"
+      ],
+      "files_touched": [
+        "services/steering-control-service/src/prototype_adaptive_smoothing.cpp",
+        "services/steering-control-service/tests/test_adas_209_2.cpp"
+      ],
+      "pull_request": {
+        "id": "PR-0105",
+        "title": "ADAS-209 Prototype adaptive smoothing gains for steering controller",
+        "merged": true,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "diagnostics reports controller delta spikes without lane confidence collapsing",
+      "change_risk": null
+    },
+    {
+      "commit_id": "cfe46254cdb483e4aee41bdf2f06bf06153d9a77",
+      "short_commit_id": "cfe46254",
+      "timestamp": "2026-02-23T12:00:00Z",
+      "author_employee_id": "EMP-006",
+      "author_name": "Haruka Sato",
+      "branch": "main",
+      "message": "merge: ADAS-208 Trace frame timestamp source across camera and controller path",
+      "jira_ticket_ids": [
+        "ADAS-208"
+      ],
+      "services_modified": [
+        "camera-ingestion-service",
+        "steering-control-service"
+      ],
+      "files_touched": [
+        "services/camera-ingestion-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0103",
+        "title": "Merge ADAS-208 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "4da5d20b8c494fc53a2c15fc2668ca4c5188a913",
+      "short_commit_id": "4da5d20b",
+      "timestamp": "2026-02-23T18:00:00Z",
+      "author_employee_id": "EMP-007",
+      "author_name": "Priya Raman",
+      "branch": "feature/adas/adas-210-expose-lane-experiment-toggle-metadata-in-http-a",
+      "message": "perf(lane-detection): tune path for expose lane experiment toggle metadata in http a",
+      "jira_ticket_ids": [
+        "ADAS-210"
+      ],
+      "services_modified": [
+        "lane-detection-service"
+      ],
+      "files_touched": [
+        "services/lane-detection-service/src/expose_lane_experiment_toggl.cpp",
+        "services/lane-detection-service/tests/test_adas_210_1.cpp"
+      ],
+      "pull_request": {
+        "id": "PR-0107",
+        "title": "ADAS-210 Expose lane experiment toggle metadata in HTTP API",
+        "merged": false,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "Routine feature work in an active development branch.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "5db77d80bf3dea1713082317ad40ffefb3629841",
+      "short_commit_id": "5db77d80",
+      "timestamp": "2026-02-24T06:00:00Z",
+      "author_employee_id": "EMP-001",
+      "author_name": "Minh Tran",
+      "branch": "main",
+      "message": "merge: LID-122 Normalize deployment metadata emitted by telemetry service",
+      "jira_ticket_ids": [
+        "LID-122"
+      ],
+      "services_modified": [
+        "telemetry-service"
+      ],
+      "files_touched": [
+        "services/telemetry-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0057",
+        "title": "Merge LID-122 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "aa4cb30c4bbdf98aeb22eee18743cb1e0bad5919",
+      "short_commit_id": "aa4cb30c",
+      "timestamp": "2026-02-24T08:00:00Z",
+      "author_employee_id": "EMP-002",
+      "author_name": "Aisha Khan",
+      "branch": "feature/lidar/lid-124-compare-fp16-and-int8-latency-on-orin-build-0-9-",
+      "message": "chore(edge-inference): advance compare fp16 and int8 latency on orin build 0 9 ",
+      "jira_ticket_ids": [
+        "LID-124"
+      ],
+      "services_modified": [
+        "edge-inference-service"
+      ],
+      "files_touched": [
+        "services/edge-inference-service/src/compare_fp16_and_int8_latenc.py",
+        "services/edge-inference-service/tests/test_lid_124_1.py"
+      ],
+      "pull_request": {
+        "id": "PR-0061",
+        "title": "LID-124 Compare FP16 and INT8 latency on Orin build 0.9.x",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Routine feature work in an active development branch.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "79e5b294354436c8ad8b79765e8232ec8a222fba",
+      "short_commit_id": "79e5b294",
+      "timestamp": "2026-02-24T10:00:00Z",
+      "author_employee_id": "EMP-007",
+      "author_name": "Priya Raman",
+      "branch": "feature/adas/adas-210-expose-lane-experiment-toggle-metadata-in-http-a",
+      "message": "perf(lane-detection): tune path for expose lane experiment toggle metadata in http a",
+      "jira_ticket_ids": [
+        "ADAS-210"
+      ],
+      "services_modified": [
+        "lane-detection-service"
+      ],
+      "files_touched": [
+        "services/lane-detection-service/src/expose_lane_experiment_toggl.cpp",
+        "services/lane-detection-service/tests/test_adas_210_2.cpp"
+      ],
+      "pull_request": {
+        "id": "PR-0108",
+        "title": "ADAS-210 Expose lane experiment toggle metadata in HTTP API",
+        "merged": true,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "Routine feature work in an active development branch.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "f620c9d2e8de30cd3ea5f01a832e0bae931fba48",
+      "short_commit_id": "f620c9d2",
+      "timestamp": "2026-02-24T15:00:00Z",
+      "author_employee_id": "EMP-009",
+      "author_name": "Nora Ibrahim",
+      "branch": "feature/adas/adas-211-add-calibration-checksum-to-diagnostics-session-",
+      "message": "chore(calibration): advance add calibration checksum to diagnostics session ",
+      "jira_ticket_ids": [
+        "ADAS-211"
+      ],
+      "services_modified": [
+        "calibration-service"
+      ],
+      "files_touched": [
+        "services/calibration-service/src/add_calibration_checksum_to_.cpp",
+        "services/calibration-service/tests/test_adas_211_1.cpp"
+      ],
+      "pull_request": {
+        "id": "PR-0110",
+        "title": "ADAS-211 Add calibration checksum to diagnostics session summary",
+        "merged": true,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "lane center error is small after cold boot but grows after a warm restart",
+      "change_risk": null
+    },
+    {
+      "commit_id": "64c7bcacb3116ff9bd614863d7aed32121e028a8",
+      "short_commit_id": "64c7bcac",
+      "timestamp": "2026-02-25T04:00:00Z",
+      "author_employee_id": "EMP-005",
+      "author_name": "Jonas Mueller",
+      "branch": "feature/lidar/lid-125-improve-jetson-deployment-rollback-notes-for-per",
+      "message": "feat(telemetry): implement slice for improve jetson deployment rollback notes for per",
+      "jira_ticket_ids": [
+        "LID-125"
+      ],
+      "services_modified": [
+        "telemetry-service"
+      ],
+      "files_touched": [
+        "services/telemetry-service/src/improve_jetson_deployment_ro.py",
+        "services/telemetry-service/tests/test_lid_125_1.py"
+      ],
+      "pull_request": {
+        "id": "PR-0063",
+        "title": "LID-125 Improve Jetson deployment rollback notes for perception team",
+        "merged": false,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Routine feature work in an active development branch.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "7601442593b0a4c6371f4c9ab93532b1aff4ad46",
+      "short_commit_id": "76014425",
+      "timestamp": "2026-02-25T09:00:00Z",
+      "author_employee_id": "EMP-001",
+      "author_name": "Minh Tran",
+      "branch": "main",
+      "message": "merge: LID-123 Tracking subscriber backlog grows on Xavier dense scene runs",
+      "jira_ticket_ids": [
+        "LID-123"
+      ],
+      "services_modified": [
+        "tracking-service",
+        "lidar-ingestion-service"
+      ],
+      "files_touched": [
+        "services/tracking-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0060",
+        "title": "Merge LID-123 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "eda1f6063249037dfc0d631b5c018a557a6013e3",
+      "short_commit_id": "eda1f606",
+      "timestamp": "2026-02-25T15:00:00Z",
+      "author_employee_id": "EMP-006",
+      "author_name": "Haruka Sato",
+      "branch": "main",
+      "message": "merge: ADAS-209 Prototype adaptive smoothing gains for steering controller",
+      "jira_ticket_ids": [
+        "ADAS-209"
+      ],
+      "services_modified": [
+        "steering-control-service"
+      ],
+      "files_touched": [
+        "services/steering-control-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0106",
+        "title": "Merge ADAS-209 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "71b6f24429bea5c1649ae51dbd2534e4a4e2615f",
+      "short_commit_id": "71b6f244",
+      "timestamp": "2026-02-26T05:00:00Z",
+      "author_employee_id": "EMP-004",
+      "author_name": "Sofia Petrov",
+      "branch": "feature/lidar/lid-125-improve-jetson-deployment-rollback-notes-for-per",
+      "message": "feat(edge-inference): implement slice for improve jetson deployment rollback notes for per",
+      "jira_ticket_ids": [
+        "LID-125"
+      ],
+      "services_modified": [
+        "edge-inference-service",
+        "telemetry-service"
+      ],
+      "files_touched": [
+        "services/edge-inference-service/src/improve_jetson_deployment_ro.py",
+        "services/edge-inference-service/tests/test_lid_125_2.py"
+      ],
+      "pull_request": {
+        "id": "PR-0064",
+        "title": "LID-125 Improve Jetson deployment rollback notes for perception team",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Routine feature work in an active development branch.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "37b21e2132cbbdabd30a28b5e88e65f19f938464",
+      "short_commit_id": "37b21e21",
+      "timestamp": "2026-02-26T12:00:00Z",
+      "author_employee_id": "EMP-001",
+      "author_name": "Minh Tran",
+      "branch": "main",
+      "message": "merge: LID-124 Compare FP16 and INT8 latency on Orin build 0.9.x",
+      "jira_ticket_ids": [
+        "LID-124"
+      ],
+      "services_modified": [
+        "edge-inference-service",
+        "object-detection-service"
+      ],
+      "files_touched": [
+        "services/edge-inference-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0062",
+        "title": "Merge LID-124 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "eec941cf9bd51701b0b1d452f4a6cf239235002e",
+      "short_commit_id": "eec941cf",
+      "timestamp": "2026-02-26T13:00:00Z",
+      "author_employee_id": "EMP-004",
+      "author_name": "Sofia Petrov",
+      "branch": "fix/lid-126-telemetry-event-payload-drops-queue-depth-field-",
+      "message": "fix(telemetry): tighten guard path for telemetry event payload drops queue depth field ",
+      "jira_ticket_ids": [
+        "LID-126"
+      ],
+      "services_modified": [
+        "telemetry-service"
+      ],
+      "files_touched": [
+        "services/telemetry-service/src/telemetry_event_payload_drop.py",
+        "services/telemetry-service/tests/test_lid_126_1.py"
+      ],
+      "pull_request": {
+        "id": "PR-0066",
+        "title": "LID-126 Telemetry event payload drops queue depth field under load",
+        "merged": false,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Routine feature work in an active development branch.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "9281d2a5b324160c69e8e4560e0f7f2fcabcf4a6",
+      "short_commit_id": "9281d2a5",
+      "timestamp": "2026-02-26T20:00:00Z",
+      "author_employee_id": "EMP-009",
+      "author_name": "Nora Ibrahim",
+      "branch": "fix/adas-212-active-calibration-endpoint-serves-stale-extrins",
+      "message": "fix(calibration): tighten guard path for active calibration endpoint serves stale extrins",
+      "jira_ticket_ids": [
+        "ADAS-212"
+      ],
+      "services_modified": [
+        "calibration-service"
+      ],
+      "files_touched": [
+        "services/calibration-service/src/active_calibration_endpoint_.cpp",
+        "services/calibration-service/tests/test_adas_212_1.cpp"
+      ],
+      "pull_request": {
+        "id": "PR-0112",
+        "title": "ADAS-212 Active calibration endpoint serves stale extrinsic age on warm boot",
+        "merged": false,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "lane center error is small after cold boot but grows after a warm restart",
+      "change_risk": "introduced_regression"
+    },
+    {
+      "commit_id": "c2f2026b621de6d6bf05374f6ae55260cb7a137a",
+      "short_commit_id": "c2f2026b",
+      "timestamp": "2026-02-26T21:00:00Z",
+      "author_employee_id": "EMP-006",
+      "author_name": "Haruka Sato",
+      "branch": "main",
+      "message": "merge: ADAS-210 Expose lane experiment toggle metadata in HTTP API",
+      "jira_ticket_ids": [
+        "ADAS-210"
+      ],
+      "services_modified": [
+        "lane-detection-service"
+      ],
+      "files_touched": [
+        "services/lane-detection-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0109",
+        "title": "Merge ADAS-210 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "66b4be252a3e4581bf9b964ebd3f40e974e71056",
+      "short_commit_id": "66b4be25",
+      "timestamp": "2026-02-27T00:00:00Z",
+      "author_employee_id": "EMP-006",
+      "author_name": "Haruka Sato",
+      "branch": "main",
+      "message": "merge: ADAS-211 Add calibration checksum to diagnostics session summary",
+      "jira_ticket_ids": [
+        "ADAS-211"
+      ],
+      "services_modified": [
+        "calibration-service",
+        "diagnostics-service"
+      ],
+      "files_touched": [
+        "services/calibration-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0111",
+        "title": "Merge ADAS-211 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "09c59aff4b6e9eb21c52f6d7f7365fd54cf9e511",
+      "short_commit_id": "09c59aff",
+      "timestamp": "2026-02-27T14:00:00Z",
+      "author_employee_id": "EMP-004",
+      "author_name": "Sofia Petrov",
+      "branch": "fix/lid-126-telemetry-event-payload-drops-queue-depth-field-",
+      "message": "fix(telemetry): reduce regression surface around lid-126",
+      "jira_ticket_ids": [
+        "LID-126"
+      ],
+      "services_modified": [
+        "telemetry-service"
+      ],
+      "files_touched": [
+        "services/telemetry-service/src/telemetry_event_payload_drop.py",
+        "services/telemetry-service/tests/test_lid_126_2.py"
+      ],
+      "pull_request": {
+        "id": "PR-0067",
+        "title": "LID-126 Telemetry event payload drops queue depth field under load",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Routine feature work in an active development branch.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "b4f235ff6d4e17c15dd54eb1323a6da43c8b9591",
+      "short_commit_id": "b4f235ff",
+      "timestamp": "2026-02-27T19:00:00Z",
+      "author_employee_id": "EMP-005",
+      "author_name": "Jonas Mueller",
+      "branch": "fix/lid-127-edge-rollback-required-after-inference-regressio",
+      "message": "hotfix(edge-inference): mitigate edge rollback required after inference regressio",
+      "jira_ticket_ids": [
+        "LID-127"
+      ],
+      "services_modified": [
+        "edge-inference-service"
+      ],
+      "files_touched": [
+        "services/edge-inference-service/src/edge_rollback_required_after.py",
+        "services/edge-inference-service/tests/test_lid_127_1.py"
+      ],
+      "pull_request": {
+        "id": "PR-0069",
+        "title": "LID-127 Edge rollback required after inference regression in demo branch",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "GPU free memory drops after each engine reload even when frame rate is flat",
+      "change_risk": null
+    },
+    {
+      "commit_id": "162c5dbc610f6403d438d2c29b5c14360da64e61",
+      "short_commit_id": "162c5dbc",
+      "timestamp": "2026-02-27T20:00:00Z",
+      "author_employee_id": "EMP-002",
+      "author_name": "Aisha Khan",
+      "branch": "feature/lidar/lid-101-stabilize-tensorrt-int8-edge-inference-path",
+      "message": "feat(object-detection): implement slice for stabilize tensorrt int8 edge inference path",
+      "jira_ticket_ids": [
+        "LID-101"
+      ],
+      "services_modified": [
+        "object-detection-service"
+      ],
+      "files_touched": [
+        "services/object-detection-service/src/stabilize_tensorrt_int8_edge.py",
+        "services/object-detection-service/tests/test_lid_101_1.py"
+      ],
+      "pull_request": {
+        "id": "PR-0001",
+        "title": "LID-101 Stabilize TensorRT INT8 edge inference path",
+        "merged": false,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "GPU free memory drops after each engine reload even when frame rate is flat",
+      "change_risk": null
+    },
+    {
+      "commit_id": "0162305312d1322380485baa941b04037e7abc27",
+      "short_commit_id": "01623053",
+      "timestamp": "2026-02-27T21:00:00Z",
+      "author_employee_id": "EMP-009",
+      "author_name": "Nora Ibrahim",
+      "branch": "fix/adas-212-active-calibration-endpoint-serves-stale-extrins",
+      "message": "fix(calibration): reduce regression surface around adas-212",
+      "jira_ticket_ids": [
+        "ADAS-212"
+      ],
+      "services_modified": [
+        "calibration-service"
+      ],
+      "files_touched": [
+        "services/calibration-service/src/active_calibration_endpoint_.cpp",
+        "services/calibration-service/tests/test_adas_212_2.cpp"
+      ],
+      "pull_request": {
+        "id": "PR-0113",
+        "title": "ADAS-212 Active calibration endpoint serves stale extrinsic age on warm boot",
+        "merged": true,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "active calibration checksum looks correct while reported extrinsic age is stale",
+      "change_risk": null
+    },
+    {
+      "commit_id": "8a116c801661924d2f9a6ba31e540e12a97f3ff6",
+      "short_commit_id": "8a116c80",
+      "timestamp": "2026-02-28T02:00:00Z",
+      "author_employee_id": "EMP-006",
+      "author_name": "Haruka Sato",
+      "branch": "feature/adas/adas-213-refactor-diagnostics-event-schema-for-replay-and",
+      "message": "perf(diagnostics): tune path for refactor diagnostics event schema for replay and",
+      "jira_ticket_ids": [
+        "ADAS-213"
+      ],
+      "services_modified": [
+        "diagnostics-service"
+      ],
+      "files_touched": [
+        "services/diagnostics-service/src/refactor_diagnostics_event_s.cpp",
+        "services/diagnostics-service/tests/test_adas_213_1.cpp"
+      ],
+      "pull_request": {
+        "id": "PR-0115",
+        "title": "ADAS-213 Refactor diagnostics event schema for replay and road runs",
+        "merged": false,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "Routine feature work in an active development branch.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "3b625f5f45a84e75948128ae9b4f233982a01aa5",
+      "short_commit_id": "3b625f5f",
+      "timestamp": "2026-02-28T15:00:00Z",
+      "author_employee_id": "EMP-001",
+      "author_name": "Minh Tran",
+      "branch": "main",
+      "message": "merge: LID-125 Improve Jetson deployment rollback notes for perception team",
+      "jira_ticket_ids": [
+        "LID-125"
+      ],
+      "services_modified": [
+        "telemetry-service",
+        "edge-inference-service"
+      ],
+      "files_touched": [
+        "services/telemetry-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0065",
+        "title": "Merge LID-125 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "d7448f42d1771d0459e82e923d22ca4d2f25132d",
+      "short_commit_id": "d7448f42",
+      "timestamp": "2026-02-28T21:00:00Z",
+      "author_employee_id": "EMP-002",
+      "author_name": "Aisha Khan",
+      "branch": "feature/lidar/lid-101-stabilize-tensorrt-int8-edge-inference-path",
+      "message": "feat(edge-inference): implement slice for stabilize tensorrt int8 edge inference path",
+      "jira_ticket_ids": [
+        "LID-101"
+      ],
+      "services_modified": [
+        "edge-inference-service",
+        "object-detection-service"
+      ],
+      "files_touched": [
+        "services/edge-inference-service/src/stabilize_tensorrt_int8_edge.py",
+        "services/edge-inference-service/tests/test_lid_101_2.py"
+      ],
+      "pull_request": {
+        "id": "PR-0002",
+        "title": "LID-101 Stabilize TensorRT INT8 edge inference path",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "latency spikes get worse after QA replays a calibration bundle twice",
+      "change_risk": null
+    },
+    {
+      "commit_id": "d9034444099283fe1ff3ffc78bb85a608f2dc328",
+      "short_commit_id": "d9034444",
+      "timestamp": "2026-03-01T03:00:00Z",
+      "author_employee_id": "EMP-006",
+      "author_name": "Haruka Sato",
+      "branch": "feature/adas/adas-213-refactor-diagnostics-event-schema-for-replay-and",
+      "message": "perf(diagnostics): tune path for refactor diagnostics event schema for replay and",
+      "jira_ticket_ids": [
+        "ADAS-213"
+      ],
+      "services_modified": [
+        "diagnostics-service"
+      ],
+      "files_touched": [
+        "services/diagnostics-service/src/refactor_diagnostics_event_s.cpp",
+        "services/diagnostics-service/tests/test_adas_213_2.cpp"
+      ],
+      "pull_request": {
+        "id": "PR-0116",
+        "title": "ADAS-213 Refactor diagnostics event schema for replay and road runs",
+        "merged": true,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "Routine feature work in an active development branch.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "df6dbf168d92a15931b7ff2ef72c88f6c8c881a2",
+      "short_commit_id": "df6dbf16",
+      "timestamp": "2026-03-01T21:00:00Z",
+      "author_employee_id": "EMP-001",
+      "author_name": "Minh Tran",
+      "branch": "main",
+      "message": "merge: LID-126 Telemetry event payload drops queue depth field under load",
+      "jira_ticket_ids": [
+        "LID-126"
+      ],
+      "services_modified": [
+        "telemetry-service"
+      ],
+      "files_touched": [
+        "services/telemetry-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0068",
+        "title": "Merge LID-126 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "715356038ad6bc4bdce9f06120dfad8caf31339a",
+      "short_commit_id": "71535603",
+      "timestamp": "2026-03-01T23:00:00Z",
+      "author_employee_id": "EMP-010",
+      "author_name": "Ethan Walker",
+      "branch": "feature/adas/adas-214-prepare-camera-timing-instrumentation-for-ecu-in",
+      "message": "feat(camera-ingestion): implement slice for prepare camera timing instrumentation for ecu in",
+      "jira_ticket_ids": [
+        "ADAS-214"
+      ],
+      "services_modified": [
+        "camera-ingestion-service"
+      ],
+      "files_touched": [
+        "services/camera-ingestion-service/src/prepare_camera_timing_instru.cpp",
+        "services/camera-ingestion-service/tests/test_adas_214_1.cpp"
+      ],
+      "pull_request": {
+        "id": "PR-0118",
+        "title": "ADAS-214 Prepare camera timing instrumentation for ECU integration",
+        "merged": false,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "steering oscillation starts only when the faster timing profile is enabled",
+      "change_risk": null
+    },
+    {
+      "commit_id": "b2f0a46d27d8d43f6241c3f2a1afc1234ea2533d",
+      "short_commit_id": "b2f0a46d",
+      "timestamp": "2026-03-02T00:00:00Z",
+      "author_employee_id": "EMP-001",
+      "author_name": "Minh Tran",
+      "branch": "main",
+      "message": "merge: LID-127 Edge rollback required after inference regression in demo branch",
+      "jira_ticket_ids": [
+        "LID-127"
+      ],
+      "services_modified": [
+        "edge-inference-service",
+        "object-detection-service"
+      ],
+      "files_touched": [
+        "services/edge-inference-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0070",
+        "title": "Merge LID-127 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "3fe11e37b88700ab1a5882264646031bebaeb3a0",
+      "short_commit_id": "3fe11e37",
+      "timestamp": "2026-03-02T00:00:00Z",
+      "author_employee_id": "EMP-001",
+      "author_name": "Minh Tran",
+      "branch": "feature/lidar/lid-128-document-ros2-topic-ownership-for-detection-and-",
+      "message": "chore(lidar-ingestion): advance document ros2 topic ownership for detection and ",
+      "jira_ticket_ids": [
+        "LID-128"
+      ],
+      "services_modified": [
+        "lidar-ingestion-service"
+      ],
+      "files_touched": [
+        "services/lidar-ingestion-service/src/document_ros2_topic_ownershi.py",
+        "services/lidar-ingestion-service/tests/test_lid_128_1.py"
+      ],
+      "pull_request": {
+        "id": "PR-0071",
+        "title": "LID-128 Document ROS2 topic ownership for detection and tracking",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Routine feature work in an active development branch.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "d366a14b27040442ad903d3f19070c9e15fdfce5",
+      "short_commit_id": "d366a14b",
+      "timestamp": "2026-03-02T02:00:00Z",
+      "author_employee_id": "EMP-003",
+      "author_name": "Diego Alvarez",
+      "branch": "feature/lidar/lid-102-profile-jetson-memory-pools-during-repeated-engi",
+      "message": "chore(edge-inference): advance profile jetson memory pools during repeated engi",
+      "jira_ticket_ids": [
+        "LID-102"
+      ],
+      "services_modified": [
+        "edge-inference-service"
+      ],
+      "files_touched": [
+        "services/edge-inference-service/src/profile_jetson_memory_pools_.py",
+        "services/edge-inference-service/tests/test_lid_102_1.py"
+      ],
+      "pull_request": {
+        "id": "PR-0004",
+        "title": "LID-102 Profile Jetson memory pools during repeated engine reload",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "GPU free memory drops after each engine reload even when frame rate is flat",
+      "change_risk": null
+    },
+    {
+      "commit_id": "8eed07ddba8d598dfe0bf4c5c43f8886e669e2cd",
+      "short_commit_id": "8eed07dd",
+      "timestamp": "2026-03-02T03:00:00Z",
+      "author_employee_id": "EMP-006",
+      "author_name": "Haruka Sato",
+      "branch": "main",
+      "message": "merge: ADAS-212 Active calibration endpoint serves stale extrinsic age on warm boot",
+      "jira_ticket_ids": [
+        "ADAS-212"
+      ],
+      "services_modified": [
+        "calibration-service"
+      ],
+      "files_touched": [
+        "services/calibration-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0114",
+        "title": "Merge ADAS-212 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "a0b21fd650392a461094b378b50c7e9156f6546c",
+      "short_commit_id": "a0b21fd6",
+      "timestamp": "2026-03-02T20:00:00Z",
+      "author_employee_id": "EMP-001",
+      "author_name": "Minh Tran",
+      "branch": "feature/lidar/lid-129-trim-copy-count-in-lidar-frame-import-path",
+      "message": "perf(lidar-ingestion): tune path for trim copy count in lidar frame import path",
+      "jira_ticket_ids": [
+        "LID-129"
+      ],
+      "services_modified": [
+        "lidar-ingestion-service"
+      ],
+      "files_touched": [
+        "services/lidar-ingestion-service/src/trim_copy_count_in_lidar_fra.py",
+        "services/lidar-ingestion-service/tests/test_lid_129_1.py"
+      ],
+      "pull_request": {
+        "id": "PR-0073",
+        "title": "LID-129 Trim copy count in lidar frame import path",
+        "merged": false,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Routine feature work in an active development branch.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "10912fb160977d90a695308660a6c0300d976bd0",
+      "short_commit_id": "10912fb1",
+      "timestamp": "2026-03-03T00:00:00Z",
+      "author_employee_id": "EMP-006",
+      "author_name": "Haruka Sato",
+      "branch": "feature/adas/adas-214-prepare-camera-timing-instrumentation-for-ecu-in",
+      "message": "feat(diagnostics): implement slice for prepare camera timing instrumentation for ecu in",
+      "jira_ticket_ids": [
+        "ADAS-214"
+      ],
+      "services_modified": [
+        "camera-ingestion-service",
+        "diagnostics-service"
+      ],
+      "files_touched": [
+        "services/diagnostics-service/src/prepare_camera_timing_instru.cpp",
+        "services/diagnostics-service/tests/test_adas_214_2.cpp"
+      ],
+      "pull_request": {
+        "id": "PR-0119",
+        "title": "ADAS-214 Prepare camera timing instrumentation for ECU integration",
+        "merged": true,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "diagnostics reports controller delta spikes without lane confidence collapsing",
+      "change_risk": null
+    },
+    {
+      "commit_id": "7182b71c21311bbd14afc0a857b8a481a482960d",
+      "short_commit_id": "7182b71c",
+      "timestamp": "2026-03-03T05:00:00Z",
+      "author_employee_id": "EMP-007",
+      "author_name": "Priya Raman",
+      "branch": "fix/adas-215-lane-confidence-drops-during-glare-replay-after-",
+      "message": "fix(lane-detection): tighten guard path for lane confidence drops during glare replay after ",
+      "jira_ticket_ids": [
+        "ADAS-215"
+      ],
+      "services_modified": [
+        "lane-detection-service"
+      ],
+      "files_touched": [
+        "services/lane-detection-service/src/lane_confidence_drops_during.cpp",
+        "services/lane-detection-service/tests/test_adas_215_1.cpp"
+      ],
+      "pull_request": {
+        "id": "PR-0121",
+        "title": "ADAS-215 Lane confidence drops during glare replay after algorithm toggle",
+        "merged": false,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "Routine feature work in an active development branch.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "fb7eeec0a2fe29a171a704ca17c18c48cd668e64",
+      "short_commit_id": "fb7eeec0",
+      "timestamp": "2026-03-03T06:00:00Z",
+      "author_employee_id": "EMP-001",
+      "author_name": "Minh Tran",
+      "branch": "main",
+      "message": "merge: LID-101 Stabilize TensorRT INT8 edge inference path",
+      "jira_ticket_ids": [
+        "LID-101"
+      ],
+      "services_modified": [
+        "object-detection-service",
+        "edge-inference-service"
+      ],
+      "files_touched": [
+        "services/object-detection-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0003",
+        "title": "Merge LID-101 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "e19acbe997bd86423f2d8e31b3afa7d7e31b9ba3",
+      "short_commit_id": "e19acbe9",
+      "timestamp": "2026-03-03T06:00:00Z",
+      "author_employee_id": "EMP-006",
+      "author_name": "Haruka Sato",
+      "branch": "main",
+      "message": "merge: ADAS-213 Refactor diagnostics event schema for replay and road runs",
+      "jira_ticket_ids": [
+        "ADAS-213"
+      ],
+      "services_modified": [
+        "diagnostics-service"
+      ],
+      "files_touched": [
+        "services/diagnostics-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0117",
+        "title": "Merge ADAS-213 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "b17e06a06942c090819018922c0ecfbac3d5e8d3",
+      "short_commit_id": "b17e06a0",
+      "timestamp": "2026-03-03T07:00:00Z",
+      "author_employee_id": "EMP-003",
+      "author_name": "Diego Alvarez",
+      "branch": "fix/lid-103-investigate-p95-inference-spike-after-quantized-",
+      "message": "fix(edge-inference): tighten guard path for investigate p95 inference spike after quantized ",
+      "jira_ticket_ids": [
+        "LID-103"
+      ],
+      "services_modified": [
+        "edge-inference-service"
+      ],
+      "files_touched": [
+        "services/edge-inference-service/src/investigate_p95_inference_sp.py",
+        "services/edge-inference-service/tests/test_lid_103_1.py"
+      ],
+      "pull_request": {
+        "id": "PR-0006",
+        "title": "LID-103 Investigate p95 inference spike after quantized engine rollout",
+        "merged": false,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "GPU free memory drops after each engine reload even when frame rate is flat",
+      "change_risk": "introduced_regression"
+    },
+    {
+      "commit_id": "ca5142f3ef5ec5cdbfa35e16ae73e5eaf35a8439",
+      "short_commit_id": "ca5142f3",
+      "timestamp": "2026-03-03T21:00:00Z",
+      "author_employee_id": "EMP-001",
+      "author_name": "Minh Tran",
+      "branch": "feature/lidar/lid-129-trim-copy-count-in-lidar-frame-import-path",
+      "message": "perf(lidar-ingestion): tune path for trim copy count in lidar frame import path",
+      "jira_ticket_ids": [
+        "LID-129"
+      ],
+      "services_modified": [
+        "lidar-ingestion-service"
+      ],
+      "files_touched": [
+        "services/lidar-ingestion-service/src/trim_copy_count_in_lidar_fra.py",
+        "services/lidar-ingestion-service/tests/test_lid_129_2.py"
+      ],
+      "pull_request": {
+        "id": "PR-0074",
+        "title": "LID-129 Trim copy count in lidar frame import path",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Routine feature work in an active development branch.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "fc0c862e52dfe4a8e7ecbfef67a22d7fc56a6e86",
+      "short_commit_id": "fc0c862e",
+      "timestamp": "2026-03-04T03:00:00Z",
+      "author_employee_id": "EMP-001",
+      "author_name": "Minh Tran",
+      "branch": "main",
+      "message": "merge: LID-128 Document ROS2 topic ownership for detection and tracking",
+      "jira_ticket_ids": [
+        "LID-128"
+      ],
+      "services_modified": [
+        "lidar-ingestion-service",
+        "tracking-service"
+      ],
+      "files_touched": [
+        "services/lidar-ingestion-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0072",
+        "title": "Merge LID-128 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "e18a46d5237b6d656de3f9403e1a76665863ece8",
+      "short_commit_id": "e18a46d5",
+      "timestamp": "2026-03-04T06:00:00Z",
+      "author_employee_id": "EMP-007",
+      "author_name": "Priya Raman",
+      "branch": "fix/adas-215-lane-confidence-drops-during-glare-replay-after-",
+      "message": "fix(lane-detection): reduce regression surface around adas-215",
+      "jira_ticket_ids": [
+        "ADAS-215"
+      ],
+      "services_modified": [
+        "lane-detection-service"
+      ],
+      "files_touched": [
+        "services/lane-detection-service/src/lane_confidence_drops_during.cpp",
+        "services/lane-detection-service/tests/test_adas_215_2.cpp"
+      ],
+      "pull_request": {
+        "id": "PR-0122",
+        "title": "ADAS-215 Lane confidence drops during glare replay after algorithm toggle",
+        "merged": true,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "Routine feature work in an active development branch.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "15957161e911d672318d9970aa2701e3ec9d81c8",
+      "short_commit_id": "15957161",
+      "timestamp": "2026-03-04T08:00:00Z",
+      "author_employee_id": "EMP-003",
+      "author_name": "Diego Alvarez",
+      "branch": "fix/lid-103-investigate-p95-inference-spike-after-quantized-",
+      "message": "fix(telemetry): reduce regression surface around lid-103",
+      "jira_ticket_ids": [
+        "LID-103"
+      ],
+      "services_modified": [
+        "edge-inference-service",
+        "telemetry-service"
+      ],
+      "files_touched": [
+        "services/telemetry-service/src/investigate_p95_inference_sp.py",
+        "services/telemetry-service/tests/test_lid_103_2.py"
+      ],
+      "pull_request": {
+        "id": "PR-0007",
+        "title": "LID-103 Investigate p95 inference spike after quantized engine rollout",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "latency spikes get worse after QA replays a calibration bundle twice",
+      "change_risk": null
+    },
+    {
+      "commit_id": "fcd9b5f3ab61191af387293f6cb1898dfeea930b",
+      "short_commit_id": "fcd9b5f3",
+      "timestamp": "2026-03-04T09:00:00Z",
+      "author_employee_id": "EMP-001",
+      "author_name": "Minh Tran",
+      "branch": "main",
+      "message": "merge: LID-102 Profile Jetson memory pools during repeated engine reload",
+      "jira_ticket_ids": [
+        "LID-102"
+      ],
+      "services_modified": [
+        "edge-inference-service"
+      ],
+      "files_touched": [
+        "services/edge-inference-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0005",
+        "title": "Merge LID-102 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "3e00595f5e66df809f4b7254652131977b92863a",
+      "short_commit_id": "3e00595f",
+      "timestamp": "2026-03-05T09:00:00Z",
+      "author_employee_id": "EMP-006",
+      "author_name": "Haruka Sato",
+      "branch": "main",
+      "message": "merge: ADAS-214 Prepare camera timing instrumentation for ECU integration",
+      "jira_ticket_ids": [
+        "ADAS-214"
+      ],
+      "services_modified": [
+        "camera-ingestion-service",
+        "diagnostics-service"
+      ],
+      "files_touched": [
+        "services/camera-ingestion-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0120",
+        "title": "Merge ADAS-214 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "827088e085d57c4464f4c004fc27ab14e3f268b0",
+      "short_commit_id": "827088e0",
+      "timestamp": "2026-03-05T10:00:00Z",
+      "author_employee_id": "EMP-008",
+      "author_name": "Lucas Moreau",
+      "branch": "feature/adas/adas-217-compare-monotonic-and-sensor-timestamps-in-camer",
+      "message": "chore(camera-ingestion): advance compare monotonic and sensor timestamps in camer",
+      "jira_ticket_ids": [
+        "ADAS-217"
+      ],
+      "services_modified": [
+        "camera-ingestion-service"
+      ],
+      "files_touched": [
+        "services/camera-ingestion-service/src/compare_monotonic_and_sensor.cpp",
+        "services/camera-ingestion-service/tests/test_adas_217_1.cpp"
+      ],
+      "pull_request": {
+        "id": "PR-0126",
+        "title": "ADAS-217 Compare monotonic and sensor timestamps in camera ingestion path",
+        "merged": true,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "steering oscillation starts only when the faster timing profile is enabled",
+      "change_risk": null
+    },
+    {
+      "commit_id": "1bc52272e5094d78d9edb2e30834d4e149369bd3",
+      "short_commit_id": "1bc52272",
+      "timestamp": "2026-03-05T11:00:00Z",
+      "author_employee_id": "EMP-006",
+      "author_name": "Haruka Sato",
+      "branch": "fix/adas-216-controller-jitter-during-75-km-h-replay-session",
+      "message": "hotfix(steering-control): mitigate controller jitter during 75 km h replay session",
+      "jira_ticket_ids": [
+        "ADAS-216"
+      ],
+      "services_modified": [
+        "steering-control-service"
+      ],
+      "files_touched": [
+        "services/steering-control-service/src/controller_jitter_during_75_.cpp",
+        "services/steering-control-service/tests/test_adas_216_1.cpp"
+      ],
+      "pull_request": {
+        "id": "PR-0124",
+        "title": "ADAS-216 Controller jitter during 75 km/h replay session",
+        "merged": true,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "steering oscillation starts only when the faster timing profile is enabled",
+      "change_risk": null
+    },
+    {
+      "commit_id": "d16195aa31f45f8b61da8784da46a3e56e619bba",
+      "short_commit_id": "d16195aa",
+      "timestamp": "2026-03-06T06:00:00Z",
+      "author_employee_id": "EMP-001",
+      "author_name": "Minh Tran",
+      "branch": "main",
+      "message": "merge: LID-129 Trim copy count in lidar frame import path",
+      "jira_ticket_ids": [
+        "LID-129"
+      ],
+      "services_modified": [
+        "lidar-ingestion-service"
+      ],
+      "files_touched": [
+        "services/lidar-ingestion-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0075",
+        "title": "Merge LID-129 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "ea23143b0a87f416437cb3347b773ee9a4ebeadb",
+      "short_commit_id": "ea23143b",
+      "timestamp": "2026-03-06T12:00:00Z",
+      "author_employee_id": "EMP-001",
+      "author_name": "Minh Tran",
+      "branch": "main",
+      "message": "merge: LID-103 Investigate p95 inference spike after quantized engine rollout",
+      "jira_ticket_ids": [
+        "LID-103"
+      ],
+      "services_modified": [
+        "edge-inference-service",
+        "telemetry-service"
+      ],
+      "files_touched": [
+        "services/edge-inference-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0008",
+        "title": "Merge LID-103 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-001"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "8901e9125f006aeebd7f0c28cfa8ef853390957e",
+      "short_commit_id": "8901e912",
+      "timestamp": "2026-03-06T12:00:00Z",
+      "author_employee_id": "EMP-006",
+      "author_name": "Haruka Sato",
+      "branch": "main",
+      "message": "merge: ADAS-215 Lane confidence drops during glare replay after algorithm toggle",
+      "jira_ticket_ids": [
+        "ADAS-215"
+      ],
+      "services_modified": [
+        "lane-detection-service"
+      ],
+      "files_touched": [
+        "services/lane-detection-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0123",
+        "title": "Merge ADAS-215 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "4bf3d74fa05ea973c0621aae1e9e379cf610f7ed",
+      "short_commit_id": "4bf3d74f",
+      "timestamp": "2026-03-07T15:00:00Z",
+      "author_employee_id": "EMP-006",
+      "author_name": "Haruka Sato",
+      "branch": "main",
+      "message": "merge: ADAS-216 Controller jitter during 75 km/h replay session",
+      "jira_ticket_ids": [
+        "ADAS-216"
+      ],
+      "services_modified": [
+        "steering-control-service",
+        "camera-ingestion-service"
+      ],
+      "files_touched": [
+        "services/steering-control-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0125",
+        "title": "Merge ADAS-216 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "24d3d39c8bd7909af0dab0b0a60ae878ee096967",
+      "short_commit_id": "24d3d39c",
+      "timestamp": "2026-03-07T15:00:00Z",
+      "author_employee_id": "EMP-009",
+      "author_name": "Nora Ibrahim",
+      "branch": "feature/adas/adas-218-add-calibration-cache-flush-to-post-upload-check",
+      "message": "perf(calibration): tune path for add calibration cache flush to post upload check",
+      "jira_ticket_ids": [
+        "ADAS-218"
+      ],
+      "services_modified": [
+        "calibration-service"
+      ],
+      "files_touched": [
+        "services/calibration-service/src/add_calibration_cache_flush_.cpp",
+        "services/calibration-service/tests/test_adas_218_1.cpp"
+      ],
+      "pull_request": {
+        "id": "PR-0128",
+        "title": "ADAS-218 Add calibration cache flush to post-upload checklist",
+        "merged": false,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "lane center error is small after cold boot but grows after a warm restart",
+      "change_risk": null
+    },
+    {
+      "commit_id": "f4835c570f5f0e5b769c08cacb8bf319e61519b8",
+      "short_commit_id": "f4835c57",
+      "timestamp": "2026-03-07T21:00:00Z",
+      "author_employee_id": "EMP-006",
+      "author_name": "Haruka Sato",
+      "branch": "main",
+      "message": "merge: ADAS-217 Compare monotonic and sensor timestamps in camera ingestion path",
+      "jira_ticket_ids": [
+        "ADAS-217"
+      ],
+      "services_modified": [
+        "camera-ingestion-service"
+      ],
+      "files_touched": [
+        "services/camera-ingestion-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0127",
+        "title": "Merge ADAS-217 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "f9617a46d442d69a0ad2971a543c504301ef0da3",
+      "short_commit_id": "f9617a46",
+      "timestamp": "2026-03-08T16:00:00Z",
+      "author_employee_id": "EMP-009",
+      "author_name": "Nora Ibrahim",
+      "branch": "feature/adas/adas-218-add-calibration-cache-flush-to-post-upload-check",
+      "message": "perf(calibration): tune path for add calibration cache flush to post upload check",
+      "jira_ticket_ids": [
+        "ADAS-218"
+      ],
+      "services_modified": [
+        "calibration-service"
+      ],
+      "files_touched": [
+        "services/calibration-service/src/add_calibration_cache_flush_.cpp",
+        "services/calibration-service/tests/test_adas_218_2.cpp"
+      ],
+      "pull_request": {
+        "id": "PR-0129",
+        "title": "ADAS-218 Add calibration cache flush to post-upload checklist",
+        "merged": true,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "active calibration checksum looks correct while reported extrinsic age is stale",
+      "change_risk": null
+    },
+    {
+      "commit_id": "01bc0107e6f89ac7dc111ac880fe9ab13e578e3a",
+      "short_commit_id": "01bc0107",
+      "timestamp": "2026-03-08T21:00:00Z",
+      "author_employee_id": "EMP-006",
+      "author_name": "Haruka Sato",
+      "branch": "feature/adas/adas-219-improve-rig-side-diagnostics-for-lane-offset-inv",
+      "message": "feat(diagnostics): implement slice for improve rig side diagnostics for lane offset inv",
+      "jira_ticket_ids": [
+        "ADAS-219"
+      ],
+      "services_modified": [
+        "diagnostics-service"
+      ],
+      "files_touched": [
+        "services/diagnostics-service/src/improve_rig_side_diagnostics.cpp",
+        "services/diagnostics-service/tests/test_adas_219_1.cpp"
+      ],
+      "pull_request": {
+        "id": "PR-0131",
+        "title": "ADAS-219 Improve rig-side diagnostics for lane offset investigations",
+        "merged": false,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "Routine feature work in an active development branch.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "53abcd403a2229a318d35407c896ec57f79ac70b",
+      "short_commit_id": "53abcd40",
+      "timestamp": "2026-03-09T22:00:00Z",
+      "author_employee_id": "EMP-006",
+      "author_name": "Haruka Sato",
+      "branch": "feature/adas/adas-219-improve-rig-side-diagnostics-for-lane-offset-inv",
+      "message": "feat(lane-detection): implement slice for improve rig side diagnostics for lane offset inv",
+      "jira_ticket_ids": [
+        "ADAS-219"
+      ],
+      "services_modified": [
+        "diagnostics-service",
+        "lane-detection-service"
+      ],
+      "files_touched": [
+        "services/lane-detection-service/src/improve_rig_side_diagnostics.cpp",
+        "services/lane-detection-service/tests/test_adas_219_2.cpp"
+      ],
+      "pull_request": {
+        "id": "PR-0132",
+        "title": "ADAS-219 Improve rig-side diagnostics for lane offset investigations",
+        "merged": true,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "Routine feature work in an active development branch.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "bf99cdb0ac5756366d426505d7652260f09d25bd",
+      "short_commit_id": "bf99cdb0",
+      "timestamp": "2026-03-11T00:00:00Z",
+      "author_employee_id": "EMP-006",
+      "author_name": "Haruka Sato",
+      "branch": "main",
+      "message": "merge: ADAS-218 Add calibration cache flush to post-upload checklist",
+      "jira_ticket_ids": [
+        "ADAS-218"
+      ],
+      "services_modified": [
+        "calibration-service"
+      ],
+      "files_touched": [
+        "services/calibration-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0130",
+        "title": "Merge ADAS-218 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "17b55b26e724c563ddd239dc0feb3f9fe118c5d5",
+      "short_commit_id": "17b55b26",
+      "timestamp": "2026-03-11T03:00:00Z",
+      "author_employee_id": "EMP-008",
+      "author_name": "Lucas Moreau",
+      "branch": "fix/adas-220-can-steering-command-saturates-on-quick-lane-swa",
+      "message": "fix(steering-control): tighten guard path for can steering command saturates on quick lane swa",
+      "jira_ticket_ids": [
+        "ADAS-220"
+      ],
+      "services_modified": [
+        "steering-control-service"
+      ],
+      "files_touched": [
+        "services/steering-control-service/src/can_steering_command_saturat.cpp",
+        "services/steering-control-service/tests/test_adas_220_1.cpp"
+      ],
+      "pull_request": {
+        "id": "PR-0134",
+        "title": "ADAS-220 CAN steering command saturates on quick lane swaps",
+        "merged": false,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "Routine feature work in an active development branch.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "e4668fa0e5fc50a8d9a8e311703421a629707011",
+      "short_commit_id": "e4668fa0",
+      "timestamp": "2026-03-11T19:00:00Z",
+      "author_employee_id": "EMP-008",
+      "author_name": "Lucas Moreau",
+      "branch": "fix/adas-220-can-steering-command-saturates-on-quick-lane-swa",
+      "message": "fix(steering-control): reduce regression surface around adas-220",
+      "jira_ticket_ids": [
+        "ADAS-220"
+      ],
+      "services_modified": [
+        "steering-control-service"
+      ],
+      "files_touched": [
+        "services/steering-control-service/src/can_steering_command_saturat.cpp",
+        "services/steering-control-service/tests/test_adas_220_2.cpp"
+      ],
+      "pull_request": {
+        "id": "PR-0135",
+        "title": "ADAS-220 CAN steering command saturates on quick lane swaps",
+        "merged": true,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "Routine feature work in an active development branch.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "c68e6c02174a542ad80f6c69b022e78f080d3cf7",
+      "short_commit_id": "c68e6c02",
+      "timestamp": "2026-03-12T00:00:00Z",
+      "author_employee_id": "EMP-010",
+      "author_name": "Ethan Walker",
+      "branch": "feature/adas/adas-221-document-ecu-image-bootstrap-steps-for-vision-te",
+      "message": "chore(camera-ingestion): advance document ecu image bootstrap steps for vision te",
+      "jira_ticket_ids": [
+        "ADAS-221"
+      ],
+      "services_modified": [
+        "camera-ingestion-service"
+      ],
+      "files_touched": [
+        "services/camera-ingestion-service/src/document_ecu_image_bootstrap.cpp",
+        "services/camera-ingestion-service/tests/test_adas_221_1.cpp"
+      ],
+      "pull_request": {
+        "id": "PR-0137",
+        "title": "ADAS-221 Document ECU image bootstrap steps for vision team",
+        "merged": true,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "Routine feature work in an active development branch.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "de864ff50c30f5f595d6ad50918b965665d29bef",
+      "short_commit_id": "de864ff5",
+      "timestamp": "2026-03-12T03:00:00Z",
+      "author_employee_id": "EMP-006",
+      "author_name": "Haruka Sato",
+      "branch": "main",
+      "message": "merge: ADAS-219 Improve rig-side diagnostics for lane offset investigations",
+      "jira_ticket_ids": [
+        "ADAS-219"
+      ],
+      "services_modified": [
+        "diagnostics-service",
+        "lane-detection-service"
+      ],
+      "files_touched": [
+        "services/diagnostics-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0133",
+        "title": "Merge ADAS-219 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "3f4726e374d80af99cb76ad350eb2371f33f0919",
+      "short_commit_id": "3f4726e3",
+      "timestamp": "2026-03-14T05:00:00Z",
+      "author_employee_id": "EMP-009",
+      "author_name": "Nora Ibrahim",
+      "branch": "feature/adas/adas-222-split-calibration-profile-metadata-from-active-r",
+      "message": "perf(calibration): tune path for split calibration profile metadata from active r",
+      "jira_ticket_ids": [
+        "ADAS-222"
+      ],
+      "services_modified": [
+        "calibration-service"
+      ],
+      "files_touched": [
+        "services/calibration-service/src/split_calibration_profile_me.cpp",
+        "services/calibration-service/tests/test_adas_222_1.cpp"
+      ],
+      "pull_request": {
+        "id": "PR-0139",
+        "title": "ADAS-222 Split calibration profile metadata from active runtime cache",
+        "merged": false,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "lane center error is small after cold boot but grows after a warm restart",
+      "change_risk": null
+    },
+    {
+      "commit_id": "119baaa335f1b28ad9798ca3061b363ba2ead173",
+      "short_commit_id": "119baaa3",
+      "timestamp": "2026-03-14T06:00:00Z",
+      "author_employee_id": "EMP-006",
+      "author_name": "Haruka Sato",
+      "branch": "main",
+      "message": "merge: ADAS-220 CAN steering command saturates on quick lane swaps",
+      "jira_ticket_ids": [
+        "ADAS-220"
+      ],
+      "services_modified": [
+        "steering-control-service"
+      ],
+      "files_touched": [
+        "services/steering-control-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0136",
+        "title": "Merge ADAS-220 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "99d4eee79dbb37e00346ec2b4e2b660f49842aa9",
+      "short_commit_id": "99d4eee7",
+      "timestamp": "2026-03-14T09:00:00Z",
+      "author_employee_id": "EMP-006",
+      "author_name": "Haruka Sato",
+      "branch": "main",
+      "message": "merge: ADAS-221 Document ECU image bootstrap steps for vision team",
+      "jira_ticket_ids": [
+        "ADAS-221"
+      ],
+      "services_modified": [
+        "camera-ingestion-service",
+        "diagnostics-service"
+      ],
+      "files_touched": [
+        "services/camera-ingestion-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0138",
+        "title": "Merge ADAS-221 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "b499d3957ca146da1768e8b3449f776eb12ac816",
+      "short_commit_id": "b499d395",
+      "timestamp": "2026-03-15T06:00:00Z",
+      "author_employee_id": "EMP-009",
+      "author_name": "Nora Ibrahim",
+      "branch": "feature/adas/adas-222-split-calibration-profile-metadata-from-active-r",
+      "message": "perf(calibration): tune path for split calibration profile metadata from active r",
+      "jira_ticket_ids": [
+        "ADAS-222"
+      ],
+      "services_modified": [
+        "calibration-service"
+      ],
+      "files_touched": [
+        "services/calibration-service/src/split_calibration_profile_me.cpp",
+        "services/calibration-service/tests/test_adas_222_2.cpp"
+      ],
+      "pull_request": {
+        "id": "PR-0140",
+        "title": "ADAS-222 Split calibration profile metadata from active runtime cache",
+        "merged": true,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "active calibration checksum looks correct while reported extrinsic age is stale",
+      "change_risk": null
+    },
+    {
+      "commit_id": "2699d67603c89dd2ba66622363d0edb48708fd4e",
+      "short_commit_id": "2699d676",
+      "timestamp": "2026-03-15T11:00:00Z",
+      "author_employee_id": "EMP-010",
+      "author_name": "Ethan Walker",
+      "branch": "fix/adas-223-frame-gap-counters-spike-when-diagnostics-sample",
+      "message": "fix(diagnostics): tighten guard path for frame gap counters spike when diagnostics sample",
+      "jira_ticket_ids": [
+        "ADAS-223"
+      ],
+      "services_modified": [
+        "diagnostics-service"
+      ],
+      "files_touched": [
+        "services/diagnostics-service/src/frame_gap_counters_spike_whe.cpp",
+        "services/diagnostics-service/tests/test_adas_223_1.cpp"
+      ],
+      "pull_request": {
+        "id": "PR-0142",
+        "title": "ADAS-223 Frame gap counters spike when diagnostics sampler is verbose",
+        "merged": false,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "steering oscillation starts only when the faster timing profile is enabled",
+      "change_risk": "introduced_regression"
+    },
+    {
+      "commit_id": "69a5a95108a6e4e2fa929a3344d3cefb8191403d",
+      "short_commit_id": "69a5a951",
+      "timestamp": "2026-03-16T11:00:00Z",
+      "author_employee_id": "EMP-009",
+      "author_name": "Nora Ibrahim",
+      "branch": "feature/adas/adas-224-measure-lane-offset-before-and-after-cache-flush",
+      "message": "chore(calibration): advance measure lane offset before and after cache flush",
+      "jira_ticket_ids": [
+        "ADAS-224"
+      ],
+      "services_modified": [
+        "calibration-service"
+      ],
+      "files_touched": [
+        "services/calibration-service/src/measure_lane_offset_before_a.cpp",
+        "services/calibration-service/tests/test_adas_224_1.cpp"
+      ],
+      "pull_request": {
+        "id": "PR-0145",
+        "title": "ADAS-224 Measure lane offset before and after cache flush on warm restart",
+        "merged": true,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "lane center error is small after cold boot but grows after a warm restart",
+      "change_risk": null
+    },
+    {
+      "commit_id": "6acb7470481e93cd2c2afccffdadebb8c13625c1",
+      "short_commit_id": "6acb7470",
+      "timestamp": "2026-03-16T12:00:00Z",
+      "author_employee_id": "EMP-006",
+      "author_name": "Haruka Sato",
+      "branch": "fix/adas-223-frame-gap-counters-spike-when-diagnostics-sample",
+      "message": "fix(camera-ingestion): reduce regression surface around adas-223",
+      "jira_ticket_ids": [
+        "ADAS-223"
+      ],
+      "services_modified": [
+        "camera-ingestion-service",
+        "diagnostics-service"
+      ],
+      "files_touched": [
+        "services/camera-ingestion-service/src/frame_gap_counters_spike_whe.cpp",
+        "services/camera-ingestion-service/tests/test_adas_223_2.cpp"
+      ],
+      "pull_request": {
+        "id": "PR-0143",
+        "title": "ADAS-223 Frame gap counters spike when diagnostics sampler is verbose",
+        "merged": true,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "diagnostics reports controller delta spikes without lane confidence collapsing",
+      "change_risk": null
+    },
+    {
+      "commit_id": "c43e2e1f3d99fdf388e38a682bbf5018a1d7143c",
+      "short_commit_id": "c43e2e1f",
+      "timestamp": "2026-03-17T12:00:00Z",
+      "author_employee_id": "EMP-006",
+      "author_name": "Haruka Sato",
+      "branch": "main",
+      "message": "merge: ADAS-222 Split calibration profile metadata from active runtime cache",
+      "jira_ticket_ids": [
+        "ADAS-222"
+      ],
+      "services_modified": [
+        "calibration-service"
+      ],
+      "files_touched": [
+        "services/calibration-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0141",
+        "title": "Merge ADAS-222 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "4e8b111ed97133572ca0e888612a936722a7d40c",
+      "short_commit_id": "4e8b111e",
+      "timestamp": "2026-03-17T16:00:00Z",
+      "author_employee_id": "EMP-008",
+      "author_name": "Lucas Moreau",
+      "branch": "feature/adas/adas-225-tune-controller-damping-for-highway-replay-set",
+      "message": "feat(steering-control): implement slice for tune controller damping for highway replay set",
+      "jira_ticket_ids": [
+        "ADAS-225"
+      ],
+      "services_modified": [
+        "steering-control-service"
+      ],
+      "files_touched": [
+        "services/steering-control-service/src/tune_controller_damping_for_.cpp",
+        "services/steering-control-service/tests/test_adas_225_1.cpp"
+      ],
+      "pull_request": {
+        "id": "PR-0147",
+        "title": "ADAS-225 Tune controller damping for highway replay set",
+        "merged": false,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "Routine feature work in an active development branch.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "fff5411e0a57bc2e228f92ce93ab4ea8161252c8",
+      "short_commit_id": "fff5411e",
+      "timestamp": "2026-03-18T15:00:00Z",
+      "author_employee_id": "EMP-006",
+      "author_name": "Haruka Sato",
+      "branch": "main",
+      "message": "merge: ADAS-223 Frame gap counters spike when diagnostics sampler is verbose",
+      "jira_ticket_ids": [
+        "ADAS-223"
+      ],
+      "services_modified": [
+        "diagnostics-service",
+        "camera-ingestion-service"
+      ],
+      "files_touched": [
+        "services/diagnostics-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0144",
+        "title": "Merge ADAS-223 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "eb5c48fa56a011e11bfbaf8f7b7b6a8cd0ec592d",
+      "short_commit_id": "eb5c48fa",
+      "timestamp": "2026-03-18T17:00:00Z",
+      "author_employee_id": "EMP-008",
+      "author_name": "Lucas Moreau",
+      "branch": "feature/adas/adas-225-tune-controller-damping-for-highway-replay-set",
+      "message": "feat(steering-control): implement slice for tune controller damping for highway replay set",
+      "jira_ticket_ids": [
+        "ADAS-225"
+      ],
+      "services_modified": [
+        "steering-control-service"
+      ],
+      "files_touched": [
+        "services/steering-control-service/src/tune_controller_damping_for_.cpp",
+        "services/steering-control-service/tests/test_adas_225_2.cpp"
+      ],
+      "pull_request": {
+        "id": "PR-0148",
+        "title": "ADAS-225 Tune controller damping for highway replay set",
+        "merged": true,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "Routine feature work in an active development branch.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "ef2bdc0df9ae1c98f52a316e0c43d1bf0153d7d1",
+      "short_commit_id": "ef2bdc0d",
+      "timestamp": "2026-03-18T21:00:00Z",
+      "author_employee_id": "EMP-006",
+      "author_name": "Haruka Sato",
+      "branch": "main",
+      "message": "merge: ADAS-224 Measure lane offset before and after cache flush on warm restart",
+      "jira_ticket_ids": [
+        "ADAS-224"
+      ],
+      "services_modified": [
+        "calibration-service",
+        "lane-detection-service"
+      ],
+      "files_touched": [
+        "services/calibration-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0146",
+        "title": "Merge ADAS-224 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "4d370701fe8609ebeccda4e4850bd49c155abdec",
+      "short_commit_id": "4d370701",
+      "timestamp": "2026-03-19T22:00:00Z",
+      "author_employee_id": "EMP-007",
+      "author_name": "Priya Raman",
+      "branch": "fix/adas-226-lane-preview-api-omits-active-experiment-label-a",
+      "message": "fix(lane-detection): tighten guard path for lane preview api omits active experiment label a",
+      "jira_ticket_ids": [
+        "ADAS-226"
+      ],
+      "services_modified": [
+        "lane-detection-service"
+      ],
+      "files_touched": [
+        "services/lane-detection-service/src/lane_preview_api_omits_activ.cpp",
+        "services/lane-detection-service/tests/test_adas_226_1.cpp"
+      ],
+      "pull_request": {
+        "id": "PR-0150",
+        "title": "ADAS-226 Lane preview API omits active experiment label after reload",
+        "merged": false,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "Routine feature work in an active development branch.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "2dd7f220b6aa64e892a3ad98b0bd3cf0ebf07eb1",
+      "short_commit_id": "2dd7f220",
+      "timestamp": "2026-03-20T19:00:00Z",
+      "author_employee_id": "EMP-010",
+      "author_name": "Ethan Walker",
+      "branch": "fix/adas-227-prototype-ecu-package-rolled-back-after-jitter-r",
+      "message": "hotfix(steering-control): mitigate prototype ecu package rolled back after jitter r",
+      "jira_ticket_ids": [
+        "ADAS-227"
+      ],
+      "services_modified": [
+        "steering-control-service"
+      ],
+      "files_touched": [
+        "services/steering-control-service/src/prototype_ecu_package_rolled.cpp",
+        "services/steering-control-service/tests/test_adas_227_1.cpp"
+      ],
+      "pull_request": {
+        "id": "PR-0153",
+        "title": "ADAS-227 Prototype ECU package rolled back after jitter regressions",
+        "merged": true,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "steering oscillation starts only when the faster timing profile is enabled",
+      "change_risk": null
+    },
+    {
+      "commit_id": "468d5088dccda810991ff3bf8eb6368c15d0c5d0",
+      "short_commit_id": "468d5088",
+      "timestamp": "2026-03-20T23:00:00Z",
+      "author_employee_id": "EMP-007",
+      "author_name": "Priya Raman",
+      "branch": "fix/adas-226-lane-preview-api-omits-active-experiment-label-a",
+      "message": "fix(lane-detection): reduce regression surface around adas-226",
+      "jira_ticket_ids": [
+        "ADAS-226"
+      ],
+      "services_modified": [
+        "lane-detection-service"
+      ],
+      "files_touched": [
+        "services/lane-detection-service/src/lane_preview_api_omits_activ.cpp",
+        "services/lane-detection-service/tests/test_adas_226_2.cpp"
+      ],
+      "pull_request": {
+        "id": "PR-0151",
+        "title": "ADAS-226 Lane preview API omits active experiment label after reload",
+        "merged": true,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "Routine feature work in an active development branch.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "7bafa8f1254df90b45f56e7d0ffc628a9323eda3",
+      "short_commit_id": "7bafa8f1",
+      "timestamp": "2026-03-21T00:00:00Z",
+      "author_employee_id": "EMP-006",
+      "author_name": "Haruka Sato",
+      "branch": "main",
+      "message": "merge: ADAS-225 Tune controller damping for highway replay set",
+      "jira_ticket_ids": [
+        "ADAS-225"
+      ],
+      "services_modified": [
+        "steering-control-service"
+      ],
+      "files_touched": [
+        "services/steering-control-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0149",
+        "title": "Merge ADAS-225 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "1ddf763f9eae54916bd2e784b46f732d32d6fb1e",
+      "short_commit_id": "1ddf763f",
+      "timestamp": "2026-03-21T04:00:00Z",
+      "author_employee_id": "EMP-007",
+      "author_name": "Priya Raman",
+      "branch": "feature/adas/adas-201-compare-gradient-and-spline-lane-detectors-on-we",
+      "message": "feat(lane-detection): implement slice for compare gradient and spline lane detectors on we",
+      "jira_ticket_ids": [
+        "ADAS-201"
+      ],
+      "services_modified": [
+        "lane-detection-service"
+      ],
+      "files_touched": [
+        "services/lane-detection-service/src/compare_gradient_and_spline_.cpp",
+        "services/lane-detection-service/tests/test_adas_201_1.cpp"
+      ],
+      "pull_request": {
+        "id": "PR-0084",
+        "title": "ADAS-201 Compare gradient and spline lane detectors on wet-road data",
+        "merged": false,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "Routine feature work in an active development branch.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "933a42210adce7537566e95225e50c64d2c03045",
+      "short_commit_id": "933a4221",
+      "timestamp": "2026-03-22T05:00:00Z",
+      "author_employee_id": "EMP-007",
+      "author_name": "Priya Raman",
+      "branch": "feature/adas/adas-201-compare-gradient-and-spline-lane-detectors-on-we",
+      "message": "feat(lane-detection): implement slice for compare gradient and spline lane detectors on we",
+      "jira_ticket_ids": [
+        "ADAS-201"
+      ],
+      "services_modified": [
+        "lane-detection-service"
+      ],
+      "files_touched": [
+        "services/lane-detection-service/src/compare_gradient_and_spline_.cpp",
+        "services/lane-detection-service/tests/test_adas_201_2.cpp"
+      ],
+      "pull_request": {
+        "id": "PR-0085",
+        "title": "ADAS-201 Compare gradient and spline lane detectors on wet-road data",
+        "merged": true,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "Routine feature work in an active development branch.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "69672016758d56469d8ab95897a6cd62e9604537",
+      "short_commit_id": "69672016",
+      "timestamp": "2026-03-23T00:00:00Z",
+      "author_employee_id": "EMP-006",
+      "author_name": "Haruka Sato",
+      "branch": "feature/adas/adas-228-add-session-tags-for-calibration-reset-experimen",
+      "message": "chore(diagnostics): advance add session tags for calibration reset experimen",
+      "jira_ticket_ids": [
+        "ADAS-228"
+      ],
+      "services_modified": [
+        "diagnostics-service"
+      ],
+      "files_touched": [
+        "services/diagnostics-service/src/add_session_tags_for_calibra.cpp",
+        "services/diagnostics-service/tests/test_adas_228_1.cpp"
+      ],
+      "pull_request": {
+        "id": "PR-0155",
+        "title": "ADAS-228 Add session tags for calibration reset experiments",
+        "merged": true,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "Routine feature work in an active development branch.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "2af1feedeed8e3b83c294f57760eca09eae5a7b7",
+      "short_commit_id": "2af1feed",
+      "timestamp": "2026-03-23T03:00:00Z",
+      "author_employee_id": "EMP-006",
+      "author_name": "Haruka Sato",
+      "branch": "main",
+      "message": "merge: ADAS-226 Lane preview API omits active experiment label after reload",
+      "jira_ticket_ids": [
+        "ADAS-226"
+      ],
+      "services_modified": [
+        "lane-detection-service"
+      ],
+      "files_touched": [
+        "services/lane-detection-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0152",
+        "title": "Merge ADAS-226 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "03d08d74248dde27f4bdeee106a39e17c82b7895",
+      "short_commit_id": "03d08d74",
+      "timestamp": "2026-03-23T06:00:00Z",
+      "author_employee_id": "EMP-006",
+      "author_name": "Haruka Sato",
+      "branch": "main",
+      "message": "merge: ADAS-227 Prototype ECU package rolled back after jitter regressions",
+      "jira_ticket_ids": [
+        "ADAS-227"
+      ],
+      "services_modified": [
+        "steering-control-service",
+        "diagnostics-service"
+      ],
+      "files_touched": [
+        "services/steering-control-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0154",
+        "title": "Merge ADAS-227 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "609c6a6086ef565dd4ce8760dda34500d07fc92e",
+      "short_commit_id": "609c6a60",
+      "timestamp": "2026-03-23T10:00:00Z",
+      "author_employee_id": "EMP-009",
+      "author_name": "Nora Ibrahim",
+      "branch": "feature/adas/adas-202-refine-camera-calibration-upload-workflow-for-ec",
+      "message": "chore(calibration): advance refine camera calibration upload workflow for ec",
+      "jira_ticket_ids": [
+        "ADAS-202"
+      ],
+      "services_modified": [
+        "calibration-service"
+      ],
+      "files_touched": [
+        "services/calibration-service/src/refine_camera_calibration_up.cpp",
+        "services/calibration-service/tests/test_adas_202_1.cpp"
+      ],
+      "pull_request": {
+        "id": "PR-0087",
+        "title": "ADAS-202 Refine camera calibration upload workflow for ECU rig",
+        "merged": true,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "lane center error is small after cold boot but grows after a warm restart",
+      "change_risk": null
+    },
+    {
+      "commit_id": "aecea41221211513017c317f31157d03131a5a02",
+      "short_commit_id": "aecea412",
+      "timestamp": "2026-03-23T18:00:00Z",
+      "author_employee_id": "EMP-009",
+      "author_name": "Nora Ibrahim",
+      "branch": "fix/adas-203-lane-center-drifts-after-warm-ecu-restart",
+      "message": "fix(calibration): tighten guard path for lane center drifts after warm ecu restart",
+      "jira_ticket_ids": [
+        "ADAS-203"
+      ],
+      "services_modified": [
+        "calibration-service"
+      ],
+      "files_touched": [
+        "services/calibration-service/src/lane_center_drifts_after_war.cpp",
+        "services/calibration-service/tests/test_adas_203_1.cpp"
+      ],
+      "pull_request": {
+        "id": "PR-0089",
+        "title": "ADAS-203 Lane center drifts after warm ECU restart",
+        "merged": false,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "lane center error is small after cold boot but grows after a warm restart",
+      "change_risk": "introduced_regression"
+    },
+    {
+      "commit_id": "e4cb722f1b993ea6b58029b234c9fe5b3afd1d2e",
+      "short_commit_id": "e4cb722f",
+      "timestamp": "2026-03-24T10:00:00Z",
+      "author_employee_id": "EMP-009",
+      "author_name": "Nora Ibrahim",
+      "branch": "fix/adas-203-lane-center-drifts-after-warm-ecu-restart",
+      "message": "fix(lane-detection): reduce regression surface around adas-203",
+      "jira_ticket_ids": [
+        "ADAS-203"
+      ],
+      "services_modified": [
+        "calibration-service",
+        "lane-detection-service"
+      ],
+      "files_touched": [
+        "services/lane-detection-service/src/lane_center_drifts_after_war.cpp",
+        "services/lane-detection-service/tests/test_adas_203_2.cpp"
+      ],
+      "pull_request": {
+        "id": "PR-0090",
+        "title": "ADAS-203 Lane center drifts after warm ECU restart",
+        "merged": true,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "active calibration checksum looks correct while reported extrinsic age is stale",
+      "change_risk": null
+    },
+    {
+      "commit_id": "caf5b69fe7b31d6de07e55e327809c4ba18bdf51",
+      "short_commit_id": "caf5b69f",
+      "timestamp": "2026-03-24T12:00:00Z",
+      "author_employee_id": "EMP-006",
+      "author_name": "Haruka Sato",
+      "branch": "main",
+      "message": "merge: ADAS-201 Compare gradient and spline lane detectors on wet-road data",
+      "jira_ticket_ids": [
+        "ADAS-201"
+      ],
+      "services_modified": [
+        "lane-detection-service"
+      ],
+      "files_touched": [
+        "services/lane-detection-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0086",
+        "title": "Merge ADAS-201 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "3cbded3c552f8de4965b7dbe531b2877c44bd604",
+      "short_commit_id": "3cbded3c",
+      "timestamp": "2026-03-25T09:00:00Z",
+      "author_employee_id": "EMP-006",
+      "author_name": "Haruka Sato",
+      "branch": "main",
+      "message": "merge: ADAS-228 Add session tags for calibration reset experiments",
+      "jira_ticket_ids": [
+        "ADAS-228"
+      ],
+      "services_modified": [
+        "diagnostics-service",
+        "calibration-service"
+      ],
+      "files_touched": [
+        "services/diagnostics-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0156",
+        "title": "Merge ADAS-228 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "fad4a8bb82b64208bf6bc5eff24993c141aff9a9",
+      "short_commit_id": "fad4a8bb",
+      "timestamp": "2026-03-25T15:00:00Z",
+      "author_employee_id": "EMP-006",
+      "author_name": "Haruka Sato",
+      "branch": "main",
+      "message": "merge: ADAS-202 Refine camera calibration upload workflow for ECU rig",
+      "jira_ticket_ids": [
+        "ADAS-202"
+      ],
+      "services_modified": [
+        "calibration-service",
+        "camera-ingestion-service"
+      ],
+      "files_touched": [
+        "services/calibration-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0088",
+        "title": "Merge ADAS-202 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "f874892d18d51258a71c359a8d89a837ab4cd967",
+      "short_commit_id": "f874892d",
+      "timestamp": "2026-03-25T15:00:00Z",
+      "author_employee_id": "EMP-007",
+      "author_name": "Priya Raman",
+      "branch": "feature/adas/adas-204-reduce-lane-mask-flicker-during-overpass-shadows",
+      "message": "perf(lane-detection): tune path for reduce lane mask flicker during overpass shadows",
+      "jira_ticket_ids": [
+        "ADAS-204"
+      ],
+      "services_modified": [
+        "lane-detection-service"
+      ],
+      "files_touched": [
+        "services/lane-detection-service/src/reduce_lane_mask_flicker_dur.cpp",
+        "services/lane-detection-service/tests/test_adas_204_1.cpp"
+      ],
+      "pull_request": {
+        "id": "PR-0092",
+        "title": "ADAS-204 Reduce lane mask flicker during overpass shadows",
+        "merged": false,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "Routine feature work in an active development branch.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "acb5e0f527fb4486a7a881d05a4aab90b91c5021",
+      "short_commit_id": "acb5e0f5",
+      "timestamp": "2026-03-26T16:00:00Z",
+      "author_employee_id": "EMP-007",
+      "author_name": "Priya Raman",
+      "branch": "feature/adas/adas-204-reduce-lane-mask-flicker-during-overpass-shadows",
+      "message": "perf(lane-detection): tune path for reduce lane mask flicker during overpass shadows",
+      "jira_ticket_ids": [
+        "ADAS-204"
+      ],
+      "services_modified": [
+        "lane-detection-service"
+      ],
+      "files_touched": [
+        "services/lane-detection-service/src/reduce_lane_mask_flicker_dur.cpp",
+        "services/lane-detection-service/tests/test_adas_204_2.cpp"
+      ],
+      "pull_request": {
+        "id": "PR-0093",
+        "title": "ADAS-204 Reduce lane mask flicker during overpass shadows",
+        "merged": true,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "Routine feature work in an active development branch.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "b181b67a93e940b3a958f50a3333248bf31618bf",
+      "short_commit_id": "b181b67a",
+      "timestamp": "2026-03-26T21:00:00Z",
+      "author_employee_id": "EMP-006",
+      "author_name": "Haruka Sato",
+      "branch": "main",
+      "message": "merge: ADAS-203 Lane center drifts after warm ECU restart",
+      "jira_ticket_ids": [
+        "ADAS-203"
+      ],
+      "services_modified": [
+        "calibration-service",
+        "lane-detection-service"
+      ],
+      "files_touched": [
+        "services/calibration-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0091",
+        "title": "Merge ADAS-203 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "6637d5ce8f4a7636787dffba7328cf4d8c0e5c4f",
+      "short_commit_id": "6637d5ce",
+      "timestamp": "2026-03-26T21:00:00Z",
+      "author_employee_id": "EMP-010",
+      "author_name": "Ethan Walker",
+      "branch": "feature/adas/adas-205-prepare-ecu-packaging-for-steering-prototype-dro",
+      "message": "chore(steering-control): advance prepare ecu packaging for steering prototype dro",
+      "jira_ticket_ids": [
+        "ADAS-205"
+      ],
+      "services_modified": [
+        "steering-control-service"
+      ],
+      "files_touched": [
+        "services/steering-control-service/src/prepare_ecu_packaging_for_st.cpp",
+        "services/steering-control-service/tests/test_adas_205_1.cpp"
+      ],
+      "pull_request": {
+        "id": "PR-0095",
+        "title": "ADAS-205 Prepare ECU packaging for steering prototype drops",
+        "merged": true,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "Routine feature work in an active development branch.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "bf1fac0af9fb58a3a555022915220def7ca9eeb5",
+      "short_commit_id": "bf1fac0a",
+      "timestamp": "2026-03-29T00:00:00Z",
+      "author_employee_id": "EMP-006",
+      "author_name": "Haruka Sato",
+      "branch": "main",
+      "message": "merge: ADAS-204 Reduce lane mask flicker during overpass shadows",
+      "jira_ticket_ids": [
+        "ADAS-204"
+      ],
+      "services_modified": [
+        "lane-detection-service"
+      ],
+      "files_touched": [
+        "services/lane-detection-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0094",
+        "title": "Merge ADAS-204 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "30dfb6f8cf6443a31c724a2aec84c630dc6c83ba",
+      "short_commit_id": "30dfb6f8",
+      "timestamp": "2026-03-29T02:00:00Z",
+      "author_employee_id": "EMP-006",
+      "author_name": "Haruka Sato",
+      "branch": "fix/adas-206-prototype-lane-keeping-offset-on-test-rig-after-",
+      "message": "hotfix(calibration): mitigate prototype lane keeping offset on test rig after ",
+      "jira_ticket_ids": [
+        "ADAS-206"
+      ],
+      "services_modified": [
+        "calibration-service"
+      ],
+      "files_touched": [
+        "services/calibration-service/src/prototype_lane_keeping_offse.cpp",
+        "services/calibration-service/tests/test_adas_206_1.cpp"
+      ],
+      "pull_request": {
+        "id": "PR-0097",
+        "title": "ADAS-206 Prototype lane keeping offset on test rig after restart",
+        "merged": true,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "lane center error is small after cold boot but grows after a warm restart",
+      "change_risk": null
+    },
+    {
+      "commit_id": "d3df2980d4c632e6e63830189a3f7fe695bf4f2e",
+      "short_commit_id": "d3df2980",
+      "timestamp": "2026-03-29T03:00:00Z",
+      "author_employee_id": "EMP-006",
+      "author_name": "Haruka Sato",
+      "branch": "main",
+      "message": "merge: ADAS-205 Prepare ECU packaging for steering prototype drops",
+      "jira_ticket_ids": [
+        "ADAS-205"
+      ],
+      "services_modified": [
+        "steering-control-service",
+        "diagnostics-service"
+      ],
+      "files_touched": [
+        "services/steering-control-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0096",
+        "title": "Merge ADAS-205 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "c775fe3139bdc69e5b685b6fe4a39050a40d4a4b",
+      "short_commit_id": "c775fe31",
+      "timestamp": "2026-03-29T22:00:00Z",
+      "author_employee_id": "EMP-008",
+      "author_name": "Lucas Moreau",
+      "branch": "fix/adas-207-high-speed-steering-oscillation-with-timing-prof",
+      "message": "fix(steering-control): tighten guard path for high speed steering oscillation with timing prof",
+      "jira_ticket_ids": [
+        "ADAS-207"
+      ],
+      "services_modified": [
+        "steering-control-service"
+      ],
+      "files_touched": [
+        "services/steering-control-service/src/high_speed_steering_oscillat.cpp",
+        "services/steering-control-service/tests/test_adas_207_1.cpp"
+      ],
+      "pull_request": {
+        "id": "PR-0099",
+        "title": "ADAS-207 High-speed steering oscillation with timing-profile-b enabled",
+        "merged": false,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "steering oscillation starts only when the faster timing profile is enabled",
+      "change_risk": "introduced_regression"
+    },
+    {
+      "commit_id": "0741d4661c1f71bc9ff4854f9d60388152f98686",
+      "short_commit_id": "0741d466",
+      "timestamp": "2026-03-30T23:00:00Z",
+      "author_employee_id": "EMP-008",
+      "author_name": "Lucas Moreau",
+      "branch": "fix/adas-207-high-speed-steering-oscillation-with-timing-prof",
+      "message": "fix(diagnostics): reduce regression surface around adas-207",
+      "jira_ticket_ids": [
+        "ADAS-207"
+      ],
+      "services_modified": [
+        "diagnostics-service",
+        "steering-control-service"
+      ],
+      "files_touched": [
+        "services/diagnostics-service/src/high_speed_steering_oscillat.cpp",
+        "services/diagnostics-service/tests/test_adas_207_2.cpp"
+      ],
+      "pull_request": {
+        "id": "PR-0100",
+        "title": "ADAS-207 High-speed steering oscillation with timing-profile-b enabled",
+        "merged": true,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "diagnostics reports controller delta spikes without lane confidence collapsing",
+      "change_risk": null
+    },
+    {
+      "commit_id": "589d72c397a2a5f4c9c7a062d317692fef046855",
+      "short_commit_id": "589d72c3",
+      "timestamp": "2026-03-31T06:00:00Z",
+      "author_employee_id": "EMP-006",
+      "author_name": "Haruka Sato",
+      "branch": "main",
+      "message": "merge: ADAS-206 Prototype lane keeping offset on test rig after restart",
+      "jira_ticket_ids": [
+        "ADAS-206"
+      ],
+      "services_modified": [
+        "calibration-service",
+        "lane-detection-service",
+        "camera-ingestion-service"
+      ],
+      "files_touched": [
+        "services/calibration-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0098",
+        "title": "Merge ADAS-206 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    },
+    {
+      "commit_id": "bdb65544c4793c8669191b0d662029d43e7aee54",
+      "short_commit_id": "bdb65544",
+      "timestamp": "2026-04-02T09:00:00Z",
+      "author_employee_id": "EMP-006",
+      "author_name": "Haruka Sato",
+      "branch": "main",
+      "message": "merge: ADAS-207 High-speed steering oscillation with timing-profile-b enabled",
+      "jira_ticket_ids": [
+        "ADAS-207"
+      ],
+      "services_modified": [
+        "steering-control-service",
+        "diagnostics-service"
+      ],
+      "files_touched": [
+        "services/steering-control-service/README.md"
+      ],
+      "pull_request": {
+        "id": "PR-0101",
+        "title": "Merge ADAS-207 into main",
+        "merged": true,
+        "merged_by_employee_id": "EMP-006"
+      },
+      "change_notes": "Branch merged after code review despite active follow-up work.",
+      "change_risk": null
+    }
+  ]
+}

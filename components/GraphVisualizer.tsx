@@ -704,6 +704,10 @@ export default function GraphVisualizer({
         }}
         onPointerDown={handleUserInteraction}
         onWheel={handleUserInteraction}
+        onPointerMissed={() => {
+          onNodeSelect(null);
+          setHighlightedLinks(new Set());
+        }}
       >
         {/* Auto-orbit controller */}
         <AutoOrbitController

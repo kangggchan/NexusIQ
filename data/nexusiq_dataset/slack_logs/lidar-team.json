@@ -1,0 +1,3730 @@
+{
+  "channel": "#lidar-team",
+  "messages": [
+    {
+      "message_id": "MSG-0175",
+      "timestamp": "2026-01-24T22:00:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-002",
+      "employee_name": "Aisha Khan",
+      "text": "Heads up, LID-130 is active. I pushed a rough first pass around object-detection-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "LID-130"
+      ],
+      "referenced_commits": [
+        "b41f81e462b9b60b1364b06902d8d73e71176687"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0176",
+      "timestamp": "2026-01-25T03:11:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-002",
+      "employee_name": "Aisha Khan",
+      "text": "Latest branch has b41f81e4. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "LID-130"
+      ],
+      "referenced_commits": [
+        "b41f81e462b9b60b1364b06902d8d73e71176687"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0019",
+      "timestamp": "2026-01-25T04:00:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-002",
+      "employee_name": "Aisha Khan",
+      "text": "Heads up, LID-104 is active. I pushed a rough first pass around object-detection-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "LID-104"
+      ],
+      "referenced_commits": [
+        "50f2f576821662f53ae04b44e6d05ee9986dbaa1"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0177",
+      "timestamp": "2026-01-25T05:22:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-002",
+      "employee_name": "Aisha Khan",
+      "text": "I can reproduce LID-130 on the current branch, but only after a couple of reruns through object-detection-service.",
+      "referenced_tickets": [
+        "LID-130"
+      ],
+      "referenced_commits": [
+        "b41f81e462b9b60b1364b06902d8d73e71176687",
+        "17abe7bdf6cfc2baa8e941823b1b0678ce09ab1b"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0020",
+      "timestamp": "2026-01-25T09:11:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-002",
+      "employee_name": "Aisha Khan",
+      "text": "Latest branch has 50f2f576. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "LID-104"
+      ],
+      "referenced_commits": [
+        "50f2f576821662f53ae04b44e6d05ee9986dbaa1"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0025",
+      "timestamp": "2026-01-25T10:00:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "Heads up, LID-105 is active. I pushed a rough first pass around telemetry-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "LID-105"
+      ],
+      "referenced_commits": [
+        "a54c60b8d64ed0ce3f7cfb56c4f9735082175b67"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0178",
+      "timestamp": "2026-01-25T10:33:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Keep every commit tied back to LID-130. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "LID-130"
+      ],
+      "referenced_commits": [
+        "b41f81e462b9b60b1364b06902d8d73e71176687",
+        "17abe7bdf6cfc2baa8e941823b1b0678ce09ab1b",
+        "34ec818f2d976c953d8e2a12b373198a8c478811"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0021",
+      "timestamp": "2026-01-25T11:22:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-002",
+      "employee_name": "Aisha Khan",
+      "text": "The tweak in LID-104 looks small on paper, but it changes timing just enough that we should watch the next replay closely.",
+      "referenced_tickets": [
+        "LID-104"
+      ],
+      "referenced_commits": [
+        "50f2f576821662f53ae04b44e6d05ee9986dbaa1",
+        "72ddd54d63b84cfb20944506d300211967279976"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0026",
+      "timestamp": "2026-01-25T15:11:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "Latest branch has a54c60b8. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "LID-105"
+      ],
+      "referenced_commits": [
+        "a54c60b8d64ed0ce3f7cfb56c4f9735082175b67"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0179",
+      "timestamp": "2026-01-25T15:44:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Small ops note: if this touches object-detection-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "LID-130"
+      ],
+      "referenced_commits": [
+        "b41f81e462b9b60b1364b06902d8d73e71176687",
+        "17abe7bdf6cfc2baa8e941823b1b0678ce09ab1b",
+        "34ec818f2d976c953d8e2a12b373198a8c478811"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0022",
+      "timestamp": "2026-01-25T16:33:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Keep every commit tied back to LID-104. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "LID-104"
+      ],
+      "referenced_commits": [
+        "50f2f576821662f53ae04b44e6d05ee9986dbaa1",
+        "72ddd54d63b84cfb20944506d300211967279976",
+        "b80d5ece853e9c3b62dbf0f508538e78f4f24d68"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0027",
+      "timestamp": "2026-01-25T17:22:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "This is mostly plumbing for LID-105, but it touches enough config that I do not trust it without another replay pass.",
+      "referenced_tickets": [
+        "LID-105"
+      ],
+      "referenced_commits": [
+        "a54c60b8d64ed0ce3f7cfb56c4f9735082175b67",
+        "f850c1c780a2ea26895cba634c3d3cf529a9609b"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0180",
+      "timestamp": "2026-01-25T17:55:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-002",
+      "employee_name": "Aisha Khan",
+      "text": "I left the change narrow around object-detection-service. If anyone sees side effects outside that boundary, please drop the replay id in-thread instead of saying it was 'kind of weird'.",
+      "referenced_tickets": [
+        "LID-130"
+      ],
+      "referenced_commits": [
+        "b41f81e462b9b60b1364b06902d8d73e71176687",
+        "17abe7bdf6cfc2baa8e941823b1b0678ce09ab1b",
+        "34ec818f2d976c953d8e2a12b373198a8c478811"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0023",
+      "timestamp": "2026-01-25T21:44:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Small ops note: if this touches object-detection-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "LID-104"
+      ],
+      "referenced_commits": [
+        "50f2f576821662f53ae04b44e6d05ee9986dbaa1",
+        "72ddd54d63b84cfb20944506d300211967279976",
+        "b80d5ece853e9c3b62dbf0f508538e78f4f24d68"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0028",
+      "timestamp": "2026-01-25T22:33:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Keep every commit tied back to LID-105. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "LID-105"
+      ],
+      "referenced_commits": [
+        "a54c60b8d64ed0ce3f7cfb56c4f9735082175b67",
+        "f850c1c780a2ea26895cba634c3d3cf529a9609b"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0024",
+      "timestamp": "2026-01-25T23:55:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-002",
+      "employee_name": "Aisha Khan",
+      "text": "I left the change narrow around object-detection-service. If anyone sees side effects outside that boundary, please drop the replay id in-thread instead of saying it was 'kind of weird'.",
+      "referenced_tickets": [
+        "LID-104"
+      ],
+      "referenced_commits": [
+        "50f2f576821662f53ae04b44e6d05ee9986dbaa1",
+        "72ddd54d63b84cfb20944506d300211967279976",
+        "b80d5ece853e9c3b62dbf0f508538e78f4f24d68"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0181",
+      "timestamp": "2026-01-26T01:00:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Heads up, LID-131 is active. I pushed a rough first pass around edge-inference-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "LID-131"
+      ],
+      "referenced_commits": [
+        "f155fdaeed4b7730229296a1b6d448d4880776ab"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0029",
+      "timestamp": "2026-01-26T03:44:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Small ops note: if this touches telemetry-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "LID-105"
+      ],
+      "referenced_commits": [
+        "a54c60b8d64ed0ce3f7cfb56c4f9735082175b67",
+        "f850c1c780a2ea26895cba634c3d3cf529a9609b"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0030",
+      "timestamp": "2026-01-26T05:55:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "I left the change narrow around telemetry-service. If anyone sees side effects outside that boundary, please drop the replay id in-thread instead of saying it was 'kind of weird'.",
+      "referenced_tickets": [
+        "LID-105"
+      ],
+      "referenced_commits": [
+        "a54c60b8d64ed0ce3f7cfb56c4f9735082175b67",
+        "f850c1c780a2ea26895cba634c3d3cf529a9609b"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0182",
+      "timestamp": "2026-01-26T06:11:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Latest branch has f155fdae. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "LID-131"
+      ],
+      "referenced_commits": [
+        "f155fdaeed4b7730229296a1b6d448d4880776ab"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0183",
+      "timestamp": "2026-01-26T08:22:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-003",
+      "employee_name": "Diego Alvarez",
+      "text": "This is mostly plumbing for LID-131, but it touches enough config that I do not trust it without another replay pass.",
+      "referenced_tickets": [
+        "LID-131"
+      ],
+      "referenced_commits": [
+        "f155fdaeed4b7730229296a1b6d448d4880776ab",
+        "f824c6caba347a9b8d0197263a40afc9fcd8904e"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0184",
+      "timestamp": "2026-01-26T13:33:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Keep every commit tied back to LID-131. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "LID-131"
+      ],
+      "referenced_commits": [
+        "f155fdaeed4b7730229296a1b6d448d4880776ab",
+        "f824c6caba347a9b8d0197263a40afc9fcd8904e"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0185",
+      "timestamp": "2026-01-26T18:44:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Small ops note: if this touches edge-inference-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "LID-131"
+      ],
+      "referenced_commits": [
+        "f155fdaeed4b7730229296a1b6d448d4880776ab",
+        "f824c6caba347a9b8d0197263a40afc9fcd8904e"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0186",
+      "timestamp": "2026-01-26T20:55:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-003",
+      "employee_name": "Diego Alvarez",
+      "text": "I left the change narrow around edge-inference-service. If anyone sees side effects outside that boundary, please drop the replay id in-thread instead of saying it was 'kind of weird'.",
+      "referenced_tickets": [
+        "LID-131"
+      ],
+      "referenced_commits": [
+        "f155fdaeed4b7730229296a1b6d448d4880776ab",
+        "f824c6caba347a9b8d0197263a40afc9fcd8904e"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0031",
+      "timestamp": "2026-01-27T13:00:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Heads up, LID-106 is active. I pushed a rough first pass around edge-inference-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "LID-106"
+      ],
+      "referenced_commits": [
+        "0781dd5ef8df306474ba75718efbd21a57e36722"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service",
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0032",
+      "timestamp": "2026-01-27T18:11:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Latest branch has 0781dd5e. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "LID-106"
+      ],
+      "referenced_commits": [
+        "0781dd5ef8df306474ba75718efbd21a57e36722"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service",
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0033",
+      "timestamp": "2026-01-27T20:22:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-003",
+      "employee_name": "Diego Alvarez",
+      "text": "GPU free memory drops after each engine reload even when frame rate is flat",
+      "referenced_tickets": [
+        "LID-106"
+      ],
+      "referenced_commits": [
+        "0781dd5ef8df306474ba75718efbd21a57e36722",
+        "39fc8d9f03dfda77917c328d9e8a6d43050cc027"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service",
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0034",
+      "timestamp": "2026-01-28T01:33:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Keep every commit tied back to LID-106. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "LID-106"
+      ],
+      "referenced_commits": [
+        "0781dd5ef8df306474ba75718efbd21a57e36722",
+        "39fc8d9f03dfda77917c328d9e8a6d43050cc027"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service",
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0187",
+      "timestamp": "2026-01-28T04:00:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "Heads up, LID-132 is active. I pushed a rough first pass around telemetry-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "LID-132"
+      ],
+      "referenced_commits": [
+        "f926fab75a1d7994c7d981a30288b9906be3b466"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0035",
+      "timestamp": "2026-01-28T06:44:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Small ops note: if this touches object-detection-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "LID-106"
+      ],
+      "referenced_commits": [
+        "0781dd5ef8df306474ba75718efbd21a57e36722",
+        "39fc8d9f03dfda77917c328d9e8a6d43050cc027"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service",
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0036",
+      "timestamp": "2026-01-28T08:55:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "fwiw, latency spikes get worse after qa replays a calibration bundle twice. I do not think that is the whole story, but it keeps showing up in traces.",
+      "referenced_tickets": [
+        "LID-106"
+      ],
+      "referenced_commits": [
+        "0781dd5ef8df306474ba75718efbd21a57e36722",
+        "39fc8d9f03dfda77917c328d9e8a6d43050cc027"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service",
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0188",
+      "timestamp": "2026-01-28T09:11:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "Latest branch has f926fab7. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "LID-132"
+      ],
+      "referenced_commits": [
+        "f926fab75a1d7994c7d981a30288b9906be3b466"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0189",
+      "timestamp": "2026-01-28T11:22:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "The tweak in LID-132 looks small on paper, but it changes timing just enough that we should watch the next replay closely.",
+      "referenced_tickets": [
+        "LID-132"
+      ],
+      "referenced_commits": [
+        "f926fab75a1d7994c7d981a30288b9906be3b466",
+        "61e8812e405f2e8b2358b8a16917c3125d8ea3c9"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0037",
+      "timestamp": "2026-01-28T16:00:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Heads up, LID-107 is active. I pushed a rough first pass around tracking-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "LID-107"
+      ],
+      "referenced_commits": [
+        "bcb52bf1efc5f538aabbab97b80e5678abb49abc"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "tracking-service",
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0190",
+      "timestamp": "2026-01-28T16:33:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Keep every commit tied back to LID-132. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "LID-132"
+      ],
+      "referenced_commits": [
+        "f926fab75a1d7994c7d981a30288b9906be3b466",
+        "61e8812e405f2e8b2358b8a16917c3125d8ea3c9",
+        "69fba656f929dfe2b2e76e42cd210f228dc8f10c"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0038",
+      "timestamp": "2026-01-28T21:11:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Latest branch has bcb52bf1. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "LID-107"
+      ],
+      "referenced_commits": [
+        "bcb52bf1efc5f538aabbab97b80e5678abb49abc"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "tracking-service",
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0191",
+      "timestamp": "2026-01-28T21:44:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Small ops note: if this touches telemetry-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "LID-132"
+      ],
+      "referenced_commits": [
+        "f926fab75a1d7994c7d981a30288b9906be3b466",
+        "61e8812e405f2e8b2358b8a16917c3125d8ea3c9",
+        "69fba656f929dfe2b2e76e42cd210f228dc8f10c"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0039",
+      "timestamp": "2026-01-28T23:22:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "track age jumps after telemetry export starts on the same rig",
+      "referenced_tickets": [
+        "LID-107"
+      ],
+      "referenced_commits": [
+        "bcb52bf1efc5f538aabbab97b80e5678abb49abc",
+        "fd63b939809fdfa8e2f2e8e434e68444ccc932f9"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "tracking-service",
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0192",
+      "timestamp": "2026-01-28T23:55:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "I left the change narrow around telemetry-service. If anyone sees side effects outside that boundary, please drop the replay id in-thread instead of saying it was 'kind of weird'.",
+      "referenced_tickets": [
+        "LID-132"
+      ],
+      "referenced_commits": [
+        "f926fab75a1d7994c7d981a30288b9906be3b466",
+        "61e8812e405f2e8b2358b8a16917c3125d8ea3c9",
+        "69fba656f929dfe2b2e76e42cd210f228dc8f10c"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0040",
+      "timestamp": "2026-01-29T04:33:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Keep every commit tied back to LID-107. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "LID-107"
+      ],
+      "referenced_commits": [
+        "bcb52bf1efc5f538aabbab97b80e5678abb49abc",
+        "fd63b939809fdfa8e2f2e8e434e68444ccc932f9",
+        "cc37a75d63c54c1d4cb361aaff80b41a345d6026"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "tracking-service",
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0041",
+      "timestamp": "2026-01-29T09:44:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Small ops note: if this touches telemetry-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "LID-107"
+      ],
+      "referenced_commits": [
+        "bcb52bf1efc5f538aabbab97b80e5678abb49abc",
+        "fd63b939809fdfa8e2f2e8e434e68444ccc932f9",
+        "cc37a75d63c54c1d4cb361aaff80b41a345d6026"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "tracking-service",
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0042",
+      "timestamp": "2026-01-29T11:55:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "fwiw, backlog is higher on the xavier device than the orin dev box. I do not think that is the whole story, but it keeps showing up in traces.",
+      "referenced_tickets": [
+        "LID-107"
+      ],
+      "referenced_commits": [
+        "bcb52bf1efc5f538aabbab97b80e5678abb49abc",
+        "fd63b939809fdfa8e2f2e8e434e68444ccc932f9",
+        "cc37a75d63c54c1d4cb361aaff80b41a345d6026"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "tracking-service",
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0043",
+      "timestamp": "2026-01-30T19:00:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Heads up, LID-108 is active. I pushed a rough first pass around lidar-ingestion-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "LID-108"
+      ],
+      "referenced_commits": [
+        "1a637e79cc98783bd15e9ff13f56cdf5d1393ec3"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lidar-ingestion-service",
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0044",
+      "timestamp": "2026-01-31T00:11:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Latest branch has 1a637e79. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "LID-108"
+      ],
+      "referenced_commits": [
+        "1a637e79cc98783bd15e9ff13f56cdf5d1393ec3"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lidar-ingestion-service",
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0045",
+      "timestamp": "2026-01-31T02:22:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "track age jumps after telemetry export starts on the same rig",
+      "referenced_tickets": [
+        "LID-108"
+      ],
+      "referenced_commits": [
+        "1a637e79cc98783bd15e9ff13f56cdf5d1393ec3",
+        "30ec5958bd89d1e41f5d324cc2f0cc759345a78b"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lidar-ingestion-service",
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0046",
+      "timestamp": "2026-01-31T07:33:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Keep every commit tied back to LID-108. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "LID-108"
+      ],
+      "referenced_commits": [
+        "1a637e79cc98783bd15e9ff13f56cdf5d1393ec3",
+        "30ec5958bd89d1e41f5d324cc2f0cc759345a78b"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lidar-ingestion-service",
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0047",
+      "timestamp": "2026-01-31T12:44:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Small ops note: if this touches tracking-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "LID-108"
+      ],
+      "referenced_commits": [
+        "1a637e79cc98783bd15e9ff13f56cdf5d1393ec3",
+        "30ec5958bd89d1e41f5d324cc2f0cc759345a78b"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lidar-ingestion-service",
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0048",
+      "timestamp": "2026-01-31T14:55:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "fwiw, backlog is higher on the xavier device than the orin dev box. I do not think that is the whole story, but it keeps showing up in traces.",
+      "referenced_tickets": [
+        "LID-108"
+      ],
+      "referenced_commits": [
+        "1a637e79cc98783bd15e9ff13f56cdf5d1393ec3",
+        "30ec5958bd89d1e41f5d324cc2f0cc759345a78b"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lidar-ingestion-service",
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0049",
+      "timestamp": "2026-01-31T22:00:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Heads up, LID-109 is active. I pushed a rough first pass around tracking-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "LID-109"
+      ],
+      "referenced_commits": [
+        "578ddda33e85d0a07fbf37bbceec004e3198a65f"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0050",
+      "timestamp": "2026-02-01T03:11:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Latest branch has 578ddda3. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "LID-109"
+      ],
+      "referenced_commits": [
+        "578ddda33e85d0a07fbf37bbceec004e3198a65f"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0051",
+      "timestamp": "2026-02-01T05:22:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "The branch for LID-109 is usable, but the API shape is still moving and I do not want other work to build against it yet.",
+      "referenced_tickets": [
+        "LID-109"
+      ],
+      "referenced_commits": [
+        "578ddda33e85d0a07fbf37bbceec004e3198a65f",
+        "4db2c2b7d18f8ca34ce1451aa4ffbfe323746d32"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0052",
+      "timestamp": "2026-02-01T10:33:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Keep every commit tied back to LID-109. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "LID-109"
+      ],
+      "referenced_commits": [
+        "578ddda33e85d0a07fbf37bbceec004e3198a65f",
+        "4db2c2b7d18f8ca34ce1451aa4ffbfe323746d32",
+        "fef4d90dbbbcd828e35663a8aecaf6e3e9fbed6a"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0053",
+      "timestamp": "2026-02-01T15:44:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Small ops note: if this touches tracking-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "LID-109"
+      ],
+      "referenced_commits": [
+        "578ddda33e85d0a07fbf37bbceec004e3198a65f",
+        "4db2c2b7d18f8ca34ce1451aa4ffbfe323746d32",
+        "fef4d90dbbbcd828e35663a8aecaf6e3e9fbed6a"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0054",
+      "timestamp": "2026-02-01T17:55:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "I left the change narrow around tracking-service. If anyone sees side effects outside that boundary, please drop the replay id in-thread instead of saying it was 'kind of weird'.",
+      "referenced_tickets": [
+        "LID-109"
+      ],
+      "referenced_commits": [
+        "578ddda33e85d0a07fbf37bbceec004e3198a65f",
+        "4db2c2b7d18f8ca34ce1451aa4ffbfe323746d32",
+        "fef4d90dbbbcd828e35663a8aecaf6e3e9fbed6a"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0055",
+      "timestamp": "2026-02-03T01:00:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "Heads up, LID-110 is active. I pushed a rough first pass around tracking-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "LID-110"
+      ],
+      "referenced_commits": [
+        "0fca3ebbc34c3d4dfeb21223ba0b9545c95273e0"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0056",
+      "timestamp": "2026-02-03T06:11:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "Latest branch has 0fca3ebb. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "LID-110"
+      ],
+      "referenced_commits": [
+        "0fca3ebbc34c3d4dfeb21223ba0b9545c95273e0"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0057",
+      "timestamp": "2026-02-03T08:22:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "The tweak in LID-110 looks small on paper, but it changes timing just enough that we should watch the next replay closely.",
+      "referenced_tickets": [
+        "LID-110"
+      ],
+      "referenced_commits": [
+        "0fca3ebbc34c3d4dfeb21223ba0b9545c95273e0",
+        "6116b77cafb4923a69330811a5ada7a15c1cb007"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0058",
+      "timestamp": "2026-02-03T13:33:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Keep every commit tied back to LID-110. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "LID-110"
+      ],
+      "referenced_commits": [
+        "0fca3ebbc34c3d4dfeb21223ba0b9545c95273e0",
+        "6116b77cafb4923a69330811a5ada7a15c1cb007",
+        "0f8c87dea33eb978900ea5e456cb6cada86c5f52"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0059",
+      "timestamp": "2026-02-03T18:44:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Small ops note: if this touches tracking-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "LID-110"
+      ],
+      "referenced_commits": [
+        "0fca3ebbc34c3d4dfeb21223ba0b9545c95273e0",
+        "6116b77cafb4923a69330811a5ada7a15c1cb007",
+        "0f8c87dea33eb978900ea5e456cb6cada86c5f52"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0060",
+      "timestamp": "2026-02-03T20:55:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "I left the change narrow around tracking-service. If anyone sees side effects outside that boundary, please drop the replay id in-thread instead of saying it was 'kind of weird'.",
+      "referenced_tickets": [
+        "LID-110"
+      ],
+      "referenced_commits": [
+        "0fca3ebbc34c3d4dfeb21223ba0b9545c95273e0",
+        "6116b77cafb4923a69330811a5ada7a15c1cb007",
+        "0f8c87dea33eb978900ea5e456cb6cada86c5f52"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0061",
+      "timestamp": "2026-02-04T04:00:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-003",
+      "employee_name": "Diego Alvarez",
+      "text": "Heads up, LID-111 is active. I pushed a rough first pass around edge-inference-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "LID-111"
+      ],
+      "referenced_commits": [
+        "032f70d118b8f1c232890ebcf6de13449904ceea"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0062",
+      "timestamp": "2026-02-04T09:11:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-003",
+      "employee_name": "Diego Alvarez",
+      "text": "Latest branch has 032f70d1. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "LID-111"
+      ],
+      "referenced_commits": [
+        "032f70d118b8f1c232890ebcf6de13449904ceea"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0063",
+      "timestamp": "2026-02-04T11:22:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-003",
+      "employee_name": "Diego Alvarez",
+      "text": "GPU free memory drops after each engine reload even when frame rate is flat",
+      "referenced_tickets": [
+        "LID-111"
+      ],
+      "referenced_commits": [
+        "032f70d118b8f1c232890ebcf6de13449904ceea",
+        "ec86ebc600326223a15bd7493ac35e182d484f51"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0064",
+      "timestamp": "2026-02-04T16:33:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Keep every commit tied back to LID-111. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "LID-111"
+      ],
+      "referenced_commits": [
+        "032f70d118b8f1c232890ebcf6de13449904ceea",
+        "ec86ebc600326223a15bd7493ac35e182d484f51"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0065",
+      "timestamp": "2026-02-04T21:44:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Small ops note: if this touches edge-inference-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "LID-111"
+      ],
+      "referenced_commits": [
+        "032f70d118b8f1c232890ebcf6de13449904ceea",
+        "ec86ebc600326223a15bd7493ac35e182d484f51"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0066",
+      "timestamp": "2026-02-04T23:55:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-003",
+      "employee_name": "Diego Alvarez",
+      "text": "fwiw, latency spikes get worse after qa replays a calibration bundle twice. I do not think that is the whole story, but it keeps showing up in traces.",
+      "referenced_tickets": [
+        "LID-111"
+      ],
+      "referenced_commits": [
+        "032f70d118b8f1c232890ebcf6de13449904ceea",
+        "ec86ebc600326223a15bd7493ac35e182d484f51"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0067",
+      "timestamp": "2026-02-05T10:00:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-003",
+      "employee_name": "Diego Alvarez",
+      "text": "Heads up, LID-112 is active. I pushed a rough first pass around edge-inference-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "LID-112"
+      ],
+      "referenced_commits": [
+        "95d8cb38b8dfae3f60800a404ba464828b2136b2"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0068",
+      "timestamp": "2026-02-05T15:11:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-003",
+      "employee_name": "Diego Alvarez",
+      "text": "Latest branch has 95d8cb38. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "LID-112"
+      ],
+      "referenced_commits": [
+        "95d8cb38b8dfae3f60800a404ba464828b2136b2"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0069",
+      "timestamp": "2026-02-05T17:22:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-003",
+      "employee_name": "Diego Alvarez",
+      "text": "GPU free memory drops after each engine reload even when frame rate is flat",
+      "referenced_tickets": [
+        "LID-112"
+      ],
+      "referenced_commits": [
+        "95d8cb38b8dfae3f60800a404ba464828b2136b2",
+        "1d56ec2e4604509bd9d1bc7144caecbc515c7b2f"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0070",
+      "timestamp": "2026-02-05T22:33:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Keep every commit tied back to LID-112. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "LID-112"
+      ],
+      "referenced_commits": [
+        "95d8cb38b8dfae3f60800a404ba464828b2136b2",
+        "1d56ec2e4604509bd9d1bc7144caecbc515c7b2f",
+        "11aa1b8ecea1f5056160a1f53fd5bb6bfb1e378f"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0071",
+      "timestamp": "2026-02-06T03:44:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Small ops note: if this touches edge-inference-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "LID-112"
+      ],
+      "referenced_commits": [
+        "95d8cb38b8dfae3f60800a404ba464828b2136b2",
+        "1d56ec2e4604509bd9d1bc7144caecbc515c7b2f",
+        "11aa1b8ecea1f5056160a1f53fd5bb6bfb1e378f"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0072",
+      "timestamp": "2026-02-06T05:55:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-003",
+      "employee_name": "Diego Alvarez",
+      "text": "fwiw, latency spikes get worse after qa replays a calibration bundle twice. I do not think that is the whole story, but it keeps showing up in traces.",
+      "referenced_tickets": [
+        "LID-112"
+      ],
+      "referenced_commits": [
+        "95d8cb38b8dfae3f60800a404ba464828b2136b2",
+        "1d56ec2e4604509bd9d1bc7144caecbc515c7b2f",
+        "11aa1b8ecea1f5056160a1f53fd5bb6bfb1e378f"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0073",
+      "timestamp": "2026-02-06T13:00:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "Heads up, LID-113 is active. I pushed a rough first pass around telemetry-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "LID-113"
+      ],
+      "referenced_commits": [
+        "cd5a6e961b069cd4b8018882b1d17c441ae93ee1"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0074",
+      "timestamp": "2026-02-06T18:11:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "Latest branch has cd5a6e96. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "LID-113"
+      ],
+      "referenced_commits": [
+        "cd5a6e961b069cd4b8018882b1d17c441ae93ee1"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0075",
+      "timestamp": "2026-02-06T20:22:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "This is mostly plumbing for LID-113, but it touches enough config that I do not trust it without another replay pass.",
+      "referenced_tickets": [
+        "LID-113"
+      ],
+      "referenced_commits": [
+        "cd5a6e961b069cd4b8018882b1d17c441ae93ee1",
+        "68e2270cc4535c15fc2fe1cb92a85e9021800bac"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0076",
+      "timestamp": "2026-02-07T01:33:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Keep every commit tied back to LID-113. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "LID-113"
+      ],
+      "referenced_commits": [
+        "cd5a6e961b069cd4b8018882b1d17c441ae93ee1",
+        "68e2270cc4535c15fc2fe1cb92a85e9021800bac"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0077",
+      "timestamp": "2026-02-07T06:44:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Small ops note: if this touches telemetry-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "LID-113"
+      ],
+      "referenced_commits": [
+        "cd5a6e961b069cd4b8018882b1d17c441ae93ee1",
+        "68e2270cc4535c15fc2fe1cb92a85e9021800bac"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0078",
+      "timestamp": "2026-02-07T08:55:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "I left the change narrow around telemetry-service. If anyone sees side effects outside that boundary, please drop the replay id in-thread instead of saying it was 'kind of weird'.",
+      "referenced_tickets": [
+        "LID-113"
+      ],
+      "referenced_commits": [
+        "cd5a6e961b069cd4b8018882b1d17c441ae93ee1",
+        "68e2270cc4535c15fc2fe1cb92a85e9021800bac"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0079",
+      "timestamp": "2026-02-08T16:00:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Heads up, LID-114 is active. I pushed a rough first pass around edge-inference-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "LID-114"
+      ],
+      "referenced_commits": [
+        "1223c27c75ba0519e7fe43773ceb1087a0d6553d"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service",
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0080",
+      "timestamp": "2026-02-08T21:11:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Latest branch has 1223c27c. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "LID-114"
+      ],
+      "referenced_commits": [
+        "1223c27c75ba0519e7fe43773ceb1087a0d6553d"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service",
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0081",
+      "timestamp": "2026-02-08T23:22:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-003",
+      "employee_name": "Diego Alvarez",
+      "text": "The branch for LID-114 is usable, but the API shape is still moving and I do not want other work to build against it yet.",
+      "referenced_tickets": [
+        "LID-114"
+      ],
+      "referenced_commits": [
+        "1223c27c75ba0519e7fe43773ceb1087a0d6553d",
+        "e48521c07870ac9a75ccf14906042af7c85bd511"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service",
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0082",
+      "timestamp": "2026-02-09T04:33:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Keep every commit tied back to LID-114. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "LID-114"
+      ],
+      "referenced_commits": [
+        "1223c27c75ba0519e7fe43773ceb1087a0d6553d",
+        "e48521c07870ac9a75ccf14906042af7c85bd511",
+        "d2212be40ba38f8440259b68a4a003859ba50e25"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service",
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0083",
+      "timestamp": "2026-02-09T09:44:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Small ops note: if this touches telemetry-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "LID-114"
+      ],
+      "referenced_commits": [
+        "1223c27c75ba0519e7fe43773ceb1087a0d6553d",
+        "e48521c07870ac9a75ccf14906042af7c85bd511",
+        "d2212be40ba38f8440259b68a4a003859ba50e25"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service",
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0084",
+      "timestamp": "2026-02-09T11:55:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-003",
+      "employee_name": "Diego Alvarez",
+      "text": "I left the change narrow around telemetry-service. If anyone sees side effects outside that boundary, please drop the replay id in-thread instead of saying it was 'kind of weird'.",
+      "referenced_tickets": [
+        "LID-114"
+      ],
+      "referenced_commits": [
+        "1223c27c75ba0519e7fe43773ceb1087a0d6553d",
+        "e48521c07870ac9a75ccf14906042af7c85bd511",
+        "d2212be40ba38f8440259b68a4a003859ba50e25"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service",
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0085",
+      "timestamp": "2026-02-09T19:00:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-002",
+      "employee_name": "Aisha Khan",
+      "text": "Heads up, LID-115 is active. I pushed a rough first pass around object-detection-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "LID-115"
+      ],
+      "referenced_commits": [
+        "2ef310b97404912ac1890cd75cb5a57ddfee439a"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0086",
+      "timestamp": "2026-02-10T00:11:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-002",
+      "employee_name": "Aisha Khan",
+      "text": "Latest branch has 2ef310b9. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "LID-115"
+      ],
+      "referenced_commits": [
+        "2ef310b97404912ac1890cd75cb5a57ddfee439a"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0087",
+      "timestamp": "2026-02-10T02:22:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-002",
+      "employee_name": "Aisha Khan",
+      "text": "I can reproduce LID-115 on the current branch, but only after a couple of reruns through object-detection-service.",
+      "referenced_tickets": [
+        "LID-115"
+      ],
+      "referenced_commits": [
+        "2ef310b97404912ac1890cd75cb5a57ddfee439a",
+        "32843bf1ee4119822dfbcfa25e7577ea0308f9a4"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0088",
+      "timestamp": "2026-02-10T07:33:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Keep every commit tied back to LID-115. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "LID-115"
+      ],
+      "referenced_commits": [
+        "2ef310b97404912ac1890cd75cb5a57ddfee439a",
+        "32843bf1ee4119822dfbcfa25e7577ea0308f9a4",
+        "56317c3550413b0983d3aec37919368263279192"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0089",
+      "timestamp": "2026-02-10T12:44:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Small ops note: if this touches object-detection-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "LID-115"
+      ],
+      "referenced_commits": [
+        "2ef310b97404912ac1890cd75cb5a57ddfee439a",
+        "32843bf1ee4119822dfbcfa25e7577ea0308f9a4",
+        "56317c3550413b0983d3aec37919368263279192"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0090",
+      "timestamp": "2026-02-10T14:55:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-002",
+      "employee_name": "Aisha Khan",
+      "text": "I left the change narrow around object-detection-service. If anyone sees side effects outside that boundary, please drop the replay id in-thread instead of saying it was 'kind of weird'.",
+      "referenced_tickets": [
+        "LID-115"
+      ],
+      "referenced_commits": [
+        "2ef310b97404912ac1890cd75cb5a57ddfee439a",
+        "32843bf1ee4119822dfbcfa25e7577ea0308f9a4",
+        "56317c3550413b0983d3aec37919368263279192"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0091",
+      "timestamp": "2026-02-11T22:00:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Heads up, LID-116 is active. I pushed a rough first pass around lidar-ingestion-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "LID-116"
+      ],
+      "referenced_commits": [
+        "957b808a95c67b09a2dbefd18ae1b817bcdebb82"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lidar-ingestion-service",
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0092",
+      "timestamp": "2026-02-12T03:11:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Latest branch has 957b808a. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "LID-116"
+      ],
+      "referenced_commits": [
+        "957b808a95c67b09a2dbefd18ae1b817bcdebb82"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lidar-ingestion-service",
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0093",
+      "timestamp": "2026-02-12T05:22:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "track age jumps after telemetry export starts on the same rig",
+      "referenced_tickets": [
+        "LID-116"
+      ],
+      "referenced_commits": [
+        "957b808a95c67b09a2dbefd18ae1b817bcdebb82",
+        "e5ec06262c64ee72e3d4618c6fb7c5198f3b2f48"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lidar-ingestion-service",
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0094",
+      "timestamp": "2026-02-12T10:33:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Keep every commit tied back to LID-116. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "LID-116"
+      ],
+      "referenced_commits": [
+        "957b808a95c67b09a2dbefd18ae1b817bcdebb82",
+        "e5ec06262c64ee72e3d4618c6fb7c5198f3b2f48"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lidar-ingestion-service",
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0095",
+      "timestamp": "2026-02-12T15:44:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Small ops note: if this touches tracking-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "LID-116"
+      ],
+      "referenced_commits": [
+        "957b808a95c67b09a2dbefd18ae1b817bcdebb82",
+        "e5ec06262c64ee72e3d4618c6fb7c5198f3b2f48"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lidar-ingestion-service",
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0096",
+      "timestamp": "2026-02-12T17:55:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "fwiw, backlog is higher on the xavier device than the orin dev box. I do not think that is the whole story, but it keeps showing up in traces.",
+      "referenced_tickets": [
+        "LID-116"
+      ],
+      "referenced_commits": [
+        "957b808a95c67b09a2dbefd18ae1b817bcdebb82",
+        "e5ec06262c64ee72e3d4618c6fb7c5198f3b2f48"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lidar-ingestion-service",
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0097",
+      "timestamp": "2026-02-13T01:00:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "Heads up, LID-117 is active. I pushed a rough first pass around telemetry-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "LID-117"
+      ],
+      "referenced_commits": [
+        "74b1a9fc95ff5a5f802b8df666e340ac35ad01b6"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service",
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0098",
+      "timestamp": "2026-02-13T06:11:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "Latest branch has 74b1a9fc. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "LID-117"
+      ],
+      "referenced_commits": [
+        "74b1a9fc95ff5a5f802b8df666e340ac35ad01b6"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service",
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0099",
+      "timestamp": "2026-02-13T08:22:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "track age jumps after telemetry export starts on the same rig",
+      "referenced_tickets": [
+        "LID-117"
+      ],
+      "referenced_commits": [
+        "74b1a9fc95ff5a5f802b8df666e340ac35ad01b6",
+        "baf771a857e892cda79941b12a12623868893b42"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service",
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0100",
+      "timestamp": "2026-02-13T13:33:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Keep every commit tied back to LID-117. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "LID-117"
+      ],
+      "referenced_commits": [
+        "74b1a9fc95ff5a5f802b8df666e340ac35ad01b6",
+        "baf771a857e892cda79941b12a12623868893b42"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service",
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0101",
+      "timestamp": "2026-02-13T18:44:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Small ops note: if this touches tracking-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "LID-117"
+      ],
+      "referenced_commits": [
+        "74b1a9fc95ff5a5f802b8df666e340ac35ad01b6",
+        "baf771a857e892cda79941b12a12623868893b42"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service",
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0102",
+      "timestamp": "2026-02-13T20:55:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "fwiw, backlog is higher on the xavier device than the orin dev box. I do not think that is the whole story, but it keeps showing up in traces.",
+      "referenced_tickets": [
+        "LID-117"
+      ],
+      "referenced_commits": [
+        "74b1a9fc95ff5a5f802b8df666e340ac35ad01b6",
+        "baf771a857e892cda79941b12a12623868893b42"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service",
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0103",
+      "timestamp": "2026-02-15T04:00:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "Heads up, LID-118 is active. I pushed a rough first pass around telemetry-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "LID-118"
+      ],
+      "referenced_commits": [
+        "7bee16446f01a159d949e6567781867b7bdf1dd7"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0104",
+      "timestamp": "2026-02-15T09:11:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "Latest branch has 7bee1644. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "LID-118"
+      ],
+      "referenced_commits": [
+        "7bee16446f01a159d949e6567781867b7bdf1dd7"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0109",
+      "timestamp": "2026-02-15T10:00:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Heads up, LID-119 is active. I pushed a rough first pass around telemetry-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "LID-119"
+      ],
+      "referenced_commits": [
+        "28c8ecf5b743232be83a35e88c9da629f5a01c14"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service",
+        "lidar-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0105",
+      "timestamp": "2026-02-15T11:22:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "track age jumps after telemetry export starts on the same rig",
+      "referenced_tickets": [
+        "LID-118"
+      ],
+      "referenced_commits": [
+        "7bee16446f01a159d949e6567781867b7bdf1dd7",
+        "1def3e4aff55270a3b762f835d6240fa68c09a2e"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0110",
+      "timestamp": "2026-02-15T15:11:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Latest branch has 28c8ecf5. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "LID-119"
+      ],
+      "referenced_commits": [
+        "28c8ecf5b743232be83a35e88c9da629f5a01c14"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service",
+        "lidar-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0106",
+      "timestamp": "2026-02-15T16:33:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Keep every commit tied back to LID-118. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "LID-118"
+      ],
+      "referenced_commits": [
+        "7bee16446f01a159d949e6567781867b7bdf1dd7",
+        "1def3e4aff55270a3b762f835d6240fa68c09a2e",
+        "ef2bb64152886da6dc6743d03ea45934c9ce01be"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0111",
+      "timestamp": "2026-02-15T17:22:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "The branch for LID-119 is usable, but the API shape is still moving and I do not want other work to build against it yet.",
+      "referenced_tickets": [
+        "LID-119"
+      ],
+      "referenced_commits": [
+        "28c8ecf5b743232be83a35e88c9da629f5a01c14",
+        "88561296c2ec62d0d44e69031e3c5f780b93831b"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service",
+        "lidar-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0107",
+      "timestamp": "2026-02-15T21:44:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Small ops note: if this touches telemetry-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "LID-118"
+      ],
+      "referenced_commits": [
+        "7bee16446f01a159d949e6567781867b7bdf1dd7",
+        "1def3e4aff55270a3b762f835d6240fa68c09a2e",
+        "ef2bb64152886da6dc6743d03ea45934c9ce01be"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0112",
+      "timestamp": "2026-02-15T22:33:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Keep every commit tied back to LID-119. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "LID-119"
+      ],
+      "referenced_commits": [
+        "28c8ecf5b743232be83a35e88c9da629f5a01c14",
+        "88561296c2ec62d0d44e69031e3c5f780b93831b",
+        "e17fa85102393660bc1a3f63babda0324ad9b085"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service",
+        "lidar-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0108",
+      "timestamp": "2026-02-15T23:55:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "fwiw, backlog is higher on the xavier device than the orin dev box. I do not think that is the whole story, but it keeps showing up in traces.",
+      "referenced_tickets": [
+        "LID-118"
+      ],
+      "referenced_commits": [
+        "7bee16446f01a159d949e6567781867b7bdf1dd7",
+        "1def3e4aff55270a3b762f835d6240fa68c09a2e",
+        "ef2bb64152886da6dc6743d03ea45934c9ce01be"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0113",
+      "timestamp": "2026-02-16T03:44:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Small ops note: if this touches lidar-ingestion-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "LID-119"
+      ],
+      "referenced_commits": [
+        "28c8ecf5b743232be83a35e88c9da629f5a01c14",
+        "88561296c2ec62d0d44e69031e3c5f780b93831b",
+        "e17fa85102393660bc1a3f63babda0324ad9b085"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service",
+        "lidar-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0114",
+      "timestamp": "2026-02-16T05:55:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "I left the change narrow around lidar-ingestion-service. If anyone sees side effects outside that boundary, please drop the replay id in-thread instead of saying it was 'kind of weird'.",
+      "referenced_tickets": [
+        "LID-119"
+      ],
+      "referenced_commits": [
+        "28c8ecf5b743232be83a35e88c9da629f5a01c14",
+        "88561296c2ec62d0d44e69031e3c5f780b93831b",
+        "e17fa85102393660bc1a3f63babda0324ad9b085"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service",
+        "lidar-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0115",
+      "timestamp": "2026-02-17T13:00:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Heads up, LID-120 is active. I pushed a rough first pass around tracking-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "LID-120"
+      ],
+      "referenced_commits": [
+        "adeb215d1ddbc23fdedbaa6acfbf58bb5eb2cb99"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0116",
+      "timestamp": "2026-02-17T18:11:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Latest branch has adeb215d. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "LID-120"
+      ],
+      "referenced_commits": [
+        "adeb215d1ddbc23fdedbaa6acfbf58bb5eb2cb99"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0117",
+      "timestamp": "2026-02-17T20:22:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "I can reproduce LID-120 on the current branch, but only after a couple of reruns through tracking-service.",
+      "referenced_tickets": [
+        "LID-120"
+      ],
+      "referenced_commits": [
+        "adeb215d1ddbc23fdedbaa6acfbf58bb5eb2cb99",
+        "138f48e02e65ecc6fd483e5e719874e08e950cd5"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0118",
+      "timestamp": "2026-02-18T01:33:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Keep every commit tied back to LID-120. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "LID-120"
+      ],
+      "referenced_commits": [
+        "adeb215d1ddbc23fdedbaa6acfbf58bb5eb2cb99",
+        "138f48e02e65ecc6fd483e5e719874e08e950cd5",
+        "43a4fe680f5e8c99dc49b52d480f7c963593dbed"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0119",
+      "timestamp": "2026-02-18T06:44:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Small ops note: if this touches tracking-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "LID-120"
+      ],
+      "referenced_commits": [
+        "adeb215d1ddbc23fdedbaa6acfbf58bb5eb2cb99",
+        "138f48e02e65ecc6fd483e5e719874e08e950cd5",
+        "43a4fe680f5e8c99dc49b52d480f7c963593dbed"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0120",
+      "timestamp": "2026-02-18T08:55:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "I left the change narrow around tracking-service. If anyone sees side effects outside that boundary, please drop the replay id in-thread instead of saying it was 'kind of weird'.",
+      "referenced_tickets": [
+        "LID-120"
+      ],
+      "referenced_commits": [
+        "adeb215d1ddbc23fdedbaa6acfbf58bb5eb2cb99",
+        "138f48e02e65ecc6fd483e5e719874e08e950cd5",
+        "43a4fe680f5e8c99dc49b52d480f7c963593dbed"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0121",
+      "timestamp": "2026-02-18T16:00:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Heads up, LID-121 is active. I pushed a rough first pass around edge-inference-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "LID-121"
+      ],
+      "referenced_commits": [
+        "bbb7bda24f06630db15ea8f5b578733b2458947a"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0122",
+      "timestamp": "2026-02-18T21:11:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Latest branch has bbb7bda2. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "LID-121"
+      ],
+      "referenced_commits": [
+        "bbb7bda24f06630db15ea8f5b578733b2458947a"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0123",
+      "timestamp": "2026-02-18T23:22:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-003",
+      "employee_name": "Diego Alvarez",
+      "text": "GPU free memory drops after each engine reload even when frame rate is flat",
+      "referenced_tickets": [
+        "LID-121"
+      ],
+      "referenced_commits": [
+        "bbb7bda24f06630db15ea8f5b578733b2458947a",
+        "3075ae916645bcca20f78fefaeaf9d624927bac2"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0124",
+      "timestamp": "2026-02-19T04:33:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Keep every commit tied back to LID-121. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "LID-121"
+      ],
+      "referenced_commits": [
+        "bbb7bda24f06630db15ea8f5b578733b2458947a",
+        "3075ae916645bcca20f78fefaeaf9d624927bac2"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0125",
+      "timestamp": "2026-02-19T09:44:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Small ops note: if this touches edge-inference-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "LID-121"
+      ],
+      "referenced_commits": [
+        "bbb7bda24f06630db15ea8f5b578733b2458947a",
+        "3075ae916645bcca20f78fefaeaf9d624927bac2"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0126",
+      "timestamp": "2026-02-19T11:55:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "fwiw, latency spikes get worse after qa replays a calibration bundle twice. I do not think that is the whole story, but it keeps showing up in traces.",
+      "referenced_tickets": [
+        "LID-121"
+      ],
+      "referenced_commits": [
+        "bbb7bda24f06630db15ea8f5b578733b2458947a",
+        "3075ae916645bcca20f78fefaeaf9d624927bac2"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0127",
+      "timestamp": "2026-02-20T19:00:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "Heads up, LID-122 is active. I pushed a rough first pass around telemetry-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "LID-122"
+      ],
+      "referenced_commits": [
+        "23b6dedd39845d4bebc3d8a27fe9bd9c2d27360d"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0128",
+      "timestamp": "2026-02-21T00:11:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "Latest branch has 23b6dedd. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "LID-122"
+      ],
+      "referenced_commits": [
+        "23b6dedd39845d4bebc3d8a27fe9bd9c2d27360d"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0129",
+      "timestamp": "2026-02-21T02:22:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "The tweak in LID-122 looks small on paper, but it changes timing just enough that we should watch the next replay closely.",
+      "referenced_tickets": [
+        "LID-122"
+      ],
+      "referenced_commits": [
+        "23b6dedd39845d4bebc3d8a27fe9bd9c2d27360d",
+        "35b6bf7c2f37def11a19070c544f36406a31594d"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0130",
+      "timestamp": "2026-02-21T07:33:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Keep every commit tied back to LID-122. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "LID-122"
+      ],
+      "referenced_commits": [
+        "23b6dedd39845d4bebc3d8a27fe9bd9c2d27360d",
+        "35b6bf7c2f37def11a19070c544f36406a31594d",
+        "5db77d80bf3dea1713082317ad40ffefb3629841"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0131",
+      "timestamp": "2026-02-21T12:44:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Small ops note: if this touches telemetry-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "LID-122"
+      ],
+      "referenced_commits": [
+        "23b6dedd39845d4bebc3d8a27fe9bd9c2d27360d",
+        "35b6bf7c2f37def11a19070c544f36406a31594d",
+        "5db77d80bf3dea1713082317ad40ffefb3629841"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0132",
+      "timestamp": "2026-02-21T14:55:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "I left the change narrow around telemetry-service. If anyone sees side effects outside that boundary, please drop the replay id in-thread instead of saying it was 'kind of weird'.",
+      "referenced_tickets": [
+        "LID-122"
+      ],
+      "referenced_commits": [
+        "23b6dedd39845d4bebc3d8a27fe9bd9c2d27360d",
+        "35b6bf7c2f37def11a19070c544f36406a31594d",
+        "5db77d80bf3dea1713082317ad40ffefb3629841"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0133",
+      "timestamp": "2026-02-21T22:00:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Heads up, LID-123 is active. I pushed a rough first pass around tracking-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "LID-123"
+      ],
+      "referenced_commits": [
+        "9463f461233f222e653e8d0aeb96560885d94583"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "tracking-service",
+        "lidar-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0134",
+      "timestamp": "2026-02-22T03:11:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Latest branch has 9463f461. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "LID-123"
+      ],
+      "referenced_commits": [
+        "9463f461233f222e653e8d0aeb96560885d94583"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "tracking-service",
+        "lidar-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0135",
+      "timestamp": "2026-02-22T05:22:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "track age jumps after telemetry export starts on the same rig",
+      "referenced_tickets": [
+        "LID-123"
+      ],
+      "referenced_commits": [
+        "9463f461233f222e653e8d0aeb96560885d94583",
+        "13370d831067cc8672ebe8e2c82d550ccaa508e0"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "tracking-service",
+        "lidar-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0136",
+      "timestamp": "2026-02-22T10:33:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Keep every commit tied back to LID-123. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "LID-123"
+      ],
+      "referenced_commits": [
+        "9463f461233f222e653e8d0aeb96560885d94583",
+        "13370d831067cc8672ebe8e2c82d550ccaa508e0",
+        "7601442593b0a4c6371f4c9ab93532b1aff4ad46"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "tracking-service",
+        "lidar-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0137",
+      "timestamp": "2026-02-22T15:44:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Small ops note: if this touches lidar-ingestion-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "LID-123"
+      ],
+      "referenced_commits": [
+        "9463f461233f222e653e8d0aeb96560885d94583",
+        "13370d831067cc8672ebe8e2c82d550ccaa508e0",
+        "7601442593b0a4c6371f4c9ab93532b1aff4ad46"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "tracking-service",
+        "lidar-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0138",
+      "timestamp": "2026-02-22T17:55:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "fwiw, backlog is higher on the xavier device than the orin dev box. I do not think that is the whole story, but it keeps showing up in traces.",
+      "referenced_tickets": [
+        "LID-123"
+      ],
+      "referenced_commits": [
+        "9463f461233f222e653e8d0aeb96560885d94583",
+        "13370d831067cc8672ebe8e2c82d550ccaa508e0",
+        "7601442593b0a4c6371f4c9ab93532b1aff4ad46"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "tracking-service",
+        "lidar-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0139",
+      "timestamp": "2026-02-24T01:00:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-002",
+      "employee_name": "Aisha Khan",
+      "text": "Heads up, LID-124 is active. I pushed a rough first pass around edge-inference-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "LID-124"
+      ],
+      "referenced_commits": [
+        "aa4cb30c4bbdf98aeb22eee18743cb1e0bad5919"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service",
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0140",
+      "timestamp": "2026-02-24T06:11:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-002",
+      "employee_name": "Aisha Khan",
+      "text": "Latest branch has aa4cb30c. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "LID-124"
+      ],
+      "referenced_commits": [
+        "aa4cb30c4bbdf98aeb22eee18743cb1e0bad5919"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service",
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0141",
+      "timestamp": "2026-02-24T08:22:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-003",
+      "employee_name": "Diego Alvarez",
+      "text": "This is mostly plumbing for LID-124, but it touches enough config that I do not trust it without another replay pass.",
+      "referenced_tickets": [
+        "LID-124"
+      ],
+      "referenced_commits": [
+        "aa4cb30c4bbdf98aeb22eee18743cb1e0bad5919",
+        "37b21e2132cbbdabd30a28b5e88e65f19f938464"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service",
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0142",
+      "timestamp": "2026-02-24T13:33:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Keep every commit tied back to LID-124. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "LID-124"
+      ],
+      "referenced_commits": [
+        "aa4cb30c4bbdf98aeb22eee18743cb1e0bad5919",
+        "37b21e2132cbbdabd30a28b5e88e65f19f938464"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service",
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0143",
+      "timestamp": "2026-02-24T18:44:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Small ops note: if this touches object-detection-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "LID-124"
+      ],
+      "referenced_commits": [
+        "aa4cb30c4bbdf98aeb22eee18743cb1e0bad5919",
+        "37b21e2132cbbdabd30a28b5e88e65f19f938464"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service",
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0144",
+      "timestamp": "2026-02-24T20:55:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-003",
+      "employee_name": "Diego Alvarez",
+      "text": "I left the change narrow around object-detection-service. If anyone sees side effects outside that boundary, please drop the replay id in-thread instead of saying it was 'kind of weird'.",
+      "referenced_tickets": [
+        "LID-124"
+      ],
+      "referenced_commits": [
+        "aa4cb30c4bbdf98aeb22eee18743cb1e0bad5919",
+        "37b21e2132cbbdabd30a28b5e88e65f19f938464"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service",
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0145",
+      "timestamp": "2026-02-25T04:00:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Heads up, LID-125 is active. I pushed a rough first pass around telemetry-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "LID-125"
+      ],
+      "referenced_commits": [
+        "64c7bcacb3116ff9bd614863d7aed32121e028a8"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service",
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0146",
+      "timestamp": "2026-02-25T09:11:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Latest branch has 64c7bcac. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "LID-125"
+      ],
+      "referenced_commits": [
+        "64c7bcacb3116ff9bd614863d7aed32121e028a8"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service",
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0147",
+      "timestamp": "2026-02-25T11:22:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "The branch for LID-125 is usable, but the API shape is still moving and I do not want other work to build against it yet.",
+      "referenced_tickets": [
+        "LID-125"
+      ],
+      "referenced_commits": [
+        "64c7bcacb3116ff9bd614863d7aed32121e028a8",
+        "71b6f24429bea5c1649ae51dbd2534e4a4e2615f"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service",
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0148",
+      "timestamp": "2026-02-25T16:33:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Keep every commit tied back to LID-125. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "LID-125"
+      ],
+      "referenced_commits": [
+        "64c7bcacb3116ff9bd614863d7aed32121e028a8",
+        "71b6f24429bea5c1649ae51dbd2534e4a4e2615f",
+        "3b625f5f45a84e75948128ae9b4f233982a01aa5"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service",
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0149",
+      "timestamp": "2026-02-25T21:44:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Small ops note: if this touches edge-inference-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "LID-125"
+      ],
+      "referenced_commits": [
+        "64c7bcacb3116ff9bd614863d7aed32121e028a8",
+        "71b6f24429bea5c1649ae51dbd2534e4a4e2615f",
+        "3b625f5f45a84e75948128ae9b4f233982a01aa5"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service",
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0150",
+      "timestamp": "2026-02-25T23:55:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "I left the change narrow around edge-inference-service. If anyone sees side effects outside that boundary, please drop the replay id in-thread instead of saying it was 'kind of weird'.",
+      "referenced_tickets": [
+        "LID-125"
+      ],
+      "referenced_commits": [
+        "64c7bcacb3116ff9bd614863d7aed32121e028a8",
+        "71b6f24429bea5c1649ae51dbd2534e4a4e2615f",
+        "3b625f5f45a84e75948128ae9b4f233982a01aa5"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service",
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0151",
+      "timestamp": "2026-02-26T10:00:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "Heads up, LID-126 is active. I pushed a rough first pass around telemetry-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "LID-126"
+      ],
+      "referenced_commits": [
+        "eec941cf9bd51701b0b1d452f4a6cf239235002e"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0152",
+      "timestamp": "2026-02-26T15:11:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "Latest branch has eec941cf. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "LID-126"
+      ],
+      "referenced_commits": [
+        "eec941cf9bd51701b0b1d452f4a6cf239235002e"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0153",
+      "timestamp": "2026-02-26T17:22:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "I can reproduce LID-126 on the current branch, but only after a couple of reruns through telemetry-service.",
+      "referenced_tickets": [
+        "LID-126"
+      ],
+      "referenced_commits": [
+        "eec941cf9bd51701b0b1d452f4a6cf239235002e",
+        "09c59aff4b6e9eb21c52f6d7f7365fd54cf9e511"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0154",
+      "timestamp": "2026-02-26T22:33:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Keep every commit tied back to LID-126. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "LID-126"
+      ],
+      "referenced_commits": [
+        "eec941cf9bd51701b0b1d452f4a6cf239235002e",
+        "09c59aff4b6e9eb21c52f6d7f7365fd54cf9e511",
+        "df6dbf168d92a15931b7ff2ef72c88f6c8c881a2"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0155",
+      "timestamp": "2026-02-27T03:44:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Small ops note: if this touches telemetry-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "LID-126"
+      ],
+      "referenced_commits": [
+        "eec941cf9bd51701b0b1d452f4a6cf239235002e",
+        "09c59aff4b6e9eb21c52f6d7f7365fd54cf9e511",
+        "df6dbf168d92a15931b7ff2ef72c88f6c8c881a2"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0156",
+      "timestamp": "2026-02-27T05:55:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "I left the change narrow around telemetry-service. If anyone sees side effects outside that boundary, please drop the replay id in-thread instead of saying it was 'kind of weird'.",
+      "referenced_tickets": [
+        "LID-126"
+      ],
+      "referenced_commits": [
+        "eec941cf9bd51701b0b1d452f4a6cf239235002e",
+        "09c59aff4b6e9eb21c52f6d7f7365fd54cf9e511",
+        "df6dbf168d92a15931b7ff2ef72c88f6c8c881a2"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0157",
+      "timestamp": "2026-02-27T13:00:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Heads up, LID-127 is active. I pushed a rough first pass around edge-inference-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "LID-127"
+      ],
+      "referenced_commits": [
+        "b4f235ff6d4e17c15dd54eb1323a6da43c8b9591"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service",
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0158",
+      "timestamp": "2026-02-27T18:11:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Latest branch has b4f235ff. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "LID-127"
+      ],
+      "referenced_commits": [
+        "b4f235ff6d4e17c15dd54eb1323a6da43c8b9591"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service",
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0001",
+      "timestamp": "2026-02-27T19:00:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-002",
+      "employee_name": "Aisha Khan",
+      "text": "Heads up, LID-101 is active. I pushed a rough first pass around object-detection-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "LID-101"
+      ],
+      "referenced_commits": [
+        "162c5dbc610f6403d438d2c29b5c14360da64e61"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "object-detection-service",
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0159",
+      "timestamp": "2026-02-27T20:22:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-003",
+      "employee_name": "Diego Alvarez",
+      "text": "GPU free memory drops after each engine reload even when frame rate is flat",
+      "referenced_tickets": [
+        "LID-127"
+      ],
+      "referenced_commits": [
+        "b4f235ff6d4e17c15dd54eb1323a6da43c8b9591",
+        "b2f0a46d27d8d43f6241c3f2a1afc1234ea2533d"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service",
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0002",
+      "timestamp": "2026-02-28T00:11:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-002",
+      "employee_name": "Aisha Khan",
+      "text": "Latest branch has 162c5dbc. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "LID-101"
+      ],
+      "referenced_commits": [
+        "162c5dbc610f6403d438d2c29b5c14360da64e61"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "object-detection-service",
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0160",
+      "timestamp": "2026-02-28T01:33:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Keep every commit tied back to LID-127. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "LID-127"
+      ],
+      "referenced_commits": [
+        "b4f235ff6d4e17c15dd54eb1323a6da43c8b9591",
+        "b2f0a46d27d8d43f6241c3f2a1afc1234ea2533d"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service",
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0003",
+      "timestamp": "2026-02-28T02:22:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-002",
+      "employee_name": "Aisha Khan",
+      "text": "GPU free memory drops after each engine reload even when frame rate is flat",
+      "referenced_tickets": [
+        "LID-101"
+      ],
+      "referenced_commits": [
+        "162c5dbc610f6403d438d2c29b5c14360da64e61",
+        "d7448f42d1771d0459e82e923d22ca4d2f25132d"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "object-detection-service",
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0161",
+      "timestamp": "2026-02-28T06:44:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Small ops note: if this touches object-detection-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "LID-127"
+      ],
+      "referenced_commits": [
+        "b4f235ff6d4e17c15dd54eb1323a6da43c8b9591",
+        "b2f0a46d27d8d43f6241c3f2a1afc1234ea2533d"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service",
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0004",
+      "timestamp": "2026-02-28T07:33:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Keep every commit tied back to LID-101. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "LID-101"
+      ],
+      "referenced_commits": [
+        "162c5dbc610f6403d438d2c29b5c14360da64e61",
+        "d7448f42d1771d0459e82e923d22ca4d2f25132d",
+        "fb7eeec0a2fe29a171a704ca17c18c48cd668e64"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "object-detection-service",
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0162",
+      "timestamp": "2026-02-28T08:55:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "fwiw, latency spikes get worse after qa replays a calibration bundle twice. I do not think that is the whole story, but it keeps showing up in traces.",
+      "referenced_tickets": [
+        "LID-127"
+      ],
+      "referenced_commits": [
+        "b4f235ff6d4e17c15dd54eb1323a6da43c8b9591",
+        "b2f0a46d27d8d43f6241c3f2a1afc1234ea2533d"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service",
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0005",
+      "timestamp": "2026-02-28T12:44:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Small ops note: if this touches edge-inference-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "LID-101"
+      ],
+      "referenced_commits": [
+        "162c5dbc610f6403d438d2c29b5c14360da64e61",
+        "d7448f42d1771d0459e82e923d22ca4d2f25132d",
+        "fb7eeec0a2fe29a171a704ca17c18c48cd668e64"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "object-detection-service",
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0006",
+      "timestamp": "2026-02-28T14:55:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-002",
+      "employee_name": "Aisha Khan",
+      "text": "fwiw, latency spikes get worse after qa replays a calibration bundle twice. I do not think that is the whole story, but it keeps showing up in traces.",
+      "referenced_tickets": [
+        "LID-101"
+      ],
+      "referenced_commits": [
+        "162c5dbc610f6403d438d2c29b5c14360da64e61",
+        "d7448f42d1771d0459e82e923d22ca4d2f25132d",
+        "fb7eeec0a2fe29a171a704ca17c18c48cd668e64"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "object-detection-service",
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0163",
+      "timestamp": "2026-03-01T16:00:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Heads up, LID-128 is active. I pushed a rough first pass around lidar-ingestion-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "LID-128"
+      ],
+      "referenced_commits": [
+        "3fe11e37b88700ab1a5882264646031bebaeb3a0"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lidar-ingestion-service",
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0164",
+      "timestamp": "2026-03-01T21:11:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Latest branch has 3fe11e37. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "LID-128"
+      ],
+      "referenced_commits": [
+        "3fe11e37b88700ab1a5882264646031bebaeb3a0"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lidar-ingestion-service",
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0007",
+      "timestamp": "2026-03-01T22:00:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-003",
+      "employee_name": "Diego Alvarez",
+      "text": "Heads up, LID-102 is active. I pushed a rough first pass around edge-inference-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "LID-102"
+      ],
+      "referenced_commits": [
+        "d366a14b27040442ad903d3f19070c9e15fdfce5"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0165",
+      "timestamp": "2026-03-01T23:22:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "This is mostly plumbing for LID-128, but it touches enough config that I do not trust it without another replay pass.",
+      "referenced_tickets": [
+        "LID-128"
+      ],
+      "referenced_commits": [
+        "3fe11e37b88700ab1a5882264646031bebaeb3a0",
+        "fc0c862e52dfe4a8e7ecbfef67a22d7fc56a6e86"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lidar-ingestion-service",
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0008",
+      "timestamp": "2026-03-02T03:11:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-003",
+      "employee_name": "Diego Alvarez",
+      "text": "Latest branch has d366a14b. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "LID-102"
+      ],
+      "referenced_commits": [
+        "d366a14b27040442ad903d3f19070c9e15fdfce5"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0166",
+      "timestamp": "2026-03-02T04:33:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Keep every commit tied back to LID-128. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "LID-128"
+      ],
+      "referenced_commits": [
+        "3fe11e37b88700ab1a5882264646031bebaeb3a0",
+        "fc0c862e52dfe4a8e7ecbfef67a22d7fc56a6e86"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lidar-ingestion-service",
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0009",
+      "timestamp": "2026-03-02T05:22:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-003",
+      "employee_name": "Diego Alvarez",
+      "text": "GPU free memory drops after each engine reload even when frame rate is flat",
+      "referenced_tickets": [
+        "LID-102"
+      ],
+      "referenced_commits": [
+        "d366a14b27040442ad903d3f19070c9e15fdfce5",
+        "fcd9b5f3ab61191af387293f6cb1898dfeea930b"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0167",
+      "timestamp": "2026-03-02T09:44:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Small ops note: if this touches tracking-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "LID-128"
+      ],
+      "referenced_commits": [
+        "3fe11e37b88700ab1a5882264646031bebaeb3a0",
+        "fc0c862e52dfe4a8e7ecbfef67a22d7fc56a6e86"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lidar-ingestion-service",
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0010",
+      "timestamp": "2026-03-02T10:33:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Keep every commit tied back to LID-102. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "LID-102"
+      ],
+      "referenced_commits": [
+        "d366a14b27040442ad903d3f19070c9e15fdfce5",
+        "fcd9b5f3ab61191af387293f6cb1898dfeea930b"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0168",
+      "timestamp": "2026-03-02T11:55:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "I left the change narrow around tracking-service. If anyone sees side effects outside that boundary, please drop the replay id in-thread instead of saying it was 'kind of weird'.",
+      "referenced_tickets": [
+        "LID-128"
+      ],
+      "referenced_commits": [
+        "3fe11e37b88700ab1a5882264646031bebaeb3a0",
+        "fc0c862e52dfe4a8e7ecbfef67a22d7fc56a6e86"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lidar-ingestion-service",
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0011",
+      "timestamp": "2026-03-02T15:44:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Small ops note: if this touches edge-inference-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "LID-102"
+      ],
+      "referenced_commits": [
+        "d366a14b27040442ad903d3f19070c9e15fdfce5",
+        "fcd9b5f3ab61191af387293f6cb1898dfeea930b"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0012",
+      "timestamp": "2026-03-02T17:55:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-003",
+      "employee_name": "Diego Alvarez",
+      "text": "fwiw, latency spikes get worse after qa replays a calibration bundle twice. I do not think that is the whole story, but it keeps showing up in traces.",
+      "referenced_tickets": [
+        "LID-102"
+      ],
+      "referenced_commits": [
+        "d366a14b27040442ad903d3f19070c9e15fdfce5",
+        "fcd9b5f3ab61191af387293f6cb1898dfeea930b"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0169",
+      "timestamp": "2026-03-02T19:00:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Heads up, LID-129 is active. I pushed a rough first pass around lidar-ingestion-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "LID-129"
+      ],
+      "referenced_commits": [
+        "a0b21fd650392a461094b378b50c7e9156f6546c"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lidar-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0170",
+      "timestamp": "2026-03-03T00:11:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Latest branch has a0b21fd6. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "LID-129"
+      ],
+      "referenced_commits": [
+        "a0b21fd650392a461094b378b50c7e9156f6546c"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lidar-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0013",
+      "timestamp": "2026-03-03T01:00:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-003",
+      "employee_name": "Diego Alvarez",
+      "text": "Heads up, LID-103 is active. I pushed a rough first pass around edge-inference-service, but it is still definitely prototype code.",
+      "referenced_tickets": [
+        "LID-103"
+      ],
+      "referenced_commits": [
+        "b17e06a06942c090819018922c0ecfbac3d5e8d3"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service",
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0171",
+      "timestamp": "2026-03-03T02:22:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "The tweak in LID-129 looks small on paper, but it changes timing just enough that we should watch the next replay closely.",
+      "referenced_tickets": [
+        "LID-129"
+      ],
+      "referenced_commits": [
+        "a0b21fd650392a461094b378b50c7e9156f6546c",
+        "ca5142f3ef5ec5cdbfa35e16ae73e5eaf35a8439"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lidar-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0014",
+      "timestamp": "2026-03-03T06:11:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-003",
+      "employee_name": "Diego Alvarez",
+      "text": "Latest branch has b17e06a0. The main symptom is still noisy on the rig, and the clean path only shows up when I replay the shorter clip pack.",
+      "referenced_tickets": [
+        "LID-103"
+      ],
+      "referenced_commits": [
+        "b17e06a06942c090819018922c0ecfbac3d5e8d3"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service",
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0172",
+      "timestamp": "2026-03-03T07:33:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Keep every commit tied back to LID-129. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "LID-129"
+      ],
+      "referenced_commits": [
+        "a0b21fd650392a461094b378b50c7e9156f6546c",
+        "ca5142f3ef5ec5cdbfa35e16ae73e5eaf35a8439",
+        "d16195aa31f45f8b61da8784da46a3e56e619bba"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lidar-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0015",
+      "timestamp": "2026-03-03T08:22:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-003",
+      "employee_name": "Diego Alvarez",
+      "text": "GPU free memory drops after each engine reload even when frame rate is flat",
+      "referenced_tickets": [
+        "LID-103"
+      ],
+      "referenced_commits": [
+        "b17e06a06942c090819018922c0ecfbac3d5e8d3",
+        "15957161e911d672318d9970aa2701e3ec9d81c8"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service",
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0173",
+      "timestamp": "2026-03-03T12:44:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Small ops note: if this touches lidar-ingestion-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "LID-129"
+      ],
+      "referenced_commits": [
+        "a0b21fd650392a461094b378b50c7e9156f6546c",
+        "ca5142f3ef5ec5cdbfa35e16ae73e5eaf35a8439",
+        "d16195aa31f45f8b61da8784da46a3e56e619bba"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lidar-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0016",
+      "timestamp": "2026-03-03T13:33:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Keep every commit tied back to LID-103. We are still in active development here, so I care more about narrowing the failure than polishing the code path.",
+      "referenced_tickets": [
+        "LID-103"
+      ],
+      "referenced_commits": [
+        "b17e06a06942c090819018922c0ecfbac3d5e8d3",
+        "15957161e911d672318d9970aa2701e3ec9d81c8",
+        "ea23143b0a87f416437cb3347b773ee9a4ebeadb"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service",
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0174",
+      "timestamp": "2026-03-03T14:55:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "I left the change narrow around lidar-ingestion-service. If anyone sees side effects outside that boundary, please drop the replay id in-thread instead of saying it was 'kind of weird'.",
+      "referenced_tickets": [
+        "LID-129"
+      ],
+      "referenced_commits": [
+        "a0b21fd650392a461094b378b50c7e9156f6546c",
+        "ca5142f3ef5ec5cdbfa35e16ae73e5eaf35a8439",
+        "d16195aa31f45f8b61da8784da46a3e56e619bba"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lidar-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0017",
+      "timestamp": "2026-03-03T18:44:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Small ops note: if this touches telemetry-service, please leave enough breadcrumbs in logs or deployment metadata. Reconstructing the timeline from memory is getting old.",
+      "referenced_tickets": [
+        "LID-103"
+      ],
+      "referenced_commits": [
+        "b17e06a06942c090819018922c0ecfbac3d5e8d3",
+        "15957161e911d672318d9970aa2701e3ec9d81c8",
+        "ea23143b0a87f416437cb3347b773ee9a4ebeadb"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service",
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0018",
+      "timestamp": "2026-03-03T20:55:00Z",
+      "channel": "#lidar-team",
+      "employee_id": "EMP-003",
+      "employee_name": "Diego Alvarez",
+      "text": "fwiw, latency spikes get worse after qa replays a calibration bundle twice. I do not think that is the whole story, but it keeps showing up in traces.",
+      "referenced_tickets": [
+        "LID-103"
+      ],
+      "referenced_commits": [
+        "b17e06a06942c090819018922c0ecfbac3d5e8d3",
+        "15957161e911d672318d9970aa2701e3ec9d81c8",
+        "ea23143b0a87f416437cb3347b773ee9a4ebeadb"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service",
+        "telemetry-service"
+      ]
+    }
+  ]
+}

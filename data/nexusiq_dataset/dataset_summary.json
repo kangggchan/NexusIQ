@@ -1,0 +1,11 @@
+{
+  "employees": 10,
+  "services": 10,
+  "tickets": 60,
+  "commits": 156,
+  "incidents": 18,
+  "deployments": 54,
+  "slack_messages": 705,
+  "technical_documents": 8,
+  "meeting_notes": 9
+}

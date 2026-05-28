@@ -1,0 +1,2178 @@
+{
+  "channel": "#incident-response",
+  "messages": [
+    {
+      "message_id": "MSG-0391",
+      "timestamp": "2026-03-12T13:15:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "INC-006 open. Seeing object decoder precision drop after nms refactor across object-detection-service.",
+      "referenced_tickets": [
+        "LID-115"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-006"
+      ],
+      "referenced_services": [
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0392",
+      "timestamp": "2026-03-12T13:28:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Recent deployment window: still checking deployment window. I am pulling the exact rollout notes now because the first symptom did not line up cleanly with one service.",
+      "referenced_tickets": [
+        "LID-115"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-006"
+      ],
+      "referenced_services": [
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0393",
+      "timestamp": "2026-03-12T13:41:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-002",
+      "employee_name": "Aisha Khan",
+      "text": "Symptom reproduced on the active branch.",
+      "referenced_tickets": [
+        "LID-115"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-006"
+      ],
+      "referenced_services": [
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0394",
+      "timestamp": "2026-03-12T13:54:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-002",
+      "employee_name": "Aisha Khan",
+      "text": "Recent code change aligned with the failure window.",
+      "referenced_tickets": [
+        "LID-115"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-006"
+      ],
+      "referenced_services": [
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0395",
+      "timestamp": "2026-03-12T14:07:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Please avoid jumping to a root cause from one graph or one dashboard. We need the Jira comments, deploy log, and replay timing in the same timeline.",
+      "referenced_tickets": [
+        "LID-115"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-006"
+      ],
+      "referenced_services": [
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0396",
+      "timestamp": "2026-03-12T14:20:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Mitigation in flight: Reverted the decode branch optimization and reran the urban replay set.",
+      "referenced_tickets": [
+        "LID-115"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-006"
+      ],
+      "referenced_services": [
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0439",
+      "timestamp": "2026-03-21T10:05:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "INC-014 open. Seeing road replay glare causes lane confidence collapse across lane-detection-service.",
+      "referenced_tickets": [
+        "ADAS-215"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-014"
+      ],
+      "referenced_services": [
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0440",
+      "timestamp": "2026-03-21T10:18:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Recent deployment window: DEP-033. I am pulling the exact rollout notes now because the first symptom did not line up cleanly with one service.",
+      "referenced_tickets": [
+        "ADAS-215"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-014"
+      ],
+      "referenced_services": [
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0441",
+      "timestamp": "2026-03-21T10:31:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-007",
+      "employee_name": "Priya Raman",
+      "text": "Symptom reproduced on the active branch.",
+      "referenced_tickets": [
+        "ADAS-215"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-014"
+      ],
+      "referenced_services": [
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0442",
+      "timestamp": "2026-03-21T10:44:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-007",
+      "employee_name": "Priya Raman",
+      "text": "Recent code change aligned with the failure window.",
+      "referenced_tickets": [
+        "ADAS-215"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-014"
+      ],
+      "referenced_services": [
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0443",
+      "timestamp": "2026-03-21T10:57:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "Please avoid jumping to a root cause from one graph or one dashboard. We need the Jira comments, deploy log, and replay timing in the same timeline.",
+      "referenced_tickets": [
+        "ADAS-215"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-014"
+      ],
+      "referenced_services": [
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0444",
+      "timestamp": "2026-03-21T11:10:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Mitigation in flight: Switched to the spline-heavy feature branch for glare replay evaluation.",
+      "referenced_tickets": [
+        "ADAS-215"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-014"
+      ],
+      "referenced_services": [
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0385",
+      "timestamp": "2026-03-24T11:03:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "INC-005 open. Seeing telemetry endpoint saturation hides lidar queue depth counters across telemetry-service.",
+      "referenced_tickets": [
+        "LID-105",
+        "LID-126"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-005"
+      ],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0386",
+      "timestamp": "2026-03-24T11:16:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Recent deployment window: still checking deployment window. I am pulling the exact rollout notes now because the first symptom did not line up cleanly with one service.",
+      "referenced_tickets": [
+        "LID-105",
+        "LID-126"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-005"
+      ],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0387",
+      "timestamp": "2026-03-24T11:29:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "Symptom reproduced on the active branch.",
+      "referenced_tickets": [
+        "LID-105",
+        "LID-126"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-005"
+      ],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0388",
+      "timestamp": "2026-03-24T11:42:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "Recent code change aligned with the failure window.",
+      "referenced_tickets": [
+        "LID-105",
+        "LID-126"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-005"
+      ],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0389",
+      "timestamp": "2026-03-24T11:55:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Please avoid jumping to a root cause from one graph or one dashboard. We need the Jira comments, deploy log, and replay timing in the same timeline.",
+      "referenced_tickets": [
+        "LID-105",
+        "LID-126"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-005"
+      ],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0390",
+      "timestamp": "2026-03-24T12:08:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Mitigation in flight: Reduced metric payload size for replay-only runs.",
+      "referenced_tickets": [
+        "LID-105",
+        "LID-126"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-005"
+      ],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0427",
+      "timestamp": "2026-03-27T14:30:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "INC-012 open. Seeing calibration checksum mismatch between laptop and ecu sidecar across calibration-service.",
+      "referenced_tickets": [
+        "ADAS-202",
+        "ADAS-211"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-012"
+      ],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0428",
+      "timestamp": "2026-03-27T14:43:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Recent deployment window: still checking deployment window. I am pulling the exact rollout notes now because the first symptom did not line up cleanly with one service.",
+      "referenced_tickets": [
+        "ADAS-202",
+        "ADAS-211"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-012"
+      ],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0429",
+      "timestamp": "2026-03-27T14:56:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "lane center error is small after cold boot but grows after a warm restart",
+      "referenced_tickets": [
+        "ADAS-202",
+        "ADAS-211"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-012"
+      ],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0430",
+      "timestamp": "2026-03-27T15:09:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "active calibration checksum looks correct while reported extrinsic age is stale",
+      "referenced_tickets": [
+        "ADAS-202",
+        "ADAS-211"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-012"
+      ],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0431",
+      "timestamp": "2026-03-27T15:22:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "Please avoid jumping to a root cause from one graph or one dashboard. We need the Jira comments, deploy log, and replay timing in the same timeline.",
+      "referenced_tickets": [
+        "ADAS-202",
+        "ADAS-211"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-012"
+      ],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0432",
+      "timestamp": "2026-03-27T15:35:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Mitigation in flight: Regenerated calibration bundle manifest and blocked partial uploads.",
+      "referenced_tickets": [
+        "ADAS-202",
+        "ADAS-211"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-012"
+      ],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0403",
+      "timestamp": "2026-03-30T09:20:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "INC-008 open. Seeing replay harness resets leave stale tracking ids across tracking-service.",
+      "referenced_tickets": [
+        "LID-120"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-008"
+      ],
+      "referenced_services": [
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0404",
+      "timestamp": "2026-03-30T09:33:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Recent deployment window: still checking deployment window. I am pulling the exact rollout notes now because the first symptom did not line up cleanly with one service.",
+      "referenced_tickets": [
+        "LID-120"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-008"
+      ],
+      "referenced_services": [
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0405",
+      "timestamp": "2026-03-30T09:46:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Symptom reproduced on the active branch.",
+      "referenced_tickets": [
+        "LID-120"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-008"
+      ],
+      "referenced_services": [
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0406",
+      "timestamp": "2026-03-30T09:59:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Recent code change aligned with the failure window.",
+      "referenced_tickets": [
+        "LID-120"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-008"
+      ],
+      "referenced_services": [
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0407",
+      "timestamp": "2026-03-30T10:12:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Please avoid jumping to a root cause from one graph or one dashboard. We need the Jira comments, deploy log, and replay timing in the same timeline.",
+      "referenced_tickets": [
+        "LID-120"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-008"
+      ],
+      "referenced_services": [
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0408",
+      "timestamp": "2026-03-30T10:25:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Mitigation in flight: Cleared track cache on replay session boundary and documented the reset path.",
+      "referenced_tickets": [
+        "LID-120"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-008"
+      ],
+      "referenced_services": [
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0415",
+      "timestamp": "2026-04-02T10:15:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "INC-010 open. Seeing lane preview api serves stale experiment label after reload across lane-detection-service.",
+      "referenced_tickets": [
+        "ADAS-210",
+        "ADAS-226"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-010"
+      ],
+      "referenced_services": [
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0416",
+      "timestamp": "2026-04-02T10:28:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Recent deployment window: still checking deployment window. I am pulling the exact rollout notes now because the first symptom did not line up cleanly with one service.",
+      "referenced_tickets": [
+        "ADAS-210",
+        "ADAS-226"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-010"
+      ],
+      "referenced_services": [
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0417",
+      "timestamp": "2026-04-02T10:41:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-007",
+      "employee_name": "Priya Raman",
+      "text": "Symptom reproduced on the active branch.",
+      "referenced_tickets": [
+        "ADAS-210",
+        "ADAS-226"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-010"
+      ],
+      "referenced_services": [
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0418",
+      "timestamp": "2026-04-02T10:54:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-007",
+      "employee_name": "Priya Raman",
+      "text": "Recent code change aligned with the failure window.",
+      "referenced_tickets": [
+        "ADAS-210",
+        "ADAS-226"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-010"
+      ],
+      "referenced_services": [
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0419",
+      "timestamp": "2026-04-02T11:07:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "Please avoid jumping to a root cause from one graph or one dashboard. We need the Jira comments, deploy log, and replay timing in the same timeline.",
+      "referenced_tickets": [
+        "ADAS-210",
+        "ADAS-226"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-010"
+      ],
+      "referenced_services": [
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0420",
+      "timestamp": "2026-04-02T11:20:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Mitigation in flight: Restarted the lane service and fixed metadata hydration in the next patch.",
+      "referenced_tickets": [
+        "ADAS-210",
+        "ADAS-226"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-010"
+      ],
+      "referenced_services": [
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0445",
+      "timestamp": "2026-04-07T08:55:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "INC-015 open. Seeing telemetry deployment metadata missing on rollback events across telemetry-service.",
+      "referenced_tickets": [
+        "LID-122",
+        "LID-132"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-015"
+      ],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0446",
+      "timestamp": "2026-04-07T09:08:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Recent deployment window: still checking deployment window. I am pulling the exact rollout notes now because the first symptom did not line up cleanly with one service.",
+      "referenced_tickets": [
+        "LID-122",
+        "LID-132"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-015"
+      ],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0447",
+      "timestamp": "2026-04-07T09:21:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "Symptom reproduced on the active branch.",
+      "referenced_tickets": [
+        "LID-122",
+        "LID-132"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-015"
+      ],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0448",
+      "timestamp": "2026-04-07T09:34:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "Recent code change aligned with the failure window.",
+      "referenced_tickets": [
+        "LID-122",
+        "LID-132"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-015"
+      ],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0449",
+      "timestamp": "2026-04-07T09:47:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Please avoid jumping to a root cause from one graph or one dashboard. We need the Jira comments, deploy log, and replay timing in the same timeline.",
+      "referenced_tickets": [
+        "LID-122",
+        "LID-132"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-015"
+      ],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0450",
+      "timestamp": "2026-04-07T10:00:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Mitigation in flight: Patched deployment event serialization and replayed missing rollback records.",
+      "referenced_tickets": [
+        "LID-122",
+        "LID-132"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-015"
+      ],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0397",
+      "timestamp": "2026-04-10T10:40:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "INC-007 open. Seeing engine cache refresh skipped after deployment smoke test across edge-inference-service.",
+      "referenced_tickets": [
+        "LID-112",
+        "LID-121"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-007"
+      ],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0398",
+      "timestamp": "2026-04-10T10:53:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Recent deployment window: still checking deployment window. I am pulling the exact rollout notes now because the first symptom did not line up cleanly with one service.",
+      "referenced_tickets": [
+        "LID-112",
+        "LID-121"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-007"
+      ],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0399",
+      "timestamp": "2026-04-10T11:06:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-003",
+      "employee_name": "Diego Alvarez",
+      "text": "GPU free memory drops after each engine reload even when frame rate is flat",
+      "referenced_tickets": [
+        "LID-112",
+        "LID-121"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-007"
+      ],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0400",
+      "timestamp": "2026-04-10T11:19:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-003",
+      "employee_name": "Diego Alvarez",
+      "text": "latency spikes get worse after QA replays a calibration bundle twice",
+      "referenced_tickets": [
+        "LID-112",
+        "LID-121"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-007"
+      ],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0401",
+      "timestamp": "2026-04-10T11:32:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Please avoid jumping to a root cause from one graph or one dashboard. We need the Jira comments, deploy log, and replay timing in the same timeline.",
+      "referenced_tickets": [
+        "LID-112",
+        "LID-121"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-007"
+      ],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0402",
+      "timestamp": "2026-04-10T11:45:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Mitigation in flight: Forced full engine rebuild after calibration upload and invalidated old cache entries.",
+      "referenced_tickets": [
+        "LID-112",
+        "LID-121"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-007"
+      ],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0409",
+      "timestamp": "2026-04-16T15:50:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "INC-009 open. Seeing camera frame gap spike during verbose diagnostics capture across camera-ingestion-service, diagnostics-service.",
+      "referenced_tickets": [
+        "ADAS-214",
+        "ADAS-223"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-009"
+      ],
+      "referenced_services": [
+        "camera-ingestion-service",
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0410",
+      "timestamp": "2026-04-16T16:03:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Recent deployment window: still checking deployment window. I am pulling the exact rollout notes now because the first symptom did not line up cleanly with one service.",
+      "referenced_tickets": [
+        "ADAS-214",
+        "ADAS-223"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-009"
+      ],
+      "referenced_services": [
+        "camera-ingestion-service",
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0411",
+      "timestamp": "2026-04-16T16:16:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "steering oscillation starts only when the faster timing profile is enabled",
+      "referenced_tickets": [
+        "ADAS-214",
+        "ADAS-223"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-009"
+      ],
+      "referenced_services": [
+        "camera-ingestion-service",
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0412",
+      "timestamp": "2026-04-16T16:29:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "diagnostics reports controller delta spikes without lane confidence collapsing",
+      "referenced_tickets": [
+        "ADAS-214",
+        "ADAS-223"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-009"
+      ],
+      "referenced_services": [
+        "camera-ingestion-service",
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0413",
+      "timestamp": "2026-04-16T16:42:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "Please avoid jumping to a root cause from one graph or one dashboard. We need the Jira comments, deploy log, and replay timing in the same timeline.",
+      "referenced_tickets": [
+        "ADAS-214",
+        "ADAS-223"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-009"
+      ],
+      "referenced_services": [
+        "camera-ingestion-service",
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0414",
+      "timestamp": "2026-04-16T16:55:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Mitigation in flight: Dropped verbose diagnostics sampling rate and moved timing capture to a lower priority thread.",
+      "referenced_tickets": [
+        "ADAS-214",
+        "ADAS-223"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-009"
+      ],
+      "referenced_services": [
+        "camera-ingestion-service",
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0367",
+      "timestamp": "2026-04-18T15:22:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "INC-002 open. Seeing tracking delay during dense replay with telemetry enabled across tracking-service, lidar-ingestion-service, telemetry-service.",
+      "referenced_tickets": [
+        "LID-107",
+        "LID-116",
+        "LID-117"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-002"
+      ],
+      "referenced_services": [
+        "tracking-service",
+        "lidar-ingestion-service",
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0655",
+      "timestamp": "2026-04-18T15:29:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "backlog is higher on the Xavier device than the Orin dev box",
+      "referenced_tickets": [
+        "LID-107",
+        "LID-116",
+        "LID-117"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-002"
+      ],
+      "referenced_services": [
+        "tracking-service",
+        "lidar-ingestion-service",
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0368",
+      "timestamp": "2026-04-18T15:35:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Recent deployment window: still checking deployment window. I am pulling the exact rollout notes now because the first symptom did not line up cleanly with one service.",
+      "referenced_tickets": [
+        "LID-107",
+        "LID-116",
+        "LID-117"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-002"
+      ],
+      "referenced_services": [
+        "tracking-service",
+        "lidar-ingestion-service",
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0369",
+      "timestamp": "2026-04-18T15:48:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "track age jumps after telemetry export starts on the same rig",
+      "referenced_tickets": [
+        "LID-107",
+        "LID-116",
+        "LID-117"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-002"
+      ],
+      "referenced_services": [
+        "tracking-service",
+        "lidar-ingestion-service",
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0370",
+      "timestamp": "2026-04-18T16:01:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "backlog is higher on the Xavier device than the Orin dev box",
+      "referenced_tickets": [
+        "LID-107",
+        "LID-116",
+        "LID-117"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-002"
+      ],
+      "referenced_services": [
+        "tracking-service",
+        "lidar-ingestion-service",
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0371",
+      "timestamp": "2026-04-18T16:14:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Please avoid jumping to a root cause from one graph or one dashboard. We need the Jira comments, deploy log, and replay timing in the same timeline.",
+      "referenced_tickets": [
+        "LID-107",
+        "LID-116",
+        "LID-117"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-002"
+      ],
+      "referenced_services": [
+        "tracking-service",
+        "lidar-ingestion-service",
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0372",
+      "timestamp": "2026-04-18T16:27:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Mitigation in flight: Throttled telemetry exporter flush interval on replay rigs.",
+      "referenced_tickets": [
+        "LID-107",
+        "LID-116",
+        "LID-117"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-002"
+      ],
+      "referenced_services": [
+        "tracking-service",
+        "lidar-ingestion-service",
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0421",
+      "timestamp": "2026-04-21T11:04:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "INC-011 open. Seeing steering command saturation on quick lane swap scenario across steering-control-service.",
+      "referenced_tickets": [
+        "ADAS-220",
+        "ADAS-225"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-011"
+      ],
+      "referenced_services": [
+        "steering-control-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0422",
+      "timestamp": "2026-04-21T11:17:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Recent deployment window: still checking deployment window. I am pulling the exact rollout notes now because the first symptom did not line up cleanly with one service.",
+      "referenced_tickets": [
+        "ADAS-220",
+        "ADAS-225"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-011"
+      ],
+      "referenced_services": [
+        "steering-control-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0423",
+      "timestamp": "2026-04-21T11:30:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-008",
+      "employee_name": "Lucas Moreau",
+      "text": "Symptom reproduced on the active branch.",
+      "referenced_tickets": [
+        "ADAS-220",
+        "ADAS-225"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-011"
+      ],
+      "referenced_services": [
+        "steering-control-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0424",
+      "timestamp": "2026-04-21T11:43:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-008",
+      "employee_name": "Lucas Moreau",
+      "text": "Recent code change aligned with the failure window.",
+      "referenced_tickets": [
+        "ADAS-220",
+        "ADAS-225"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-011"
+      ],
+      "referenced_services": [
+        "steering-control-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0425",
+      "timestamp": "2026-04-21T11:56:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "Please avoid jumping to a root cause from one graph or one dashboard. We need the Jira comments, deploy log, and replay timing in the same timeline.",
+      "referenced_tickets": [
+        "ADAS-220",
+        "ADAS-225"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-011"
+      ],
+      "referenced_services": [
+        "steering-control-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0426",
+      "timestamp": "2026-04-21T12:09:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Mitigation in flight: Lowered steering torque clamp in highway replay profile.",
+      "referenced_tickets": [
+        "ADAS-220",
+        "ADAS-225"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-011"
+      ],
+      "referenced_services": [
+        "steering-control-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0361",
+      "timestamp": "2026-04-29T10:18:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "INC-001 open. Seeing lidar inference latency spike after int8 rollout across edge-inference-service, object-detection-service.",
+      "referenced_tickets": [
+        "LID-103",
+        "LID-106",
+        "LID-121"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-001"
+      ],
+      "referenced_services": [
+        "edge-inference-service",
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0652",
+      "timestamp": "2026-04-29T10:18:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-003",
+      "employee_name": "Diego Alvarez",
+      "text": "GPU free memory drops after each engine reload even when frame rate is flat",
+      "referenced_tickets": [
+        "LID-103",
+        "LID-106",
+        "LID-121"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-001"
+      ],
+      "referenced_services": [
+        "edge-inference-service",
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0362",
+      "timestamp": "2026-04-29T10:31:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Recent deployment window: still checking deployment window. I am pulling the exact rollout notes now because the first symptom did not line up cleanly with one service.",
+      "referenced_tickets": [
+        "LID-103",
+        "LID-106",
+        "LID-121"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-001"
+      ],
+      "referenced_services": [
+        "edge-inference-service",
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0363",
+      "timestamp": "2026-04-29T10:44:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-003",
+      "employee_name": "Diego Alvarez",
+      "text": "GPU free memory drops after each engine reload even when frame rate is flat",
+      "referenced_tickets": [
+        "LID-103",
+        "LID-106",
+        "LID-121"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-001"
+      ],
+      "referenced_services": [
+        "edge-inference-service",
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0364",
+      "timestamp": "2026-04-29T10:57:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-002",
+      "employee_name": "Aisha Khan",
+      "text": "latency spikes get worse after QA replays a calibration bundle twice",
+      "referenced_tickets": [
+        "LID-103",
+        "LID-106",
+        "LID-121"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-001"
+      ],
+      "referenced_services": [
+        "edge-inference-service",
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0365",
+      "timestamp": "2026-04-29T11:10:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Please avoid jumping to a root cause from one graph or one dashboard. We need the Jira comments, deploy log, and replay timing in the same timeline.",
+      "referenced_tickets": [
+        "LID-103",
+        "LID-106",
+        "LID-121"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-001"
+      ],
+      "referenced_services": [
+        "edge-inference-service",
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0366",
+      "timestamp": "2026-04-29T11:23:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Mitigation in flight: Rolled edge-inference-service back to previous FP16 build on jetson-xavier-edge-02.",
+      "referenced_tickets": [
+        "LID-103",
+        "LID-106",
+        "LID-121"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-001"
+      ],
+      "referenced_services": [
+        "edge-inference-service",
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0373",
+      "timestamp": "2026-04-30T09:40:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "INC-003 open. Seeing lane offset after warm ecu restart on calibration branch across calibration-service, lane-detection-service, camera-ingestion-service.",
+      "referenced_tickets": [
+        "ADAS-203",
+        "ADAS-206",
+        "ADAS-224"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-003"
+      ],
+      "referenced_services": [
+        "calibration-service",
+        "lane-detection-service",
+        "camera-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0374",
+      "timestamp": "2026-04-30T09:53:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Recent deployment window: still checking deployment window. I am pulling the exact rollout notes now because the first symptom did not line up cleanly with one service.",
+      "referenced_tickets": [
+        "ADAS-203",
+        "ADAS-206",
+        "ADAS-224"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-003"
+      ],
+      "referenced_services": [
+        "calibration-service",
+        "lane-detection-service",
+        "camera-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0375",
+      "timestamp": "2026-04-30T10:06:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "lane center error is small after cold boot but grows after a warm restart",
+      "referenced_tickets": [
+        "ADAS-203",
+        "ADAS-206",
+        "ADAS-224"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-003"
+      ],
+      "referenced_services": [
+        "calibration-service",
+        "lane-detection-service",
+        "camera-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0376",
+      "timestamp": "2026-04-30T10:19:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "active calibration checksum looks correct while reported extrinsic age is stale",
+      "referenced_tickets": [
+        "ADAS-203",
+        "ADAS-206",
+        "ADAS-224"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-003"
+      ],
+      "referenced_services": [
+        "calibration-service",
+        "lane-detection-service",
+        "camera-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0377",
+      "timestamp": "2026-04-30T10:32:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "Please avoid jumping to a root cause from one graph or one dashboard. We need the Jira comments, deploy log, and replay timing in the same timeline.",
+      "referenced_tickets": [
+        "ADAS-203",
+        "ADAS-206",
+        "ADAS-224"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-003"
+      ],
+      "referenced_services": [
+        "calibration-service",
+        "lane-detection-service",
+        "camera-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0378",
+      "timestamp": "2026-04-30T10:45:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Mitigation in flight: Forced calibration cache flush after each uploaded bundle.",
+      "referenced_tickets": [
+        "ADAS-203",
+        "ADAS-206",
+        "ADAS-224"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-003"
+      ],
+      "referenced_services": [
+        "calibration-service",
+        "lane-detection-service",
+        "camera-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0457",
+      "timestamp": "2026-05-05T13:08:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "INC-017 open. Seeing lane tests blocked by stale calibration cache after repeated uploads across calibration-service, lane-detection-service.",
+      "referenced_tickets": [
+        "ADAS-218",
+        "ADAS-224"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-017"
+      ],
+      "referenced_services": [
+        "calibration-service",
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0458",
+      "timestamp": "2026-05-05T13:21:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Recent deployment window: still checking deployment window. I am pulling the exact rollout notes now because the first symptom did not line up cleanly with one service.",
+      "referenced_tickets": [
+        "ADAS-218",
+        "ADAS-224"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-017"
+      ],
+      "referenced_services": [
+        "calibration-service",
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0459",
+      "timestamp": "2026-05-05T13:34:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "lane center error is small after cold boot but grows after a warm restart",
+      "referenced_tickets": [
+        "ADAS-218",
+        "ADAS-224"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-017"
+      ],
+      "referenced_services": [
+        "calibration-service",
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0460",
+      "timestamp": "2026-05-05T13:47:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-007",
+      "employee_name": "Priya Raman",
+      "text": "active calibration checksum looks correct while reported extrinsic age is stale",
+      "referenced_tickets": [
+        "ADAS-218",
+        "ADAS-224"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-017"
+      ],
+      "referenced_services": [
+        "calibration-service",
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0461",
+      "timestamp": "2026-05-05T14:00:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "Please avoid jumping to a root cause from one graph or one dashboard. We need the Jira comments, deploy log, and replay timing in the same timeline.",
+      "referenced_tickets": [
+        "ADAS-218",
+        "ADAS-224"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-017"
+      ],
+      "referenced_services": [
+        "calibration-service",
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0462",
+      "timestamp": "2026-05-05T14:13:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Mitigation in flight: Added explicit cache flush to the calibration upload playbook.",
+      "referenced_tickets": [
+        "ADAS-218",
+        "ADAS-224"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-017"
+      ],
+      "referenced_services": [
+        "calibration-service",
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0379",
+      "timestamp": "2026-05-09T14:05:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "INC-004 open. Seeing steering jitter on timing-profile-b during highway replay across steering-control-service, camera-ingestion-service, diagnostics-service.",
+      "referenced_tickets": [
+        "ADAS-207",
+        "ADAS-216",
+        "ADAS-217"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-004"
+      ],
+      "referenced_services": [
+        "steering-control-service",
+        "camera-ingestion-service",
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0380",
+      "timestamp": "2026-05-09T14:18:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Recent deployment window: still checking deployment window. I am pulling the exact rollout notes now because the first symptom did not line up cleanly with one service.",
+      "referenced_tickets": [
+        "ADAS-207",
+        "ADAS-216",
+        "ADAS-217"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-004"
+      ],
+      "referenced_services": [
+        "steering-control-service",
+        "camera-ingestion-service",
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0381",
+      "timestamp": "2026-05-09T14:31:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-008",
+      "employee_name": "Lucas Moreau",
+      "text": "steering oscillation starts only when the faster timing profile is enabled",
+      "referenced_tickets": [
+        "ADAS-207",
+        "ADAS-216",
+        "ADAS-217"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-004"
+      ],
+      "referenced_services": [
+        "steering-control-service",
+        "camera-ingestion-service",
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0382",
+      "timestamp": "2026-05-09T14:44:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "diagnostics reports controller delta spikes without lane confidence collapsing",
+      "referenced_tickets": [
+        "ADAS-207",
+        "ADAS-216",
+        "ADAS-217"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-004"
+      ],
+      "referenced_services": [
+        "steering-control-service",
+        "camera-ingestion-service",
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0383",
+      "timestamp": "2026-05-09T14:57:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "Please avoid jumping to a root cause from one graph or one dashboard. We need the Jira comments, deploy log, and replay timing in the same timeline.",
+      "referenced_tickets": [
+        "ADAS-207",
+        "ADAS-216",
+        "ADAS-217"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-004"
+      ],
+      "referenced_services": [
+        "steering-control-service",
+        "camera-ingestion-service",
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0384",
+      "timestamp": "2026-05-09T15:10:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Mitigation in flight: Rolled controller timing-profile-b back to profile-a.",
+      "referenced_tickets": [
+        "ADAS-207",
+        "ADAS-216",
+        "ADAS-217"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-004"
+      ],
+      "referenced_services": [
+        "steering-control-service",
+        "camera-ingestion-service",
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0433",
+      "timestamp": "2026-05-12T09:12:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "INC-013 open. Seeing xavier canary rollback after inference regression in demo branch across edge-inference-service, object-detection-service.",
+      "referenced_tickets": [
+        "LID-127",
+        "LID-131"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-013"
+      ],
+      "referenced_services": [
+        "edge-inference-service",
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0434",
+      "timestamp": "2026-05-12T09:25:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Recent deployment window: still checking deployment window. I am pulling the exact rollout notes now because the first symptom did not line up cleanly with one service.",
+      "referenced_tickets": [
+        "LID-127",
+        "LID-131"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-013"
+      ],
+      "referenced_services": [
+        "edge-inference-service",
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0435",
+      "timestamp": "2026-05-12T09:38:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-003",
+      "employee_name": "Diego Alvarez",
+      "text": "GPU free memory drops after each engine reload even when frame rate is flat",
+      "referenced_tickets": [
+        "LID-127",
+        "LID-131"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-013"
+      ],
+      "referenced_services": [
+        "edge-inference-service",
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0436",
+      "timestamp": "2026-05-12T09:51:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-002",
+      "employee_name": "Aisha Khan",
+      "text": "latency spikes get worse after QA replays a calibration bundle twice",
+      "referenced_tickets": [
+        "LID-127",
+        "LID-131"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-013"
+      ],
+      "referenced_services": [
+        "edge-inference-service",
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0437",
+      "timestamp": "2026-05-12T10:04:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Please avoid jumping to a root cause from one graph or one dashboard. We need the Jira comments, deploy log, and replay timing in the same timeline.",
+      "referenced_tickets": [
+        "LID-127",
+        "LID-131"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-013"
+      ],
+      "referenced_services": [
+        "edge-inference-service",
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0438",
+      "timestamp": "2026-05-12T10:17:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Mitigation in flight: Reverted the demo branch deployment and held future canaries to Orin only.",
+      "referenced_tickets": [
+        "LID-127",
+        "LID-131"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-013"
+      ],
+      "referenced_services": [
+        "edge-inference-service",
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0451",
+      "timestamp": "2026-05-14T16:10:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "INC-016 open. Seeing prototype ecu package rollback after controller jitter regression across steering-control-service, diagnostics-service.",
+      "referenced_tickets": [
+        "ADAS-227",
+        "ADAS-208"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-016"
+      ],
+      "referenced_services": [
+        "steering-control-service",
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0452",
+      "timestamp": "2026-05-14T16:23:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Recent deployment window: still checking deployment window. I am pulling the exact rollout notes now because the first symptom did not line up cleanly with one service.",
+      "referenced_tickets": [
+        "ADAS-227",
+        "ADAS-208"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-016"
+      ],
+      "referenced_services": [
+        "steering-control-service",
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0453",
+      "timestamp": "2026-05-14T16:36:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-008",
+      "employee_name": "Lucas Moreau",
+      "text": "steering oscillation starts only when the faster timing profile is enabled",
+      "referenced_tickets": [
+        "ADAS-227",
+        "ADAS-208"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-016"
+      ],
+      "referenced_services": [
+        "steering-control-service",
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0454",
+      "timestamp": "2026-05-14T16:49:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "diagnostics reports controller delta spikes without lane confidence collapsing",
+      "referenced_tickets": [
+        "ADAS-227",
+        "ADAS-208"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-016"
+      ],
+      "referenced_services": [
+        "steering-control-service",
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0455",
+      "timestamp": "2026-05-14T17:02:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-006",
+      "employee_name": "Haruka Sato",
+      "text": "Please avoid jumping to a root cause from one graph or one dashboard. We need the Jira comments, deploy log, and replay timing in the same timeline.",
+      "referenced_tickets": [
+        "ADAS-227",
+        "ADAS-208"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-016"
+      ],
+      "referenced_services": [
+        "steering-control-service",
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0456",
+      "timestamp": "2026-05-14T17:15:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Mitigation in flight: Rolled back ECU package 0.6.8 and re-enabled profile-a for all rigs.",
+      "referenced_tickets": [
+        "ADAS-227",
+        "ADAS-208"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-016"
+      ],
+      "referenced_services": [
+        "steering-control-service",
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0463",
+      "timestamp": "2026-05-18T11:33:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "INC-018 open. Seeing telemetry burst amplifies track lag on old xavier image across tracking-service, telemetry-service.",
+      "referenced_tickets": [
+        "LID-123",
+        "LID-117"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-018"
+      ],
+      "referenced_services": [
+        "tracking-service",
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0464",
+      "timestamp": "2026-05-18T11:46:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Recent deployment window: still checking deployment window. I am pulling the exact rollout notes now because the first symptom did not line up cleanly with one service.",
+      "referenced_tickets": [
+        "LID-123",
+        "LID-117"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-018"
+      ],
+      "referenced_services": [
+        "tracking-service",
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0465",
+      "timestamp": "2026-05-18T11:59:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "track age jumps after telemetry export starts on the same rig",
+      "referenced_tickets": [
+        "LID-123",
+        "LID-117"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-018"
+      ],
+      "referenced_services": [
+        "tracking-service",
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0466",
+      "timestamp": "2026-05-18T12:12:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "backlog is higher on the Xavier device than the Orin dev box",
+      "referenced_tickets": [
+        "LID-123",
+        "LID-117"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-018"
+      ],
+      "referenced_services": [
+        "tracking-service",
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0467",
+      "timestamp": "2026-05-18T12:25:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-001",
+      "employee_name": "Minh Tran",
+      "text": "Please avoid jumping to a root cause from one graph or one dashboard. We need the Jira comments, deploy log, and replay timing in the same timeline.",
+      "referenced_tickets": [
+        "LID-123",
+        "LID-117"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-018"
+      ],
+      "referenced_services": [
+        "tracking-service",
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0468",
+      "timestamp": "2026-05-18T12:38:00Z",
+      "channel": "#incident-response",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Mitigation in flight: Reduced telemetry burst size and rebuilt Xavier image with updated QoS defaults.",
+      "referenced_tickets": [
+        "LID-123",
+        "LID-117"
+      ],
+      "referenced_commits": [],
+      "referenced_incidents": [
+        "INC-018"
+      ],
+      "referenced_services": [
+        "tracking-service",
+        "telemetry-service"
+      ]
+    }
+  ]
+}

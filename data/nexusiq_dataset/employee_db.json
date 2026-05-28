@@ -1,0 +1,199 @@
+{
+  "company": "NovaDrive AI",
+  "industry": "Autonomous Driving & ADAS Software",
+  "generated_at": "2026-05-23T17:00:00Z",
+  "employees": [
+    {
+      "employee_id": "EMP-001",
+      "name": "Minh Tran",
+      "nationality": "Vietnamese",
+      "role": "Technical Lead",
+      "specialization": "LiDAR perception systems and ROS2 architecture",
+      "years_of_experience": 11,
+      "team": "LiDAR Perception Team",
+      "email": "minh.tran@novadrive.ai",
+      "manager": null,
+      "owned_services": [
+        "lidar-ingestion-service",
+        "tracking-service"
+      ],
+      "projects": [
+        "LiDAR Object Detection System for Autonomous Vehicles"
+      ]
+    },
+    {
+      "employee_id": "EMP-002",
+      "name": "Aisha Khan",
+      "nationality": "Pakistani",
+      "role": "ML Engineer",
+      "specialization": "PointPillars training and TensorRT quantization",
+      "years_of_experience": 7,
+      "team": "LiDAR Perception Team",
+      "email": "aisha.khan@novadrive.ai",
+      "manager": "EMP-001",
+      "owned_services": [
+        "object-detection-service"
+      ],
+      "projects": [
+        "LiDAR Object Detection System for Autonomous Vehicles"
+      ]
+    },
+    {
+      "employee_id": "EMP-003",
+      "name": "Diego Alvarez",
+      "nationality": "Mexican",
+      "role": "Embedded Engineer",
+      "specialization": "Jetson deployment, CUDA profiling, memory diagnostics",
+      "years_of_experience": 8,
+      "team": "LiDAR Perception Team",
+      "email": "diego.alvarez@novadrive.ai",
+      "manager": "EMP-001",
+      "owned_services": [
+        "edge-inference-service"
+      ],
+      "projects": [
+        "LiDAR Object Detection System for Autonomous Vehicles"
+      ]
+    },
+    {
+      "employee_id": "EMP-004",
+      "name": "Sofia Petrov",
+      "nationality": "Bulgarian",
+      "role": "Backend Engineer",
+      "specialization": "Telemetry pipelines, service APIs, deployment hooks",
+      "years_of_experience": 6,
+      "team": "LiDAR Perception Team",
+      "email": "sofia.petrov@novadrive.ai",
+      "manager": "EMP-001",
+      "owned_services": [
+        "telemetry-service"
+      ],
+      "projects": [
+        "LiDAR Object Detection System for Autonomous Vehicles"
+      ]
+    },
+    {
+      "employee_id": "EMP-005",
+      "name": "Jonas Mueller",
+      "nationality": "German",
+      "role": "DevOps Engineer",
+      "specialization": "Edge rollout automation and container tuning",
+      "years_of_experience": 9,
+      "team": "LiDAR Perception Team",
+      "email": "jonas.mueller@novadrive.ai",
+      "manager": "EMP-001",
+      "owned_services": [],
+      "projects": [
+        "LiDAR Object Detection System for Autonomous Vehicles"
+      ]
+    },
+    {
+      "employee_id": "EMP-006",
+      "name": "Haruka Sato",
+      "nationality": "Japanese",
+      "role": "Technical Lead",
+      "specialization": "ADAS perception architecture and control integration",
+      "years_of_experience": 10,
+      "team": "ADAS Vision Team",
+      "email": "haruka.sato@novadrive.ai",
+      "manager": null,
+      "owned_services": [
+        "camera-ingestion-service",
+        "diagnostics-service"
+      ],
+      "projects": [
+        "Lane Keeping Assist System using 2D Camera in ADAS ECU"
+      ]
+    },
+    {
+      "employee_id": "EMP-007",
+      "name": "Priya Raman",
+      "nationality": "Indian",
+      "role": "Computer Vision Engineer",
+      "specialization": "Lane segmentation, feature extraction, OpenCV prototyping",
+      "years_of_experience": 6,
+      "team": "ADAS Vision Team",
+      "email": "priya.raman@novadrive.ai",
+      "manager": "EMP-006",
+      "owned_services": [
+        "lane-detection-service"
+      ],
+      "projects": [
+        "Lane Keeping Assist System using 2D Camera in ADAS ECU"
+      ]
+    },
+    {
+      "employee_id": "EMP-008",
+      "name": "Lucas Moreau",
+      "nationality": "French",
+      "role": "Embedded Engineer",
+      "specialization": "CAN bus integration, ECU timing, frame sync analysis",
+      "years_of_experience": 7,
+      "team": "ADAS Vision Team",
+      "email": "lucas.moreau@novadrive.ai",
+      "manager": "EMP-006",
+      "owned_services": [
+        "steering-control-service"
+      ],
+      "projects": [
+        "Lane Keeping Assist System using 2D Camera in ADAS ECU"
+      ]
+    },
+    {
+      "employee_id": "EMP-009",
+      "name": "Nora Ibrahim",
+      "nationality": "Egyptian",
+      "role": "Backend Engineer",
+      "specialization": "Calibration state handling, diagnostics APIs, test harness tooling",
+      "years_of_experience": 5,
+      "team": "ADAS Vision Team",
+      "email": "nora.ibrahim@novadrive.ai",
+      "manager": "EMP-006",
+      "owned_services": [
+        "calibration-service"
+      ],
+      "projects": [
+        "Lane Keeping Assist System using 2D Camera in ADAS ECU"
+      ]
+    },
+    {
+      "employee_id": "EMP-010",
+      "name": "Ethan Walker",
+      "nationality": "American",
+      "role": "DevOps Engineer",
+      "specialization": "Prototype ECU images, rig orchestration, deployment logging",
+      "years_of_experience": 8,
+      "team": "ADAS Vision Team",
+      "email": "ethan.walker@novadrive.ai",
+      "manager": "EMP-006",
+      "owned_services": [],
+      "projects": [
+        "Lane Keeping Assist System using 2D Camera in ADAS ECU"
+      ]
+    }
+  ],
+  "teams": [
+    {
+      "name": "LiDAR Perception Team",
+      "lead_employee_id": "EMP-001",
+      "services": [
+        "lidar-ingestion-service",
+        "object-detection-service",
+        "tracking-service",
+        "edge-inference-service",
+        "telemetry-service"
+      ]
+    },
+    {
+      "name": "ADAS Vision Team",
+      "lead_employee_id": "EMP-006",
+      "services": [
+        "camera-ingestion-service",
+        "lane-detection-service",
+        "steering-control-service",
+        "calibration-service",
+        "diagnostics-service"
+      ]
+    }
+  ]
+}

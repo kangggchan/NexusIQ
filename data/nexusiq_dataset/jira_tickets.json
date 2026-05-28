@@ -1,0 +1,2501 @@
+{
+  "generated_at": "2026-05-23T17:00:00Z",
+  "tickets": [
+    {
+      "ticket_id": "LID-101",
+      "project": "LiDAR Object Detection System for Autonomous Vehicles",
+      "type": "Story",
+      "priority": "High",
+      "status": "Done",
+      "summary": "Stabilize TensorRT INT8 edge inference path",
+      "description": "Stabilize TensorRT INT8 edge inference path. Related services: object-detection-service, edge-inference-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-02-27T18:00:00Z",
+      "updated_at": "2026-03-03T19:00:00Z",
+      "reporter_employee_id": "EMP-001",
+      "assignee_employee_id": "EMP-002",
+      "related_services": [
+        "object-detection-service",
+        "edge-inference-service"
+      ],
+      "linked_commits": [
+        "162c5dbc610f6403d438d2c29b5c14360da64e61",
+        "d7448f42d1771d0459e82e923d22ca4d2f25132d",
+        "fb7eeec0a2fe29a171a704ca17c18c48cd668e64"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-001",
+          "timestamp": "2026-02-27T20:00:00Z",
+          "comment": "Initial triage notes for stabilize tensorrt int8 edge inference path. Focus on object-detection-service, edge-inference-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-002",
+          "timestamp": "2026-02-28T19:00:00Z",
+          "comment": "GPU free memory drops after each engine reload even when frame rate is flat"
+        },
+        {
+          "author_employee_id": "EMP-001",
+          "timestamp": "2026-03-01T21:00:00Z",
+          "comment": "latency spikes get worse after QA replays a calibration bundle twice"
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "lidar"
+      ],
+      "issue_theme": "lidar_memory_leak"
+    },
+    {
+      "ticket_id": "LID-102",
+      "project": "LiDAR Object Detection System for Autonomous Vehicles",
+      "type": "Task",
+      "priority": "Medium",
+      "status": "Done",
+      "summary": "Profile Jetson memory pools during repeated engine reload",
+      "description": "Profile Jetson memory pools during repeated engine reload. Related services: edge-inference-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-03-01T21:00:00Z",
+      "updated_at": "2026-03-05T23:00:00Z",
+      "reporter_employee_id": "EMP-001",
+      "assignee_employee_id": "EMP-003",
+      "related_services": [
+        "edge-inference-service"
+      ],
+      "linked_commits": [
+        "d366a14b27040442ad903d3f19070c9e15fdfce5",
+        "fcd9b5f3ab61191af387293f6cb1898dfeea930b"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-001",
+          "timestamp": "2026-03-01T23:00:00Z",
+          "comment": "Initial triage notes for profile jetson memory pools during repeated engine reload. Focus on edge-inference-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-003",
+          "timestamp": "2026-03-02T22:00:00Z",
+          "comment": "GPU free memory drops after each engine reload even when frame rate is flat"
+        },
+        {
+          "author_employee_id": "EMP-001",
+          "timestamp": "2026-03-04T00:00:00Z",
+          "comment": "latency spikes get worse after QA replays a calibration bundle twice"
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "lidar"
+      ],
+      "issue_theme": "lidar_memory_leak"
+    },
+    {
+      "ticket_id": "LID-103",
+      "project": "LiDAR Object Detection System for Autonomous Vehicles",
+      "type": "Bug",
+      "priority": "Critical",
+      "status": "Done",
+      "summary": "Investigate p95 inference spike after quantized engine rollout",
+      "description": "Investigate p95 inference spike after quantized engine rollout. Related services: edge-inference-service, telemetry-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-03-03T00:00:00Z",
+      "updated_at": "2026-03-07T03:00:00Z",
+      "reporter_employee_id": "EMP-001",
+      "assignee_employee_id": "EMP-003",
+      "related_services": [
+        "edge-inference-service",
+        "telemetry-service"
+      ],
+      "linked_commits": [
+        "b17e06a06942c090819018922c0ecfbac3d5e8d3",
+        "15957161e911d672318d9970aa2701e3ec9d81c8",
+        "ea23143b0a87f416437cb3347b773ee9a4ebeadb"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-001",
+          "timestamp": "2026-03-03T02:00:00Z",
+          "comment": "Initial triage notes for investigate p95 inference spike after quantized engine rollout. Focus on edge-inference-service, telemetry-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-003",
+          "timestamp": "2026-03-04T01:00:00Z",
+          "comment": "GPU free memory drops after each engine reload even when frame rate is flat"
+        },
+        {
+          "author_employee_id": "EMP-001",
+          "timestamp": "2026-03-05T03:00:00Z",
+          "comment": "latency spikes get worse after QA replays a calibration bundle twice"
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "lidar"
+      ],
+      "issue_theme": "lidar_memory_leak"
+    },
+    {
+      "ticket_id": "LID-104",
+      "project": "LiDAR Object Detection System for Autonomous Vehicles",
+      "type": "Improvement",
+      "priority": "Medium",
+      "status": "In Progress",
+      "summary": "Reduce PointPillars postprocess copy overhead",
+      "description": "Reduce PointPillars postprocess copy overhead. Related services: object-detection-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-01-25T03:00:00Z",
+      "updated_at": "2026-01-29T07:00:00Z",
+      "reporter_employee_id": "EMP-001",
+      "assignee_employee_id": "EMP-002",
+      "related_services": [
+        "object-detection-service"
+      ],
+      "linked_commits": [
+        "50f2f576821662f53ae04b44e6d05ee9986dbaa1",
+        "72ddd54d63b84cfb20944506d300211967279976",
+        "b80d5ece853e9c3b62dbf0f508538e78f4f24d68"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-001",
+          "timestamp": "2026-01-25T05:00:00Z",
+          "comment": "Initial triage notes for reduce pointpillars postprocess copy overhead. Focus on object-detection-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-002",
+          "timestamp": "2026-01-26T04:00:00Z",
+          "comment": "Work is active on object-detection-service and current implementation is still moving quickly."
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "lidar"
+      ],
+      "issue_theme": null
+    },
+    {
+      "ticket_id": "LID-105",
+      "project": "LiDAR Object Detection System for Autonomous Vehicles",
+      "type": "Task",
+      "priority": "Medium",
+      "status": "Done",
+      "summary": "Add replay counters to telemetry for edge regression runs",
+      "description": "Add replay counters to telemetry for edge regression runs. Related services: telemetry-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-01-25T09:00:00Z",
+      "updated_at": "2026-01-29T09:00:00Z",
+      "reporter_employee_id": "EMP-001",
+      "assignee_employee_id": "EMP-004",
+      "related_services": [
+        "telemetry-service"
+      ],
+      "linked_commits": [
+        "a54c60b8d64ed0ce3f7cfb56c4f9735082175b67",
+        "f850c1c780a2ea26895cba634c3d3cf529a9609b"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-001",
+          "timestamp": "2026-01-25T11:00:00Z",
+          "comment": "Initial triage notes for add replay counters to telemetry for edge regression runs. Focus on telemetry-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-004",
+          "timestamp": "2026-01-26T10:00:00Z",
+          "comment": "Work is active on telemetry-service and current implementation is still moving quickly."
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "lidar"
+      ],
+      "issue_theme": null
+    },
+    {
+      "ticket_id": "LID-106",
+      "project": "LiDAR Object Detection System for Autonomous Vehicles",
+      "type": "Incident",
+      "priority": "Critical",
+      "status": "Done",
+      "summary": "Latency spike on jetson-xavier-edge-02 after TRT deployment",
+      "description": "Latency spike on jetson-xavier-edge-02 after TRT deployment. Related services: edge-inference-service, object-detection-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-01-27T12:00:00Z",
+      "updated_at": "2026-01-31T13:00:00Z",
+      "reporter_employee_id": "EMP-001",
+      "assignee_employee_id": "EMP-005",
+      "related_services": [
+        "edge-inference-service",
+        "object-detection-service"
+      ],
+      "linked_commits": [
+        "0781dd5ef8df306474ba75718efbd21a57e36722",
+        "39fc8d9f03dfda77917c328d9e8a6d43050cc027"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-001",
+          "timestamp": "2026-01-27T14:00:00Z",
+          "comment": "Initial triage notes for latency spike on jetson-xavier-edge-02 after trt deployment. Focus on edge-inference-service, object-detection-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-005",
+          "timestamp": "2026-01-28T13:00:00Z",
+          "comment": "GPU free memory drops after each engine reload even when frame rate is flat"
+        },
+        {
+          "author_employee_id": "EMP-001",
+          "timestamp": "2026-01-29T15:00:00Z",
+          "comment": "latency spikes get worse after QA replays a calibration bundle twice"
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "lidar"
+      ],
+      "issue_theme": "lidar_memory_leak"
+    },
+    {
+      "ticket_id": "LID-107",
+      "project": "LiDAR Object Detection System for Autonomous Vehicles",
+      "type": "Bug",
+      "priority": "High",
+      "status": "Done",
+      "summary": "Tracking delay when telemetry exporter is enabled",
+      "description": "Tracking delay when telemetry exporter is enabled. Related services: tracking-service, telemetry-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-01-28T15:00:00Z",
+      "updated_at": "2026-02-01T17:00:00Z",
+      "reporter_employee_id": "EMP-001",
+      "assignee_employee_id": "EMP-001",
+      "related_services": [
+        "tracking-service",
+        "telemetry-service"
+      ],
+      "linked_commits": [
+        "bcb52bf1efc5f538aabbab97b80e5678abb49abc",
+        "fd63b939809fdfa8e2f2e8e434e68444ccc932f9",
+        "cc37a75d63c54c1d4cb361aaff80b41a345d6026"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-001",
+          "timestamp": "2026-01-28T17:00:00Z",
+          "comment": "Initial triage notes for tracking delay when telemetry exporter is enabled. Focus on tracking-service, telemetry-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-001",
+          "timestamp": "2026-01-29T16:00:00Z",
+          "comment": "track age jumps after telemetry export starts on the same rig"
+        },
+        {
+          "author_employee_id": "EMP-001",
+          "timestamp": "2026-01-30T18:00:00Z",
+          "comment": "backlog is higher on the Xavier device than the Orin dev box"
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "lidar"
+      ],
+      "issue_theme": "ros2_qos_backlog"
+    },
+    {
+      "ticket_id": "LID-108",
+      "project": "LiDAR Object Detection System for Autonomous Vehicles",
+      "type": "Task",
+      "priority": "Medium",
+      "status": "Done",
+      "summary": "Compare ROS2 QoS profiles for track update stream",
+      "description": "Compare ROS2 QoS profiles for track update stream. Related services: lidar-ingestion-service, tracking-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-01-30T18:00:00Z",
+      "updated_at": "2026-02-03T21:00:00Z",
+      "reporter_employee_id": "EMP-001",
+      "assignee_employee_id": "EMP-001",
+      "related_services": [
+        "lidar-ingestion-service",
+        "tracking-service"
+      ],
+      "linked_commits": [
+        "1a637e79cc98783bd15e9ff13f56cdf5d1393ec3",
+        "30ec5958bd89d1e41f5d324cc2f0cc759345a78b"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-001",
+          "timestamp": "2026-01-30T20:00:00Z",
+          "comment": "Initial triage notes for compare ros2 qos profiles for track update stream. Focus on lidar-ingestion-service, tracking-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-001",
+          "timestamp": "2026-01-31T19:00:00Z",
+          "comment": "track age jumps after telemetry export starts on the same rig"
+        },
+        {
+          "author_employee_id": "EMP-001",
+          "timestamp": "2026-02-01T21:00:00Z",
+          "comment": "backlog is higher on the Xavier device than the Orin dev box"
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "lidar"
+      ],
+      "issue_theme": "ros2_qos_backlog"
+    },
+    {
+      "ticket_id": "LID-109",
+      "project": "LiDAR Object Detection System for Autonomous Vehicles",
+      "type": "Story",
+      "priority": "High",
+      "status": "Done",
+      "summary": "Tune tracking association thresholds for dense urban replay",
+      "description": "Tune tracking association thresholds for dense urban replay. Related services: tracking-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-01-31T21:00:00Z",
+      "updated_at": "2026-02-05T01:00:00Z",
+      "reporter_employee_id": "EMP-001",
+      "assignee_employee_id": "EMP-001",
+      "related_services": [
+        "tracking-service"
+      ],
+      "linked_commits": [
+        "578ddda33e85d0a07fbf37bbceec004e3198a65f",
+        "4db2c2b7d18f8ca34ce1451aa4ffbfe323746d32",
+        "fef4d90dbbbcd828e35663a8aecaf6e3e9fbed6a"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-001",
+          "timestamp": "2026-01-31T23:00:00Z",
+          "comment": "Initial triage notes for tune tracking association thresholds for dense urban replay. Focus on tracking-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-001",
+          "timestamp": "2026-02-01T22:00:00Z",
+          "comment": "Work is active on tracking-service and current implementation is still moving quickly."
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "lidar"
+      ],
+      "issue_theme": null
+    },
+    {
+      "ticket_id": "LID-110",
+      "project": "LiDAR Object Detection System for Autonomous Vehicles",
+      "type": "Improvement",
+      "priority": "Low",
+      "status": "In Progress",
+      "summary": "Refactor track reset API for replay harness",
+      "description": "Refactor track reset API for replay harness. Related services: tracking-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-02-03T00:00:00Z",
+      "updated_at": "2026-02-07T00:00:00Z",
+      "reporter_employee_id": "EMP-001",
+      "assignee_employee_id": "EMP-004",
+      "related_services": [
+        "tracking-service"
+      ],
+      "linked_commits": [
+        "0fca3ebbc34c3d4dfeb21223ba0b9545c95273e0",
+        "6116b77cafb4923a69330811a5ada7a15c1cb007",
+        "0f8c87dea33eb978900ea5e456cb6cada86c5f52"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-001",
+          "timestamp": "2026-02-03T02:00:00Z",
+          "comment": "Initial triage notes for refactor track reset api for replay harness. Focus on tracking-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-004",
+          "timestamp": "2026-02-04T01:00:00Z",
+          "comment": "Work is active on tracking-service and current implementation is still moving quickly."
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "lidar"
+      ],
+      "issue_theme": null
+    },
+    {
+      "ticket_id": "LID-111",
+      "project": "LiDAR Object Detection System for Autonomous Vehicles",
+      "type": "Task",
+      "priority": "Medium",
+      "status": "Done",
+      "summary": "Add TensorRT allocator counters to /v1/profile/memory",
+      "description": "Add TensorRT allocator counters to /v1/profile/memory. Related services: edge-inference-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-02-04T03:00:00Z",
+      "updated_at": "2026-02-08T04:00:00Z",
+      "reporter_employee_id": "EMP-001",
+      "assignee_employee_id": "EMP-003",
+      "related_services": [
+        "edge-inference-service"
+      ],
+      "linked_commits": [
+        "032f70d118b8f1c232890ebcf6de13449904ceea",
+        "ec86ebc600326223a15bd7493ac35e182d484f51"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-001",
+          "timestamp": "2026-02-04T05:00:00Z",
+          "comment": "Initial triage notes for add tensorrt allocator counters to /v1/profile/memory. Focus on edge-inference-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-003",
+          "timestamp": "2026-02-05T04:00:00Z",
+          "comment": "GPU free memory drops after each engine reload even when frame rate is flat"
+        },
+        {
+          "author_employee_id": "EMP-001",
+          "timestamp": "2026-02-06T06:00:00Z",
+          "comment": "latency spikes get worse after QA replays a calibration bundle twice"
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "lidar"
+      ],
+      "issue_theme": "lidar_memory_leak"
+    },
+    {
+      "ticket_id": "LID-112",
+      "project": "LiDAR Object Detection System for Autonomous Vehicles",
+      "type": "Bug",
+      "priority": "High",
+      "status": "In Progress",
+      "summary": "Engine cache invalidation can skip calibration artifact refresh",
+      "description": "Engine cache invalidation can skip calibration artifact refresh. Related services: edge-inference-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-02-05T09:00:00Z",
+      "updated_at": "2026-02-09T11:00:00Z",
+      "reporter_employee_id": "EMP-001",
+      "assignee_employee_id": "EMP-003",
+      "related_services": [
+        "edge-inference-service"
+      ],
+      "linked_commits": [
+        "95d8cb38b8dfae3f60800a404ba464828b2136b2",
+        "1d56ec2e4604509bd9d1bc7144caecbc515c7b2f",
+        "11aa1b8ecea1f5056160a1f53fd5bb6bfb1e378f"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-001",
+          "timestamp": "2026-02-05T11:00:00Z",
+          "comment": "Initial triage notes for engine cache invalidation can skip calibration artifact refresh. Focus on edge-inference-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-003",
+          "timestamp": "2026-02-06T10:00:00Z",
+          "comment": "GPU free memory drops after each engine reload even when frame rate is flat"
+        },
+        {
+          "author_employee_id": "EMP-001",
+          "timestamp": "2026-02-07T12:00:00Z",
+          "comment": "latency spikes get worse after QA replays a calibration bundle twice"
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "lidar"
+      ],
+      "issue_theme": "lidar_memory_leak"
+    },
+    {
+      "ticket_id": "LID-113",
+      "project": "LiDAR Object Detection System for Autonomous Vehicles",
+      "type": "Task",
+      "priority": "Low",
+      "status": "Done",
+      "summary": "Cleanup stale protobuf schemas in telemetry exporter",
+      "description": "Cleanup stale protobuf schemas in telemetry exporter. Related services: telemetry-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-02-06T12:00:00Z",
+      "updated_at": "2026-02-10T15:00:00Z",
+      "reporter_employee_id": "EMP-001",
+      "assignee_employee_id": "EMP-004",
+      "related_services": [
+        "telemetry-service"
+      ],
+      "linked_commits": [
+        "cd5a6e961b069cd4b8018882b1d17c441ae93ee1",
+        "68e2270cc4535c15fc2fe1cb92a85e9021800bac"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-001",
+          "timestamp": "2026-02-06T14:00:00Z",
+          "comment": "Initial triage notes for cleanup stale protobuf schemas in telemetry exporter. Focus on telemetry-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-004",
+          "timestamp": "2026-02-07T13:00:00Z",
+          "comment": "Work is active on telemetry-service and current implementation is still moving quickly."
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "lidar"
+      ],
+      "issue_theme": null
+    },
+    {
+      "ticket_id": "LID-114",
+      "project": "LiDAR Object Detection System for Autonomous Vehicles",
+      "type": "Story",
+      "priority": "High",
+      "status": "Done",
+      "summary": "Prepare edge deployment checklist for Orin and Xavier rigs",
+      "description": "Prepare edge deployment checklist for Orin and Xavier rigs. Related services: edge-inference-service, telemetry-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-02-08T15:00:00Z",
+      "updated_at": "2026-02-12T19:00:00Z",
+      "reporter_employee_id": "EMP-001",
+      "assignee_employee_id": "EMP-005",
+      "related_services": [
+        "edge-inference-service",
+        "telemetry-service"
+      ],
+      "linked_commits": [
+        "1223c27c75ba0519e7fe43773ceb1087a0d6553d",
+        "e48521c07870ac9a75ccf14906042af7c85bd511",
+        "d2212be40ba38f8440259b68a4a003859ba50e25"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-001",
+          "timestamp": "2026-02-08T17:00:00Z",
+          "comment": "Initial triage notes for prepare edge deployment checklist for orin and xavier rigs. Focus on edge-inference-service, telemetry-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-005",
+          "timestamp": "2026-02-09T16:00:00Z",
+          "comment": "Work is active on edge-inference-service and current implementation is still moving quickly."
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "lidar"
+      ],
+      "issue_theme": null
+    },
+    {
+      "ticket_id": "LID-115",
+      "project": "LiDAR Object Detection System for Autonomous Vehicles",
+      "type": "Bug",
+      "priority": "High",
+      "status": "Done",
+      "summary": "Object decode precision regresses after NMS refactor",
+      "description": "Object decode precision regresses after NMS refactor. Related services: object-detection-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-02-09T18:00:00Z",
+      "updated_at": "2026-02-13T18:00:00Z",
+      "reporter_employee_id": "EMP-001",
+      "assignee_employee_id": "EMP-002",
+      "related_services": [
+        "object-detection-service"
+      ],
+      "linked_commits": [
+        "2ef310b97404912ac1890cd75cb5a57ddfee439a",
+        "32843bf1ee4119822dfbcfa25e7577ea0308f9a4",
+        "56317c3550413b0983d3aec37919368263279192"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-001",
+          "timestamp": "2026-02-09T20:00:00Z",
+          "comment": "Initial triage notes for object decode precision regresses after nms refactor. Focus on object-detection-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-002",
+          "timestamp": "2026-02-10T19:00:00Z",
+          "comment": "Work is active on object-detection-service and current implementation is still moving quickly."
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "lidar"
+      ],
+      "issue_theme": null
+    },
+    {
+      "ticket_id": "LID-116",
+      "project": "LiDAR Object Detection System for Autonomous Vehicles",
+      "type": "Incident",
+      "priority": "High",
+      "status": "Done",
+      "summary": "Delayed tracks observed during dense replay session",
+      "description": "Delayed tracks observed during dense replay session. Related services: lidar-ingestion-service, tracking-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-02-11T21:00:00Z",
+      "updated_at": "2026-02-15T22:00:00Z",
+      "reporter_employee_id": "EMP-001",
+      "assignee_employee_id": "EMP-001",
+      "related_services": [
+        "lidar-ingestion-service",
+        "tracking-service"
+      ],
+      "linked_commits": [
+        "957b808a95c67b09a2dbefd18ae1b817bcdebb82",
+        "e5ec06262c64ee72e3d4618c6fb7c5198f3b2f48"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-001",
+          "timestamp": "2026-02-11T23:00:00Z",
+          "comment": "Initial triage notes for delayed tracks observed during dense replay session. Focus on lidar-ingestion-service, tracking-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-001",
+          "timestamp": "2026-02-12T22:00:00Z",
+          "comment": "track age jumps after telemetry export starts on the same rig"
+        },
+        {
+          "author_employee_id": "EMP-001",
+          "timestamp": "2026-02-14T00:00:00Z",
+          "comment": "backlog is higher on the Xavier device than the Orin dev box"
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "lidar"
+      ],
+      "issue_theme": "ros2_qos_backlog"
+    },
+    {
+      "ticket_id": "LID-117",
+      "project": "LiDAR Object Detection System for Autonomous Vehicles",
+      "type": "Task",
+      "priority": "Medium",
+      "status": "Done",
+      "summary": "Measure telemetry burst impact on ROS2 callback timing",
+      "description": "Measure telemetry burst impact on ROS2 callback timing. Related services: telemetry-service, tracking-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-02-13T00:00:00Z",
+      "updated_at": "2026-02-17T02:00:00Z",
+      "reporter_employee_id": "EMP-001",
+      "assignee_employee_id": "EMP-004",
+      "related_services": [
+        "telemetry-service",
+        "tracking-service"
+      ],
+      "linked_commits": [
+        "74b1a9fc95ff5a5f802b8df666e340ac35ad01b6",
+        "baf771a857e892cda79941b12a12623868893b42"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-001",
+          "timestamp": "2026-02-13T02:00:00Z",
+          "comment": "Initial triage notes for measure telemetry burst impact on ros2 callback timing. Focus on telemetry-service, tracking-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-004",
+          "timestamp": "2026-02-14T01:00:00Z",
+          "comment": "track age jumps after telemetry export starts on the same rig"
+        },
+        {
+          "author_employee_id": "EMP-001",
+          "timestamp": "2026-02-15T03:00:00Z",
+          "comment": "backlog is higher on the Xavier device than the Orin dev box"
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "lidar"
+      ],
+      "issue_theme": "ros2_qos_backlog"
+    },
+    {
+      "ticket_id": "LID-118",
+      "project": "LiDAR Object Detection System for Autonomous Vehicles",
+      "type": "Improvement",
+      "priority": "Medium",
+      "status": "In Progress",
+      "summary": "Batch telemetry writes during replay experiments",
+      "description": "Batch telemetry writes during replay experiments. Related services: telemetry-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-02-15T03:00:00Z",
+      "updated_at": "2026-02-19T06:00:00Z",
+      "reporter_employee_id": "EMP-001",
+      "assignee_employee_id": "EMP-004",
+      "related_services": [
+        "telemetry-service"
+      ],
+      "linked_commits": [
+        "7bee16446f01a159d949e6567781867b7bdf1dd7",
+        "1def3e4aff55270a3b762f835d6240fa68c09a2e",
+        "ef2bb64152886da6dc6743d03ea45934c9ce01be"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-001",
+          "timestamp": "2026-02-15T05:00:00Z",
+          "comment": "Initial triage notes for batch telemetry writes during replay experiments. Focus on telemetry-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-004",
+          "timestamp": "2026-02-16T04:00:00Z",
+          "comment": "track age jumps after telemetry export starts on the same rig"
+        },
+        {
+          "author_employee_id": "EMP-001",
+          "timestamp": "2026-02-17T06:00:00Z",
+          "comment": "backlog is higher on the Xavier device than the Orin dev box"
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "lidar"
+      ],
+      "issue_theme": "ros2_qos_backlog"
+    },
+    {
+      "ticket_id": "LID-119",
+      "project": "LiDAR Object Detection System for Autonomous Vehicles",
+      "type": "Story",
+      "priority": "Medium",
+      "status": "Done",
+      "summary": "Harden lidar replay CLI for edge test lab",
+      "description": "Harden lidar replay CLI for edge test lab. Related services: telemetry-service, lidar-ingestion-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-02-15T09:00:00Z",
+      "updated_at": "2026-02-19T13:00:00Z",
+      "reporter_employee_id": "EMP-001",
+      "assignee_employee_id": "EMP-005",
+      "related_services": [
+        "telemetry-service",
+        "lidar-ingestion-service"
+      ],
+      "linked_commits": [
+        "28c8ecf5b743232be83a35e88c9da629f5a01c14",
+        "88561296c2ec62d0d44e69031e3c5f780b93831b",
+        "e17fa85102393660bc1a3f63babda0324ad9b085"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-001",
+          "timestamp": "2026-02-15T11:00:00Z",
+          "comment": "Initial triage notes for harden lidar replay cli for edge test lab. Focus on telemetry-service, lidar-ingestion-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-005",
+          "timestamp": "2026-02-16T10:00:00Z",
+          "comment": "Work is active on telemetry-service and current implementation is still moving quickly."
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "lidar"
+      ],
+      "issue_theme": null
+    },
+    {
+      "ticket_id": "LID-120",
+      "project": "LiDAR Object Detection System for Autonomous Vehicles",
+      "type": "Bug",
+      "priority": "Medium",
+      "status": "Done",
+      "summary": "Tracking reset leaves stale object IDs on short clips",
+      "description": "Tracking reset leaves stale object IDs on short clips. Related services: tracking-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-02-17T12:00:00Z",
+      "updated_at": "2026-02-21T12:00:00Z",
+      "reporter_employee_id": "EMP-001",
+      "assignee_employee_id": "EMP-001",
+      "related_services": [
+        "tracking-service"
+      ],
+      "linked_commits": [
+        "adeb215d1ddbc23fdedbaa6acfbf58bb5eb2cb99",
+        "138f48e02e65ecc6fd483e5e719874e08e950cd5",
+        "43a4fe680f5e8c99dc49b52d480f7c963593dbed"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-001",
+          "timestamp": "2026-02-17T14:00:00Z",
+          "comment": "Initial triage notes for tracking reset leaves stale object ids on short clips. Focus on tracking-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-001",
+          "timestamp": "2026-02-18T13:00:00Z",
+          "comment": "Work is active on tracking-service and current implementation is still moving quickly."
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "lidar"
+      ],
+      "issue_theme": null
+    },
+    {
+      "ticket_id": "LID-121",
+      "project": "LiDAR Object Detection System for Autonomous Vehicles",
+      "type": "Task",
+      "priority": "Medium",
+      "status": "Done",
+      "summary": "Validate TensorRT engine reload behavior under watchdog restarts",
+      "description": "Validate TensorRT engine reload behavior under watchdog restarts. Related services: edge-inference-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-02-18T15:00:00Z",
+      "updated_at": "2026-02-22T16:00:00Z",
+      "reporter_employee_id": "EMP-001",
+      "assignee_employee_id": "EMP-005",
+      "related_services": [
+        "edge-inference-service"
+      ],
+      "linked_commits": [
+        "bbb7bda24f06630db15ea8f5b578733b2458947a",
+        "3075ae916645bcca20f78fefaeaf9d624927bac2"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-001",
+          "timestamp": "2026-02-18T17:00:00Z",
+          "comment": "Initial triage notes for validate tensorrt engine reload behavior under watchdog restarts. Focus on edge-inference-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-005",
+          "timestamp": "2026-02-19T16:00:00Z",
+          "comment": "GPU free memory drops after each engine reload even when frame rate is flat"
+        },
+        {
+          "author_employee_id": "EMP-001",
+          "timestamp": "2026-02-20T18:00:00Z",
+          "comment": "latency spikes get worse after QA replays a calibration bundle twice"
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "lidar"
+      ],
+      "issue_theme": "lidar_memory_leak"
+    },
+    {
+      "ticket_id": "LID-122",
+      "project": "LiDAR Object Detection System for Autonomous Vehicles",
+      "type": "Improvement",
+      "priority": "Low",
+      "status": "In Progress",
+      "summary": "Normalize deployment metadata emitted by telemetry service",
+      "description": "Normalize deployment metadata emitted by telemetry service. Related services: telemetry-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-02-20T18:00:00Z",
+      "updated_at": "2026-02-24T20:00:00Z",
+      "reporter_employee_id": "EMP-001",
+      "assignee_employee_id": "EMP-004",
+      "related_services": [
+        "telemetry-service"
+      ],
+      "linked_commits": [
+        "23b6dedd39845d4bebc3d8a27fe9bd9c2d27360d",
+        "35b6bf7c2f37def11a19070c544f36406a31594d",
+        "5db77d80bf3dea1713082317ad40ffefb3629841"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-001",
+          "timestamp": "2026-02-20T20:00:00Z",
+          "comment": "Initial triage notes for normalize deployment metadata emitted by telemetry service. Focus on telemetry-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-004",
+          "timestamp": "2026-02-21T19:00:00Z",
+          "comment": "Work is active on telemetry-service and current implementation is still moving quickly."
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "lidar"
+      ],
+      "issue_theme": null
+    },
+    {
+      "ticket_id": "LID-123",
+      "project": "LiDAR Object Detection System for Autonomous Vehicles",
+      "type": "Bug",
+      "priority": "High",
+      "status": "Done",
+      "summary": "Tracking subscriber backlog grows on Xavier dense scene runs",
+      "description": "Tracking subscriber backlog grows on Xavier dense scene runs. Related services: tracking-service, lidar-ingestion-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-02-21T21:00:00Z",
+      "updated_at": "2026-02-26T00:00:00Z",
+      "reporter_employee_id": "EMP-001",
+      "assignee_employee_id": "EMP-001",
+      "related_services": [
+        "tracking-service",
+        "lidar-ingestion-service"
+      ],
+      "linked_commits": [
+        "9463f461233f222e653e8d0aeb96560885d94583",
+        "13370d831067cc8672ebe8e2c82d550ccaa508e0",
+        "7601442593b0a4c6371f4c9ab93532b1aff4ad46"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-001",
+          "timestamp": "2026-02-21T23:00:00Z",
+          "comment": "Initial triage notes for tracking subscriber backlog grows on xavier dense scene runs. Focus on tracking-service, lidar-ingestion-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-001",
+          "timestamp": "2026-02-22T22:00:00Z",
+          "comment": "track age jumps after telemetry export starts on the same rig"
+        },
+        {
+          "author_employee_id": "EMP-001",
+          "timestamp": "2026-02-24T00:00:00Z",
+          "comment": "backlog is higher on the Xavier device than the Orin dev box"
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "lidar"
+      ],
+      "issue_theme": "ros2_qos_backlog"
+    },
+    {
+      "ticket_id": "LID-124",
+      "project": "LiDAR Object Detection System for Autonomous Vehicles",
+      "type": "Task",
+      "priority": "Medium",
+      "status": "In Progress",
+      "summary": "Compare FP16 and INT8 latency on Orin build 0.9.x",
+      "description": "Compare FP16 and INT8 latency on Orin build 0.9.x. Related services: edge-inference-service, object-detection-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-02-24T00:00:00Z",
+      "updated_at": "2026-02-28T04:00:00Z",
+      "reporter_employee_id": "EMP-001",
+      "assignee_employee_id": "EMP-002",
+      "related_services": [
+        "edge-inference-service",
+        "object-detection-service"
+      ],
+      "linked_commits": [
+        "aa4cb30c4bbdf98aeb22eee18743cb1e0bad5919",
+        "37b21e2132cbbdabd30a28b5e88e65f19f938464"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-001",
+          "timestamp": "2026-02-24T02:00:00Z",
+          "comment": "Initial triage notes for compare fp16 and int8 latency on orin build 0.9.x. Focus on edge-inference-service, object-detection-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-002",
+          "timestamp": "2026-02-25T01:00:00Z",
+          "comment": "Work is active on edge-inference-service and current implementation is still moving quickly."
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "lidar"
+      ],
+      "issue_theme": null
+    },
+    {
+      "ticket_id": "LID-125",
+      "project": "LiDAR Object Detection System for Autonomous Vehicles",
+      "type": "Story",
+      "priority": "Medium",
+      "status": "Done",
+      "summary": "Improve Jetson deployment rollback notes for perception team",
+      "description": "Improve Jetson deployment rollback notes for perception team. Related services: telemetry-service, edge-inference-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-02-25T03:00:00Z",
+      "updated_at": "2026-03-01T03:00:00Z",
+      "reporter_employee_id": "EMP-001",
+      "assignee_employee_id": "EMP-005",
+      "related_services": [
+        "telemetry-service",
+        "edge-inference-service"
+      ],
+      "linked_commits": [
+        "64c7bcacb3116ff9bd614863d7aed32121e028a8",
+        "71b6f24429bea5c1649ae51dbd2534e4a4e2615f",
+        "3b625f5f45a84e75948128ae9b4f233982a01aa5"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-001",
+          "timestamp": "2026-02-25T05:00:00Z",
+          "comment": "Initial triage notes for improve jetson deployment rollback notes for perception team. Focus on telemetry-service, edge-inference-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-005",
+          "timestamp": "2026-02-26T04:00:00Z",
+          "comment": "Work is active on telemetry-service and current implementation is still moving quickly."
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "lidar"
+      ],
+      "issue_theme": null
+    },
+    {
+      "ticket_id": "LID-126",
+      "project": "LiDAR Object Detection System for Autonomous Vehicles",
+      "type": "Bug",
+      "priority": "Medium",
+      "status": "Done",
+      "summary": "Telemetry event payload drops queue depth field under load",
+      "description": "Telemetry event payload drops queue depth field under load. Related services: telemetry-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-02-26T09:00:00Z",
+      "updated_at": "2026-03-02T10:00:00Z",
+      "reporter_employee_id": "EMP-001",
+      "assignee_employee_id": "EMP-004",
+      "related_services": [
+        "telemetry-service"
+      ],
+      "linked_commits": [
+        "eec941cf9bd51701b0b1d452f4a6cf239235002e",
+        "09c59aff4b6e9eb21c52f6d7f7365fd54cf9e511",
+        "df6dbf168d92a15931b7ff2ef72c88f6c8c881a2"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-001",
+          "timestamp": "2026-02-26T11:00:00Z",
+          "comment": "Initial triage notes for telemetry event payload drops queue depth field under load. Focus on telemetry-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-004",
+          "timestamp": "2026-02-27T10:00:00Z",
+          "comment": "Work is active on telemetry-service and current implementation is still moving quickly."
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "lidar"
+      ],
+      "issue_theme": null
+    },
+    {
+      "ticket_id": "LID-127",
+      "project": "LiDAR Object Detection System for Autonomous Vehicles",
+      "type": "Incident",
+      "priority": "High",
+      "status": "Done",
+      "summary": "Edge rollback required after inference regression in demo branch",
+      "description": "Edge rollback required after inference regression in demo branch. Related services: edge-inference-service, object-detection-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-02-27T12:00:00Z",
+      "updated_at": "2026-03-03T14:00:00Z",
+      "reporter_employee_id": "EMP-001",
+      "assignee_employee_id": "EMP-005",
+      "related_services": [
+        "edge-inference-service",
+        "object-detection-service"
+      ],
+      "linked_commits": [
+        "b4f235ff6d4e17c15dd54eb1323a6da43c8b9591",
+        "b2f0a46d27d8d43f6241c3f2a1afc1234ea2533d"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-001",
+          "timestamp": "2026-02-27T14:00:00Z",
+          "comment": "Initial triage notes for edge rollback required after inference regression in demo branch. Focus on edge-inference-service, object-detection-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-005",
+          "timestamp": "2026-02-28T13:00:00Z",
+          "comment": "GPU free memory drops after each engine reload even when frame rate is flat"
+        },
+        {
+          "author_employee_id": "EMP-001",
+          "timestamp": "2026-03-01T15:00:00Z",
+          "comment": "latency spikes get worse after QA replays a calibration bundle twice"
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "lidar"
+      ],
+      "issue_theme": "lidar_memory_leak"
+    },
+    {
+      "ticket_id": "LID-128",
+      "project": "LiDAR Object Detection System for Autonomous Vehicles",
+      "type": "Task",
+      "priority": "Low",
+      "status": "In Progress",
+      "summary": "Document ROS2 topic ownership for detection and tracking",
+      "description": "Document ROS2 topic ownership for detection and tracking. Related services: lidar-ingestion-service, tracking-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-03-01T15:00:00Z",
+      "updated_at": "2026-03-05T18:00:00Z",
+      "reporter_employee_id": "EMP-001",
+      "assignee_employee_id": "EMP-001",
+      "related_services": [
+        "lidar-ingestion-service",
+        "tracking-service"
+      ],
+      "linked_commits": [
+        "3fe11e37b88700ab1a5882264646031bebaeb3a0",
+        "fc0c862e52dfe4a8e7ecbfef67a22d7fc56a6e86"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-001",
+          "timestamp": "2026-03-01T17:00:00Z",
+          "comment": "Initial triage notes for document ros2 topic ownership for detection and tracking. Focus on lidar-ingestion-service, tracking-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-001",
+          "timestamp": "2026-03-02T16:00:00Z",
+          "comment": "Work is active on lidar-ingestion-service and current implementation is still moving quickly."
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "lidar"
+      ],
+      "issue_theme": null
+    },
+    {
+      "ticket_id": "LID-129",
+      "project": "LiDAR Object Detection System for Autonomous Vehicles",
+      "type": "Improvement",
+      "priority": "Medium",
+      "status": "Done",
+      "summary": "Trim copy count in lidar frame import path",
+      "description": "Trim copy count in lidar frame import path. Related services: lidar-ingestion-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-03-02T18:00:00Z",
+      "updated_at": "2026-03-06T22:00:00Z",
+      "reporter_employee_id": "EMP-001",
+      "assignee_employee_id": "EMP-001",
+      "related_services": [
+        "lidar-ingestion-service"
+      ],
+      "linked_commits": [
+        "a0b21fd650392a461094b378b50c7e9156f6546c",
+        "ca5142f3ef5ec5cdbfa35e16ae73e5eaf35a8439",
+        "d16195aa31f45f8b61da8784da46a3e56e619bba"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-001",
+          "timestamp": "2026-03-02T20:00:00Z",
+          "comment": "Initial triage notes for trim copy count in lidar frame import path. Focus on lidar-ingestion-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-001",
+          "timestamp": "2026-03-03T19:00:00Z",
+          "comment": "Work is active on lidar-ingestion-service and current implementation is still moving quickly."
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "lidar"
+      ],
+      "issue_theme": null
+    },
+    {
+      "ticket_id": "LID-130",
+      "project": "LiDAR Object Detection System for Autonomous Vehicles",
+      "type": "Bug",
+      "priority": "Medium",
+      "status": "In Progress",
+      "summary": "Decoder metrics endpoint reports stale p95 after service reload",
+      "description": "Decoder metrics endpoint reports stale p95 after service reload. Related services: object-detection-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-01-24T21:00:00Z",
+      "updated_at": "2026-01-28T21:00:00Z",
+      "reporter_employee_id": "EMP-001",
+      "assignee_employee_id": "EMP-002",
+      "related_services": [
+        "object-detection-service"
+      ],
+      "linked_commits": [
+        "b41f81e462b9b60b1364b06902d8d73e71176687",
+        "17abe7bdf6cfc2baa8e941823b1b0678ce09ab1b",
+        "34ec818f2d976c953d8e2a12b373198a8c478811"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-001",
+          "timestamp": "2026-01-24T23:00:00Z",
+          "comment": "Initial triage notes for decoder metrics endpoint reports stale p95 after service reload. Focus on object-detection-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-002",
+          "timestamp": "2026-01-25T22:00:00Z",
+          "comment": "Work is active on object-detection-service and current implementation is still moving quickly."
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "lidar"
+      ],
+      "issue_theme": null
+    },
+    {
+      "ticket_id": "LID-131",
+      "project": "LiDAR Object Detection System for Autonomous Vehicles",
+      "type": "Task",
+      "priority": "Medium",
+      "status": "Done",
+      "summary": "Add deployment canary notes for Xavier edge boxes",
+      "description": "Add deployment canary notes for Xavier edge boxes. Related services: edge-inference-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-01-26T00:00:00Z",
+      "updated_at": "2026-01-30T01:00:00Z",
+      "reporter_employee_id": "EMP-001",
+      "assignee_employee_id": "EMP-005",
+      "related_services": [
+        "edge-inference-service"
+      ],
+      "linked_commits": [
+        "f155fdaeed4b7730229296a1b6d448d4880776ab",
+        "f824c6caba347a9b8d0197263a40afc9fcd8904e"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-001",
+          "timestamp": "2026-01-26T02:00:00Z",
+          "comment": "Initial triage notes for add deployment canary notes for xavier edge boxes. Focus on edge-inference-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-005",
+          "timestamp": "2026-01-27T01:00:00Z",
+          "comment": "Work is active on edge-inference-service and current implementation is still moving quickly."
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "lidar"
+      ],
+      "issue_theme": null
+    },
+    {
+      "ticket_id": "LID-132",
+      "project": "LiDAR Object Detection System for Autonomous Vehicles",
+      "type": "Improvement",
+      "priority": "Low",
+      "status": "Done",
+      "summary": "Split replay experiment tags from deployment tags in telemetry",
+      "description": "Split replay experiment tags from deployment tags in telemetry. Related services: telemetry-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-01-28T03:00:00Z",
+      "updated_at": "2026-02-01T05:00:00Z",
+      "reporter_employee_id": "EMP-001",
+      "assignee_employee_id": "EMP-004",
+      "related_services": [
+        "telemetry-service"
+      ],
+      "linked_commits": [
+        "f926fab75a1d7994c7d981a30288b9906be3b466",
+        "61e8812e405f2e8b2358b8a16917c3125d8ea3c9",
+        "69fba656f929dfe2b2e76e42cd210f228dc8f10c"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-001",
+          "timestamp": "2026-01-28T05:00:00Z",
+          "comment": "Initial triage notes for split replay experiment tags from deployment tags in telemetry. Focus on telemetry-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-004",
+          "timestamp": "2026-01-29T04:00:00Z",
+          "comment": "Work is active on telemetry-service and current implementation is still moving quickly."
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "lidar"
+      ],
+      "issue_theme": null
+    },
+    {
+      "ticket_id": "ADAS-201",
+      "project": "Lane Keeping Assist System using 2D Camera in ADAS ECU",
+      "type": "Story",
+      "priority": "High",
+      "status": "Done",
+      "summary": "Compare gradient and spline lane detectors on wet-road data",
+      "description": "Compare gradient and spline lane detectors on wet-road data. Related services: lane-detection-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-03-21T00:00:00Z",
+      "updated_at": "2026-03-25T03:00:00Z",
+      "reporter_employee_id": "EMP-006",
+      "assignee_employee_id": "EMP-007",
+      "related_services": [
+        "lane-detection-service"
+      ],
+      "linked_commits": [
+        "1ddf763f9eae54916bd2e784b46f732d32d6fb1e",
+        "933a42210adce7537566e95225e50c64d2c03045",
+        "caf5b69fe7b31d6de07e55e327809c4ba18bdf51"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-006",
+          "timestamp": "2026-03-21T02:00:00Z",
+          "comment": "Initial triage notes for compare gradient and spline lane detectors on wet-road data. Focus on lane-detection-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-007",
+          "timestamp": "2026-03-22T01:00:00Z",
+          "comment": "Work is active on lane-detection-service and current implementation is still moving quickly."
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "adas"
+      ],
+      "issue_theme": null
+    },
+    {
+      "ticket_id": "ADAS-202",
+      "project": "Lane Keeping Assist System using 2D Camera in ADAS ECU",
+      "type": "Task",
+      "priority": "Medium",
+      "status": "In Progress",
+      "summary": "Refine camera calibration upload workflow for ECU rig",
+      "description": "Refine camera calibration upload workflow for ECU rig. Related services: calibration-service, camera-ingestion-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-03-23T03:00:00Z",
+      "updated_at": "2026-03-27T07:00:00Z",
+      "reporter_employee_id": "EMP-006",
+      "assignee_employee_id": "EMP-009",
+      "related_services": [
+        "calibration-service",
+        "camera-ingestion-service"
+      ],
+      "linked_commits": [
+        "609c6a6086ef565dd4ce8760dda34500d07fc92e",
+        "fad4a8bb82b64208bf6bc5eff24993c141aff9a9"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-006",
+          "timestamp": "2026-03-23T05:00:00Z",
+          "comment": "Initial triage notes for refine camera calibration upload workflow for ecu rig. Focus on calibration-service, camera-ingestion-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-009",
+          "timestamp": "2026-03-24T04:00:00Z",
+          "comment": "lane center error is small after cold boot but grows after a warm restart"
+        },
+        {
+          "author_employee_id": "EMP-006",
+          "timestamp": "2026-03-25T06:00:00Z",
+          "comment": "active calibration checksum looks correct while reported extrinsic age is stale"
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "adas"
+      ],
+      "issue_theme": "calibration_drift"
+    },
+    {
+      "ticket_id": "ADAS-203",
+      "project": "Lane Keeping Assist System using 2D Camera in ADAS ECU",
+      "type": "Bug",
+      "priority": "Critical",
+      "status": "Done",
+      "summary": "Lane center drifts after warm ECU restart",
+      "description": "Lane center drifts after warm ECU restart. Related services: calibration-service, lane-detection-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-03-23T09:00:00Z",
+      "updated_at": "2026-03-27T09:00:00Z",
+      "reporter_employee_id": "EMP-006",
+      "assignee_employee_id": "EMP-009",
+      "related_services": [
+        "calibration-service",
+        "lane-detection-service"
+      ],
+      "linked_commits": [
+        "aecea41221211513017c317f31157d03131a5a02",
+        "e4cb722f1b993ea6b58029b234c9fe5b3afd1d2e",
+        "b181b67a93e940b3a958f50a3333248bf31618bf"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-006",
+          "timestamp": "2026-03-23T11:00:00Z",
+          "comment": "Initial triage notes for lane center drifts after warm ecu restart. Focus on calibration-service, lane-detection-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-009",
+          "timestamp": "2026-03-24T10:00:00Z",
+          "comment": "lane center error is small after cold boot but grows after a warm restart"
+        },
+        {
+          "author_employee_id": "EMP-006",
+          "timestamp": "2026-03-25T12:00:00Z",
+          "comment": "active calibration checksum looks correct while reported extrinsic age is stale"
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "adas"
+      ],
+      "issue_theme": "calibration_drift"
+    },
+    {
+      "ticket_id": "ADAS-204",
+      "project": "Lane Keeping Assist System using 2D Camera in ADAS ECU",
+      "type": "Improvement",
+      "priority": "Medium",
+      "status": "In Progress",
+      "summary": "Reduce lane mask flicker during overpass shadows",
+      "description": "Reduce lane mask flicker during overpass shadows. Related services: lane-detection-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-03-25T12:00:00Z",
+      "updated_at": "2026-03-29T13:00:00Z",
+      "reporter_employee_id": "EMP-006",
+      "assignee_employee_id": "EMP-007",
+      "related_services": [
+        "lane-detection-service"
+      ],
+      "linked_commits": [
+        "f874892d18d51258a71c359a8d89a837ab4cd967",
+        "acb5e0f527fb4486a7a881d05a4aab90b91c5021",
+        "bf1fac0af9fb58a3a555022915220def7ca9eeb5"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-006",
+          "timestamp": "2026-03-25T14:00:00Z",
+          "comment": "Initial triage notes for reduce lane mask flicker during overpass shadows. Focus on lane-detection-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-007",
+          "timestamp": "2026-03-26T13:00:00Z",
+          "comment": "Work is active on lane-detection-service and current implementation is still moving quickly."
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "adas"
+      ],
+      "issue_theme": null
+    },
+    {
+      "ticket_id": "ADAS-205",
+      "project": "Lane Keeping Assist System using 2D Camera in ADAS ECU",
+      "type": "Task",
+      "priority": "Medium",
+      "status": "Done",
+      "summary": "Prepare ECU packaging for steering prototype drops",
+      "description": "Prepare ECU packaging for steering prototype drops. Related services: steering-control-service, diagnostics-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-03-26T15:00:00Z",
+      "updated_at": "2026-03-30T17:00:00Z",
+      "reporter_employee_id": "EMP-006",
+      "assignee_employee_id": "EMP-010",
+      "related_services": [
+        "steering-control-service",
+        "diagnostics-service"
+      ],
+      "linked_commits": [
+        "6637d5ce8f4a7636787dffba7328cf4d8c0e5c4f",
+        "d3df2980d4c632e6e63830189a3f7fe695bf4f2e"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-006",
+          "timestamp": "2026-03-26T17:00:00Z",
+          "comment": "Initial triage notes for prepare ecu packaging for steering prototype drops. Focus on steering-control-service, diagnostics-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-010",
+          "timestamp": "2026-03-27T16:00:00Z",
+          "comment": "Work is active on steering-control-service and current implementation is still moving quickly."
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "adas"
+      ],
+      "issue_theme": null
+    },
+    {
+      "ticket_id": "ADAS-206",
+      "project": "Lane Keeping Assist System using 2D Camera in ADAS ECU",
+      "type": "Incident",
+      "priority": "Critical",
+      "status": "Done",
+      "summary": "Prototype lane keeping offset on test rig after restart",
+      "description": "Prototype lane keeping offset on test rig after restart. Related services: calibration-service, lane-detection-service, camera-ingestion-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-03-28T18:00:00Z",
+      "updated_at": "2026-04-01T21:00:00Z",
+      "reporter_employee_id": "EMP-006",
+      "assignee_employee_id": "EMP-006",
+      "related_services": [
+        "calibration-service",
+        "lane-detection-service",
+        "camera-ingestion-service"
+      ],
+      "linked_commits": [
+        "30dfb6f8cf6443a31c724a2aec84c630dc6c83ba",
+        "589d72c397a2a5f4c9c7a062d317692fef046855"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-006",
+          "timestamp": "2026-03-28T20:00:00Z",
+          "comment": "Initial triage notes for prototype lane keeping offset on test rig after restart. Focus on calibration-service, lane-detection-service, camera-ingestion-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-006",
+          "timestamp": "2026-03-29T19:00:00Z",
+          "comment": "lane center error is small after cold boot but grows after a warm restart"
+        },
+        {
+          "author_employee_id": "EMP-006",
+          "timestamp": "2026-03-30T21:00:00Z",
+          "comment": "active calibration checksum looks correct while reported extrinsic age is stale"
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "adas"
+      ],
+      "issue_theme": "calibration_drift"
+    },
+    {
+      "ticket_id": "ADAS-207",
+      "project": "Lane Keeping Assist System using 2D Camera in ADAS ECU",
+      "type": "Bug",
+      "priority": "High",
+      "status": "Done",
+      "summary": "High-speed steering oscillation with timing-profile-b enabled",
+      "description": "High-speed steering oscillation with timing-profile-b enabled. Related services: steering-control-service, diagnostics-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-03-29T21:00:00Z",
+      "updated_at": "2026-04-03T01:00:00Z",
+      "reporter_employee_id": "EMP-006",
+      "assignee_employee_id": "EMP-008",
+      "related_services": [
+        "steering-control-service",
+        "diagnostics-service"
+      ],
+      "linked_commits": [
+        "c775fe3139bdc69e5b685b6fe4a39050a40d4a4b",
+        "0741d4661c1f71bc9ff4854f9d60388152f98686",
+        "bdb65544c4793c8669191b0d662029d43e7aee54"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-006",
+          "timestamp": "2026-03-29T23:00:00Z",
+          "comment": "Initial triage notes for high-speed steering oscillation with timing-profile-b enabled. Focus on steering-control-service, diagnostics-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-008",
+          "timestamp": "2026-03-30T22:00:00Z",
+          "comment": "steering oscillation starts only when the faster timing profile is enabled"
+        },
+        {
+          "author_employee_id": "EMP-006",
+          "timestamp": "2026-04-01T00:00:00Z",
+          "comment": "diagnostics reports controller delta spikes without lane confidence collapsing"
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "adas"
+      ],
+      "issue_theme": "frame_sync_jitter"
+    },
+    {
+      "ticket_id": "ADAS-208",
+      "project": "Lane Keeping Assist System using 2D Camera in ADAS ECU",
+      "type": "Task",
+      "priority": "Medium",
+      "status": "In Progress",
+      "summary": "Trace frame timestamp source across camera and controller path",
+      "description": "Trace frame timestamp source across camera and controller path. Related services: camera-ingestion-service, steering-control-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-02-21T00:00:00Z",
+      "updated_at": "2026-02-25T00:00:00Z",
+      "reporter_employee_id": "EMP-006",
+      "assignee_employee_id": "EMP-008",
+      "related_services": [
+        "camera-ingestion-service",
+        "steering-control-service"
+      ],
+      "linked_commits": [
+        "b4dd56958e9f283963311976df1b5e03431399b7",
+        "cfe46254cdb483e4aee41bdf2f06bf06153d9a77"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-006",
+          "timestamp": "2026-02-21T02:00:00Z",
+          "comment": "Initial triage notes for trace frame timestamp source across camera and controller path. Focus on camera-ingestion-service, steering-control-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-008",
+          "timestamp": "2026-02-22T01:00:00Z",
+          "comment": "steering oscillation starts only when the faster timing profile is enabled"
+        },
+        {
+          "author_employee_id": "EMP-006",
+          "timestamp": "2026-02-23T03:00:00Z",
+          "comment": "diagnostics reports controller delta spikes without lane confidence collapsing"
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "adas"
+      ],
+      "issue_theme": "frame_sync_jitter"
+    },
+    {
+      "ticket_id": "ADAS-209",
+      "project": "Lane Keeping Assist System using 2D Camera in ADAS ECU",
+      "type": "Story",
+      "priority": "Medium",
+      "status": "Done",
+      "summary": "Prototype adaptive smoothing gains for steering controller",
+      "description": "Prototype adaptive smoothing gains for steering controller. Related services: steering-control-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-02-22T03:00:00Z",
+      "updated_at": "2026-02-26T04:00:00Z",
+      "reporter_employee_id": "EMP-006",
+      "assignee_employee_id": "EMP-008",
+      "related_services": [
+        "steering-control-service"
+      ],
+      "linked_commits": [
+        "89a38a2c8ae560a932b189ecf2c8417a03740972",
+        "0283047cdc542907c51ef79c9f217219eba02312",
+        "eda1f6063249037dfc0d631b5c018a557a6013e3"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-006",
+          "timestamp": "2026-02-22T05:00:00Z",
+          "comment": "Initial triage notes for prototype adaptive smoothing gains for steering controller. Focus on steering-control-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-008",
+          "timestamp": "2026-02-23T04:00:00Z",
+          "comment": "steering oscillation starts only when the faster timing profile is enabled"
+        },
+        {
+          "author_employee_id": "EMP-006",
+          "timestamp": "2026-02-24T06:00:00Z",
+          "comment": "diagnostics reports controller delta spikes without lane confidence collapsing"
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "adas"
+      ],
+      "issue_theme": "frame_sync_jitter"
+    },
+    {
+      "ticket_id": "ADAS-210",
+      "project": "Lane Keeping Assist System using 2D Camera in ADAS ECU",
+      "type": "Improvement",
+      "priority": "Low",
+      "status": "In Progress",
+      "summary": "Expose lane experiment toggle metadata in HTTP API",
+      "description": "Expose lane experiment toggle metadata in HTTP API. Related services: lane-detection-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-02-23T09:00:00Z",
+      "updated_at": "2026-02-27T11:00:00Z",
+      "reporter_employee_id": "EMP-006",
+      "assignee_employee_id": "EMP-007",
+      "related_services": [
+        "lane-detection-service"
+      ],
+      "linked_commits": [
+        "4da5d20b8c494fc53a2c15fc2668ca4c5188a913",
+        "79e5b294354436c8ad8b79765e8232ec8a222fba",
+        "c2f2026b621de6d6bf05374f6ae55260cb7a137a"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-006",
+          "timestamp": "2026-02-23T11:00:00Z",
+          "comment": "Initial triage notes for expose lane experiment toggle metadata in http api. Focus on lane-detection-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-007",
+          "timestamp": "2026-02-24T10:00:00Z",
+          "comment": "Work is active on lane-detection-service and current implementation is still moving quickly."
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "adas"
+      ],
+      "issue_theme": null
+    },
+    {
+      "ticket_id": "ADAS-211",
+      "project": "Lane Keeping Assist System using 2D Camera in ADAS ECU",
+      "type": "Task",
+      "priority": "Medium",
+      "status": "Done",
+      "summary": "Add calibration checksum to diagnostics session summary",
+      "description": "Add calibration checksum to diagnostics session summary. Related services: calibration-service, diagnostics-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-02-24T12:00:00Z",
+      "updated_at": "2026-02-28T15:00:00Z",
+      "reporter_employee_id": "EMP-006",
+      "assignee_employee_id": "EMP-009",
+      "related_services": [
+        "calibration-service",
+        "diagnostics-service"
+      ],
+      "linked_commits": [
+        "f620c9d2e8de30cd3ea5f01a832e0bae931fba48",
+        "66b4be252a3e4581bf9b964ebd3f40e974e71056"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-006",
+          "timestamp": "2026-02-24T14:00:00Z",
+          "comment": "Initial triage notes for add calibration checksum to diagnostics session summary. Focus on calibration-service, diagnostics-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-009",
+          "timestamp": "2026-02-25T13:00:00Z",
+          "comment": "lane center error is small after cold boot but grows after a warm restart"
+        },
+        {
+          "author_employee_id": "EMP-006",
+          "timestamp": "2026-02-26T15:00:00Z",
+          "comment": "active calibration checksum looks correct while reported extrinsic age is stale"
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "adas"
+      ],
+      "issue_theme": "calibration_drift"
+    },
+    {
+      "ticket_id": "ADAS-212",
+      "project": "Lane Keeping Assist System using 2D Camera in ADAS ECU",
+      "type": "Bug",
+      "priority": "High",
+      "status": "Done",
+      "summary": "Active calibration endpoint serves stale extrinsic age on warm boot",
+      "description": "Active calibration endpoint serves stale extrinsic age on warm boot. Related services: calibration-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-02-26T15:00:00Z",
+      "updated_at": "2026-03-02T19:00:00Z",
+      "reporter_employee_id": "EMP-006",
+      "assignee_employee_id": "EMP-009",
+      "related_services": [
+        "calibration-service"
+      ],
+      "linked_commits": [
+        "9281d2a5b324160c69e8e4560e0f7f2fcabcf4a6",
+        "0162305312d1322380485baa941b04037e7abc27",
+        "8eed07ddba8d598dfe0bf4c5c43f8886e669e2cd"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-006",
+          "timestamp": "2026-02-26T17:00:00Z",
+          "comment": "Initial triage notes for active calibration endpoint serves stale extrinsic age on warm boot. Focus on calibration-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-009",
+          "timestamp": "2026-02-27T16:00:00Z",
+          "comment": "lane center error is small after cold boot but grows after a warm restart"
+        },
+        {
+          "author_employee_id": "EMP-006",
+          "timestamp": "2026-02-28T18:00:00Z",
+          "comment": "active calibration checksum looks correct while reported extrinsic age is stale"
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "adas"
+      ],
+      "issue_theme": "calibration_drift"
+    },
+    {
+      "ticket_id": "ADAS-213",
+      "project": "Lane Keeping Assist System using 2D Camera in ADAS ECU",
+      "type": "Improvement",
+      "priority": "Medium",
+      "status": "Done",
+      "summary": "Refactor diagnostics event schema for replay and road runs",
+      "description": "Refactor diagnostics event schema for replay and road runs. Related services: diagnostics-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-02-27T18:00:00Z",
+      "updated_at": "2026-03-03T18:00:00Z",
+      "reporter_employee_id": "EMP-006",
+      "assignee_employee_id": "EMP-006",
+      "related_services": [
+        "diagnostics-service"
+      ],
+      "linked_commits": [
+        "8a116c801661924d2f9a6ba31e540e12a97f3ff6",
+        "d9034444099283fe1ff3ffc78bb85a608f2dc328",
+        "e19acbe997bd86423f2d8e31b3afa7d7e31b9ba3"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-006",
+          "timestamp": "2026-02-27T20:00:00Z",
+          "comment": "Initial triage notes for refactor diagnostics event schema for replay and road runs. Focus on diagnostics-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-006",
+          "timestamp": "2026-02-28T19:00:00Z",
+          "comment": "Work is active on diagnostics-service and current implementation is still moving quickly."
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "adas"
+      ],
+      "issue_theme": null
+    },
+    {
+      "ticket_id": "ADAS-214",
+      "project": "Lane Keeping Assist System using 2D Camera in ADAS ECU",
+      "type": "Story",
+      "priority": "High",
+      "status": "In Progress",
+      "summary": "Prepare camera timing instrumentation for ECU integration",
+      "description": "Prepare camera timing instrumentation for ECU integration. Related services: camera-ingestion-service, diagnostics-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-03-01T21:00:00Z",
+      "updated_at": "2026-03-05T22:00:00Z",
+      "reporter_employee_id": "EMP-006",
+      "assignee_employee_id": "EMP-010",
+      "related_services": [
+        "camera-ingestion-service",
+        "diagnostics-service"
+      ],
+      "linked_commits": [
+        "715356038ad6bc4bdce9f06120dfad8caf31339a",
+        "10912fb160977d90a695308660a6c0300d976bd0",
+        "3e00595f5e66df809f4b7254652131977b92863a"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-006",
+          "timestamp": "2026-03-01T23:00:00Z",
+          "comment": "Initial triage notes for prepare camera timing instrumentation for ecu integration. Focus on camera-ingestion-service, diagnostics-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-010",
+          "timestamp": "2026-03-02T22:00:00Z",
+          "comment": "steering oscillation starts only when the faster timing profile is enabled"
+        },
+        {
+          "author_employee_id": "EMP-006",
+          "timestamp": "2026-03-04T00:00:00Z",
+          "comment": "diagnostics reports controller delta spikes without lane confidence collapsing"
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "adas"
+      ],
+      "issue_theme": "frame_sync_jitter"
+    },
+    {
+      "ticket_id": "ADAS-215",
+      "project": "Lane Keeping Assist System using 2D Camera in ADAS ECU",
+      "type": "Bug",
+      "priority": "Medium",
+      "status": "Done",
+      "summary": "Lane confidence drops during glare replay after algorithm toggle",
+      "description": "Lane confidence drops during glare replay after algorithm toggle. Related services: lane-detection-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-03-03T00:00:00Z",
+      "updated_at": "2026-03-07T02:00:00Z",
+      "reporter_employee_id": "EMP-006",
+      "assignee_employee_id": "EMP-007",
+      "related_services": [
+        "lane-detection-service"
+      ],
+      "linked_commits": [
+        "7182b71c21311bbd14afc0a857b8a481a482960d",
+        "e18a46d5237b6d656de3f9403e1a76665863ece8",
+        "8901e9125f006aeebd7f0c28cfa8ef853390957e"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-006",
+          "timestamp": "2026-03-03T02:00:00Z",
+          "comment": "Initial triage notes for lane confidence drops during glare replay after algorithm toggle. Focus on lane-detection-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-007",
+          "timestamp": "2026-03-04T01:00:00Z",
+          "comment": "Work is active on lane-detection-service and current implementation is still moving quickly."
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "adas"
+      ],
+      "issue_theme": null
+    },
+    {
+      "ticket_id": "ADAS-216",
+      "project": "Lane Keeping Assist System using 2D Camera in ADAS ECU",
+      "type": "Incident",
+      "priority": "High",
+      "status": "Done",
+      "summary": "Controller jitter during 75 km/h replay session",
+      "description": "Controller jitter during 75 km/h replay session. Related services: steering-control-service, camera-ingestion-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-03-05T03:00:00Z",
+      "updated_at": "2026-03-09T06:00:00Z",
+      "reporter_employee_id": "EMP-006",
+      "assignee_employee_id": "EMP-006",
+      "related_services": [
+        "steering-control-service",
+        "camera-ingestion-service"
+      ],
+      "linked_commits": [
+        "1bc52272e5094d78d9edb2e30834d4e149369bd3",
+        "4bf3d74fa05ea973c0621aae1e9e379cf610f7ed"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-006",
+          "timestamp": "2026-03-05T05:00:00Z",
+          "comment": "Initial triage notes for controller jitter during 75 km/h replay session. Focus on steering-control-service, camera-ingestion-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-006",
+          "timestamp": "2026-03-06T04:00:00Z",
+          "comment": "steering oscillation starts only when the faster timing profile is enabled"
+        },
+        {
+          "author_employee_id": "EMP-006",
+          "timestamp": "2026-03-07T06:00:00Z",
+          "comment": "diagnostics reports controller delta spikes without lane confidence collapsing"
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "adas"
+      ],
+      "issue_theme": "frame_sync_jitter"
+    },
+    {
+      "ticket_id": "ADAS-217",
+      "project": "Lane Keeping Assist System using 2D Camera in ADAS ECU",
+      "type": "Task",
+      "priority": "Medium",
+      "status": "Done",
+      "summary": "Compare monotonic and sensor timestamps in camera ingestion path",
+      "description": "Compare monotonic and sensor timestamps in camera ingestion path. Related services: camera-ingestion-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-03-05T09:00:00Z",
+      "updated_at": "2026-03-09T13:00:00Z",
+      "reporter_employee_id": "EMP-006",
+      "assignee_employee_id": "EMP-008",
+      "related_services": [
+        "camera-ingestion-service"
+      ],
+      "linked_commits": [
+        "827088e085d57c4464f4c004fc27ab14e3f268b0",
+        "f4835c570f5f0e5b769c08cacb8bf319e61519b8"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-006",
+          "timestamp": "2026-03-05T11:00:00Z",
+          "comment": "Initial triage notes for compare monotonic and sensor timestamps in camera ingestion path. Focus on camera-ingestion-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-008",
+          "timestamp": "2026-03-06T10:00:00Z",
+          "comment": "steering oscillation starts only when the faster timing profile is enabled"
+        },
+        {
+          "author_employee_id": "EMP-006",
+          "timestamp": "2026-03-07T12:00:00Z",
+          "comment": "diagnostics reports controller delta spikes without lane confidence collapsing"
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "adas"
+      ],
+      "issue_theme": "frame_sync_jitter"
+    },
+    {
+      "ticket_id": "ADAS-218",
+      "project": "Lane Keeping Assist System using 2D Camera in ADAS ECU",
+      "type": "Improvement",
+      "priority": "Medium",
+      "status": "Done",
+      "summary": "Add calibration cache flush to post-upload checklist",
+      "description": "Add calibration cache flush to post-upload checklist. Related services: calibration-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-03-07T12:00:00Z",
+      "updated_at": "2026-03-11T12:00:00Z",
+      "reporter_employee_id": "EMP-006",
+      "assignee_employee_id": "EMP-009",
+      "related_services": [
+        "calibration-service"
+      ],
+      "linked_commits": [
+        "24d3d39c8bd7909af0dab0b0a60ae878ee096967",
+        "f9617a46d442d69a0ad2971a543c504301ef0da3",
+        "bf99cdb0ac5756366d426505d7652260f09d25bd"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-006",
+          "timestamp": "2026-03-07T14:00:00Z",
+          "comment": "Initial triage notes for add calibration cache flush to post-upload checklist. Focus on calibration-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-009",
+          "timestamp": "2026-03-08T13:00:00Z",
+          "comment": "lane center error is small after cold boot but grows after a warm restart"
+        },
+        {
+          "author_employee_id": "EMP-006",
+          "timestamp": "2026-03-09T15:00:00Z",
+          "comment": "active calibration checksum looks correct while reported extrinsic age is stale"
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "adas"
+      ],
+      "issue_theme": "calibration_drift"
+    },
+    {
+      "ticket_id": "ADAS-219",
+      "project": "Lane Keeping Assist System using 2D Camera in ADAS ECU",
+      "type": "Story",
+      "priority": "Medium",
+      "status": "Done",
+      "summary": "Improve rig-side diagnostics for lane offset investigations",
+      "description": "Improve rig-side diagnostics for lane offset investigations. Related services: diagnostics-service, lane-detection-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-03-08T15:00:00Z",
+      "updated_at": "2026-03-12T16:00:00Z",
+      "reporter_employee_id": "EMP-006",
+      "assignee_employee_id": "EMP-006",
+      "related_services": [
+        "diagnostics-service",
+        "lane-detection-service"
+      ],
+      "linked_commits": [
+        "01bc0107e6f89ac7dc111ac880fe9ab13e578e3a",
+        "53abcd403a2229a318d35407c896ec57f79ac70b",
+        "de864ff50c30f5f595d6ad50918b965665d29bef"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-006",
+          "timestamp": "2026-03-08T17:00:00Z",
+          "comment": "Initial triage notes for improve rig-side diagnostics for lane offset investigations. Focus on diagnostics-service, lane-detection-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-006",
+          "timestamp": "2026-03-09T16:00:00Z",
+          "comment": "Work is active on diagnostics-service and current implementation is still moving quickly."
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "adas"
+      ],
+      "issue_theme": null
+    },
+    {
+      "ticket_id": "ADAS-220",
+      "project": "Lane Keeping Assist System using 2D Camera in ADAS ECU",
+      "type": "Bug",
+      "priority": "Medium",
+      "status": "In Progress",
+      "summary": "CAN steering command saturates on quick lane swaps",
+      "description": "CAN steering command saturates on quick lane swaps. Related services: steering-control-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-03-10T18:00:00Z",
+      "updated_at": "2026-03-14T20:00:00Z",
+      "reporter_employee_id": "EMP-006",
+      "assignee_employee_id": "EMP-008",
+      "related_services": [
+        "steering-control-service"
+      ],
+      "linked_commits": [
+        "17b55b26e724c563ddd239dc0feb3f9fe118c5d5",
+        "e4668fa0e5fc50a8d9a8e311703421a629707011",
+        "119baaa335f1b28ad9798ca3061b363ba2ead173"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-006",
+          "timestamp": "2026-03-10T20:00:00Z",
+          "comment": "Initial triage notes for can steering command saturates on quick lane swaps. Focus on steering-control-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-008",
+          "timestamp": "2026-03-11T19:00:00Z",
+          "comment": "Work is active on steering-control-service and current implementation is still moving quickly."
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "adas"
+      ],
+      "issue_theme": null
+    },
+    {
+      "ticket_id": "ADAS-221",
+      "project": "Lane Keeping Assist System using 2D Camera in ADAS ECU",
+      "type": "Task",
+      "priority": "Low",
+      "status": "Done",
+      "summary": "Document ECU image bootstrap steps for vision team",
+      "description": "Document ECU image bootstrap steps for vision team. Related services: camera-ingestion-service, diagnostics-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-03-11T21:00:00Z",
+      "updated_at": "2026-03-16T00:00:00Z",
+      "reporter_employee_id": "EMP-006",
+      "assignee_employee_id": "EMP-010",
+      "related_services": [
+        "camera-ingestion-service",
+        "diagnostics-service"
+      ],
+      "linked_commits": [
+        "c68e6c02174a542ad80f6c69b022e78f080d3cf7",
+        "99d4eee79dbb37e00346ec2b4e2b660f49842aa9"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-006",
+          "timestamp": "2026-03-11T23:00:00Z",
+          "comment": "Initial triage notes for document ecu image bootstrap steps for vision team. Focus on camera-ingestion-service, diagnostics-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-010",
+          "timestamp": "2026-03-12T22:00:00Z",
+          "comment": "Work is active on camera-ingestion-service and current implementation is still moving quickly."
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "adas"
+      ],
+      "issue_theme": null
+    },
+    {
+      "ticket_id": "ADAS-222",
+      "project": "Lane Keeping Assist System using 2D Camera in ADAS ECU",
+      "type": "Improvement",
+      "priority": "Low",
+      "status": "In Progress",
+      "summary": "Split calibration profile metadata from active runtime cache",
+      "description": "Split calibration profile metadata from active runtime cache. Related services: calibration-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-03-14T00:00:00Z",
+      "updated_at": "2026-03-18T04:00:00Z",
+      "reporter_employee_id": "EMP-006",
+      "assignee_employee_id": "EMP-009",
+      "related_services": [
+        "calibration-service"
+      ],
+      "linked_commits": [
+        "3f4726e374d80af99cb76ad350eb2371f33f0919",
+        "b499d3957ca146da1768e8b3449f776eb12ac816",
+        "c43e2e1f3d99fdf388e38a682bbf5018a1d7143c"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-006",
+          "timestamp": "2026-03-14T02:00:00Z",
+          "comment": "Initial triage notes for split calibration profile metadata from active runtime cache. Focus on calibration-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-009",
+          "timestamp": "2026-03-15T01:00:00Z",
+          "comment": "lane center error is small after cold boot but grows after a warm restart"
+        },
+        {
+          "author_employee_id": "EMP-006",
+          "timestamp": "2026-03-16T03:00:00Z",
+          "comment": "active calibration checksum looks correct while reported extrinsic age is stale"
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "adas"
+      ],
+      "issue_theme": "calibration_drift"
+    },
+    {
+      "ticket_id": "ADAS-223",
+      "project": "Lane Keeping Assist System using 2D Camera in ADAS ECU",
+      "type": "Bug",
+      "priority": "High",
+      "status": "Done",
+      "summary": "Frame gap counters spike when diagnostics sampler is verbose",
+      "description": "Frame gap counters spike when diagnostics sampler is verbose. Related services: diagnostics-service, camera-ingestion-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-03-15T03:00:00Z",
+      "updated_at": "2026-03-19T03:00:00Z",
+      "reporter_employee_id": "EMP-006",
+      "assignee_employee_id": "EMP-010",
+      "related_services": [
+        "diagnostics-service",
+        "camera-ingestion-service"
+      ],
+      "linked_commits": [
+        "2699d67603c89dd2ba66622363d0edb48708fd4e",
+        "6acb7470481e93cd2c2afccffdadebb8c13625c1",
+        "fff5411e0a57bc2e228f92ce93ab4ea8161252c8"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-006",
+          "timestamp": "2026-03-15T05:00:00Z",
+          "comment": "Initial triage notes for frame gap counters spike when diagnostics sampler is verbose. Focus on diagnostics-service, camera-ingestion-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-010",
+          "timestamp": "2026-03-16T04:00:00Z",
+          "comment": "steering oscillation starts only when the faster timing profile is enabled"
+        },
+        {
+          "author_employee_id": "EMP-006",
+          "timestamp": "2026-03-17T06:00:00Z",
+          "comment": "diagnostics reports controller delta spikes without lane confidence collapsing"
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "adas"
+      ],
+      "issue_theme": "frame_sync_jitter"
+    },
+    {
+      "ticket_id": "ADAS-224",
+      "project": "Lane Keeping Assist System using 2D Camera in ADAS ECU",
+      "type": "Task",
+      "priority": "Medium",
+      "status": "Done",
+      "summary": "Measure lane offset before and after cache flush on warm restart",
+      "description": "Measure lane offset before and after cache flush on warm restart. Related services: calibration-service, lane-detection-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-03-16T09:00:00Z",
+      "updated_at": "2026-03-20T10:00:00Z",
+      "reporter_employee_id": "EMP-006",
+      "assignee_employee_id": "EMP-009",
+      "related_services": [
+        "calibration-service",
+        "lane-detection-service"
+      ],
+      "linked_commits": [
+        "69a5a95108a6e4e2fa929a3344d3cefb8191403d",
+        "ef2bdc0df9ae1c98f52a316e0c43d1bf0153d7d1"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-006",
+          "timestamp": "2026-03-16T11:00:00Z",
+          "comment": "Initial triage notes for measure lane offset before and after cache flush on warm restart. Focus on calibration-service, lane-detection-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-009",
+          "timestamp": "2026-03-17T10:00:00Z",
+          "comment": "lane center error is small after cold boot but grows after a warm restart"
+        },
+        {
+          "author_employee_id": "EMP-006",
+          "timestamp": "2026-03-18T12:00:00Z",
+          "comment": "active calibration checksum looks correct while reported extrinsic age is stale"
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "adas"
+      ],
+      "issue_theme": "calibration_drift"
+    },
+    {
+      "ticket_id": "ADAS-225",
+      "project": "Lane Keeping Assist System using 2D Camera in ADAS ECU",
+      "type": "Story",
+      "priority": "Medium",
+      "status": "Done",
+      "summary": "Tune controller damping for highway replay set",
+      "description": "Tune controller damping for highway replay set. Related services: steering-control-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-03-17T12:00:00Z",
+      "updated_at": "2026-03-21T14:00:00Z",
+      "reporter_employee_id": "EMP-006",
+      "assignee_employee_id": "EMP-008",
+      "related_services": [
+        "steering-control-service"
+      ],
+      "linked_commits": [
+        "4e8b111ed97133572ca0e888612a936722a7d40c",
+        "eb5c48fa56a011e11bfbaf8f7b7b6a8cd0ec592d",
+        "7bafa8f1254df90b45f56e7d0ffc628a9323eda3"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-006",
+          "timestamp": "2026-03-17T14:00:00Z",
+          "comment": "Initial triage notes for tune controller damping for highway replay set. Focus on steering-control-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-008",
+          "timestamp": "2026-03-18T13:00:00Z",
+          "comment": "Work is active on steering-control-service and current implementation is still moving quickly."
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "adas"
+      ],
+      "issue_theme": null
+    },
+    {
+      "ticket_id": "ADAS-226",
+      "project": "Lane Keeping Assist System using 2D Camera in ADAS ECU",
+      "type": "Bug",
+      "priority": "Medium",
+      "status": "In Progress",
+      "summary": "Lane preview API omits active experiment label after reload",
+      "description": "Lane preview API omits active experiment label after reload. Related services: lane-detection-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-03-19T15:00:00Z",
+      "updated_at": "2026-03-23T18:00:00Z",
+      "reporter_employee_id": "EMP-006",
+      "assignee_employee_id": "EMP-007",
+      "related_services": [
+        "lane-detection-service"
+      ],
+      "linked_commits": [
+        "4d370701fe8609ebeccda4e4850bd49c155abdec",
+        "468d5088dccda810991ff3bf8eb6368c15d0c5d0",
+        "2af1feedeed8e3b83c294f57760eca09eae5a7b7"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-006",
+          "timestamp": "2026-03-19T17:00:00Z",
+          "comment": "Initial triage notes for lane preview api omits active experiment label after reload. Focus on lane-detection-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-007",
+          "timestamp": "2026-03-20T16:00:00Z",
+          "comment": "Work is active on lane-detection-service and current implementation is still moving quickly."
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "adas"
+      ],
+      "issue_theme": null
+    },
+    {
+      "ticket_id": "ADAS-227",
+      "project": "Lane Keeping Assist System using 2D Camera in ADAS ECU",
+      "type": "Incident",
+      "priority": "High",
+      "status": "Done",
+      "summary": "Prototype ECU package rolled back after jitter regressions",
+      "description": "Prototype ECU package rolled back after jitter regressions. Related services: steering-control-service, diagnostics-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-03-20T18:00:00Z",
+      "updated_at": "2026-03-24T22:00:00Z",
+      "reporter_employee_id": "EMP-006",
+      "assignee_employee_id": "EMP-010",
+      "related_services": [
+        "steering-control-service",
+        "diagnostics-service"
+      ],
+      "linked_commits": [
+        "2dd7f220b6aa64e892a3ad98b0bd3cf0ebf07eb1",
+        "03d08d74248dde27f4bdeee106a39e17c82b7895"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-006",
+          "timestamp": "2026-03-20T20:00:00Z",
+          "comment": "Initial triage notes for prototype ecu package rolled back after jitter regressions. Focus on steering-control-service, diagnostics-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-010",
+          "timestamp": "2026-03-21T19:00:00Z",
+          "comment": "steering oscillation starts only when the faster timing profile is enabled"
+        },
+        {
+          "author_employee_id": "EMP-006",
+          "timestamp": "2026-03-22T21:00:00Z",
+          "comment": "diagnostics reports controller delta spikes without lane confidence collapsing"
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "adas"
+      ],
+      "issue_theme": "frame_sync_jitter"
+    },
+    {
+      "ticket_id": "ADAS-228",
+      "project": "Lane Keeping Assist System using 2D Camera in ADAS ECU",
+      "type": "Task",
+      "priority": "Medium",
+      "status": "In Progress",
+      "summary": "Add session tags for calibration reset experiments",
+      "description": "Add session tags for calibration reset experiments. Related services: diagnostics-service, calibration-service. Work reflects an active in-development startup environment rather than production hardening.",
+      "created_at": "2026-03-22T21:00:00Z",
+      "updated_at": "2026-03-26T21:00:00Z",
+      "reporter_employee_id": "EMP-006",
+      "assignee_employee_id": "EMP-006",
+      "related_services": [
+        "diagnostics-service",
+        "calibration-service"
+      ],
+      "linked_commits": [
+        "69672016758d56469d8ab95897a6cd62e9604537",
+        "3cbded3c552f8de4965b7dbe531b2877c44bd604"
+      ],
+      "comments": [
+        {
+          "author_employee_id": "EMP-006",
+          "timestamp": "2026-03-22T23:00:00Z",
+          "comment": "Initial triage notes for add session tags for calibration reset experiments. Focus on diagnostics-service, calibration-service and keep commits linked."
+        },
+        {
+          "author_employee_id": "EMP-006",
+          "timestamp": "2026-03-23T22:00:00Z",
+          "comment": "Work is active on diagnostics-service and current implementation is still moving quickly."
+        }
+      ],
+      "labels": [
+        "nexusiq",
+        "graph-demo",
+        "adas"
+      ],
+      "issue_theme": null
+    }
+  ]
+}

@@ -1,303 +1,311 @@
-# GraphRAG Workbench
+# NexusIQ — GraphRAG Investigation Workbench
 
+An AI-powered investigation platform that combines a 3D knowledge graph with a multi-agent LLM workflow. Ask natural-language questions about your engineering data and get structured incident analysis powered by local Ollama models, Neo4j Aura, and ChromaDB.
 
-A modern, interactive web application for building and visualizing knowledge graphs using Microsoft's [GraphRAG](https://github.com/microsoft/graphrag) framework. Transform your documents into an explorable 3D knowledge graph with advanced AI-powered analysis and querying capabilities.
-
-![GraphRAG Workbench](https://img.shields.io/badge/GraphRAG-Workbench-blue)
 ![Next.js](https://img.shields.io/badge/Next.js-15.5-black)
 ![React](https://img.shields.io/badge/React-19.1-blue)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.115-green)
+![Ollama](https://img.shields.io/badge/Ollama-local-orange)
 
-
-https://github.com/user-attachments/assets/1f588a45-07ca-4953-92ed-fc888fe28cff
-
+---
 
 ## ✨ Features
 
-### 📊 Interactive 3D Visualization
-- **Immersive 3D Knowledge Graph**: Navigate through your data in a stunning 3D space with smooth animations
-- **Community Detection**: Visualize hierarchical community structures with color-coded boundaries
-- **Smart Node Sizing**: Entity importance reflected through dynamic node sizing based on centrality metrics
-- **Advanced Filtering**: Filter by entity types, community levels, and relationship weights
-- **Search & Highlight**: Real-time search with visual highlighting of matching entities
+- **3D Knowledge Graph** — WebGL-rendered entity graph with community detection, bloom effects, and node-click isolation
+- **Multi-Agent Investigation** — LangGraph workflow with Graph, Incident, and Risk agents running in parallel
+- **Hybrid Retrieval** — Neo4j graph traversal + ChromaDB vector search fused together
+- **Local LLMs via Ollama** — Fully offline-capable; no OpenAI key required for investigation
+- **Markdown Chat Responses** — Formatted output with headers, bullets, code blocks, and inline styles
+- **Resizable Panels** — Drag-and-drop panel resizing for the 3-column layout
+- **Stop / New Chat** — Cancel in-flight queries and clear session history
 
-### 🗂️ Document Management
-- **PDF Processing**: Drag-and-drop PDF upload with automatic text extraction
-- **Batch Operations**: Process multiple documents simultaneously
-- **Archive Management**: Save and restore different knowledge graph versions
-- **Progress Tracking**: Real-time indexing progress with detailed logs
+---
 
-### 🤖 AI-Powered Analysis  
-- **GraphRAG Integration**: Leverage Microsoft's GraphRAG for entity extraction and relationship mapping
-- **Community Reports**: AI-generated summaries of detected communities
-- **Chat Interface**: Query your knowledge graph using natural language
-- **Multiple Search Modes**: Local, global, drift, and basic search strategies
+## 🏗️ Architecture
 
-### 🎯 Advanced Features
-- **Community Isolator**: Focus on specific community hierarchies for detailed analysis
-- **Relationship Weighting**: Visualize connection strength with dynamic link thickness
-- **Bloom Effects**: Beautiful post-processing effects for enhanced visualization
-- **Responsive Design**: Optimized for desktop and tablet usage
+```
+Browser (Next.js 15)
+  ├── Left Panel  — InvestigationChat  →  POST /investigation/run  (SSE stream)
+  ├── Center      — GraphVisualizer   →  GET  /graph/visualization
+  └── Right Panel — Inspector / Timeline / Context
+
+FastAPI Backend (port 8000)
+  └── LangGraph Workflow
+        classify → retrieve → plan
+          ↳ DIRECT: synthesize
+          ↳ FULL:   graph_agent + incident_agent + risk_agent → synthesize
+
+Data Sources
+  ├── Neo4j Aura      — graph relationships
+  └── ChromaDB Cloud  — vector embeddings
+```
+
+---
 
 ## 🚀 Quick Start
 
 ### Prerequisites
-- Node.js 18+ 
-- OpenAI API key
-- Python 3.10+ (for GraphRAG backend)
 
-### Installation
+| Tool | Version | Purpose |
+|------|---------|---------|
+| Node.js | 18+ | Frontend |
+| pnpm | 8+ | Package manager |
+| Python | 3.11+ | Backend |
+| Ollama | latest | Local LLM inference |
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/ChristopherLyon/graphrag-workbench.git
-   cd graphrag-workbench
-   ```
+---
 
-2. **Install dependencies**
-   ```bash
-   npm install
-   # or
-   pnpm install
-   ```
+### 1 — Clone & install frontend
 
-3. **Set up environment**
-   ```bash
-   cp .env.example .env
-   ```
-   
-   Edit `.env` and add your OpenAI API key:
-   ```
-   OPENAI_API_KEY=your_openai_api_key_here
-   ```
+```bash
+git clone https://github.com/your-org/graphrag-workbench.git
+cd graphrag-workbench
 
-4. **Configure GraphRAG**
-   
-   The `settings.yaml` file is pre-configured for OpenAI. Adjust if needed:
-   - Model settings (defaults to `gpt-4o-mini`)
-   - Embedding model (defaults to `text-embedding-3-small`)
-   - Processing parameters
-
-5. **Install GraphRAG Python package**
-   ```bash
-   pip install graphrag
-   ```
-
-6. **Start the development server**
-   ```bash
-   npm run dev
-   ```
-
-7. **Open your browser**
-   
-   Navigate to [http://localhost:3000](http://localhost:3000)
-
-## 📖 Usage Guide
-
-### Building Your First Knowledge Graph
-
-1. **Upload Documents**
-   - Click "Add PDFs" or drag and drop PDF files onto the Dataset card
-   - Supported formats: PDF files only
-
-2. **Run Indexing**
-   - Click the "Run Index" button to start the GraphRAG processing
-   - Monitor progress in real-time with detailed logs
-   - The process extracts entities, relationships, and communities from your documents
-
-3. **Explore the Graph**
-   - Once indexing completes, your 3D knowledge graph will appear
-   - Use mouse controls to navigate: drag to rotate, scroll to zoom, right-click to pan
-   - Click on nodes to inspect entities and their connections
-
-### Advanced Usage
-
-#### Community Analysis
-- Enable "Community Isolator" to focus on specific community hierarchies
-- Communities are organized in levels: Sector → System → Subsystem → Component → Element
-
-#### Search and Discovery
-- Use the search box (Cmd/Ctrl + K) to find specific entities
-- Matching entities will be highlighted in the visualization
-- Use the Inspector panel to view detailed entity information
-
-#### Chat Interface
-- Switch to the Chat tab to query your knowledge graph using natural language
-- Ask questions like "What are the main themes?" or "How are these entities connected?"
-
-#### Archive Management
-- Create archives of your current knowledge graph state
-- Restore previous versions to compare different document sets
-- Rename archives for better organization
-
-## 🏗️ Architecture
-
-### Frontend Stack
-- **Next.js 15.5**: React framework with App Router
-- **React Three Fiber**: 3D graphics rendering
-- **TailwindCSS**: Modern styling framework
-- **shadcn/ui**: High-quality UI components
-- **Three.js**: WebGL-based 3D graphics library
-
-### Key Components
-- **GraphVisualizer**: Main 3D visualization component with WebGL rendering
-- **CorpusPanel**: Document management and indexing interface  
-- **ChatPanel**: AI-powered natural language querying
-- **Inspector**: Detailed entity and relationship analysis
-
-### Backend Integration
-- **Next.js API Routes**: RESTful endpoints for data management
-- **GraphRAG Pipeline**: Microsoft's GraphRAG for knowledge extraction
-- **File System Storage**: Local storage for documents and processed data
-- **Streaming APIs**: Real-time progress updates during indexing
-
-### Data Flow
-1. **Document Upload** → PDF processing and text extraction
-2. **GraphRAG Processing** → Entity extraction, relationship mapping, community detection
-3. **Data Transformation** → JSON format optimization for web rendering
-4. **3D Visualization** → Force-directed layout with community clustering
-5. **Interactive Querying** → AI-powered search and analysis
-
-## ⚙️ Configuration
-
-### GraphRAG Settings (`settings.yaml`)
-The configuration file controls the GraphRAG processing pipeline:
-
-```yaml
-models:
-  default_chat_model:
-    type: openai_chat
-    model: gpt-4o-mini-2024-07-18
-    api_key: ${OPENAI_API_KEY}
-  
-  default_embedding_model:
-    type: openai_embedding  
-    model: text-embedding-3-small
-    api_key: ${OPENAI_API_KEY}
-
-extract_graph:
-  entity_types: [organization, person, geo, event]
-  max_gleanings: 1
-
-community_reports:
-  max_length: 2000
-  max_input_length: 8000
+pnpm install
 ```
 
-### Customization Options
-- **Entity Types**: Modify the types of entities to extract
-- **Model Selection**: Choose different OpenAI models for processing
-- **Chunking Parameters**: Adjust text processing chunk sizes
-- **Community Detection**: Configure clustering algorithms
+---
+
+### 2 — Install Ollama and pull models
+
+**Install Ollama** (macOS / Linux):
+```bash
+curl -fsSL https://ollama.com/install.sh | sh
+```
+
+Or download the desktop app from [ollama.com](https://ollama.com).
+
+**Pull the required models:**
+```bash
+# Orchestrator + incident analysis
+ollama pull llama3.1:8b
+
+# Graph topology + risk assessment
+ollama pull qwen2.5:7b
+
+# Text embeddings (for ChromaDB retrieval)
+ollama pull nomic-embed-text
+```
+
+**Verify Ollama is running:**
+```bash
+curl http://localhost:11434/api/tags
+# Should return a JSON list of installed models
+```
+
+> Ollama starts automatically on macOS after installation. On Linux, run `ollama serve` in a separate terminal if it's not running.
+
+---
+
+### 3 — Set up the Python backend
+
+```bash
+# Create a virtual environment
+python3.11 -m venv .venv
+source .venv/bin/activate        # Windows: .venv\Scripts\activate
+
+# Install backend dependencies
+pip install -r backend/requirements.txt
+```
+
+---
+
+### 4 — Configure environment variables
+
+```bash
+cp .env.example .env
+```
+
+Edit `.env` with your credentials:
+
+```env
+# Ollama (usually no changes needed)
+OLLAMA_HOST=http://localhost:11434
+OLLAMA_BACKEND_URL=http://localhost:8000
+
+# Neo4j Aura — create a free instance at console.neo4j.io
+NEO4J_URI=neo4j+s://<instance-id>.databases.neo4j.io
+NEO4J_USERNAME=neo4j
+NEO4J_PASSWORD=<your-neo4j-password>
+NEO4J_DATABASE=neo4j
+
+# ChromaDB Cloud — create a free tenant at trychroma.com
+CHROMA_CLOUD_HOST=<region>.gcp.trychroma.com
+CHROMA_API_KEY=<your-chroma-api-key>
+CHROMA_TENANT=<your-tenant-id>
+CHROMA_DATABASE=nexusiq
+```
+
+> `OPENAI_API_KEY` is only needed if you use the legacy GraphRAG CLI indexing pipeline. The investigation workflow runs entirely on Ollama.
+
+---
+
+### 5 — Start the backend
+
+```bash
+# Make sure your venv is active
+source .venv/bin/activate
+
+# Start FastAPI with hot-reload
+python -m uvicorn backend.main:app --reload --port 8000
+```
+
+You should see:
+```
+INFO:     Uvicorn running on http://0.0.0.0:8000
+INFO:     Application startup complete.
+```
+
+Test it:
+```bash
+curl http://localhost:8000/investigation/health
+```
+
+---
+
+### 6 — Start the frontend
+
+In a **new terminal**:
+
+```bash
+pnpm dev
+```
+
+Open [http://localhost:3000](http://localhost:3000).
+
+---
+
+## 🤖 Ollama Model Configuration
+
+The backend assigns specific models to each agent. You can override them in `.env`:
+
+```env
+MODEL_ORCHESTRATOR=llama3.1:8b    # classify, plan, synthesize
+MODEL_GRAPH=qwen2.5:7b            # graph topology analysis
+MODEL_INCIDENT=llama3.1:8b        # incident timeline reconstruction
+MODEL_RISK=qwen2.5:7b             # cascading failure risk assessment
+MODEL_EMBEDDING=nomic-embed-text  # ChromaDB vector search
+```
+
+**Minimum hardware for default models:**
+- llama3.1:8b → ~6 GB VRAM / 8 GB RAM
+- qwen2.5:7b → ~5 GB VRAM / 7 GB RAM
+- nomic-embed-text → ~300 MB
+
+**Lighter alternatives** (for machines with less RAM):
+```bash
+ollama pull llama3.2:3b    # faster, less accurate
+ollama pull qwen2.5:3b
+```
+Then set `MODEL_ORCHESTRATOR=llama3.2:3b` etc. in `.env`.
+
+---
 
 ## 📁 Project Structure
 
 ```
 graphrag-workbench/
-├── app/                    # Next.js App Router
-│   ├── api/               # API routes for data management
-│   ├── layout.tsx         # Root layout component
-│   └── page.tsx           # Main application page
-├── components/            # React components
-│   ├── ui/               # shadcn/ui components
-│   ├── GraphVisualizer.tsx # 3D visualization engine
-│   ├── CorpusPanel.tsx   # Document management
-│   ├── ChatPanel.tsx     # AI chat interface  
-│   └── Inspector.tsx     # Entity detail viewer
-├── lib/                  # Utility libraries
-│   ├── graphData.ts      # Data models and loaders
-│   ├── forceSimulation.ts # 3D layout algorithms
-│   └── utils.ts          # Helper functions
-├── settings.yaml         # GraphRAG configuration
-└── prompts/              # AI prompt templates
+├── app/                        # Next.js App Router
+│   ├── page.tsx               # Main 3-panel layout
+│   └── api/                   # Next.js API routes (corpus, data)
+├── backend/                    # FastAPI backend
+│   ├── main.py                # App entry point
+│   ├── config.py              # Settings from .env
+│   ├── agents/                # Graph / Incident / Risk agents
+│   ├── services/              # Ollama, embedding, model router
+│   ├── investigation/         # LangGraph workflow
+│   │   └── workflow.py        # classify→retrieve→plan→synthesize
+│   └── api/routes/            # FastAPI route handlers
+├── retrieval/                  # Hybrid retrieval layer
+│   └── retrieval/             # Neo4j + ChromaDB hybrid retriever
+├── components/                 # React components
+│   ├── GraphVisualizer.tsx    # 3D WebGL graph
+│   ├── nexusiq/               # Investigation-specific UI
+│   │   ├── InvestigationChat.tsx
+│   │   ├── IncidentTimeline.tsx
+│   │   ├── ContextExplorer.tsx
+│   │   └── ServiceInspector.tsx
+│   └── ui/                    # shadcn/ui primitives
+├── data/                       # Sample NexusIQ dataset
+├── prompts/                    # LLM prompt templates
+├── settings.yaml               # GraphRAG CLI config (legacy indexing)
+├── .env.example                # Environment variable template
+└── backend/requirements.txt   # Python dependencies
 ```
-
-## 🛠️ Development
-
-### Running in Development Mode
-```bash
-npm run dev
-```
-
-### Building for Production
-```bash
-npm run build
-npm run start
-```
-
-### Code Quality
-```bash
-npm run lint        # ESLint checking
-npm run typecheck   # TypeScript validation
-```
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📋 Requirements
-
-### System Requirements
-- **Node.js**: 18.0.0 or higher
-- **Python**: 3.10 or higher (for GraphRAG backend)
-- **Memory**: 8GB RAM minimum (16GB recommended for large documents)
-- **Storage**: SSD recommended for better I/O performance
-
-### Browser Compatibility
-- Chrome 90+
-- Firefox 88+
-- Safari 14+
-- Edge 90+
-
-WebGL 2.0 support required for 3D visualization.
-
-## 🐛 Troubleshooting
-
-### Common Issues
-
-**Graph not loading after indexing**
-- Check that all required JSON files are generated in the `output/` directory
-- Verify the API endpoints are accessible at `/api/data/`
-
-**Slow 3D performance**  
-- Reduce the number of visible communities in complex graphs
-- Try disabling bloom effects in crowded visualizations
-- Consider filtering to smaller entity subsets
-
-**Indexing fails**
-- Verify your OpenAI API key is correctly set in `.env`
-- Check that GraphRAG Python package is installed
-- Review the indexing logs for specific error messages
-
-**Memory issues with large documents**
-- Process documents in smaller batches
-- Increase Node.js memory limit: `export NODE_OPTIONS="--max-old-space-size=8192"`
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- [Microsoft GraphRAG](https://github.com/microsoft/graphrag) - Core knowledge graph extraction
-- [React Three Fiber](https://github.com/pmndrs/react-three-fiber) - 3D rendering capabilities
-- [shadcn/ui](https://ui.shadcn.com/) - Beautiful UI components
-- [Lucide Icons](https://lucide.dev/) - Clean, consistent iconography
-
-## 📞 Support
-
-If you encounter any issues or have questions:
-
-1. Check the [Issues](https://github.com/ChristopherLyon/graphrag-workbench/issues) page
-2. Review the troubleshooting section above
-3. Create a new issue with detailed information about your problem
 
 ---
 
-**Happy Knowledge Graphing! 🎉**
+## 🛠️ Development
+
+### Run both services together (two terminals)
+
+**Terminal 1 — Backend:**
+```bash
+source .venv/bin/activate
+python -m uvicorn backend.main:app --reload --port 8000
+```
+
+**Terminal 2 — Frontend:**
+```bash
+pnpm dev
+```
+
+### Build for production
+
+```bash
+pnpm build
+pnpm start
+```
+
+---
+
+## 🐛 Troubleshooting
+
+**Ollama connection refused**
+```bash
+# Check if Ollama is running
+curl http://localhost:11434
+# If not: start it
+ollama serve
+```
+
+**Model not found error**
+```bash
+# List installed models
+ollama list
+# Pull missing model
+ollama pull llama3.1:8b
+```
+
+**Backend fails to start — Neo4j/ChromaDB connection error**
+- Verify credentials in `.env` match your cloud console
+- Neo4j Aura free instances pause after inactivity — resume them at [console.neo4j.io](https://console.neo4j.io)
+
+**Slow responses (>2 min per query)**
+- Normal for first inference after model load — Ollama caches models in memory after first use
+- Consider switching to smaller models (3B instead of 8B) in `.env`
+- Ensure no other GPU-heavy processes are running
+
+**Graph not rendering**
+- Check `/graph/visualization` returns data: `curl http://localhost:8000/graph/visualization`
+- Verify Neo4j instance is active and contains nodes
+
+**Frontend TypeScript errors**
+```bash
+pnpm build   # shows all type errors
+```
+
+---
+
+## 📋 Requirements
+
+| Component | Minimum | Recommended |
+|-----------|---------|-------------|
+| RAM | 8 GB | 16 GB |
+| VRAM (GPU) | 6 GB | 12 GB |
+| Storage | 10 GB free | SSD |
+| Node.js | 18.x | 22.x |
+| Python | 3.11 | 3.11 |
+
+WebGL 2.0 support required for 3D visualization (Chrome 90+, Firefox 88+, Safari 14+, Edge 90+).

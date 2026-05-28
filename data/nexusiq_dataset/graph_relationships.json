@@ -1,0 +1,3001 @@
+{
+  "generated_at": "2026-05-23T17:00:00Z",
+  "relationships": [
+    {
+      "type": "EMPLOYEE_OWNS_SERVICE",
+      "from": "EMP-001",
+      "to": "lidar-ingestion-service",
+      "properties": {
+        "team": "LiDAR Perception Team"
+      }
+    },
+    {
+      "type": "SERVICE_DEPENDS_ON",
+      "from": "object-detection-service",
+      "to": "lidar-ingestion-service",
+      "properties": {
+        "project": "LiDAR Object Detection System for Autonomous Vehicles"
+      }
+    },
+    {
+      "type": "SERVICE_DEPENDS_ON",
+      "from": "object-detection-service",
+      "to": "edge-inference-service",
+      "properties": {
+        "project": "LiDAR Object Detection System for Autonomous Vehicles"
+      }
+    },
+    {
+      "type": "EMPLOYEE_OWNS_SERVICE",
+      "from": "EMP-002",
+      "to": "object-detection-service",
+      "properties": {
+        "team": "LiDAR Perception Team"
+      }
+    },
+    {
+      "type": "SERVICE_DEPENDS_ON",
+      "from": "tracking-service",
+      "to": "object-detection-service",
+      "properties": {
+        "project": "LiDAR Object Detection System for Autonomous Vehicles"
+      }
+    },
+    {
+      "type": "SERVICE_DEPENDS_ON",
+      "from": "tracking-service",
+      "to": "telemetry-service",
+      "properties": {
+        "project": "LiDAR Object Detection System for Autonomous Vehicles"
+      }
+    },
+    {
+      "type": "EMPLOYEE_OWNS_SERVICE",
+      "from": "EMP-001",
+      "to": "tracking-service",
+      "properties": {
+        "team": "LiDAR Perception Team"
+      }
+    },
+    {
+      "type": "SERVICE_DEPENDS_ON",
+      "from": "edge-inference-service",
+      "to": "lidar-ingestion-service",
+      "properties": {
+        "project": "LiDAR Object Detection System for Autonomous Vehicles"
+      }
+    },
+    {
+      "type": "SERVICE_DEPENDS_ON",
+      "from": "edge-inference-service",
+      "to": "telemetry-service",
+      "properties": {
+        "project": "LiDAR Object Detection System for Autonomous Vehicles"
+      }
+    },
+    {
+      "type": "EMPLOYEE_OWNS_SERVICE",
+      "from": "EMP-003",
+      "to": "edge-inference-service",
+      "properties": {
+        "team": "LiDAR Perception Team"
+      }
+    },
+    {
+      "type": "EMPLOYEE_OWNS_SERVICE",
+      "from": "EMP-004",
+      "to": "telemetry-service",
+      "properties": {
+        "team": "LiDAR Perception Team"
+      }
+    },
+    {
+      "type": "SERVICE_DEPENDS_ON",
+      "from": "camera-ingestion-service",
+      "to": "calibration-service",
+      "properties": {
+        "project": "Lane Keeping Assist System using 2D Camera in ADAS ECU"
+      }
+    },
+    {
+      "type": "EMPLOYEE_OWNS_SERVICE",
+      "from": "EMP-006",
+      "to": "camera-ingestion-service",
+      "properties": {
+        "team": "ADAS Vision Team"
+      }
+    },
+    {
+      "type": "SERVICE_DEPENDS_ON",
+      "from": "lane-detection-service",
+      "to": "camera-ingestion-service",
+      "properties": {
+        "project": "Lane Keeping Assist System using 2D Camera in ADAS ECU"
+      }
+    },
+    {
+      "type": "SERVICE_DEPENDS_ON",
+      "from": "lane-detection-service",
+      "to": "calibration-service",
+      "properties": {
+        "project": "Lane Keeping Assist System using 2D Camera in ADAS ECU"
+      }
+    },
+    {
+      "type": "EMPLOYEE_OWNS_SERVICE",
+      "from": "EMP-007",
+      "to": "lane-detection-service",
+      "properties": {
+        "team": "ADAS Vision Team"
+      }
+    },
+    {
+      "type": "SERVICE_DEPENDS_ON",
+      "from": "steering-control-service",
+      "to": "camera-ingestion-service",
+      "properties": {
+        "project": "Lane Keeping Assist System using 2D Camera in ADAS ECU"
+      }
+    },
+    {
+      "type": "SERVICE_DEPENDS_ON",
+      "from": "steering-control-service",
+      "to": "lane-detection-service",
+      "properties": {
+        "project": "Lane Keeping Assist System using 2D Camera in ADAS ECU"
+      }
+    },
+    {
+      "type": "EMPLOYEE_OWNS_SERVICE",
+      "from": "EMP-008",
+      "to": "steering-control-service",
+      "properties": {
+        "team": "ADAS Vision Team"
+      }
+    },
+    {
+      "type": "EMPLOYEE_OWNS_SERVICE",
+      "from": "EMP-009",
+      "to": "calibration-service",
+      "properties": {
+        "team": "ADAS Vision Team"
+      }
+    },
+    {
+      "type": "SERVICE_DEPENDS_ON",
+      "from": "diagnostics-service",
+      "to": "lane-detection-service",
+      "properties": {
+        "project": "Lane Keeping Assist System using 2D Camera in ADAS ECU"
+      }
+    },
+    {
+      "type": "SERVICE_DEPENDS_ON",
+      "from": "diagnostics-service",
+      "to": "steering-control-service",
+      "properties": {
+        "project": "Lane Keeping Assist System using 2D Camera in ADAS ECU"
+      }
+    },
+    {
+      "type": "SERVICE_DEPENDS_ON",
+      "from": "diagnostics-service",
+      "to": "calibration-service",
+      "properties": {
+        "project": "Lane Keeping Assist System using 2D Camera in ADAS ECU"
+      }
+    },
+    {
+      "type": "EMPLOYEE_OWNS_SERVICE",
+      "from": "EMP-006",
+      "to": "diagnostics-service",
+      "properties": {
+        "team": "ADAS Vision Team"
+      }
+    },
+    {
+      "type": "EMPLOYEE_WORKS_ON_PROJECT",
+      "from": "EMP-001",
+      "to": "LiDAR Object Detection System for Autonomous Vehicles",
+      "properties": {
+        "team": "LiDAR Perception Team",
+        "role": "Technical Lead"
+      }
+    },
+    {
+      "type": "EMPLOYEE_WORKS_ON_PROJECT",
+      "from": "EMP-002",
+      "to": "LiDAR Object Detection System for Autonomous Vehicles",
+      "properties": {
+        "team": "LiDAR Perception Team",
+        "role": "ML Engineer"
+      }
+    },
+    {
+      "type": "EMPLOYEE_WORKS_ON_PROJECT",
+      "from": "EMP-003",
+      "to": "LiDAR Object Detection System for Autonomous Vehicles",
+      "properties": {
+        "team": "LiDAR Perception Team",
+        "role": "Embedded Engineer"
+      }
+    },
+    {
+      "type": "EMPLOYEE_WORKS_ON_PROJECT",
+      "from": "EMP-004",
+      "to": "LiDAR Object Detection System for Autonomous Vehicles",
+      "properties": {
+        "team": "LiDAR Perception Team",
+        "role": "Backend Engineer"
+      }
+    },
+    {
+      "type": "EMPLOYEE_WORKS_ON_PROJECT",
+      "from": "EMP-005",
+      "to": "LiDAR Object Detection System for Autonomous Vehicles",
+      "properties": {
+        "team": "LiDAR Perception Team",
+        "role": "DevOps Engineer"
+      }
+    },
+    {
+      "type": "EMPLOYEE_WORKS_ON_PROJECT",
+      "from": "EMP-006",
+      "to": "Lane Keeping Assist System using 2D Camera in ADAS ECU",
+      "properties": {
+        "team": "ADAS Vision Team",
+        "role": "Technical Lead"
+      }
+    },
+    {
+      "type": "EMPLOYEE_WORKS_ON_PROJECT",
+      "from": "EMP-007",
+      "to": "Lane Keeping Assist System using 2D Camera in ADAS ECU",
+      "properties": {
+        "team": "ADAS Vision Team",
+        "role": "Computer Vision Engineer"
+      }
+    },
+    {
+      "type": "EMPLOYEE_WORKS_ON_PROJECT",
+      "from": "EMP-008",
+      "to": "Lane Keeping Assist System using 2D Camera in ADAS ECU",
+      "properties": {
+        "team": "ADAS Vision Team",
+        "role": "Embedded Engineer"
+      }
+    },
+    {
+      "type": "EMPLOYEE_WORKS_ON_PROJECT",
+      "from": "EMP-009",
+      "to": "Lane Keeping Assist System using 2D Camera in ADAS ECU",
+      "properties": {
+        "team": "ADAS Vision Team",
+        "role": "Backend Engineer"
+      }
+    },
+    {
+      "type": "EMPLOYEE_WORKS_ON_PROJECT",
+      "from": "EMP-010",
+      "to": "Lane Keeping Assist System using 2D Camera in ADAS ECU",
+      "properties": {
+        "team": "ADAS Vision Team",
+        "role": "DevOps Engineer"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "b41f81e462b9b60b1364b06902d8d73e71176687",
+      "to": "object-detection-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-130"
+        ],
+        "author_employee_id": "EMP-002"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "50f2f576821662f53ae04b44e6d05ee9986dbaa1",
+      "to": "object-detection-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-104"
+        ],
+        "author_employee_id": "EMP-002"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "a54c60b8d64ed0ce3f7cfb56c4f9735082175b67",
+      "to": "telemetry-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-105"
+        ],
+        "author_employee_id": "EMP-004"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "17abe7bdf6cfc2baa8e941823b1b0678ce09ab1b",
+      "to": "object-detection-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-130"
+        ],
+        "author_employee_id": "EMP-002"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "72ddd54d63b84cfb20944506d300211967279976",
+      "to": "object-detection-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-104"
+        ],
+        "author_employee_id": "EMP-002"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "f155fdaeed4b7730229296a1b6d448d4880776ab",
+      "to": "edge-inference-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-131"
+        ],
+        "author_employee_id": "EMP-005"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "0781dd5ef8df306474ba75718efbd21a57e36722",
+      "to": "edge-inference-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-106"
+        ],
+        "author_employee_id": "EMP-005"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "f850c1c780a2ea26895cba634c3d3cf529a9609b",
+      "to": "telemetry-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-105"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "f926fab75a1d7994c7d981a30288b9906be3b466",
+      "to": "telemetry-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-132"
+        ],
+        "author_employee_id": "EMP-004"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "34ec818f2d976c953d8e2a12b373198a8c478811",
+      "to": "object-detection-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-130"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "f824c6caba347a9b8d0197263a40afc9fcd8904e",
+      "to": "edge-inference-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-131"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "b80d5ece853e9c3b62dbf0f508538e78f4f24d68",
+      "to": "object-detection-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-104"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "bcb52bf1efc5f538aabbab97b80e5678abb49abc",
+      "to": "tracking-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-107"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "61e8812e405f2e8b2358b8a16917c3125d8ea3c9",
+      "to": "telemetry-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-132"
+        ],
+        "author_employee_id": "EMP-004"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "39fc8d9f03dfda77917c328d9e8a6d43050cc027",
+      "to": "edge-inference-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-106"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "39fc8d9f03dfda77917c328d9e8a6d43050cc027",
+      "to": "object-detection-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-106"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "fd63b939809fdfa8e2f2e8e434e68444ccc932f9",
+      "to": "telemetry-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-107"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "fd63b939809fdfa8e2f2e8e434e68444ccc932f9",
+      "to": "tracking-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-107"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "1a637e79cc98783bd15e9ff13f56cdf5d1393ec3",
+      "to": "lidar-ingestion-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-108"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "69fba656f929dfe2b2e76e42cd210f228dc8f10c",
+      "to": "telemetry-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-132"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "578ddda33e85d0a07fbf37bbceec004e3198a65f",
+      "to": "tracking-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-109"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "cc37a75d63c54c1d4cb361aaff80b41a345d6026",
+      "to": "tracking-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-107"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "cc37a75d63c54c1d4cb361aaff80b41a345d6026",
+      "to": "telemetry-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-107"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "4db2c2b7d18f8ca34ce1451aa4ffbfe323746d32",
+      "to": "tracking-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-109"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "30ec5958bd89d1e41f5d324cc2f0cc759345a78b",
+      "to": "lidar-ingestion-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-108"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "30ec5958bd89d1e41f5d324cc2f0cc759345a78b",
+      "to": "tracking-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-108"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "0fca3ebbc34c3d4dfeb21223ba0b9545c95273e0",
+      "to": "tracking-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-110"
+        ],
+        "author_employee_id": "EMP-004"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "032f70d118b8f1c232890ebcf6de13449904ceea",
+      "to": "edge-inference-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-111"
+        ],
+        "author_employee_id": "EMP-003"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "6116b77cafb4923a69330811a5ada7a15c1cb007",
+      "to": "tracking-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-110"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "fef4d90dbbbcd828e35663a8aecaf6e3e9fbed6a",
+      "to": "tracking-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-109"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "95d8cb38b8dfae3f60800a404ba464828b2136b2",
+      "to": "edge-inference-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-112"
+        ],
+        "author_employee_id": "EMP-003"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "0f8c87dea33eb978900ea5e456cb6cada86c5f52",
+      "to": "tracking-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-110"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "1d56ec2e4604509bd9d1bc7144caecbc515c7b2f",
+      "to": "edge-inference-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-112"
+        ],
+        "author_employee_id": "EMP-003"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "ec86ebc600326223a15bd7493ac35e182d484f51",
+      "to": "edge-inference-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-111"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "cd5a6e961b069cd4b8018882b1d17c441ae93ee1",
+      "to": "telemetry-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-113"
+        ],
+        "author_employee_id": "EMP-004"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "11aa1b8ecea1f5056160a1f53fd5bb6bfb1e378f",
+      "to": "edge-inference-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-112"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "1223c27c75ba0519e7fe43773ceb1087a0d6553d",
+      "to": "edge-inference-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-114"
+        ],
+        "author_employee_id": "EMP-005"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "68e2270cc4535c15fc2fe1cb92a85e9021800bac",
+      "to": "telemetry-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-113"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "2ef310b97404912ac1890cd75cb5a57ddfee439a",
+      "to": "object-detection-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-115"
+        ],
+        "author_employee_id": "EMP-002"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "e48521c07870ac9a75ccf14906042af7c85bd511",
+      "to": "edge-inference-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-114"
+        ],
+        "author_employee_id": "EMP-003"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "e48521c07870ac9a75ccf14906042af7c85bd511",
+      "to": "telemetry-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-114"
+        ],
+        "author_employee_id": "EMP-003"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "32843bf1ee4119822dfbcfa25e7577ea0308f9a4",
+      "to": "object-detection-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-115"
+        ],
+        "author_employee_id": "EMP-002"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "957b808a95c67b09a2dbefd18ae1b817bcdebb82",
+      "to": "lidar-ingestion-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-116"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "d2212be40ba38f8440259b68a4a003859ba50e25",
+      "to": "edge-inference-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-114"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "d2212be40ba38f8440259b68a4a003859ba50e25",
+      "to": "telemetry-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-114"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "56317c3550413b0983d3aec37919368263279192",
+      "to": "object-detection-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-115"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "74b1a9fc95ff5a5f802b8df666e340ac35ad01b6",
+      "to": "telemetry-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-117"
+        ],
+        "author_employee_id": "EMP-004"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "e5ec06262c64ee72e3d4618c6fb7c5198f3b2f48",
+      "to": "lidar-ingestion-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-116"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "e5ec06262c64ee72e3d4618c6fb7c5198f3b2f48",
+      "to": "tracking-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-116"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "baf771a857e892cda79941b12a12623868893b42",
+      "to": "telemetry-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-117"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "baf771a857e892cda79941b12a12623868893b42",
+      "to": "tracking-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-117"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "7bee16446f01a159d949e6567781867b7bdf1dd7",
+      "to": "telemetry-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-118"
+        ],
+        "author_employee_id": "EMP-004"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "28c8ecf5b743232be83a35e88c9da629f5a01c14",
+      "to": "telemetry-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-119"
+        ],
+        "author_employee_id": "EMP-005"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "1def3e4aff55270a3b762f835d6240fa68c09a2e",
+      "to": "telemetry-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-118"
+        ],
+        "author_employee_id": "EMP-004"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "88561296c2ec62d0d44e69031e3c5f780b93831b",
+      "to": "lidar-ingestion-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-119"
+        ],
+        "author_employee_id": "EMP-005"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "88561296c2ec62d0d44e69031e3c5f780b93831b",
+      "to": "telemetry-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-119"
+        ],
+        "author_employee_id": "EMP-005"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "adeb215d1ddbc23fdedbaa6acfbf58bb5eb2cb99",
+      "to": "tracking-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-120"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "ef2bb64152886da6dc6743d03ea45934c9ce01be",
+      "to": "telemetry-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-118"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "138f48e02e65ecc6fd483e5e719874e08e950cd5",
+      "to": "tracking-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-120"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "e17fa85102393660bc1a3f63babda0324ad9b085",
+      "to": "telemetry-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-119"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "e17fa85102393660bc1a3f63babda0324ad9b085",
+      "to": "lidar-ingestion-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-119"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "bbb7bda24f06630db15ea8f5b578733b2458947a",
+      "to": "edge-inference-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-121"
+        ],
+        "author_employee_id": "EMP-005"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "23b6dedd39845d4bebc3d8a27fe9bd9c2d27360d",
+      "to": "telemetry-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-122"
+        ],
+        "author_employee_id": "EMP-004"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "43a4fe680f5e8c99dc49b52d480f7c963593dbed",
+      "to": "tracking-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-120"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "3075ae916645bcca20f78fefaeaf9d624927bac2",
+      "to": "edge-inference-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-121"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "b4dd56958e9f283963311976df1b5e03431399b7",
+      "to": "camera-ingestion-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-208"
+        ],
+        "author_employee_id": "EMP-008"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "35b6bf7c2f37def11a19070c544f36406a31594d",
+      "to": "telemetry-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-122"
+        ],
+        "author_employee_id": "EMP-004"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "9463f461233f222e653e8d0aeb96560885d94583",
+      "to": "tracking-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-123"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "89a38a2c8ae560a932b189ecf2c8417a03740972",
+      "to": "steering-control-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-209"
+        ],
+        "author_employee_id": "EMP-008"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "13370d831067cc8672ebe8e2c82d550ccaa508e0",
+      "to": "lidar-ingestion-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-123"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "13370d831067cc8672ebe8e2c82d550ccaa508e0",
+      "to": "tracking-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-123"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "0283047cdc542907c51ef79c9f217219eba02312",
+      "to": "steering-control-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-209"
+        ],
+        "author_employee_id": "EMP-008"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "cfe46254cdb483e4aee41bdf2f06bf06153d9a77",
+      "to": "camera-ingestion-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-208"
+        ],
+        "author_employee_id": "EMP-006"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "cfe46254cdb483e4aee41bdf2f06bf06153d9a77",
+      "to": "steering-control-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-208"
+        ],
+        "author_employee_id": "EMP-006"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "4da5d20b8c494fc53a2c15fc2668ca4c5188a913",
+      "to": "lane-detection-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-210"
+        ],
+        "author_employee_id": "EMP-007"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "5db77d80bf3dea1713082317ad40ffefb3629841",
+      "to": "telemetry-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-122"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "aa4cb30c4bbdf98aeb22eee18743cb1e0bad5919",
+      "to": "edge-inference-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-124"
+        ],
+        "author_employee_id": "EMP-002"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "79e5b294354436c8ad8b79765e8232ec8a222fba",
+      "to": "lane-detection-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-210"
+        ],
+        "author_employee_id": "EMP-007"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "f620c9d2e8de30cd3ea5f01a832e0bae931fba48",
+      "to": "calibration-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-211"
+        ],
+        "author_employee_id": "EMP-009"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "64c7bcacb3116ff9bd614863d7aed32121e028a8",
+      "to": "telemetry-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-125"
+        ],
+        "author_employee_id": "EMP-005"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "7601442593b0a4c6371f4c9ab93532b1aff4ad46",
+      "to": "tracking-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-123"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "7601442593b0a4c6371f4c9ab93532b1aff4ad46",
+      "to": "lidar-ingestion-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-123"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "eda1f6063249037dfc0d631b5c018a557a6013e3",
+      "to": "steering-control-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-209"
+        ],
+        "author_employee_id": "EMP-006"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "71b6f24429bea5c1649ae51dbd2534e4a4e2615f",
+      "to": "edge-inference-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-125"
+        ],
+        "author_employee_id": "EMP-004"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "71b6f24429bea5c1649ae51dbd2534e4a4e2615f",
+      "to": "telemetry-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-125"
+        ],
+        "author_employee_id": "EMP-004"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "37b21e2132cbbdabd30a28b5e88e65f19f938464",
+      "to": "edge-inference-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-124"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "37b21e2132cbbdabd30a28b5e88e65f19f938464",
+      "to": "object-detection-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-124"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "eec941cf9bd51701b0b1d452f4a6cf239235002e",
+      "to": "telemetry-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-126"
+        ],
+        "author_employee_id": "EMP-004"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "9281d2a5b324160c69e8e4560e0f7f2fcabcf4a6",
+      "to": "calibration-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-212"
+        ],
+        "author_employee_id": "EMP-009"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "c2f2026b621de6d6bf05374f6ae55260cb7a137a",
+      "to": "lane-detection-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-210"
+        ],
+        "author_employee_id": "EMP-006"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "66b4be252a3e4581bf9b964ebd3f40e974e71056",
+      "to": "calibration-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-211"
+        ],
+        "author_employee_id": "EMP-006"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "66b4be252a3e4581bf9b964ebd3f40e974e71056",
+      "to": "diagnostics-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-211"
+        ],
+        "author_employee_id": "EMP-006"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "09c59aff4b6e9eb21c52f6d7f7365fd54cf9e511",
+      "to": "telemetry-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-126"
+        ],
+        "author_employee_id": "EMP-004"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "b4f235ff6d4e17c15dd54eb1323a6da43c8b9591",
+      "to": "edge-inference-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-127"
+        ],
+        "author_employee_id": "EMP-005"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "162c5dbc610f6403d438d2c29b5c14360da64e61",
+      "to": "object-detection-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-101"
+        ],
+        "author_employee_id": "EMP-002"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "0162305312d1322380485baa941b04037e7abc27",
+      "to": "calibration-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-212"
+        ],
+        "author_employee_id": "EMP-009"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "8a116c801661924d2f9a6ba31e540e12a97f3ff6",
+      "to": "diagnostics-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-213"
+        ],
+        "author_employee_id": "EMP-006"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "3b625f5f45a84e75948128ae9b4f233982a01aa5",
+      "to": "telemetry-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-125"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "3b625f5f45a84e75948128ae9b4f233982a01aa5",
+      "to": "edge-inference-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-125"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "d7448f42d1771d0459e82e923d22ca4d2f25132d",
+      "to": "edge-inference-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-101"
+        ],
+        "author_employee_id": "EMP-002"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "d7448f42d1771d0459e82e923d22ca4d2f25132d",
+      "to": "object-detection-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-101"
+        ],
+        "author_employee_id": "EMP-002"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "d9034444099283fe1ff3ffc78bb85a608f2dc328",
+      "to": "diagnostics-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-213"
+        ],
+        "author_employee_id": "EMP-006"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "df6dbf168d92a15931b7ff2ef72c88f6c8c881a2",
+      "to": "telemetry-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-126"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "715356038ad6bc4bdce9f06120dfad8caf31339a",
+      "to": "camera-ingestion-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-214"
+        ],
+        "author_employee_id": "EMP-010"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "b2f0a46d27d8d43f6241c3f2a1afc1234ea2533d",
+      "to": "edge-inference-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-127"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "b2f0a46d27d8d43f6241c3f2a1afc1234ea2533d",
+      "to": "object-detection-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-127"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "3fe11e37b88700ab1a5882264646031bebaeb3a0",
+      "to": "lidar-ingestion-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-128"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "d366a14b27040442ad903d3f19070c9e15fdfce5",
+      "to": "edge-inference-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-102"
+        ],
+        "author_employee_id": "EMP-003"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "8eed07ddba8d598dfe0bf4c5c43f8886e669e2cd",
+      "to": "calibration-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-212"
+        ],
+        "author_employee_id": "EMP-006"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "a0b21fd650392a461094b378b50c7e9156f6546c",
+      "to": "lidar-ingestion-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-129"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "10912fb160977d90a695308660a6c0300d976bd0",
+      "to": "camera-ingestion-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-214"
+        ],
+        "author_employee_id": "EMP-006"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "10912fb160977d90a695308660a6c0300d976bd0",
+      "to": "diagnostics-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-214"
+        ],
+        "author_employee_id": "EMP-006"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "7182b71c21311bbd14afc0a857b8a481a482960d",
+      "to": "lane-detection-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-215"
+        ],
+        "author_employee_id": "EMP-007"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "fb7eeec0a2fe29a171a704ca17c18c48cd668e64",
+      "to": "object-detection-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-101"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "fb7eeec0a2fe29a171a704ca17c18c48cd668e64",
+      "to": "edge-inference-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-101"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "e19acbe997bd86423f2d8e31b3afa7d7e31b9ba3",
+      "to": "diagnostics-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-213"
+        ],
+        "author_employee_id": "EMP-006"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "b17e06a06942c090819018922c0ecfbac3d5e8d3",
+      "to": "edge-inference-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-103"
+        ],
+        "author_employee_id": "EMP-003"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "ca5142f3ef5ec5cdbfa35e16ae73e5eaf35a8439",
+      "to": "lidar-ingestion-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-129"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "fc0c862e52dfe4a8e7ecbfef67a22d7fc56a6e86",
+      "to": "lidar-ingestion-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-128"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "fc0c862e52dfe4a8e7ecbfef67a22d7fc56a6e86",
+      "to": "tracking-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-128"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "e18a46d5237b6d656de3f9403e1a76665863ece8",
+      "to": "lane-detection-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-215"
+        ],
+        "author_employee_id": "EMP-007"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "15957161e911d672318d9970aa2701e3ec9d81c8",
+      "to": "edge-inference-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-103"
+        ],
+        "author_employee_id": "EMP-003"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "15957161e911d672318d9970aa2701e3ec9d81c8",
+      "to": "telemetry-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-103"
+        ],
+        "author_employee_id": "EMP-003"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "fcd9b5f3ab61191af387293f6cb1898dfeea930b",
+      "to": "edge-inference-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-102"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "3e00595f5e66df809f4b7254652131977b92863a",
+      "to": "camera-ingestion-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-214"
+        ],
+        "author_employee_id": "EMP-006"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "3e00595f5e66df809f4b7254652131977b92863a",
+      "to": "diagnostics-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-214"
+        ],
+        "author_employee_id": "EMP-006"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "827088e085d57c4464f4c004fc27ab14e3f268b0",
+      "to": "camera-ingestion-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-217"
+        ],
+        "author_employee_id": "EMP-008"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "1bc52272e5094d78d9edb2e30834d4e149369bd3",
+      "to": "steering-control-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-216"
+        ],
+        "author_employee_id": "EMP-006"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "d16195aa31f45f8b61da8784da46a3e56e619bba",
+      "to": "lidar-ingestion-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-129"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "ea23143b0a87f416437cb3347b773ee9a4ebeadb",
+      "to": "edge-inference-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-103"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "ea23143b0a87f416437cb3347b773ee9a4ebeadb",
+      "to": "telemetry-service",
+      "properties": {
+        "ticket_ids": [
+          "LID-103"
+        ],
+        "author_employee_id": "EMP-001"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "8901e9125f006aeebd7f0c28cfa8ef853390957e",
+      "to": "lane-detection-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-215"
+        ],
+        "author_employee_id": "EMP-006"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "4bf3d74fa05ea973c0621aae1e9e379cf610f7ed",
+      "to": "steering-control-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-216"
+        ],
+        "author_employee_id": "EMP-006"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "4bf3d74fa05ea973c0621aae1e9e379cf610f7ed",
+      "to": "camera-ingestion-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-216"
+        ],
+        "author_employee_id": "EMP-006"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "24d3d39c8bd7909af0dab0b0a60ae878ee096967",
+      "to": "calibration-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-218"
+        ],
+        "author_employee_id": "EMP-009"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "f4835c570f5f0e5b769c08cacb8bf319e61519b8",
+      "to": "camera-ingestion-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-217"
+        ],
+        "author_employee_id": "EMP-006"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "f9617a46d442d69a0ad2971a543c504301ef0da3",
+      "to": "calibration-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-218"
+        ],
+        "author_employee_id": "EMP-009"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "01bc0107e6f89ac7dc111ac880fe9ab13e578e3a",
+      "to": "diagnostics-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-219"
+        ],
+        "author_employee_id": "EMP-006"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "53abcd403a2229a318d35407c896ec57f79ac70b",
+      "to": "diagnostics-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-219"
+        ],
+        "author_employee_id": "EMP-006"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "53abcd403a2229a318d35407c896ec57f79ac70b",
+      "to": "lane-detection-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-219"
+        ],
+        "author_employee_id": "EMP-006"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "bf99cdb0ac5756366d426505d7652260f09d25bd",
+      "to": "calibration-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-218"
+        ],
+        "author_employee_id": "EMP-006"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "17b55b26e724c563ddd239dc0feb3f9fe118c5d5",
+      "to": "steering-control-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-220"
+        ],
+        "author_employee_id": "EMP-008"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "e4668fa0e5fc50a8d9a8e311703421a629707011",
+      "to": "steering-control-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-220"
+        ],
+        "author_employee_id": "EMP-008"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "c68e6c02174a542ad80f6c69b022e78f080d3cf7",
+      "to": "camera-ingestion-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-221"
+        ],
+        "author_employee_id": "EMP-010"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "de864ff50c30f5f595d6ad50918b965665d29bef",
+      "to": "diagnostics-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-219"
+        ],
+        "author_employee_id": "EMP-006"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "de864ff50c30f5f595d6ad50918b965665d29bef",
+      "to": "lane-detection-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-219"
+        ],
+        "author_employee_id": "EMP-006"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "3f4726e374d80af99cb76ad350eb2371f33f0919",
+      "to": "calibration-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-222"
+        ],
+        "author_employee_id": "EMP-009"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "119baaa335f1b28ad9798ca3061b363ba2ead173",
+      "to": "steering-control-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-220"
+        ],
+        "author_employee_id": "EMP-006"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "99d4eee79dbb37e00346ec2b4e2b660f49842aa9",
+      "to": "camera-ingestion-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-221"
+        ],
+        "author_employee_id": "EMP-006"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "99d4eee79dbb37e00346ec2b4e2b660f49842aa9",
+      "to": "diagnostics-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-221"
+        ],
+        "author_employee_id": "EMP-006"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "b499d3957ca146da1768e8b3449f776eb12ac816",
+      "to": "calibration-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-222"
+        ],
+        "author_employee_id": "EMP-009"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "2699d67603c89dd2ba66622363d0edb48708fd4e",
+      "to": "diagnostics-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-223"
+        ],
+        "author_employee_id": "EMP-010"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "69a5a95108a6e4e2fa929a3344d3cefb8191403d",
+      "to": "calibration-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-224"
+        ],
+        "author_employee_id": "EMP-009"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "6acb7470481e93cd2c2afccffdadebb8c13625c1",
+      "to": "camera-ingestion-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-223"
+        ],
+        "author_employee_id": "EMP-006"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "6acb7470481e93cd2c2afccffdadebb8c13625c1",
+      "to": "diagnostics-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-223"
+        ],
+        "author_employee_id": "EMP-006"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "c43e2e1f3d99fdf388e38a682bbf5018a1d7143c",
+      "to": "calibration-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-222"
+        ],
+        "author_employee_id": "EMP-006"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "4e8b111ed97133572ca0e888612a936722a7d40c",
+      "to": "steering-control-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-225"
+        ],
+        "author_employee_id": "EMP-008"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "fff5411e0a57bc2e228f92ce93ab4ea8161252c8",
+      "to": "diagnostics-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-223"
+        ],
+        "author_employee_id": "EMP-006"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "fff5411e0a57bc2e228f92ce93ab4ea8161252c8",
+      "to": "camera-ingestion-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-223"
+        ],
+        "author_employee_id": "EMP-006"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "eb5c48fa56a011e11bfbaf8f7b7b6a8cd0ec592d",
+      "to": "steering-control-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-225"
+        ],
+        "author_employee_id": "EMP-008"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "ef2bdc0df9ae1c98f52a316e0c43d1bf0153d7d1",
+      "to": "calibration-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-224"
+        ],
+        "author_employee_id": "EMP-006"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "ef2bdc0df9ae1c98f52a316e0c43d1bf0153d7d1",
+      "to": "lane-detection-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-224"
+        ],
+        "author_employee_id": "EMP-006"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "4d370701fe8609ebeccda4e4850bd49c155abdec",
+      "to": "lane-detection-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-226"
+        ],
+        "author_employee_id": "EMP-007"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "2dd7f220b6aa64e892a3ad98b0bd3cf0ebf07eb1",
+      "to": "steering-control-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-227"
+        ],
+        "author_employee_id": "EMP-010"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "468d5088dccda810991ff3bf8eb6368c15d0c5d0",
+      "to": "lane-detection-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-226"
+        ],
+        "author_employee_id": "EMP-007"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "7bafa8f1254df90b45f56e7d0ffc628a9323eda3",
+      "to": "steering-control-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-225"
+        ],
+        "author_employee_id": "EMP-006"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "1ddf763f9eae54916bd2e784b46f732d32d6fb1e",
+      "to": "lane-detection-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-201"
+        ],
+        "author_employee_id": "EMP-007"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "933a42210adce7537566e95225e50c64d2c03045",
+      "to": "lane-detection-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-201"
+        ],
+        "author_employee_id": "EMP-007"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "69672016758d56469d8ab95897a6cd62e9604537",
+      "to": "diagnostics-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-228"
+        ],
+        "author_employee_id": "EMP-006"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "2af1feedeed8e3b83c294f57760eca09eae5a7b7",
+      "to": "lane-detection-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-226"
+        ],
+        "author_employee_id": "EMP-006"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "03d08d74248dde27f4bdeee106a39e17c82b7895",
+      "to": "steering-control-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-227"
+        ],
+        "author_employee_id": "EMP-006"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "03d08d74248dde27f4bdeee106a39e17c82b7895",
+      "to": "diagnostics-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-227"
+        ],
+        "author_employee_id": "EMP-006"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "609c6a6086ef565dd4ce8760dda34500d07fc92e",
+      "to": "calibration-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-202"
+        ],
+        "author_employee_id": "EMP-009"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "aecea41221211513017c317f31157d03131a5a02",
+      "to": "calibration-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-203"
+        ],
+        "author_employee_id": "EMP-009"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "e4cb722f1b993ea6b58029b234c9fe5b3afd1d2e",
+      "to": "calibration-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-203"
+        ],
+        "author_employee_id": "EMP-009"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "e4cb722f1b993ea6b58029b234c9fe5b3afd1d2e",
+      "to": "lane-detection-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-203"
+        ],
+        "author_employee_id": "EMP-009"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "caf5b69fe7b31d6de07e55e327809c4ba18bdf51",
+      "to": "lane-detection-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-201"
+        ],
+        "author_employee_id": "EMP-006"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "3cbded3c552f8de4965b7dbe531b2877c44bd604",
+      "to": "diagnostics-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-228"
+        ],
+        "author_employee_id": "EMP-006"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "3cbded3c552f8de4965b7dbe531b2877c44bd604",
+      "to": "calibration-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-228"
+        ],
+        "author_employee_id": "EMP-006"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "fad4a8bb82b64208bf6bc5eff24993c141aff9a9",
+      "to": "calibration-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-202"
+        ],
+        "author_employee_id": "EMP-006"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "fad4a8bb82b64208bf6bc5eff24993c141aff9a9",
+      "to": "camera-ingestion-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-202"
+        ],
+        "author_employee_id": "EMP-006"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "f874892d18d51258a71c359a8d89a837ab4cd967",
+      "to": "lane-detection-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-204"
+        ],
+        "author_employee_id": "EMP-007"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "acb5e0f527fb4486a7a881d05a4aab90b91c5021",
+      "to": "lane-detection-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-204"
+        ],
+        "author_employee_id": "EMP-007"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "b181b67a93e940b3a958f50a3333248bf31618bf",
+      "to": "calibration-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-203"
+        ],
+        "author_employee_id": "EMP-006"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "b181b67a93e940b3a958f50a3333248bf31618bf",
+      "to": "lane-detection-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-203"
+        ],
+        "author_employee_id": "EMP-006"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "6637d5ce8f4a7636787dffba7328cf4d8c0e5c4f",
+      "to": "steering-control-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-205"
+        ],
+        "author_employee_id": "EMP-010"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "bf1fac0af9fb58a3a555022915220def7ca9eeb5",
+      "to": "lane-detection-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-204"
+        ],
+        "author_employee_id": "EMP-006"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "30dfb6f8cf6443a31c724a2aec84c630dc6c83ba",
+      "to": "calibration-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-206"
+        ],
+        "author_employee_id": "EMP-006"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "d3df2980d4c632e6e63830189a3f7fe695bf4f2e",
+      "to": "steering-control-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-205"
+        ],
+        "author_employee_id": "EMP-006"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "d3df2980d4c632e6e63830189a3f7fe695bf4f2e",
+      "to": "diagnostics-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-205"
+        ],
+        "author_employee_id": "EMP-006"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "c775fe3139bdc69e5b685b6fe4a39050a40d4a4b",
+      "to": "steering-control-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-207"
+        ],
+        "author_employee_id": "EMP-008"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "0741d4661c1f71bc9ff4854f9d60388152f98686",
+      "to": "diagnostics-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-207"
+        ],
+        "author_employee_id": "EMP-008"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "0741d4661c1f71bc9ff4854f9d60388152f98686",
+      "to": "steering-control-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-207"
+        ],
+        "author_employee_id": "EMP-008"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "589d72c397a2a5f4c9c7a062d317692fef046855",
+      "to": "calibration-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-206"
+        ],
+        "author_employee_id": "EMP-006"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "589d72c397a2a5f4c9c7a062d317692fef046855",
+      "to": "lane-detection-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-206"
+        ],
+        "author_employee_id": "EMP-006"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "589d72c397a2a5f4c9c7a062d317692fef046855",
+      "to": "camera-ingestion-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-206"
+        ],
+        "author_employee_id": "EMP-006"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "bdb65544c4793c8669191b0d662029d43e7aee54",
+      "to": "steering-control-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-207"
+        ],
+        "author_employee_id": "EMP-006"
+      }
+    },
+    {
+      "type": "COMMIT_MODIFIES_SERVICE",
+      "from": "bdb65544c4793c8669191b0d662029d43e7aee54",
+      "to": "diagnostics-service",
+      "properties": {
+        "ticket_ids": [
+          "ADAS-207"
+        ],
+        "author_employee_id": "EMP-006"
+      }
+    },
+    {
+      "type": "INCIDENT_AFFECTS_SERVICE",
+      "from": "INC-001",
+      "to": "edge-inference-service",
+      "properties": {
+        "severity": "SEV-1"
+      }
+    },
+    {
+      "type": "INCIDENT_AFFECTS_SERVICE",
+      "from": "INC-001",
+      "to": "object-detection-service",
+      "properties": {
+        "severity": "SEV-1"
+      }
+    },
+    {
+      "type": "TICKET_RELATES_TO_INCIDENT",
+      "from": "LID-103",
+      "to": "INC-001",
+      "properties": {
+        "relationship": "triage-or-follow-up"
+      }
+    },
+    {
+      "type": "TICKET_RELATES_TO_INCIDENT",
+      "from": "LID-106",
+      "to": "INC-001",
+      "properties": {
+        "relationship": "triage-or-follow-up"
+      }
+    },
+    {
+      "type": "TICKET_RELATES_TO_INCIDENT",
+      "from": "LID-121",
+      "to": "INC-001",
+      "properties": {
+        "relationship": "triage-or-follow-up"
+      }
+    },
+    {
+      "type": "INCIDENT_AFFECTS_SERVICE",
+      "from": "INC-002",
+      "to": "tracking-service",
+      "properties": {
+        "severity": "SEV-2"
+      }
+    },
+    {
+      "type": "INCIDENT_AFFECTS_SERVICE",
+      "from": "INC-002",
+      "to": "lidar-ingestion-service",
+      "properties": {
+        "severity": "SEV-2"
+      }
+    },
+    {
+      "type": "INCIDENT_AFFECTS_SERVICE",
+      "from": "INC-002",
+      "to": "telemetry-service",
+      "properties": {
+        "severity": "SEV-2"
+      }
+    },
+    {
+      "type": "TICKET_RELATES_TO_INCIDENT",
+      "from": "LID-107",
+      "to": "INC-002",
+      "properties": {
+        "relationship": "triage-or-follow-up"
+      }
+    },
+    {
+      "type": "TICKET_RELATES_TO_INCIDENT",
+      "from": "LID-116",
+      "to": "INC-002",
+      "properties": {
+        "relationship": "triage-or-follow-up"
+      }
+    },
+    {
+      "type": "TICKET_RELATES_TO_INCIDENT",
+      "from": "LID-117",
+      "to": "INC-002",
+      "properties": {
+        "relationship": "triage-or-follow-up"
+      }
+    },
+    {
+      "type": "INCIDENT_AFFECTS_SERVICE",
+      "from": "INC-003",
+      "to": "calibration-service",
+      "properties": {
+        "severity": "SEV-1"
+      }
+    },
+    {
+      "type": "INCIDENT_AFFECTS_SERVICE",
+      "from": "INC-003",
+      "to": "lane-detection-service",
+      "properties": {
+        "severity": "SEV-1"
+      }
+    },
+    {
+      "type": "INCIDENT_AFFECTS_SERVICE",
+      "from": "INC-003",
+      "to": "camera-ingestion-service",
+      "properties": {
+        "severity": "SEV-1"
+      }
+    },
+    {
+      "type": "TICKET_RELATES_TO_INCIDENT",
+      "from": "ADAS-203",
+      "to": "INC-003",
+      "properties": {
+        "relationship": "triage-or-follow-up"
+      }
+    },
+    {
+      "type": "TICKET_RELATES_TO_INCIDENT",
+      "from": "ADAS-206",
+      "to": "INC-003",
+      "properties": {
+        "relationship": "triage-or-follow-up"
+      }
+    },
+    {
+      "type": "TICKET_RELATES_TO_INCIDENT",
+      "from": "ADAS-224",
+      "to": "INC-003",
+      "properties": {
+        "relationship": "triage-or-follow-up"
+      }
+    },
+    {
+      "type": "INCIDENT_AFFECTS_SERVICE",
+      "from": "INC-004",
+      "to": "steering-control-service",
+      "properties": {
+        "severity": "SEV-1"
+      }
+    },
+    {
+      "type": "INCIDENT_AFFECTS_SERVICE",
+      "from": "INC-004",
+      "to": "camera-ingestion-service",
+      "properties": {
+        "severity": "SEV-1"
+      }
+    },
+    {
+      "type": "INCIDENT_AFFECTS_SERVICE",
+      "from": "INC-004",
+      "to": "diagnostics-service",
+      "properties": {
+        "severity": "SEV-1"
+      }
+    },
+    {
+      "type": "TICKET_RELATES_TO_INCIDENT",
+      "from": "ADAS-207",
+      "to": "INC-004",
+      "properties": {
+        "relationship": "triage-or-follow-up"
+      }
+    },
+    {
+      "type": "TICKET_RELATES_TO_INCIDENT",
+      "from": "ADAS-216",
+      "to": "INC-004",
+      "properties": {
+        "relationship": "triage-or-follow-up"
+      }
+    },
+    {
+      "type": "TICKET_RELATES_TO_INCIDENT",
+      "from": "ADAS-217",
+      "to": "INC-004",
+      "properties": {
+        "relationship": "triage-or-follow-up"
+      }
+    },
+    {
+      "type": "INCIDENT_AFFECTS_SERVICE",
+      "from": "INC-005",
+      "to": "telemetry-service",
+      "properties": {
+        "severity": "SEV-3"
+      }
+    },
+    {
+      "type": "TICKET_RELATES_TO_INCIDENT",
+      "from": "LID-105",
+      "to": "INC-005",
+      "properties": {
+        "relationship": "triage-or-follow-up"
+      }
+    },
+    {
+      "type": "TICKET_RELATES_TO_INCIDENT",
+      "from": "LID-126",
+      "to": "INC-005",
+      "properties": {
+        "relationship": "triage-or-follow-up"
+      }
+    },
+    {
+      "type": "INCIDENT_AFFECTS_SERVICE",
+      "from": "INC-006",
+      "to": "object-detection-service",
+      "properties": {
+        "severity": "SEV-2"
+      }
+    },
+    {
+      "type": "TICKET_RELATES_TO_INCIDENT",
+      "from": "LID-115",
+      "to": "INC-006",
+      "properties": {
+        "relationship": "triage-or-follow-up"
+      }
+    },
+    {
+      "type": "INCIDENT_AFFECTS_SERVICE",
+      "from": "INC-007",
+      "to": "edge-inference-service",
+      "properties": {
+        "severity": "SEV-2"
+      }
+    },
+    {
+      "type": "TICKET_RELATES_TO_INCIDENT",
+      "from": "LID-112",
+      "to": "INC-007",
+      "properties": {
+        "relationship": "triage-or-follow-up"
+      }
+    },
+    {
+      "type": "TICKET_RELATES_TO_INCIDENT",
+      "from": "LID-121",
+      "to": "INC-007",
+      "properties": {
+        "relationship": "triage-or-follow-up"
+      }
+    },
+    {
+      "type": "INCIDENT_AFFECTS_SERVICE",
+      "from": "INC-008",
+      "to": "tracking-service",
+      "properties": {
+        "severity": "SEV-3"
+      }
+    },
+    {
+      "type": "TICKET_RELATES_TO_INCIDENT",
+      "from": "LID-120",
+      "to": "INC-008",
+      "properties": {
+        "relationship": "triage-or-follow-up"
+      }
+    },
+    {
+      "type": "INCIDENT_AFFECTS_SERVICE",
+      "from": "INC-009",
+      "to": "camera-ingestion-service",
+      "properties": {
+        "severity": "SEV-2"
+      }
+    },
+    {
+      "type": "INCIDENT_AFFECTS_SERVICE",
+      "from": "INC-009",
+      "to": "diagnostics-service",
+      "properties": {
+        "severity": "SEV-2"
+      }
+    },
+    {
+      "type": "TICKET_RELATES_TO_INCIDENT",
+      "from": "ADAS-214",
+      "to": "INC-009",
+      "properties": {
+        "relationship": "triage-or-follow-up"
+      }
+    },
+    {
+      "type": "TICKET_RELATES_TO_INCIDENT",
+      "from": "ADAS-223",
+      "to": "INC-009",
+      "properties": {
+        "relationship": "triage-or-follow-up"
+      }
+    },
+    {
+      "type": "INCIDENT_AFFECTS_SERVICE",
+      "from": "INC-010",
+      "to": "lane-detection-service",
+      "properties": {
+        "severity": "SEV-3"
+      }
+    },
+    {
+      "type": "TICKET_RELATES_TO_INCIDENT",
+      "from": "ADAS-210",
+      "to": "INC-010",
+      "properties": {
+        "relationship": "triage-or-follow-up"
+      }
+    },
+    {
+      "type": "TICKET_RELATES_TO_INCIDENT",
+      "from": "ADAS-226",
+      "to": "INC-010",
+      "properties": {
+        "relationship": "triage-or-follow-up"
+      }
+    },
+    {
+      "type": "INCIDENT_AFFECTS_SERVICE",
+      "from": "INC-011",
+      "to": "steering-control-service",
+      "properties": {
+        "severity": "SEV-2"
+      }
+    },
+    {
+      "type": "TICKET_RELATES_TO_INCIDENT",
+      "from": "ADAS-220",
+      "to": "INC-011",
+      "properties": {
+        "relationship": "triage-or-follow-up"
+      }
+    },
+    {
+      "type": "TICKET_RELATES_TO_INCIDENT",
+      "from": "ADAS-225",
+      "to": "INC-011",
+      "properties": {
+        "relationship": "triage-or-follow-up"
+      }
+    },
+    {
+      "type": "INCIDENT_AFFECTS_SERVICE",
+      "from": "INC-012",
+      "to": "calibration-service",
+      "properties": {
+        "severity": "SEV-2"
+      }
+    },
+    {
+      "type": "TICKET_RELATES_TO_INCIDENT",
+      "from": "ADAS-202",
+      "to": "INC-012",
+      "properties": {
+        "relationship": "triage-or-follow-up"
+      }
+    },
+    {
+      "type": "TICKET_RELATES_TO_INCIDENT",
+      "from": "ADAS-211",
+      "to": "INC-012",
+      "properties": {
+        "relationship": "triage-or-follow-up"
+      }
+    },
+    {
+      "type": "INCIDENT_AFFECTS_SERVICE",
+      "from": "INC-013",
+      "to": "edge-inference-service",
+      "properties": {
+        "severity": "SEV-2"
+      }
+    },
+    {
+      "type": "INCIDENT_AFFECTS_SERVICE",
+      "from": "INC-013",
+      "to": "object-detection-service",
+      "properties": {
+        "severity": "SEV-2"
+      }
+    },
+    {
+      "type": "TICKET_RELATES_TO_INCIDENT",
+      "from": "LID-127",
+      "to": "INC-013",
+      "properties": {
+        "relationship": "triage-or-follow-up"
+      }
+    },
+    {
+      "type": "TICKET_RELATES_TO_INCIDENT",
+      "from": "LID-131",
+      "to": "INC-013",
+      "properties": {
+        "relationship": "triage-or-follow-up"
+      }
+    },
+    {
+      "type": "INCIDENT_AFFECTS_SERVICE",
+      "from": "INC-014",
+      "to": "lane-detection-service",
+      "properties": {
+        "severity": "SEV-3"
+      }
+    },
+    {
+      "type": "TICKET_RELATES_TO_INCIDENT",
+      "from": "ADAS-215",
+      "to": "INC-014",
+      "properties": {
+        "relationship": "triage-or-follow-up"
+      }
+    },
+    {
+      "type": "INCIDENT_AFFECTS_SERVICE",
+      "from": "INC-015",
+      "to": "telemetry-service",
+      "properties": {
+        "severity": "SEV-3"
+      }
+    },
+    {
+      "type": "TICKET_RELATES_TO_INCIDENT",
+      "from": "LID-122",
+      "to": "INC-015",
+      "properties": {
+        "relationship": "triage-or-follow-up"
+      }
+    },
+    {
+      "type": "TICKET_RELATES_TO_INCIDENT",
+      "from": "LID-132",
+      "to": "INC-015",
+      "properties": {
+        "relationship": "triage-or-follow-up"
+      }
+    },
+    {
+      "type": "INCIDENT_AFFECTS_SERVICE",
+      "from": "INC-016",
+      "to": "steering-control-service",
+      "properties": {
+        "severity": "SEV-2"
+      }
+    },
+    {
+      "type": "INCIDENT_AFFECTS_SERVICE",
+      "from": "INC-016",
+      "to": "diagnostics-service",
+      "properties": {
+        "severity": "SEV-2"
+      }
+    },
+    {
+      "type": "TICKET_RELATES_TO_INCIDENT",
+      "from": "ADAS-227",
+      "to": "INC-016",
+      "properties": {
+        "relationship": "triage-or-follow-up"
+      }
+    },
+    {
+      "type": "TICKET_RELATES_TO_INCIDENT",
+      "from": "ADAS-208",
+      "to": "INC-016",
+      "properties": {
+        "relationship": "triage-or-follow-up"
+      }
+    },
+    {
+      "type": "INCIDENT_AFFECTS_SERVICE",
+      "from": "INC-017",
+      "to": "calibration-service",
+      "properties": {
+        "severity": "SEV-2"
+      }
+    },
+    {
+      "type": "INCIDENT_AFFECTS_SERVICE",
+      "from": "INC-017",
+      "to": "lane-detection-service",
+      "properties": {
+        "severity": "SEV-2"
+      }
+    },
+    {
+      "type": "TICKET_RELATES_TO_INCIDENT",
+      "from": "ADAS-218",
+      "to": "INC-017",
+      "properties": {
+        "relationship": "triage-or-follow-up"
+      }
+    },
+    {
+      "type": "TICKET_RELATES_TO_INCIDENT",
+      "from": "ADAS-224",
+      "to": "INC-017",
+      "properties": {
+        "relationship": "triage-or-follow-up"
+      }
+    },
+    {
+      "type": "INCIDENT_AFFECTS_SERVICE",
+      "from": "INC-018",
+      "to": "tracking-service",
+      "properties": {
+        "severity": "SEV-2"
+      }
+    },
+    {
+      "type": "INCIDENT_AFFECTS_SERVICE",
+      "from": "INC-018",
+      "to": "telemetry-service",
+      "properties": {
+        "severity": "SEV-2"
+      }
+    },
+    {
+      "type": "TICKET_RELATES_TO_INCIDENT",
+      "from": "LID-123",
+      "to": "INC-018",
+      "properties": {
+        "relationship": "triage-or-follow-up"
+      }
+    },
+    {
+      "type": "TICKET_RELATES_TO_INCIDENT",
+      "from": "LID-117",
+      "to": "INC-018",
+      "properties": {
+        "relationship": "triage-or-follow-up"
+      }
+    }
+  ]
+}

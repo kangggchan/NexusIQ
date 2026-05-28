@@ -202,11 +202,16 @@ export class GraphDataLoader {
 }
 
 export const ENTITY_COLORS: Record<string, string> = {
+  // GraphRAG entity types
   'ORGANIZATION': '#ff6b6b',
   'EVENT': '#4ecdc4',
   'PERSON': '#45b7d1',
   'GEO': '#96ceb4',
   'PROCESS': '#feca57',
+  // NexusIQ entity types
+  'SERVICE': '#00bcd4',
+  'EMPLOYEE': '#a855f7',
+  'INCIDENT': '#ef4444',
   'unnamed': '#95a5a6',
 };
 

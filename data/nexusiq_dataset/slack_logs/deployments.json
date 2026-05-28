@@ -1,0 +1,1845 @@
+{
+  "channel": "#deployments",
+  "messages": [
+    {
+      "message_id": "MSG-0469",
+      "timestamp": "2026-01-25T06:00:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Starting DEP-006 for object-detection-service on jetson-orin-dev-01 from b41f81e4. Build note says this is still a prototype validation drop, not a release candidate.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "b41f81e462b9b60b1364b06902d8d73e71176687"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0470",
+      "timestamp": "2026-01-25T06:08:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "DEP-006 finished with status=success and version object-detection-service-0.0.6+b41f81e4. First smoke checks are good enough for another replay cycle.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "b41f81e462b9b60b1364b06902d8d73e71176687"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0471",
+      "timestamp": "2026-01-25T17:00:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Starting DEP-021 for telemetry-service on jetson-xavier-edge-02 from a54c60b8. Build note says this is still a prototype validation drop, not a release candidate.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "a54c60b8d64ed0ce3f7cfb56c4f9735082175b67"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0472",
+      "timestamp": "2026-01-25T17:08:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "DEP-021 finished with status=success and version telemetry-service-0.2.1+a54c60b8. First smoke checks are good enough for another replay cycle.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "a54c60b8d64ed0ce3f7cfb56c4f9735082175b67"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0473",
+      "timestamp": "2026-01-26T09:00:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Starting DEP-007 for object-detection-service on jetson-xavier-edge-02 from 72ddd54d. Build note says this is still a prototype validation drop, not a release candidate.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "72ddd54d63b84cfb20944506d300211967279976"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0474",
+      "timestamp": "2026-01-26T09:08:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "DEP-007 finished with status=success and version object-detection-service-0.0.7+72ddd54d. First smoke checks are good enough for another replay cycle.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "72ddd54d63b84cfb20944506d300211967279976"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0475",
+      "timestamp": "2026-01-26T12:00:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Starting DEP-016 for edge-inference-service on jetson-orin-dev-01 from f155fdae. Build note says this is still a prototype validation drop, not a release candidate.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "f155fdaeed4b7730229296a1b6d448d4880776ab"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0476",
+      "timestamp": "2026-01-26T12:08:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "DEP-016 finished with status=success and version edge-inference-service-0.1.6+f155fdae. First smoke checks are good enough for another replay cycle.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "f155fdaeed4b7730229296a1b6d448d4880776ab"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0477",
+      "timestamp": "2026-01-29T03:00:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Starting DEP-011 for tracking-service on jetson-orin-dev-01 from bcb52bf1. Build note says this is still a prototype validation drop, not a release candidate.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "bcb52bf1efc5f538aabbab97b80e5678abb49abc"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0478",
+      "timestamp": "2026-01-29T03:08:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "DEP-011 finished with status=success and version tracking-service-0.1.1+bcb52bf1. First smoke checks are good enough for another replay cycle.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "bcb52bf1efc5f538aabbab97b80e5678abb49abc"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0653",
+      "timestamp": "2026-01-29T03:20:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "DEP-011 verification note: runtime is nominal enough for prototype work on jetson-orin-dev-01.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "bcb52bf1efc5f538aabbab97b80e5678abb49abc"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0479",
+      "timestamp": "2026-01-30T04:00:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Starting DEP-008 for object-detection-service on jetson-orin-dev-01 from 39fc8d9f. Build note says this is still a prototype validation drop, not a release candidate.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "39fc8d9f03dfda77917c328d9e8a6d43050cc027"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0480",
+      "timestamp": "2026-01-30T04:08:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "DEP-008 finished with status=success and version object-detection-service-0.0.8+39fc8d9f. First smoke checks are good enough for another replay cycle.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "39fc8d9f03dfda77917c328d9e8a6d43050cc027"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0656",
+      "timestamp": "2026-01-30T04:25:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "DEP-008 verification note: runtime is nominal enough for prototype work on jetson-orin-dev-01.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "39fc8d9f03dfda77917c328d9e8a6d43050cc027"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0481",
+      "timestamp": "2026-01-31T00:00:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Starting DEP-001 for lidar-ingestion-service on jetson-xavier-edge-02 from 1a637e79. Build note says this is still a prototype validation drop, not a release candidate.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "1a637e79cc98783bd15e9ff13f56cdf5d1393ec3"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lidar-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0658",
+      "timestamp": "2026-01-31T00:00:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "DEP-001 verification note: runtime is nominal enough for prototype work on jetson-xavier-edge-02.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "1a637e79cc98783bd15e9ff13f56cdf5d1393ec3"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lidar-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0482",
+      "timestamp": "2026-01-31T00:08:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "DEP-001 finished with status=success and version lidar-ingestion-service-0.0.1+1a637e79. First smoke checks are good enough for another replay cycle.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "1a637e79cc98783bd15e9ff13f56cdf5d1393ec3"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lidar-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0483",
+      "timestamp": "2026-02-02T06:00:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Starting DEP-012 for tracking-service on jetson-orin-dev-01 from 4db2c2b7. Build note says this is still a prototype validation drop, not a release candidate.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "4db2c2b7d18f8ca34ce1451aa4ffbfe323746d32"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0484",
+      "timestamp": "2026-02-02T06:08:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "DEP-012 finished with status=success and version tracking-service-0.1.2+4db2c2b7. First smoke checks are good enough for another replay cycle.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "4db2c2b7d18f8ca34ce1451aa4ffbfe323746d32"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0485",
+      "timestamp": "2026-02-04T13:00:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Starting DEP-013 for tracking-service on jetson-orin-dev-01 from fef4d90d. Build note says this is still a prototype validation drop, not a release candidate.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "fef4d90dbbbcd828e35663a8aecaf6e3e9fbed6a"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0486",
+      "timestamp": "2026-02-04T13:08:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "DEP-013 finished with status=success and version tracking-service-0.1.3+fef4d90d. First smoke checks are good enough for another replay cycle.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "fef4d90dbbbcd828e35663a8aecaf6e3e9fbed6a"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0487",
+      "timestamp": "2026-02-06T17:00:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Starting DEP-017 for edge-inference-service on jetson-orin-dev-01 from 1d56ec2e. Build note says this is still a prototype validation drop, not a release candidate.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "1d56ec2e4604509bd9d1bc7144caecbc515c7b2f"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0488",
+      "timestamp": "2026-02-06T17:08:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "DEP-017 finished with status=success and version edge-inference-service-0.1.7+1d56ec2e. First smoke checks are good enough for another replay cycle.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "1d56ec2e4604509bd9d1bc7144caecbc515c7b2f"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0489",
+      "timestamp": "2026-02-06T22:00:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Starting DEP-022 for telemetry-service on jetson-xavier-edge-02 from cd5a6e96. Build note says this is still a prototype validation drop, not a release candidate.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "cd5a6e961b069cd4b8018882b1d17c441ae93ee1"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0490",
+      "timestamp": "2026-02-06T22:08:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "DEP-022 finished with status=success and version telemetry-service-0.2.2+cd5a6e96. First smoke checks are good enough for another replay cycle.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "cd5a6e961b069cd4b8018882b1d17c441ae93ee1"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0491",
+      "timestamp": "2026-02-13T10:00:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Starting DEP-009 for object-detection-service on jetson-xavier-edge-02 from 56317c35. Build note says this is still a prototype validation drop, not a release candidate.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "56317c3550413b0983d3aec37919368263279192"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0492",
+      "timestamp": "2026-02-13T10:08:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "DEP-009 finished with status=success and version object-detection-service-0.0.9+56317c35. First smoke checks are good enough for another replay cycle.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "56317c3550413b0983d3aec37919368263279192"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0493",
+      "timestamp": "2026-02-14T13:00:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Starting DEP-002 for lidar-ingestion-service on jetson-xavier-edge-02 from e5ec0626. Build note says this is still a prototype validation drop, not a release candidate.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "e5ec06262c64ee72e3d4618c6fb7c5198f3b2f48"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lidar-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0494",
+      "timestamp": "2026-02-14T13:08:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "DEP-002 finished with status=success and version lidar-ingestion-service-0.0.2+e5ec0626. First smoke checks are good enough for another replay cycle.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "e5ec06262c64ee72e3d4618c6fb7c5198f3b2f48"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lidar-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0495",
+      "timestamp": "2026-02-15T16:00:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Starting DEP-023 for telemetry-service on jetson-orin-dev-01 from 28c8ecf5. Build note says this is still a prototype validation drop, not a release candidate.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "28c8ecf5b743232be83a35e88c9da629f5a01c14"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0496",
+      "timestamp": "2026-02-15T16:08:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "DEP-023 finished with status=success and version telemetry-service-0.2.3+28c8ecf5. First smoke checks are good enough for another replay cycle.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "28c8ecf5b743232be83a35e88c9da629f5a01c14"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0497",
+      "timestamp": "2026-02-17T22:00:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Starting DEP-014 for tracking-service on jetson-orin-dev-01 from adeb215d. Build note says this is still a prototype validation drop, not a release candidate.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "adeb215d1ddbc23fdedbaa6acfbf58bb5eb2cb99"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0498",
+      "timestamp": "2026-02-17T22:08:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "DEP-014 finished with status=success and version tracking-service-0.1.4+adeb215d. First smoke checks are good enough for another replay cycle.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "adeb215d1ddbc23fdedbaa6acfbf58bb5eb2cb99"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0499",
+      "timestamp": "2026-02-19T04:00:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Starting DEP-018 for edge-inference-service on jetson-orin-dev-01 from bbb7bda2. Build note says this is still a prototype validation drop, not a release candidate.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "bbb7bda24f06630db15ea8f5b578733b2458947a"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0500",
+      "timestamp": "2026-02-19T04:08:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "DEP-018 finished with status=failed and version edge-inference-service-0.1.8+bbb7bda2. First smoke checks are still a little noisy.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "bbb7bda24f06630db15ea8f5b578733b2458947a"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0501",
+      "timestamp": "2026-02-19T06:00:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Starting DEP-051 for edge-inference-service on jetson-orin-dev-01 from bbb7bda2. Build note says this is still a prototype validation drop, not a release candidate.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "bbb7bda24f06630db15ea8f5b578733b2458947a"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0502",
+      "timestamp": "2026-02-19T06:08:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "DEP-051 finished with status=rollback and version edge-inference-service-0.1.8+bbb7bda2-rollback. First smoke checks are still a little noisy.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "bbb7bda24f06630db15ea8f5b578733b2458947a"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0503",
+      "timestamp": "2026-02-19T06:16:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Rollback references DEP-018. Keeping the old artifact around because we will almost certainly diff runtime traces again.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "bbb7bda24f06630db15ea8f5b578733b2458947a"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0504",
+      "timestamp": "2026-02-21T08:00:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Starting DEP-026 for camera-ingestion-service on adas-ecu-rig-01 from b4dd5695. Build note says this is still a prototype validation drop, not a release candidate.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "b4dd56958e9f283963311976df1b5e03431399b7"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "camera-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0505",
+      "timestamp": "2026-02-21T08:08:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "DEP-026 finished with status=success and version camera-ingestion-service-0.2.6+b4dd5695. First smoke checks are good enough for another replay cycle.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "b4dd56958e9f283963311976df1b5e03431399b7"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "camera-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0506",
+      "timestamp": "2026-02-22T13:00:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Starting DEP-036 for steering-control-service on adas-ecu-rig-02 from 89a38a2c. Build note says this is still a prototype validation drop, not a release candidate.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "89a38a2c8ae560a932b189ecf2c8417a03740972"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0507",
+      "timestamp": "2026-02-22T13:08:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "DEP-036 finished with status=failed and version steering-control-service-0.3.6+89a38a2c. First smoke checks are still a little noisy.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "89a38a2c8ae560a932b189ecf2c8417a03740972"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0508",
+      "timestamp": "2026-02-22T15:00:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Starting DEP-052 for steering-control-service on adas-ecu-rig-02 from 89a38a2c. Build note says this is still a prototype validation drop, not a release candidate.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "89a38a2c8ae560a932b189ecf2c8417a03740972"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0509",
+      "timestamp": "2026-02-22T15:08:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "DEP-052 finished with status=rollback and version steering-control-service-0.3.6+89a38a2c-rollback. First smoke checks are still a little noisy.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "89a38a2c8ae560a932b189ecf2c8417a03740972"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0510",
+      "timestamp": "2026-02-22T15:16:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Rollback references DEP-036. Keeping the old artifact around because we will almost certainly diff runtime traces again.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "89a38a2c8ae560a932b189ecf2c8417a03740972"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0511",
+      "timestamp": "2026-02-23T07:00:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Starting DEP-003 for lidar-ingestion-service on jetson-xavier-edge-02 from 13370d83. Build note says this is still a prototype validation drop, not a release candidate.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "13370d831067cc8672ebe8e2c82d550ccaa508e0"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lidar-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0513",
+      "timestamp": "2026-02-23T07:00:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Starting DEP-015 for tracking-service on jetson-xavier-edge-02 from 13370d83. Build note says this is still a prototype validation drop, not a release candidate.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "13370d831067cc8672ebe8e2c82d550ccaa508e0"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0512",
+      "timestamp": "2026-02-23T07:08:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "DEP-003 finished with status=success and version lidar-ingestion-service-0.0.3+13370d83. First smoke checks are good enough for another replay cycle.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "13370d831067cc8672ebe8e2c82d550ccaa508e0"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lidar-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0514",
+      "timestamp": "2026-02-23T07:08:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "DEP-015 finished with status=success and version tracking-service-0.1.5+13370d83. First smoke checks are good enough for another replay cycle.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "13370d831067cc8672ebe8e2c82d550ccaa508e0"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "tracking-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0515",
+      "timestamp": "2026-02-23T22:00:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Starting DEP-031 for lane-detection-service on adas-ecu-rig-01 from 4da5d20b. Build note says this is still a prototype validation drop, not a release candidate.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "4da5d20b8c494fc53a2c15fc2668ca4c5188a913"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0516",
+      "timestamp": "2026-02-23T22:08:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "DEP-031 finished with status=success and version lane-detection-service-0.3.1+4da5d20b. First smoke checks are good enough for another replay cycle.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "4da5d20b8c494fc53a2c15fc2668ca4c5188a913"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0517",
+      "timestamp": "2026-02-24T10:00:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Starting DEP-024 for telemetry-service on jetson-xavier-edge-02 from 5db77d80. Build note says this is still a prototype validation drop, not a release candidate.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "5db77d80bf3dea1713082317ad40ffefb3629841"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0518",
+      "timestamp": "2026-02-24T10:08:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "DEP-024 finished with status=failed and version telemetry-service-0.2.4+5db77d80. First smoke checks are still a little noisy.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "5db77d80bf3dea1713082317ad40ffefb3629841"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0519",
+      "timestamp": "2026-02-24T12:00:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Starting DEP-053 for telemetry-service on jetson-xavier-edge-02 from 5db77d80. Build note says this is still a prototype validation drop, not a release candidate.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "5db77d80bf3dea1713082317ad40ffefb3629841"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0520",
+      "timestamp": "2026-02-24T12:08:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "DEP-053 finished with status=rollback and version telemetry-service-0.2.4+5db77d80-rollback. First smoke checks are still a little noisy.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "5db77d80bf3dea1713082317ad40ffefb3629841"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0521",
+      "timestamp": "2026-02-24T12:16:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Rollback references DEP-024. Keeping the old artifact around because we will almost certainly diff runtime traces again.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "5db77d80bf3dea1713082317ad40ffefb3629841"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0522",
+      "timestamp": "2026-02-24T19:00:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Starting DEP-041 for calibration-service on adas-ecu-rig-02 from f620c9d2. Build note says this is still a prototype validation drop, not a release candidate.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "f620c9d2e8de30cd3ea5f01a832e0bae931fba48"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0523",
+      "timestamp": "2026-02-24T19:08:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "DEP-041 finished with status=success and version calibration-service-0.4.1+f620c9d2. First smoke checks are good enough for another replay cycle.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "f620c9d2e8de30cd3ea5f01a832e0bae931fba48"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0524",
+      "timestamp": "2026-02-27T04:00:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Starting DEP-046 for diagnostics-service on adas-ecu-rig-01 from 66b4be25. Build note says this is still a prototype validation drop, not a release candidate.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "66b4be252a3e4581bf9b964ebd3f40e974e71056"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0525",
+      "timestamp": "2026-02-27T04:08:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "DEP-046 finished with status=success and version diagnostics-service-0.4.6+66b4be25. First smoke checks are good enough for another replay cycle.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "66b4be252a3e4581bf9b964ebd3f40e974e71056"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0526",
+      "timestamp": "2026-02-28T19:00:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Starting DEP-019 for edge-inference-service on jetson-xavier-edge-02 from 3b625f5f. Build note says this is still a prototype validation drop, not a release candidate.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "3b625f5f45a84e75948128ae9b4f233982a01aa5"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0527",
+      "timestamp": "2026-02-28T19:08:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "DEP-019 finished with status=success and version edge-inference-service-0.1.9+3b625f5f. First smoke checks are good enough for another replay cycle.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "3b625f5f45a84e75948128ae9b4f233982a01aa5"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0528",
+      "timestamp": "2026-03-01T01:00:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Starting DEP-010 for object-detection-service on jetson-xavier-edge-02 from d7448f42. Build note says this is still a prototype validation drop, not a release candidate.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "d7448f42d1771d0459e82e923d22ca4d2f25132d"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0529",
+      "timestamp": "2026-03-01T01:08:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "DEP-010 finished with status=success and version object-detection-service-0.1.0+d7448f42. First smoke checks are good enough for another replay cycle.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "d7448f42d1771d0459e82e923d22ca4d2f25132d"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "object-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0530",
+      "timestamp": "2026-03-03T00:00:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Starting DEP-004 for lidar-ingestion-service on jetson-orin-dev-01 from a0b21fd6. Build note says this is still a prototype validation drop, not a release candidate.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "a0b21fd650392a461094b378b50c7e9156f6546c"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lidar-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0531",
+      "timestamp": "2026-03-03T00:08:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "DEP-004 finished with status=success and version lidar-ingestion-service-0.0.4+a0b21fd6. First smoke checks are good enough for another replay cycle.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "a0b21fd650392a461094b378b50c7e9156f6546c"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lidar-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0532",
+      "timestamp": "2026-03-03T04:00:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Starting DEP-027 for camera-ingestion-service on adas-ecu-rig-02 from 10912fb1. Build note says this is still a prototype validation drop, not a release candidate.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "10912fb160977d90a695308660a6c0300d976bd0"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "camera-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0533",
+      "timestamp": "2026-03-03T04:08:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "DEP-027 finished with status=success and version camera-ingestion-service-0.2.7+10912fb1. First smoke checks are good enough for another replay cycle.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "10912fb160977d90a695308660a6c0300d976bd0"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "camera-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0534",
+      "timestamp": "2026-03-03T10:00:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Starting DEP-047 for diagnostics-service on adas-ecu-rig-02 from e19acbe9. Build note says this is still a prototype validation drop, not a release candidate.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "e19acbe997bd86423f2d8e31b3afa7d7e31b9ba3"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0535",
+      "timestamp": "2026-03-03T10:08:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "DEP-047 finished with status=success and version diagnostics-service-0.4.7+e19acbe9. First smoke checks are good enough for another replay cycle.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "e19acbe997bd86423f2d8e31b3afa7d7e31b9ba3"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0536",
+      "timestamp": "2026-03-04T12:00:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Starting DEP-020 for edge-inference-service on jetson-xavier-edge-02 from 15957161. Build note says this is still a prototype validation drop, not a release candidate.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "15957161e911d672318d9970aa2701e3ec9d81c8"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0538",
+      "timestamp": "2026-03-04T12:00:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Starting DEP-025 for telemetry-service on jetson-xavier-edge-02 from 15957161. Build note says this is still a prototype validation drop, not a release candidate.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "15957161e911d672318d9970aa2701e3ec9d81c8"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0537",
+      "timestamp": "2026-03-04T12:08:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "DEP-020 finished with status=success and version edge-inference-service-0.2.0+15957161. First smoke checks are good enough for another replay cycle.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "15957161e911d672318d9970aa2701e3ec9d81c8"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0539",
+      "timestamp": "2026-03-04T12:08:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "DEP-025 finished with status=success and version telemetry-service-0.2.5+15957161. First smoke checks are good enough for another replay cycle.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "15957161e911d672318d9970aa2701e3ec9d81c8"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0540",
+      "timestamp": "2026-03-05T15:00:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Starting DEP-037 for steering-control-service on adas-ecu-rig-01 from 1bc52272. Build note says this is still a prototype validation drop, not a release candidate.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "1bc52272e5094d78d9edb2e30834d4e149369bd3"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0541",
+      "timestamp": "2026-03-05T15:08:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "DEP-037 finished with status=success and version steering-control-service-0.3.7+1bc52272. First smoke checks are good enough for another replay cycle.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "1bc52272e5094d78d9edb2e30834d4e149369bd3"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0542",
+      "timestamp": "2026-03-06T10:00:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Starting DEP-005 for lidar-ingestion-service on jetson-xavier-edge-02 from d16195aa. Build note says this is still a prototype validation drop, not a release candidate.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "d16195aa31f45f8b61da8784da46a3e56e619bba"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lidar-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0543",
+      "timestamp": "2026-03-06T10:08:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "DEP-005 finished with status=success and version lidar-ingestion-service-0.0.5+d16195aa. First smoke checks are good enough for another replay cycle.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "d16195aa31f45f8b61da8784da46a3e56e619bba"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lidar-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0544",
+      "timestamp": "2026-03-06T16:00:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Starting DEP-032 for lane-detection-service on adas-ecu-rig-02 from 8901e912. Build note says this is still a prototype validation drop, not a release candidate.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "8901e9125f006aeebd7f0c28cfa8ef853390957e"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0545",
+      "timestamp": "2026-03-06T16:08:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "DEP-032 finished with status=success and version lane-detection-service-0.3.2+8901e912. First smoke checks are good enough for another replay cycle.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "8901e9125f006aeebd7f0c28cfa8ef853390957e"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0546",
+      "timestamp": "2026-03-07T19:00:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Starting DEP-028 for camera-ingestion-service on adas-ecu-rig-01 from 4bf3d74f. Build note says this is still a prototype validation drop, not a release candidate.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "4bf3d74fa05ea973c0621aae1e9e379cf610f7ed"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "camera-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0548",
+      "timestamp": "2026-03-07T19:00:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Starting DEP-042 for calibration-service on adas-ecu-rig-02 from 24d3d39c. Build note says this is still a prototype validation drop, not a release candidate.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "24d3d39c8bd7909af0dab0b0a60ae878ee096967"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0547",
+      "timestamp": "2026-03-07T19:08:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "DEP-028 finished with status=success and version camera-ingestion-service-0.2.8+4bf3d74f. First smoke checks are good enough for another replay cycle.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "4bf3d74fa05ea973c0621aae1e9e379cf610f7ed"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "camera-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0549",
+      "timestamp": "2026-03-07T19:08:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "DEP-042 finished with status=success and version calibration-service-0.4.2+24d3d39c. First smoke checks are good enough for another replay cycle.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "24d3d39c8bd7909af0dab0b0a60ae878ee096967"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0550",
+      "timestamp": "2026-03-12T07:00:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Starting DEP-048 for diagnostics-service on adas-ecu-rig-02 from de864ff5. Build note says this is still a prototype validation drop, not a release candidate.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "de864ff50c30f5f595d6ad50918b965665d29bef"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0551",
+      "timestamp": "2026-03-12T07:08:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "DEP-048 finished with status=success and version diagnostics-service-0.4.8+de864ff5. First smoke checks are good enough for another replay cycle.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "de864ff50c30f5f595d6ad50918b965665d29bef"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0552",
+      "timestamp": "2026-03-14T10:00:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Starting DEP-038 for steering-control-service on adas-ecu-rig-01 from 119baaa3. Build note says this is still a prototype validation drop, not a release candidate.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "119baaa335f1b28ad9798ca3061b363ba2ead173"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0553",
+      "timestamp": "2026-03-14T10:08:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "DEP-038 finished with status=success and version steering-control-service-0.3.8+119baaa3. First smoke checks are good enough for another replay cycle.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "119baaa335f1b28ad9798ca3061b363ba2ead173"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0554",
+      "timestamp": "2026-03-14T13:00:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Starting DEP-029 for camera-ingestion-service on adas-ecu-rig-01 from 99d4eee7. Build note says this is still a prototype validation drop, not a release candidate.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "99d4eee79dbb37e00346ec2b4e2b660f49842aa9"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "camera-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0555",
+      "timestamp": "2026-03-14T13:08:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "DEP-029 finished with status=success and version camera-ingestion-service-0.2.9+99d4eee7. First smoke checks are good enough for another replay cycle.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "99d4eee79dbb37e00346ec2b4e2b660f49842aa9"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "camera-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0556",
+      "timestamp": "2026-03-16T15:00:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Starting DEP-043 for calibration-service on adas-ecu-rig-01 from 69a5a951. Build note says this is still a prototype validation drop, not a release candidate.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "69a5a95108a6e4e2fa929a3344d3cefb8191403d"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0557",
+      "timestamp": "2026-03-16T15:08:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "DEP-043 finished with status=success and version calibration-service-0.4.3+69a5a951. First smoke checks are good enough for another replay cycle.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "69a5a95108a6e4e2fa929a3344d3cefb8191403d"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0558",
+      "timestamp": "2026-03-18T19:00:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Starting DEP-049 for diagnostics-service on adas-ecu-rig-02 from fff5411e. Build note says this is still a prototype validation drop, not a release candidate.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "fff5411e0a57bc2e228f92ce93ab4ea8161252c8"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0559",
+      "timestamp": "2026-03-18T19:08:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "DEP-049 finished with status=success and version diagnostics-service-0.4.9+fff5411e. First smoke checks are good enough for another replay cycle.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "fff5411e0a57bc2e228f92ce93ab4ea8161252c8"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0560",
+      "timestamp": "2026-03-21T03:00:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Starting DEP-033 for lane-detection-service on adas-ecu-rig-02 from 468d5088. Build note says this is still a prototype validation drop, not a release candidate.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "468d5088dccda810991ff3bf8eb6368c15d0c5d0"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0561",
+      "timestamp": "2026-03-21T03:08:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "DEP-033 finished with status=success and version lane-detection-service-0.3.3+468d5088. First smoke checks are good enough for another replay cycle.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "468d5088dccda810991ff3bf8eb6368c15d0c5d0"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0562",
+      "timestamp": "2026-03-21T04:00:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Starting DEP-039 for steering-control-service on adas-ecu-rig-01 from 7bafa8f1. Build note says this is still a prototype validation drop, not a release candidate.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "7bafa8f1254df90b45f56e7d0ffc628a9323eda3"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0563",
+      "timestamp": "2026-03-21T04:08:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "DEP-039 finished with status=failed and version steering-control-service-0.3.9+7bafa8f1. First smoke checks are still a little noisy.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "7bafa8f1254df90b45f56e7d0ffc628a9323eda3"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0564",
+      "timestamp": "2026-03-21T06:00:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Starting DEP-054 for steering-control-service on adas-ecu-rig-01 from 7bafa8f1. Build note says this is still a prototype validation drop, not a release candidate.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "7bafa8f1254df90b45f56e7d0ffc628a9323eda3"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0565",
+      "timestamp": "2026-03-21T06:08:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "DEP-054 finished with status=rollback and version steering-control-service-0.3.9+7bafa8f1-rollback. First smoke checks are still a little noisy.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "7bafa8f1254df90b45f56e7d0ffc628a9323eda3"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0566",
+      "timestamp": "2026-03-21T06:16:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Rollback references DEP-039. Keeping the old artifact around because we will almost certainly diff runtime traces again.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "7bafa8f1254df90b45f56e7d0ffc628a9323eda3"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0567",
+      "timestamp": "2026-03-24T14:00:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Starting DEP-044 for calibration-service on adas-ecu-rig-01 from e4cb722f. Build note says this is still a prototype validation drop, not a release candidate.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "e4cb722f1b993ea6b58029b234c9fe5b3afd1d2e"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0568",
+      "timestamp": "2026-03-24T14:08:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "DEP-044 finished with status=success and version calibration-service-0.4.4+e4cb722f. First smoke checks are good enough for another replay cycle.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "e4cb722f1b993ea6b58029b234c9fe5b3afd1d2e"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0569",
+      "timestamp": "2026-03-24T16:00:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Starting DEP-034 for lane-detection-service on adas-ecu-rig-02 from caf5b69f. Build note says this is still a prototype validation drop, not a release candidate.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "caf5b69fe7b31d6de07e55e327809c4ba18bdf51"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0570",
+      "timestamp": "2026-03-24T16:08:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "DEP-034 finished with status=success and version lane-detection-service-0.3.4+caf5b69f. First smoke checks are good enough for another replay cycle.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "caf5b69fe7b31d6de07e55e327809c4ba18bdf51"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0571",
+      "timestamp": "2026-03-25T19:00:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Starting DEP-030 for camera-ingestion-service on adas-ecu-rig-01 from fad4a8bb. Build note says this is still a prototype validation drop, not a release candidate.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "fad4a8bb82b64208bf6bc5eff24993c141aff9a9"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "camera-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0572",
+      "timestamp": "2026-03-25T19:08:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "DEP-030 finished with status=success and version camera-ingestion-service-0.3.0+fad4a8bb. First smoke checks are good enough for another replay cycle.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "fad4a8bb82b64208bf6bc5eff24993c141aff9a9"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "camera-ingestion-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0573",
+      "timestamp": "2026-03-29T07:00:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Starting DEP-050 for diagnostics-service on adas-ecu-rig-01 from d3df2980. Build note says this is still a prototype validation drop, not a release candidate.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "d3df2980d4c632e6e63830189a3f7fe695bf4f2e"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0574",
+      "timestamp": "2026-03-29T07:08:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "DEP-050 finished with status=success and version diagnostics-service-0.5.0+d3df2980. First smoke checks are good enough for another replay cycle.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "d3df2980d4c632e6e63830189a3f7fe695bf4f2e"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0575",
+      "timestamp": "2026-03-30T02:00:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Starting DEP-040 for steering-control-service on adas-ecu-rig-02 from c775fe31. Build note says this is still a prototype validation drop, not a release candidate.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "c775fe3139bdc69e5b685b6fe4a39050a40d4a4b"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0576",
+      "timestamp": "2026-03-30T02:08:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "DEP-040 finished with status=success and version steering-control-service-0.4.0+c775fe31. First smoke checks are good enough for another replay cycle.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "c775fe3139bdc69e5b685b6fe4a39050a40d4a4b"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "steering-control-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0577",
+      "timestamp": "2026-03-31T10:00:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Starting DEP-035 for lane-detection-service on adas-ecu-rig-01 from 589d72c3. Build note says this is still a prototype validation drop, not a release candidate.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "589d72c397a2a5f4c9c7a062d317692fef046855"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0579",
+      "timestamp": "2026-03-31T10:00:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Starting DEP-045 for calibration-service on adas-ecu-rig-02 from 589d72c3. Build note says this is still a prototype validation drop, not a release candidate.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "589d72c397a2a5f4c9c7a062d317692fef046855"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0578",
+      "timestamp": "2026-03-31T10:08:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "DEP-035 finished with status=success and version lane-detection-service-0.3.5+589d72c3. First smoke checks are good enough for another replay cycle.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "589d72c397a2a5f4c9c7a062d317692fef046855"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "lane-detection-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0580",
+      "timestamp": "2026-03-31T10:08:00Z",
+      "channel": "#deployments",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "DEP-045 finished with status=success and version calibration-service-0.4.5+589d72c3. First smoke checks are good enough for another replay cycle.",
+      "referenced_tickets": [],
+      "referenced_commits": [
+        "589d72c397a2a5f4c9c7a062d317692fef046855"
+      ],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    }
+  ]
+}

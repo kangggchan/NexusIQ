@@ -1,0 +1,1703 @@
+{
+  "channel": "#platform",
+  "messages": [
+    {
+      "message_id": "MSG-0651",
+      "timestamp": "2026-02-28T15:50:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Rig automation still assumes clean restarts, which is optimistic bordering on fictional for this phase.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0654",
+      "timestamp": "2026-02-28T16:01:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Please do not call a deployment stable if it only survived one replay loop and no warm restart.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0581",
+      "timestamp": "2026-03-01T09:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "Quick platform note on telemetry backlog: event volume is outpacing the dashboard assumptions again, so if your graph looks clean please sanity-check the raw event stream before trusting it.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0657",
+      "timestamp": "2026-03-01T09:12:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "Cross-service metadata drift is making the dashboards less useful than the raw logs again.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0659",
+      "timestamp": "2026-03-01T10:23:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "Cache flush should be explicit in the API contract, not an unwritten step buried in a helper script.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0582",
+      "timestamp": "2026-03-02T10:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Please include whether the rig was warm or cold before rollout. Half the debugging thread disappears if that detail is missing.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service",
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0660",
+      "timestamp": "2026-03-02T11:34:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Rig automation still assumes clean restarts, which is optimistic bordering on fictional for this phase.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0661",
+      "timestamp": "2026-03-02T12:45:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Please do not call a deployment stable if it only survived one replay loop and no warm restart.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0583",
+      "timestamp": "2026-03-03T11:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "If the fix depends on everyone remembering an extra script step, it is not really fixed.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0662",
+      "timestamp": "2026-03-03T13:56:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "Cross-service metadata drift is making the dashboards less useful than the raw logs again.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0663",
+      "timestamp": "2026-03-03T14:07:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "Cache flush should be explicit in the API contract, not an unwritten step buried in a helper script.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0584",
+      "timestamp": "2026-03-04T12:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Diagnostics sampler overhead is back in the conversation. The rig tolerates it until somebody enables the louder profile and then timing starts to wobble.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0664",
+      "timestamp": "2026-03-04T15:18:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Rig automation still assumes clean restarts, which is optimistic bordering on fictional for this phase.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0665",
+      "timestamp": "2026-03-04T16:29:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Please do not call a deployment stable if it only survived one replay loop and no warm restart.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0666",
+      "timestamp": "2026-03-05T09:40:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "Cross-service metadata drift is making the dashboards less useful than the raw logs again.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0667",
+      "timestamp": "2026-03-05T10:51:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "Cache flush should be explicit in the API contract, not an unwritten step buried in a helper script.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0585",
+      "timestamp": "2026-03-05T13:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "I trimmed one payload shape, but the bigger issue is still that replay and deployment metadata are drifting apart just enough to break simple correlations.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0586",
+      "timestamp": "2026-03-06T09:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "I can live with instability. I cannot live with a deployment note that says 'seems fine so far'.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service",
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0668",
+      "timestamp": "2026-03-06T11:02:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Rig automation still assumes clean restarts, which is optimistic bordering on fictional for this phase.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0669",
+      "timestamp": "2026-03-06T12:13:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Please do not call a deployment stable if it only survived one replay loop and no warm restart.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0587",
+      "timestamp": "2026-03-07T10:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "Calibration cache behavior still feels under-specified. The checksum can look perfect while the runtime state is clearly older than it should be.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0670",
+      "timestamp": "2026-03-07T13:24:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "Cross-service metadata drift is making the dashboards less useful than the raw logs again.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0671",
+      "timestamp": "2026-03-07T14:35:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "Cache flush should be explicit in the API contract, not an unwritten step buried in a helper script.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0588",
+      "timestamp": "2026-03-08T11:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "I am okay paying a little overhead for evidence, but not enough to create the symptom we are trying to explain.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0672",
+      "timestamp": "2026-03-08T15:46:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Rig automation still assumes clean restarts, which is optimistic bordering on fictional for this phase.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0673",
+      "timestamp": "2026-03-08T16:57:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Please do not call a deployment stable if it only survived one replay loop and no warm restart.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0674",
+      "timestamp": "2026-03-09T09:08:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "Cross-service metadata drift is making the dashboards less useful than the raw logs again.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0675",
+      "timestamp": "2026-03-09T10:19:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "Cache flush should be explicit in the API contract, not an unwritten step buried in a helper script.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0589",
+      "timestamp": "2026-03-09T12:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "If anyone changed event tags this morning, please say it out loud. I am diffing two runs that look identical until the labels stop matching.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0676",
+      "timestamp": "2026-03-10T11:30:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Rig automation still assumes clean restarts, which is optimistic bordering on fictional for this phase.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0677",
+      "timestamp": "2026-03-10T12:41:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Please do not call a deployment stable if it only survived one replay loop and no warm restart.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0590",
+      "timestamp": "2026-03-10T13:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Small deployment gripe: we keep calling these canaries, but they are really prototype drops with just enough smoke coverage to be dangerous.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service",
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0591",
+      "timestamp": "2026-03-11T09:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "Not trying to relitigate ADAS-203, but the upload path is still too polite about stale runtime state.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0678",
+      "timestamp": "2026-03-11T13:52:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "Cross-service metadata drift is making the dashboards less useful than the raw logs again.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0679",
+      "timestamp": "2026-03-11T14:03:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "Cache flush should be explicit in the API contract, not an unwritten step buried in a helper script.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0592",
+      "timestamp": "2026-03-12T10:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Can someone verify whether the session summaries are using the same clock source as the raw capture? I do not fully trust the current path.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0680",
+      "timestamp": "2026-03-12T15:14:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Rig automation still assumes clean restarts, which is optimistic bordering on fictional for this phase.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0681",
+      "timestamp": "2026-03-12T16:25:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Please do not call a deployment stable if it only survived one replay loop and no warm restart.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0682",
+      "timestamp": "2026-03-13T09:36:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "Cross-service metadata drift is making the dashboards less useful than the raw logs again.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0683",
+      "timestamp": "2026-03-13T10:47:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "Cache flush should be explicit in the API contract, not an unwritten step buried in a helper script.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0593",
+      "timestamp": "2026-03-13T11:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "Quick platform note on telemetry backlog: event volume is outpacing the dashboard assumptions again, so if your graph looks clean please sanity-check the raw event stream before trusting it.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0684",
+      "timestamp": "2026-03-14T11:58:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Rig automation still assumes clean restarts, which is optimistic bordering on fictional for this phase.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0594",
+      "timestamp": "2026-03-14T12:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Please include whether the rig was warm or cold before rollout. Half the debugging thread disappears if that detail is missing.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service",
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0685",
+      "timestamp": "2026-03-14T12:09:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Please do not call a deployment stable if it only survived one replay loop and no warm restart.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0595",
+      "timestamp": "2026-03-15T13:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "If the fix depends on everyone remembering an extra script step, it is not really fixed.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0686",
+      "timestamp": "2026-03-15T13:20:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "Cross-service metadata drift is making the dashboards less useful than the raw logs again.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0687",
+      "timestamp": "2026-03-15T14:31:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "Cache flush should be explicit in the API contract, not an unwritten step buried in a helper script.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0596",
+      "timestamp": "2026-03-16T09:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Diagnostics sampler overhead is back in the conversation. The rig tolerates it until somebody enables the louder profile and then timing starts to wobble.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0688",
+      "timestamp": "2026-03-16T15:42:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Rig automation still assumes clean restarts, which is optimistic bordering on fictional for this phase.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0689",
+      "timestamp": "2026-03-16T16:53:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Please do not call a deployment stable if it only survived one replay loop and no warm restart.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0690",
+      "timestamp": "2026-03-17T09:04:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "Cross-service metadata drift is making the dashboards less useful than the raw logs again.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0597",
+      "timestamp": "2026-03-17T10:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "I trimmed one payload shape, but the bigger issue is still that replay and deployment metadata are drifting apart just enough to break simple correlations.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0691",
+      "timestamp": "2026-03-17T10:15:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "Cache flush should be explicit in the API contract, not an unwritten step buried in a helper script.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0598",
+      "timestamp": "2026-03-18T11:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "I can live with instability. I cannot live with a deployment note that says 'seems fine so far'.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service",
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0692",
+      "timestamp": "2026-03-18T11:26:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Rig automation still assumes clean restarts, which is optimistic bordering on fictional for this phase.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0693",
+      "timestamp": "2026-03-18T12:37:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Please do not call a deployment stable if it only survived one replay loop and no warm restart.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0599",
+      "timestamp": "2026-03-19T12:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "Calibration cache behavior still feels under-specified. The checksum can look perfect while the runtime state is clearly older than it should be.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0694",
+      "timestamp": "2026-03-19T13:48:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "Cross-service metadata drift is making the dashboards less useful than the raw logs again.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0695",
+      "timestamp": "2026-03-19T14:59:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "Cache flush should be explicit in the API contract, not an unwritten step buried in a helper script.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0600",
+      "timestamp": "2026-03-20T13:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "I am okay paying a little overhead for evidence, but not enough to create the symptom we are trying to explain.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0696",
+      "timestamp": "2026-03-20T15:10:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Rig automation still assumes clean restarts, which is optimistic bordering on fictional for this phase.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0697",
+      "timestamp": "2026-03-20T16:21:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Please do not call a deployment stable if it only survived one replay loop and no warm restart.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0601",
+      "timestamp": "2026-03-21T09:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "If anyone changed event tags this morning, please say it out loud. I am diffing two runs that look identical until the labels stop matching.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0698",
+      "timestamp": "2026-03-21T09:32:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "Cross-service metadata drift is making the dashboards less useful than the raw logs again.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0699",
+      "timestamp": "2026-03-21T10:43:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "Cache flush should be explicit in the API contract, not an unwritten step buried in a helper script.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0602",
+      "timestamp": "2026-03-22T10:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Small deployment gripe: we keep calling these canaries, but they are really prototype drops with just enough smoke coverage to be dangerous.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service",
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0700",
+      "timestamp": "2026-03-22T11:54:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Rig automation still assumes clean restarts, which is optimistic bordering on fictional for this phase.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0701",
+      "timestamp": "2026-03-22T12:05:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Please do not call a deployment stable if it only survived one replay loop and no warm restart.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0603",
+      "timestamp": "2026-03-23T11:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "Not trying to relitigate ADAS-203, but the upload path is still too polite about stale runtime state.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0702",
+      "timestamp": "2026-03-23T13:16:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "Cross-service metadata drift is making the dashboards less useful than the raw logs again.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0703",
+      "timestamp": "2026-03-23T14:27:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "Cache flush should be explicit in the API contract, not an unwritten step buried in a helper script.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0604",
+      "timestamp": "2026-03-24T12:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Can someone verify whether the session summaries are using the same clock source as the raw capture? I do not fully trust the current path.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0704",
+      "timestamp": "2026-03-24T15:38:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Rig automation still assumes clean restarts, which is optimistic bordering on fictional for this phase.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0705",
+      "timestamp": "2026-03-24T16:49:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Please do not call a deployment stable if it only survived one replay loop and no warm restart.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0605",
+      "timestamp": "2026-03-25T13:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "Quick platform note on telemetry backlog: event volume is outpacing the dashboard assumptions again, so if your graph looks clean please sanity-check the raw event stream before trusting it.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0606",
+      "timestamp": "2026-03-26T09:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Please include whether the rig was warm or cold before rollout. Half the debugging thread disappears if that detail is missing.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service",
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0607",
+      "timestamp": "2026-03-27T10:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "If the fix depends on everyone remembering an extra script step, it is not really fixed.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0608",
+      "timestamp": "2026-03-28T11:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Diagnostics sampler overhead is back in the conversation. The rig tolerates it until somebody enables the louder profile and then timing starts to wobble.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0609",
+      "timestamp": "2026-03-29T12:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "I trimmed one payload shape, but the bigger issue is still that replay and deployment metadata are drifting apart just enough to break simple correlations.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0610",
+      "timestamp": "2026-03-30T13:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "I can live with instability. I cannot live with a deployment note that says 'seems fine so far'.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service",
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0611",
+      "timestamp": "2026-03-31T09:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "Calibration cache behavior still feels under-specified. The checksum can look perfect while the runtime state is clearly older than it should be.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0612",
+      "timestamp": "2026-04-01T10:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "I am okay paying a little overhead for evidence, but not enough to create the symptom we are trying to explain.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0613",
+      "timestamp": "2026-04-02T11:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "If anyone changed event tags this morning, please say it out loud. I am diffing two runs that look identical until the labels stop matching.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0614",
+      "timestamp": "2026-04-03T12:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Small deployment gripe: we keep calling these canaries, but they are really prototype drops with just enough smoke coverage to be dangerous.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service",
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0615",
+      "timestamp": "2026-04-04T13:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "Not trying to relitigate ADAS-203, but the upload path is still too polite about stale runtime state.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0616",
+      "timestamp": "2026-04-05T09:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Can someone verify whether the session summaries are using the same clock source as the raw capture? I do not fully trust the current path.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0617",
+      "timestamp": "2026-04-06T10:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "Quick platform note on telemetry backlog: event volume is outpacing the dashboard assumptions again, so if your graph looks clean please sanity-check the raw event stream before trusting it.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0618",
+      "timestamp": "2026-04-07T11:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Please include whether the rig was warm or cold before rollout. Half the debugging thread disappears if that detail is missing.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service",
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0619",
+      "timestamp": "2026-04-08T12:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "If the fix depends on everyone remembering an extra script step, it is not really fixed.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0620",
+      "timestamp": "2026-04-09T13:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Diagnostics sampler overhead is back in the conversation. The rig tolerates it until somebody enables the louder profile and then timing starts to wobble.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0621",
+      "timestamp": "2026-04-10T09:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "I trimmed one payload shape, but the bigger issue is still that replay and deployment metadata are drifting apart just enough to break simple correlations.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0622",
+      "timestamp": "2026-04-11T10:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "I can live with instability. I cannot live with a deployment note that says 'seems fine so far'.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service",
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0623",
+      "timestamp": "2026-04-12T11:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "Calibration cache behavior still feels under-specified. The checksum can look perfect while the runtime state is clearly older than it should be.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0624",
+      "timestamp": "2026-04-13T12:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "I am okay paying a little overhead for evidence, but not enough to create the symptom we are trying to explain.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0625",
+      "timestamp": "2026-04-14T13:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "If anyone changed event tags this morning, please say it out loud. I am diffing two runs that look identical until the labels stop matching.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0626",
+      "timestamp": "2026-04-15T09:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Small deployment gripe: we keep calling these canaries, but they are really prototype drops with just enough smoke coverage to be dangerous.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service",
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0627",
+      "timestamp": "2026-04-16T10:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "Not trying to relitigate ADAS-203, but the upload path is still too polite about stale runtime state.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0628",
+      "timestamp": "2026-04-17T11:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Can someone verify whether the session summaries are using the same clock source as the raw capture? I do not fully trust the current path.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0629",
+      "timestamp": "2026-04-18T12:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "Quick platform note on telemetry backlog: event volume is outpacing the dashboard assumptions again, so if your graph looks clean please sanity-check the raw event stream before trusting it.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0630",
+      "timestamp": "2026-04-19T13:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Please include whether the rig was warm or cold before rollout. Half the debugging thread disappears if that detail is missing.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service",
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0631",
+      "timestamp": "2026-04-20T09:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "If the fix depends on everyone remembering an extra script step, it is not really fixed.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0632",
+      "timestamp": "2026-04-21T10:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Diagnostics sampler overhead is back in the conversation. The rig tolerates it until somebody enables the louder profile and then timing starts to wobble.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0633",
+      "timestamp": "2026-04-22T11:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "I trimmed one payload shape, but the bigger issue is still that replay and deployment metadata are drifting apart just enough to break simple correlations.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0634",
+      "timestamp": "2026-04-23T12:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "I can live with instability. I cannot live with a deployment note that says 'seems fine so far'.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service",
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0635",
+      "timestamp": "2026-04-24T13:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "Calibration cache behavior still feels under-specified. The checksum can look perfect while the runtime state is clearly older than it should be.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0636",
+      "timestamp": "2026-04-25T09:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "I am okay paying a little overhead for evidence, but not enough to create the symptom we are trying to explain.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0637",
+      "timestamp": "2026-04-26T10:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "If anyone changed event tags this morning, please say it out loud. I am diffing two runs that look identical until the labels stop matching.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0638",
+      "timestamp": "2026-04-27T11:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Small deployment gripe: we keep calling these canaries, but they are really prototype drops with just enough smoke coverage to be dangerous.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service",
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0639",
+      "timestamp": "2026-04-28T12:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "Not trying to relitigate ADAS-203, but the upload path is still too polite about stale runtime state.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0640",
+      "timestamp": "2026-04-29T13:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Can someone verify whether the session summaries are using the same clock source as the raw capture? I do not fully trust the current path.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0641",
+      "timestamp": "2026-04-30T09:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "Quick platform note on telemetry backlog: event volume is outpacing the dashboard assumptions again, so if your graph looks clean please sanity-check the raw event stream before trusting it.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0642",
+      "timestamp": "2026-05-01T10:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Please include whether the rig was warm or cold before rollout. Half the debugging thread disappears if that detail is missing.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service",
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0643",
+      "timestamp": "2026-05-02T11:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "If the fix depends on everyone remembering an extra script step, it is not really fixed.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0644",
+      "timestamp": "2026-05-03T12:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "Diagnostics sampler overhead is back in the conversation. The rig tolerates it until somebody enables the louder profile and then timing starts to wobble.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0645",
+      "timestamp": "2026-05-04T13:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "I trimmed one payload shape, but the bigger issue is still that replay and deployment metadata are drifting apart just enough to break simple correlations.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0646",
+      "timestamp": "2026-05-05T09:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "I can live with instability. I cannot live with a deployment note that says 'seems fine so far'.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service",
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0647",
+      "timestamp": "2026-05-06T10:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-009",
+      "employee_name": "Nora Ibrahim",
+      "text": "Calibration cache behavior still feels under-specified. The checksum can look perfect while the runtime state is clearly older than it should be.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "calibration-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0648",
+      "timestamp": "2026-05-07T11:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-010",
+      "employee_name": "Ethan Walker",
+      "text": "I am okay paying a little overhead for evidence, but not enough to create the symptom we are trying to explain.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "diagnostics-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0649",
+      "timestamp": "2026-05-08T12:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-004",
+      "employee_name": "Sofia Petrov",
+      "text": "If anyone changed event tags this morning, please say it out loud. I am diffing two runs that look identical until the labels stop matching.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "telemetry-service"
+      ]
+    },
+    {
+      "message_id": "MSG-0650",
+      "timestamp": "2026-05-09T13:00:00Z",
+      "channel": "#platform",
+      "employee_id": "EMP-005",
+      "employee_name": "Jonas Mueller",
+      "text": "Small deployment gripe: we keep calling these canaries, but they are really prototype drops with just enough smoke coverage to be dangerous.",
+      "referenced_tickets": [],
+      "referenced_commits": [],
+      "referenced_incidents": [],
+      "referenced_services": [
+        "edge-inference-service",
+        "telemetry-service"
+      ]
+    }
+  ]
+}

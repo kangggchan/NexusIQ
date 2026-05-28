@@ -88,7 +88,7 @@ embed_text:
 extract_graph:
   model_id: default_chat_model
   prompt: "prompts/extract_graph.txt"
-  entity_types: [organization,person,geo,event]
+  entity_types: [service,incident,team,deployment,engineer,system,commit]
   max_gleanings: 1
 
 summarize_descriptions:
@@ -106,8 +106,7 @@ cluster_graph:
 extract_claims:
   enabled: false
   model_id: default_chat_model
-  prompt: "prompts/extract_claims.txt"
-  description: "Any claims or facts that could be relevant to information discovery."
+  description: "Claims extraction is disabled for NexusIQ; use graph-based relationship extraction instead."
   max_gleanings: 1
 
 community_reports:

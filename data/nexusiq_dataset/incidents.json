@@ -1,0 +1,796 @@
+{
+  "generated_at": "2026-05-23T17:00:00Z",
+  "incidents": [
+    {
+      "incident_id": "INC-001",
+      "title": "LiDAR inference latency spike after INT8 rollout",
+      "project": "LiDAR Object Detection System for Autonomous Vehicles",
+      "severity": "SEV-1",
+      "started_at": "2026-04-29T10:18:00Z",
+      "ended_at": "2026-04-29T13:05:00Z",
+      "affected_services": [
+        "edge-inference-service",
+        "object-detection-service"
+      ],
+      "timeline": [
+        {
+          "timestamp": "2026-04-29T10:18:00Z",
+          "event": "Issue detected during prototype validation run."
+        },
+        {
+          "timestamp": "2026-04-29T10:46:00Z",
+          "event": "Team correlated symptoms across affected services and deployment logs."
+        },
+        {
+          "timestamp": "2026-04-29T12:30:00Z",
+          "event": "Mitigation applied on active rig and behavior partially recovered."
+        },
+        {
+          "timestamp": "2026-04-29T13:05:00Z",
+          "event": "Incident downgraded after replay verification completed."
+        }
+      ],
+      "root_cause": "TensorRT calibration buffers were retained across hot reloads, fragmenting GPU memory and stretching inference latency under replay-heavy sessions.",
+      "contributing_signals": [
+        "GPU free memory drops after each engine reload even when frame rate is flat",
+        "latency spikes get worse after QA replays a calibration bundle twice",
+        "restarts temporarily recover p95 inference time"
+      ],
+      "mitigation_steps": [
+        "Rolled edge-inference-service back to previous FP16 build on jetson-xavier-edge-02.",
+        "Disabled automatic engine reload during replay-driven smoke tests.",
+        "Added allocator counter collection to telemetry dashboard for the next canary."
+      ],
+      "linked_jira_tickets": [
+        "LID-103",
+        "LID-106",
+        "LID-121"
+      ],
+      "related_deployments": []
+    },
+    {
+      "incident_id": "INC-002",
+      "title": "Tracking delay during dense replay with telemetry enabled",
+      "project": "LiDAR Object Detection System for Autonomous Vehicles",
+      "severity": "SEV-2",
+      "started_at": "2026-04-18T15:22:00Z",
+      "ended_at": "2026-04-18T17:10:00Z",
+      "affected_services": [
+        "tracking-service",
+        "lidar-ingestion-service",
+        "telemetry-service"
+      ],
+      "timeline": [
+        {
+          "timestamp": "2026-04-18T15:22:00Z",
+          "event": "Issue detected during prototype validation run."
+        },
+        {
+          "timestamp": "2026-04-18T15:50:00Z",
+          "event": "Team correlated symptoms across affected services and deployment logs."
+        },
+        {
+          "timestamp": "2026-04-18T16:35:00Z",
+          "event": "Mitigation applied on active rig and behavior partially recovered."
+        },
+        {
+          "timestamp": "2026-04-18T17:10:00Z",
+          "event": "Incident downgraded after replay verification completed."
+        }
+      ],
+      "root_cause": "A mismatched reliable QoS profile on the tracking subscriber combined with telemetry burst publishing caused message buildup during dense scenes.",
+      "contributing_signals": [
+        "track age jumps after telemetry export starts on the same rig",
+        "backlog is higher on the Xavier device than the Orin dev box",
+        "reducing telemetry flush interval makes tracking delay less visible"
+      ],
+      "mitigation_steps": [
+        "Throttled telemetry exporter flush interval on replay rigs.",
+        "Switched tracking subscriber to best-effort profile on the demo branch.",
+        "Captured ROS2 callback timing traces from Xavier for follow-up analysis."
+      ],
+      "linked_jira_tickets": [
+        "LID-107",
+        "LID-116",
+        "LID-117"
+      ],
+      "related_deployments": []
+    },
+    {
+      "incident_id": "INC-003",
+      "title": "Lane offset after warm ECU restart on calibration branch",
+      "project": "Lane Keeping Assist System using 2D Camera in ADAS ECU",
+      "severity": "SEV-1",
+      "started_at": "2026-04-30T09:40:00Z",
+      "ended_at": "2026-04-30T12:35:00Z",
+      "affected_services": [
+        "calibration-service",
+        "lane-detection-service",
+        "camera-ingestion-service"
+      ],
+      "timeline": [
+        {
+          "timestamp": "2026-04-30T09:40:00Z",
+          "event": "Issue detected during prototype validation run."
+        },
+        {
+          "timestamp": "2026-04-30T10:08:00Z",
+          "event": "Team correlated symptoms across affected services and deployment logs."
+        },
+        {
+          "timestamp": "2026-04-30T12:00:00Z",
+          "event": "Mitigation applied on active rig and behavior partially recovered."
+        },
+        {
+          "timestamp": "2026-04-30T12:35:00Z",
+          "event": "Incident downgraded after replay verification completed."
+        }
+      ],
+      "root_cause": "The calibration service reused a stale extrinsic cache when the ECU restarted without a full profile flush, so lane inference mixed fresh frames with an old transform.",
+      "contributing_signals": [
+        "lane center error is small after cold boot but grows after a warm restart",
+        "active calibration checksum looks correct while reported extrinsic age is stale",
+        "uploading the same bundle twice sometimes recenters the lane mask"
+      ],
+      "mitigation_steps": [
+        "Forced calibration cache flush after each uploaded bundle.",
+        "Restarted the camera-ingestion-service after profile activation on the rig.",
+        "Pinned lane tests to cold-boot setup until cache lifecycle was clarified."
+      ],
+      "linked_jira_tickets": [
+        "ADAS-203",
+        "ADAS-206",
+        "ADAS-224"
+      ],
+      "related_deployments": []
+    },
+    {
+      "incident_id": "INC-004",
+      "title": "Steering jitter on timing-profile-b during highway replay",
+      "project": "Lane Keeping Assist System using 2D Camera in ADAS ECU",
+      "severity": "SEV-1",
+      "started_at": "2026-05-09T14:05:00Z",
+      "ended_at": "2026-05-09T17:20:00Z",
+      "affected_services": [
+        "steering-control-service",
+        "camera-ingestion-service",
+        "diagnostics-service"
+      ],
+      "timeline": [
+        {
+          "timestamp": "2026-05-09T14:05:00Z",
+          "event": "Issue detected during prototype validation run."
+        },
+        {
+          "timestamp": "2026-05-09T14:33:00Z",
+          "event": "Team correlated symptoms across affected services and deployment logs."
+        },
+        {
+          "timestamp": "2026-05-09T16:45:00Z",
+          "event": "Mitigation applied on active rig and behavior partially recovered."
+        },
+        {
+          "timestamp": "2026-05-09T17:20:00Z",
+          "event": "Incident downgraded after replay verification completed."
+        }
+      ],
+      "root_cause": "Controller smoothing consumed camera timestamps from a different clock domain than the CAN feedback path, amplifying oscillation once speed exceeded 70 km/h.",
+      "contributing_signals": [
+        "steering oscillation starts only when the faster timing profile is enabled",
+        "diagnostics reports controller delta spikes without lane confidence collapsing",
+        "the issue is hard to reproduce in replay because wall clock pacing is different"
+      ],
+      "mitigation_steps": [
+        "Rolled controller timing-profile-b back to profile-a.",
+        "Disabled aggressive smoothing gains above 70 km/h in the prototype build.",
+        "Started logging both sensor and monotonic timestamps in diagnostics output."
+      ],
+      "linked_jira_tickets": [
+        "ADAS-207",
+        "ADAS-216",
+        "ADAS-217"
+      ],
+      "related_deployments": []
+    },
+    {
+      "incident_id": "INC-005",
+      "title": "Telemetry endpoint saturation hides LiDAR queue depth counters",
+      "project": "LiDAR Object Detection System for Autonomous Vehicles",
+      "severity": "SEV-3",
+      "started_at": "2026-03-24T11:03:00Z",
+      "ended_at": "2026-03-24T12:09:00Z",
+      "affected_services": [
+        "telemetry-service"
+      ],
+      "timeline": [
+        {
+          "timestamp": "2026-03-24T11:03:00Z",
+          "event": "Issue detected during prototype validation run."
+        },
+        {
+          "timestamp": "2026-03-24T11:31:00Z",
+          "event": "Team correlated symptoms across affected services and deployment logs."
+        },
+        {
+          "timestamp": "2026-03-24T11:34:00Z",
+          "event": "Mitigation applied on active rig and behavior partially recovered."
+        },
+        {
+          "timestamp": "2026-03-24T12:09:00Z",
+          "event": "Incident downgraded after replay verification completed."
+        }
+      ],
+      "root_cause": "Local implementation regression uncovered during prototype iteration and resolved with a targeted rollback or patch.",
+      "contributing_signals": [
+        "Symptom reproduced on the active branch.",
+        "Recent code change aligned with the failure window."
+      ],
+      "mitigation_steps": [
+        "Reduced metric payload size for replay-only runs.",
+        "Restored queue depth field with fallback serialization."
+      ],
+      "linked_jira_tickets": [
+        "LID-105",
+        "LID-126"
+      ],
+      "related_deployments": []
+    },
+    {
+      "incident_id": "INC-006",
+      "title": "Object decoder precision drop after NMS refactor",
+      "project": "LiDAR Object Detection System for Autonomous Vehicles",
+      "severity": "SEV-2",
+      "started_at": "2026-03-12T13:15:00Z",
+      "ended_at": "2026-03-12T16:05:00Z",
+      "affected_services": [
+        "object-detection-service"
+      ],
+      "timeline": [
+        {
+          "timestamp": "2026-03-12T13:15:00Z",
+          "event": "Issue detected during prototype validation run."
+        },
+        {
+          "timestamp": "2026-03-12T13:43:00Z",
+          "event": "Team correlated symptoms across affected services and deployment logs."
+        },
+        {
+          "timestamp": "2026-03-12T15:30:00Z",
+          "event": "Mitigation applied on active rig and behavior partially recovered."
+        },
+        {
+          "timestamp": "2026-03-12T16:05:00Z",
+          "event": "Incident downgraded after replay verification completed."
+        }
+      ],
+      "root_cause": "Local implementation regression uncovered during prototype iteration and resolved with a targeted rollback or patch.",
+      "contributing_signals": [
+        "Symptom reproduced on the active branch.",
+        "Recent code change aligned with the failure window."
+      ],
+      "mitigation_steps": [
+        "Reverted the decode branch optimization and reran the urban replay set."
+      ],
+      "linked_jira_tickets": [
+        "LID-115"
+      ],
+      "related_deployments": []
+    },
+    {
+      "incident_id": "INC-007",
+      "title": "Engine cache refresh skipped after deployment smoke test",
+      "project": "LiDAR Object Detection System for Autonomous Vehicles",
+      "severity": "SEV-2",
+      "started_at": "2026-04-10T10:40:00Z",
+      "ended_at": "2026-04-10T12:01:00Z",
+      "affected_services": [
+        "edge-inference-service"
+      ],
+      "timeline": [
+        {
+          "timestamp": "2026-04-10T10:40:00Z",
+          "event": "Issue detected during prototype validation run."
+        },
+        {
+          "timestamp": "2026-04-10T11:08:00Z",
+          "event": "Team correlated symptoms across affected services and deployment logs."
+        },
+        {
+          "timestamp": "2026-04-10T11:26:00Z",
+          "event": "Mitigation applied on active rig and behavior partially recovered."
+        },
+        {
+          "timestamp": "2026-04-10T12:01:00Z",
+          "event": "Incident downgraded after replay verification completed."
+        }
+      ],
+      "root_cause": "TensorRT calibration buffers were retained across hot reloads, fragmenting GPU memory and stretching inference latency under replay-heavy sessions.",
+      "contributing_signals": [
+        "GPU free memory drops after each engine reload even when frame rate is flat",
+        "latency spikes get worse after QA replays a calibration bundle twice",
+        "restarts temporarily recover p95 inference time"
+      ],
+      "mitigation_steps": [
+        "Forced full engine rebuild after calibration upload and invalidated old cache entries."
+      ],
+      "linked_jira_tickets": [
+        "LID-112",
+        "LID-121"
+      ],
+      "related_deployments": []
+    },
+    {
+      "incident_id": "INC-008",
+      "title": "Replay harness resets leave stale tracking IDs",
+      "project": "LiDAR Object Detection System for Autonomous Vehicles",
+      "severity": "SEV-3",
+      "started_at": "2026-03-30T09:20:00Z",
+      "ended_at": "2026-03-30T10:00:00Z",
+      "affected_services": [
+        "tracking-service"
+      ],
+      "timeline": [
+        {
+          "timestamp": "2026-03-30T09:20:00Z",
+          "event": "Issue detected during prototype validation run."
+        },
+        {
+          "timestamp": "2026-03-30T09:48:00Z",
+          "event": "Team correlated symptoms across affected services and deployment logs."
+        },
+        {
+          "timestamp": "2026-03-30T09:25:00Z",
+          "event": "Mitigation applied on active rig and behavior partially recovered."
+        },
+        {
+          "timestamp": "2026-03-30T10:00:00Z",
+          "event": "Incident downgraded after replay verification completed."
+        }
+      ],
+      "root_cause": "Local implementation regression uncovered during prototype iteration and resolved with a targeted rollback or patch.",
+      "contributing_signals": [
+        "Symptom reproduced on the active branch.",
+        "Recent code change aligned with the failure window."
+      ],
+      "mitigation_steps": [
+        "Cleared track cache on replay session boundary and documented the reset path."
+      ],
+      "linked_jira_tickets": [
+        "LID-120"
+      ],
+      "related_deployments": []
+    },
+    {
+      "incident_id": "INC-009",
+      "title": "Camera frame gap spike during verbose diagnostics capture",
+      "project": "Lane Keeping Assist System using 2D Camera in ADAS ECU",
+      "severity": "SEV-2",
+      "started_at": "2026-04-16T15:50:00Z",
+      "ended_at": "2026-04-16T17:00:00Z",
+      "affected_services": [
+        "camera-ingestion-service",
+        "diagnostics-service"
+      ],
+      "timeline": [
+        {
+          "timestamp": "2026-04-16T15:50:00Z",
+          "event": "Issue detected during prototype validation run."
+        },
+        {
+          "timestamp": "2026-04-16T16:18:00Z",
+          "event": "Team correlated symptoms across affected services and deployment logs."
+        },
+        {
+          "timestamp": "2026-04-16T16:25:00Z",
+          "event": "Mitigation applied on active rig and behavior partially recovered."
+        },
+        {
+          "timestamp": "2026-04-16T17:00:00Z",
+          "event": "Incident downgraded after replay verification completed."
+        }
+      ],
+      "root_cause": "Controller smoothing consumed camera timestamps from a different clock domain than the CAN feedback path, amplifying oscillation once speed exceeded 70 km/h.",
+      "contributing_signals": [
+        "steering oscillation starts only when the faster timing profile is enabled",
+        "diagnostics reports controller delta spikes without lane confidence collapsing",
+        "the issue is hard to reproduce in replay because wall clock pacing is different"
+      ],
+      "mitigation_steps": [
+        "Dropped verbose diagnostics sampling rate and moved timing capture to a lower priority thread."
+      ],
+      "linked_jira_tickets": [
+        "ADAS-214",
+        "ADAS-223"
+      ],
+      "related_deployments": []
+    },
+    {
+      "incident_id": "INC-010",
+      "title": "Lane preview API serves stale experiment label after reload",
+      "project": "Lane Keeping Assist System using 2D Camera in ADAS ECU",
+      "severity": "SEV-3",
+      "started_at": "2026-04-02T10:15:00Z",
+      "ended_at": "2026-04-02T10:55:00Z",
+      "affected_services": [
+        "lane-detection-service"
+      ],
+      "timeline": [
+        {
+          "timestamp": "2026-04-02T10:15:00Z",
+          "event": "Issue detected during prototype validation run."
+        },
+        {
+          "timestamp": "2026-04-02T10:43:00Z",
+          "event": "Team correlated symptoms across affected services and deployment logs."
+        },
+        {
+          "timestamp": "2026-04-02T10:20:00Z",
+          "event": "Mitigation applied on active rig and behavior partially recovered."
+        },
+        {
+          "timestamp": "2026-04-02T10:55:00Z",
+          "event": "Incident downgraded after replay verification completed."
+        }
+      ],
+      "root_cause": "Local implementation regression uncovered during prototype iteration and resolved with a targeted rollback or patch.",
+      "contributing_signals": [
+        "Symptom reproduced on the active branch.",
+        "Recent code change aligned with the failure window."
+      ],
+      "mitigation_steps": [
+        "Restarted the lane service and fixed metadata hydration in the next patch."
+      ],
+      "linked_jira_tickets": [
+        "ADAS-210",
+        "ADAS-226"
+      ],
+      "related_deployments": []
+    },
+    {
+      "incident_id": "INC-011",
+      "title": "Steering command saturation on quick lane swap scenario",
+      "project": "Lane Keeping Assist System using 2D Camera in ADAS ECU",
+      "severity": "SEV-2",
+      "started_at": "2026-04-21T11:04:00Z",
+      "ended_at": "2026-04-21T13:18:00Z",
+      "affected_services": [
+        "steering-control-service"
+      ],
+      "timeline": [
+        {
+          "timestamp": "2026-04-21T11:04:00Z",
+          "event": "Issue detected during prototype validation run."
+        },
+        {
+          "timestamp": "2026-04-21T11:32:00Z",
+          "event": "Team correlated symptoms across affected services and deployment logs."
+        },
+        {
+          "timestamp": "2026-04-21T12:43:00Z",
+          "event": "Mitigation applied on active rig and behavior partially recovered."
+        },
+        {
+          "timestamp": "2026-04-21T13:18:00Z",
+          "event": "Incident downgraded after replay verification completed."
+        }
+      ],
+      "root_cause": "Local implementation regression uncovered during prototype iteration and resolved with a targeted rollback or patch.",
+      "contributing_signals": [
+        "Symptom reproduced on the active branch.",
+        "Recent code change aligned with the failure window."
+      ],
+      "mitigation_steps": [
+        "Lowered steering torque clamp in highway replay profile."
+      ],
+      "linked_jira_tickets": [
+        "ADAS-220",
+        "ADAS-225"
+      ],
+      "related_deployments": []
+    },
+    {
+      "incident_id": "INC-012",
+      "title": "Calibration checksum mismatch between laptop and ECU sidecar",
+      "project": "Lane Keeping Assist System using 2D Camera in ADAS ECU",
+      "severity": "SEV-2",
+      "started_at": "2026-03-27T14:30:00Z",
+      "ended_at": "2026-03-27T16:04:00Z",
+      "affected_services": [
+        "calibration-service"
+      ],
+      "timeline": [
+        {
+          "timestamp": "2026-03-27T14:30:00Z",
+          "event": "Issue detected during prototype validation run."
+        },
+        {
+          "timestamp": "2026-03-27T14:58:00Z",
+          "event": "Team correlated symptoms across affected services and deployment logs."
+        },
+        {
+          "timestamp": "2026-03-27T15:29:00Z",
+          "event": "Mitigation applied on active rig and behavior partially recovered."
+        },
+        {
+          "timestamp": "2026-03-27T16:04:00Z",
+          "event": "Incident downgraded after replay verification completed."
+        }
+      ],
+      "root_cause": "The calibration service reused a stale extrinsic cache when the ECU restarted without a full profile flush, so lane inference mixed fresh frames with an old transform.",
+      "contributing_signals": [
+        "lane center error is small after cold boot but grows after a warm restart",
+        "active calibration checksum looks correct while reported extrinsic age is stale",
+        "uploading the same bundle twice sometimes recenters the lane mask"
+      ],
+      "mitigation_steps": [
+        "Regenerated calibration bundle manifest and blocked partial uploads."
+      ],
+      "linked_jira_tickets": [
+        "ADAS-202",
+        "ADAS-211"
+      ],
+      "related_deployments": []
+    },
+    {
+      "incident_id": "INC-013",
+      "title": "Xavier canary rollback after inference regression in demo branch",
+      "project": "LiDAR Object Detection System for Autonomous Vehicles",
+      "severity": "SEV-2",
+      "started_at": "2026-05-12T09:12:00Z",
+      "ended_at": "2026-05-12T10:50:00Z",
+      "affected_services": [
+        "edge-inference-service",
+        "object-detection-service"
+      ],
+      "timeline": [
+        {
+          "timestamp": "2026-05-12T09:12:00Z",
+          "event": "Issue detected during prototype validation run."
+        },
+        {
+          "timestamp": "2026-05-12T09:40:00Z",
+          "event": "Team correlated symptoms across affected services and deployment logs."
+        },
+        {
+          "timestamp": "2026-05-12T10:15:00Z",
+          "event": "Mitigation applied on active rig and behavior partially recovered."
+        },
+        {
+          "timestamp": "2026-05-12T10:50:00Z",
+          "event": "Incident downgraded after replay verification completed."
+        }
+      ],
+      "root_cause": "TensorRT calibration buffers were retained across hot reloads, fragmenting GPU memory and stretching inference latency under replay-heavy sessions.",
+      "contributing_signals": [
+        "GPU free memory drops after each engine reload even when frame rate is flat",
+        "latency spikes get worse after QA replays a calibration bundle twice",
+        "restarts temporarily recover p95 inference time"
+      ],
+      "mitigation_steps": [
+        "Reverted the demo branch deployment and held future canaries to Orin only."
+      ],
+      "linked_jira_tickets": [
+        "LID-127",
+        "LID-131"
+      ],
+      "related_deployments": []
+    },
+    {
+      "incident_id": "INC-014",
+      "title": "Road replay glare causes lane confidence collapse",
+      "project": "Lane Keeping Assist System using 2D Camera in ADAS ECU",
+      "severity": "SEV-3",
+      "started_at": "2026-03-21T10:05:00Z",
+      "ended_at": "2026-03-21T11:10:00Z",
+      "affected_services": [
+        "lane-detection-service"
+      ],
+      "timeline": [
+        {
+          "timestamp": "2026-03-21T10:05:00Z",
+          "event": "Issue detected during prototype validation run."
+        },
+        {
+          "timestamp": "2026-03-21T10:33:00Z",
+          "event": "Team correlated symptoms across affected services and deployment logs."
+        },
+        {
+          "timestamp": "2026-03-21T10:35:00Z",
+          "event": "Mitigation applied on active rig and behavior partially recovered."
+        },
+        {
+          "timestamp": "2026-03-21T11:10:00Z",
+          "event": "Incident downgraded after replay verification completed."
+        }
+      ],
+      "root_cause": "Local implementation regression uncovered during prototype iteration and resolved with a targeted rollback or patch.",
+      "contributing_signals": [
+        "Symptom reproduced on the active branch.",
+        "Recent code change aligned with the failure window."
+      ],
+      "mitigation_steps": [
+        "Switched to the spline-heavy feature branch for glare replay evaluation."
+      ],
+      "linked_jira_tickets": [
+        "ADAS-215"
+      ],
+      "related_deployments": [
+        "DEP-033"
+      ]
+    },
+    {
+      "incident_id": "INC-015",
+      "title": "Telemetry deployment metadata missing on rollback events",
+      "project": "LiDAR Object Detection System for Autonomous Vehicles",
+      "severity": "SEV-3",
+      "started_at": "2026-04-07T08:55:00Z",
+      "ended_at": "2026-04-07T09:38:00Z",
+      "affected_services": [
+        "telemetry-service"
+      ],
+      "timeline": [
+        {
+          "timestamp": "2026-04-07T08:55:00Z",
+          "event": "Issue detected during prototype validation run."
+        },
+        {
+          "timestamp": "2026-04-07T09:23:00Z",
+          "event": "Team correlated symptoms across affected services and deployment logs."
+        },
+        {
+          "timestamp": "2026-04-07T09:03:00Z",
+          "event": "Mitigation applied on active rig and behavior partially recovered."
+        },
+        {
+          "timestamp": "2026-04-07T09:38:00Z",
+          "event": "Incident downgraded after replay verification completed."
+        }
+      ],
+      "root_cause": "Local implementation regression uncovered during prototype iteration and resolved with a targeted rollback or patch.",
+      "contributing_signals": [
+        "Symptom reproduced on the active branch.",
+        "Recent code change aligned with the failure window."
+      ],
+      "mitigation_steps": [
+        "Patched deployment event serialization and replayed missing rollback records."
+      ],
+      "linked_jira_tickets": [
+        "LID-122",
+        "LID-132"
+      ],
+      "related_deployments": []
+    },
+    {
+      "incident_id": "INC-016",
+      "title": "Prototype ECU package rollback after controller jitter regression",
+      "project": "Lane Keeping Assist System using 2D Camera in ADAS ECU",
+      "severity": "SEV-2",
+      "started_at": "2026-05-14T16:10:00Z",
+      "ended_at": "2026-05-14T17:45:00Z",
+      "affected_services": [
+        "steering-control-service",
+        "diagnostics-service"
+      ],
+      "timeline": [
+        {
+          "timestamp": "2026-05-14T16:10:00Z",
+          "event": "Issue detected during prototype validation run."
+        },
+        {
+          "timestamp": "2026-05-14T16:38:00Z",
+          "event": "Team correlated symptoms across affected services and deployment logs."
+        },
+        {
+          "timestamp": "2026-05-14T17:10:00Z",
+          "event": "Mitigation applied on active rig and behavior partially recovered."
+        },
+        {
+          "timestamp": "2026-05-14T17:45:00Z",
+          "event": "Incident downgraded after replay verification completed."
+        }
+      ],
+      "root_cause": "Controller smoothing consumed camera timestamps from a different clock domain than the CAN feedback path, amplifying oscillation once speed exceeded 70 km/h.",
+      "contributing_signals": [
+        "steering oscillation starts only when the faster timing profile is enabled",
+        "diagnostics reports controller delta spikes without lane confidence collapsing",
+        "the issue is hard to reproduce in replay because wall clock pacing is different"
+      ],
+      "mitigation_steps": [
+        "Rolled back ECU package 0.6.8 and re-enabled profile-a for all rigs."
+      ],
+      "linked_jira_tickets": [
+        "ADAS-227",
+        "ADAS-208"
+      ],
+      "related_deployments": []
+    },
+    {
+      "incident_id": "INC-017",
+      "title": "Lane tests blocked by stale calibration cache after repeated uploads",
+      "project": "Lane Keeping Assist System using 2D Camera in ADAS ECU",
+      "severity": "SEV-2",
+      "started_at": "2026-05-05T13:08:00Z",
+      "ended_at": "2026-05-05T14:44:00Z",
+      "affected_services": [
+        "calibration-service",
+        "lane-detection-service"
+      ],
+      "timeline": [
+        {
+          "timestamp": "2026-05-05T13:08:00Z",
+          "event": "Issue detected during prototype validation run."
+        },
+        {
+          "timestamp": "2026-05-05T13:36:00Z",
+          "event": "Team correlated symptoms across affected services and deployment logs."
+        },
+        {
+          "timestamp": "2026-05-05T14:09:00Z",
+          "event": "Mitigation applied on active rig and behavior partially recovered."
+        },
+        {
+          "timestamp": "2026-05-05T14:44:00Z",
+          "event": "Incident downgraded after replay verification completed."
+        }
+      ],
+      "root_cause": "The calibration service reused a stale extrinsic cache when the ECU restarted without a full profile flush, so lane inference mixed fresh frames with an old transform.",
+      "contributing_signals": [
+        "lane center error is small after cold boot but grows after a warm restart",
+        "active calibration checksum looks correct while reported extrinsic age is stale",
+        "uploading the same bundle twice sometimes recenters the lane mask"
+      ],
+      "mitigation_steps": [
+        "Added explicit cache flush to the calibration upload playbook."
+      ],
+      "linked_jira_tickets": [
+        "ADAS-218",
+        "ADAS-224"
+      ],
+      "related_deployments": []
+    },
+    {
+      "incident_id": "INC-018",
+      "title": "Telemetry burst amplifies track lag on old Xavier image",
+      "project": "LiDAR Object Detection System for Autonomous Vehicles",
+      "severity": "SEV-2",
+      "started_at": "2026-05-18T11:33:00Z",
+      "ended_at": "2026-05-18T12:59:00Z",
+      "affected_services": [
+        "tracking-service",
+        "telemetry-service"
+      ],
+      "timeline": [
+        {
+          "timestamp": "2026-05-18T11:33:00Z",
+          "event": "Issue detected during prototype validation run."
+        },
+        {
+          "timestamp": "2026-05-18T12:01:00Z",
+          "event": "Team correlated symptoms across affected services and deployment logs."
+        },
+        {
+          "timestamp": "2026-05-18T12:24:00Z",
+          "event": "Mitigation applied on active rig and behavior partially recovered."
+        },
+        {
+          "timestamp": "2026-05-18T12:59:00Z",
+          "event": "Incident downgraded after replay verification completed."
+        }
+      ],
+      "root_cause": "A mismatched reliable QoS profile on the tracking subscriber combined with telemetry burst publishing caused message buildup during dense scenes.",
+      "contributing_signals": [
+        "track age jumps after telemetry export starts on the same rig",
+        "backlog is higher on the Xavier device than the Orin dev box",
+        "reducing telemetry flush interval makes tracking delay less visible"
+      ],
+      "mitigation_steps": [
+        "Reduced telemetry burst size and rebuilt Xavier image with updated QoS defaults."
+      ],
+      "linked_jira_tickets": [
+        "LID-123",
+        "LID-117"
+      ],
+      "related_deployments": []
+    }
+  ]
+}
