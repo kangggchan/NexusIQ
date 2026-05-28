@@ -400,8 +400,15 @@ export default function InvestigationChat({ onHighlightServices, onQueryStart, f
         body: JSON.stringify({
           query: q,
           history: messages
-            .filter(m => m.content)
-            .map(m => ({ role: m.role, content: m.content.slice(0, 400) }))
+            .map(m => {
+              // Assistant messages may have no text content but carry a report —
+              // use the report summary as the history text so the backend
+              // understands what was previously answered.
+              const text = m.content ||
+                (m.report ? (m.report.summary || m.report.synthesis || '').slice(0, 400) : '')
+              return text ? { role: m.role, content: text.slice(0, 400) } : null
+            })
+            .filter(Boolean)
             .slice(-10),
         }),
       })

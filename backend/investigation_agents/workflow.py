@@ -3,12 +3,12 @@ Investigation LangGraph workflow.
 
 Graph topology:
   START
-    → classify          (heuristic-only: greetings get instant answer, no LLM/DB)
-        ↓ GREETING      → synthesize (instant canned response)
-        ↓ NOT GREETING
+    → classify          (LLM router: no retrieval, low token budget)
+        ↓ DIRECT        → synthesize (conversational reply — no KB search needed)
+        ↓ FULL
     → retrieve          (HybridRetriever: Neo4j + ChromaDB context)
-    → plan              (Orchestrator LLM: decides DIRECT or FULL, now has DB context)
-        ↓ DIRECT        → synthesize (orchestrator answers from retrieved data)
+    → plan              (Orchestrator LLM: with full context, decides DIRECT or FULL)
+        ↓ DIRECT        → synthesize (orchestrator answers from retrieved data alone)
         ↓ FULL
     → graph_agent   ┐   (parallel fan-out)
     → incident_agent├   (parallel fan-out)
@@ -32,8 +32,9 @@ from typing import AsyncIterator
 import httpx
 from langgraph.graph import StateGraph, START, END
 
-from backend.investigation.state import InvestigationState
-from backend.investigation.prompts import (
+from backend.investigation_agents.state import InvestigationState
+from backend.investigation_agents.prompts import (
+    ORCHESTRATOR_ROUTE_PROMPT,
     ORCHESTRATOR_PLAN_PROMPT,
     GRAPH_AGENT_PROMPT,
     INCIDENT_AGENT_PROMPT,
@@ -48,10 +49,11 @@ log = logging.getLogger(__name__)
 # ── Model assignments ─────────────────────────────────────────────────────────
 
 AGENT_MODELS: dict[str, str] = {
+    # Fast first-level router — short output, low latency
+    "route":        "llama3.1:8b",
     "orchestrator": "llama3.1:8b",
     "graph":        "qwen2.5:7b",
     "incident":     "llama3.1:8b",
-    # qwen2.5:7b is faster than gemma3:12b and produces cleaner structured output
     "risk":         "qwen2.5:7b",
     # JSON synthesis needs a model that reliably follows strict schema
     "synthesize":   "qwen2.5:7b",
@@ -108,50 +110,56 @@ class InvestigationWorkflow:
             resp.raise_for_status()
             return resp.json().get("message", {}).get("content", "")
 
-    # ── Node: classify (heuristic-only, no LLM, no DB) ─────────────────────
-
-    # Keywords that strongly suggest a technical investigation is needed
-    _TECH_KEYWORDS = (
-        "incident", "outage", "error", "failure", "deploy", "service", "latency",
-        "crash", "alert", "spike", "ticket", "jira", "commit", "rollback",
-        "database", "cpu", "memory", "timeout", "nexus", "api", "pod", "k8s",
-        "kubernetes", "dependency", "downstream", "upstream", "team",
-    )
-
-    def _is_greeting(self, query: str) -> tuple[bool, str]:
-        """Returns (True, answer) only for unambiguous greetings — nothing else."""
-        q = query.strip().lower().rstrip("!?.")
-        greetings = {
-            "hello": "Hello! I'm the NexusIQ Investigation AI. Ask me about incidents, service outages, deployments, or any technical investigation.",
-            "hi": "Hi there! How can I help with your investigation today?",
-            "hey": "Hey! What would you like to investigate?",
-            "thanks": "You're welcome! Let me know if you have more questions.",
-            "thank you": "You're welcome! Anything else I can help investigate?",
-            "ok": "Got it. What else would you like to know?",
-            "okay": "Understood. What else can I help with?",
-            "bye": "Goodbye! Come back if you need another investigation.",
-            "who are you": "I'm NexusIQ, an AI investigation engine that correlates incidents, deployments, and service topology to debug production issues.",
-            "what can you do": "I can investigate incidents, correlate deployments with outages, analyze service blast radius, and trace root causes across your engineering systems.",
-            "what is nexusiq": "NexusIQ is a multi-agent investigation platform using Graph RAG (Neo4j + ChromaDB) to correlate incidents, code changes, and service dependencies.",
-        }
-        for key, answer in greetings.items():
-            if q == key or q.startswith(key + " ") or q.endswith(" " + key):
-                return True, answer
-        return False, ""
+    # ── Node: classify (LLM router — runs before any retrieval) ─────────────
 
     async def _classify(self, state: InvestigationState) -> dict:
-        """Fast heuristic node — no LLM, no DB. Only handles greetings."""
-        is_greeting, answer = self._is_greeting(state["query"])
-        if is_greeting:
-            log.info("[classify] greeting detected — skipping retrieval and agents")
-            return {
-                "decision":      "direct",
-                "direct_answer": answer,
-                "plan":          "Greeting — no investigation needed",
-                "steps": [_step("orchestrator", "completed", "Direct response — no investigation needed")],
-            }
-        # Everything else: proceed to retrieve → plan
-        return {"decision": "full", "direct_answer": "", "plan": ""}
+        """
+        LLM-based first-level router.
+
+        Runs before any retrieval. Decides whether the query can be answered
+        immediately (DIRECT) or requires knowledge-base search and agents (FULL).
+        DIRECT is used for conversational messages, capability questions, and
+        anything not tied to a specific production system or incident.
+        """
+        log.info("[classify] routing query via LLM")
+        history_text = ""
+        if state.get("history"):
+            turns = state["history"][-4:]
+            history_text = "\n".join(
+                f"{t['role'].upper()}: {t['content'][:200]}" for t in turns
+            )
+        user_msg = (
+            f"CONVERSATION HISTORY:\n{history_text or '(none)'}\n\n"
+            f"CURRENT MESSAGE: {state['query']}"
+        )
+        try:
+            raw = await self._chat(
+                AGENT_MODELS["route"], ORCHESTRATOR_ROUTE_PROMPT, user_msg,
+                timeout=30.0, num_predict=150, temperature=0.0,
+            )
+            decision = "full"
+            direct_answer = ""
+            for line in raw.splitlines():
+                if line.startswith("DECISION:"):
+                    decision = "direct" if "DIRECT" in line.upper() else "full"
+                elif line.startswith("DIRECT_ANSWER:"):
+                    direct_answer = line.split(":", 1)[1].strip()
+
+            if decision == "direct" and direct_answer:
+                log.info("[classify] direct — skipping retrieval and agents")
+                return {
+                    "decision":      "direct",
+                    "direct_answer": direct_answer,
+                    "plan":          "Conversational response — no investigation needed",
+                    "steps": [_step("orchestrator", "completed", "Direct response — no data lookup needed")],
+                }
+
+            log.info("[classify] investigation required — proceeding to retrieve")
+            return {"decision": "full", "direct_answer": "", "plan": ""}
+
+        except Exception as exc:
+            log.warning("[classify] routing LLM failed, defaulting to full: %s", exc)
+            return {"decision": "full", "direct_answer": "", "plan": ""}
 
     # ── Node: retrieve ────────────────────────────────────────────────────────
 
@@ -199,18 +207,26 @@ class InvestigationWorkflow:
             )
             decision = "full"
             direct_answer = ""
+            active_agents: list[str] = ["graph", "incident", "risk"]   # default: all
             for line in raw.splitlines():
                 if line.startswith("DECISION:"):
                     decision = "direct" if "DIRECT" in line.upper() else "full"
                 elif line.startswith("DIRECT_ANSWER:"):
                     direct_answer = line.split(":", 1)[1].strip()
-            log.info("[plan] decision=%s", decision)
+                elif line.startswith("ACTIVE_AGENTS:"):
+                    raw_agents = line.split(":", 1)[1].strip().lower()
+                    parsed = [a.strip() for a in raw_agents.split(",") if a.strip()]
+                    # Only accept known agent names; fall back to all if parse fails
+                    known = {"graph", "incident", "risk"}
+                    active_agents = [a for a in parsed if a in known] or ["graph", "incident", "risk"]
+            log.info("[plan] decision=%s active_agents=%s", decision, active_agents)
             return {
                 "plan":          raw,
                 "decision":      decision,
                 "direct_answer": direct_answer,
+                "active_agents": active_agents,
                 "steps": [_step("orchestrator", "completed",
-                    f"Decision: {decision.upper()} — plan formulated")],
+                    f"Decision: {decision.upper()} — agents: {', '.join(active_agents)}")],
             }
         except Exception as exc:
             log.warning("[plan] %s", exc)
@@ -218,12 +234,16 @@ class InvestigationWorkflow:
                 "plan":          f"Direct investigation of: {state['query']}",
                 "decision":      "full",
                 "direct_answer": "",
+                "active_agents": ["graph", "incident", "risk"],
                 "steps": [_step("orchestrator", "error", f"Planning failed: {exc}")],
             }
 
     # ── Node: graph agent ─────────────────────────────────────────────────────
 
     async def _graph_agent(self, state: InvestigationState) -> dict:
+        if "graph" not in state.get("active_agents", ["graph", "incident", "risk"]):
+            log.info("[graph_agent] skipped — not in active_agents")
+            return {"graph_analysis": "", "steps": []}
         log.info("[graph_agent] analyzing service topology")
         user_msg = _agent_prompt(state)
         try:
@@ -246,6 +266,9 @@ class InvestigationWorkflow:
     # ── Node: incident agent ──────────────────────────────────────────────────
 
     async def _incident_agent(self, state: InvestigationState) -> dict:
+        if "incident" not in state.get("active_agents", ["graph", "incident", "risk"]):
+            log.info("[incident_agent] skipped — not in active_agents")
+            return {"incident_analysis": "", "steps": []}
         log.info("[incident_agent] reconstructing incident timeline")
         user_msg = _agent_prompt(state)
         try:
@@ -268,6 +291,9 @@ class InvestigationWorkflow:
     # ── Node: risk agent ──────────────────────────────────────────────────────
 
     async def _risk_agent(self, state: InvestigationState) -> dict:
+        if "risk" not in state.get("active_agents", ["graph", "incident", "risk"]):
+            log.info("[risk_agent] skipped — not in active_agents")
+            return {"risk_analysis": "", "steps": []}
         log.info("[risk_agent] assessing cascading failure risk")
         user_msg = _agent_prompt(state)
         try:
@@ -357,9 +383,12 @@ class InvestigationWorkflow:
         return ["retrieve"]
 
     def _route_after_plan(self, state: InvestigationState) -> list[str]:
-        """After plan (which has DB context): DIRECT → synthesize, FULL → agents."""
+        """After plan: DIRECT → synthesize, FULL → fan-out to all 3 agents (each self-skips if not active)."""
         if state.get("decision") == "direct":
             return ["synthesize"]
+        # Always fan-out to all three — inactive agents self-skip instantly.
+        # LangGraph requires all incoming edges to satisfy before synthesize fires,
+        # so we must always route to all three nodes.
         return ["graph_agent", "incident_agent", "risk_agent"]
 
     def _compile(self):
@@ -415,6 +444,7 @@ class InvestigationWorkflow:
             "plan":               "",
             "decision":           "full",
             "direct_answer":      "",
+            "active_agents":      ["graph", "incident", "risk"],
             "graph_analysis":     "",
             "incident_analysis":  "",
             "risk_analysis":      "",

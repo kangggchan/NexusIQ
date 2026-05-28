@@ -24,15 +24,9 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from backend.config import settings
 from backend.services.ollama_service import OllamaService, OllamaServiceError
-from backend.services.model_router import ModelRouter
 from backend.services.embedding_service import EmbeddingService
 
-from backend.agents.orchestrator_agent import OrchestratorAgent
-from backend.agents.graph_agent import GraphAgent
-from backend.agents.incident_agent import IncidentAgent
-from backend.agents.risk_agent import RiskAgent
-
-from backend.api.routes import health, chat, agents, embeddings
+from backend.api.routes import health, embeddings
 from backend.api.routes import investigation as investigation_routes
 from retrieval.api.routes import retrieval as retrieval_routes
 from retrieval.api.routes import graph_api as graph_routes
@@ -57,37 +51,21 @@ async def lifespan(app: FastAPI):
 
     # Services
     ollama = OllamaService()
-    router = ModelRouter()
     embedding_svc = EmbeddingService(ollama)
 
-    # Verify Ollama connectivity (non-fatal — agents will fail gracefully at runtime)
+    # Verify Ollama connectivity (non-fatal — embeddings will fail gracefully at runtime)
     try:
         info = await ollama.health_check()
         log.info("Ollama connected. Available models: %s", info.get("models", []))
     except OllamaServiceError as exc:
         log.warning(
-            "Ollama not reachable at startup: %s — agents will fail until Ollama is running.",
+            "Ollama not reachable at startup: %s — embeddings will fail until Ollama is running.",
             exc,
         )
 
-    # Agents
-    orchestrator = OrchestratorAgent(ollama, router)
-    graph_agent = GraphAgent(ollama, router)
-    incident_agent = IncidentAgent(ollama, router)
-    risk_agent = RiskAgent(ollama, router)
-
-    agent_registry = {
-        "orchestrator": orchestrator,
-        "graph": graph_agent,
-        "incident": incident_agent,
-        "risk": risk_agent,
-    }
-
     # Inject into app state so routes can access them via request.app.state.*
     app.state.ollama = ollama
-    app.state.model_router = router
     app.state.embedding_service = embedding_svc
-    app.state.agent_registry = agent_registry
 
     log.info("NexusIQ backend ready on http://%s:%d", settings.backend_host, settings.backend_port)
     yield
@@ -119,8 +97,6 @@ app.add_middleware(
 # ── Routers ───────────────────────────────────────────────────────────────────
 
 app.include_router(health.router)
-app.include_router(chat.router)
-app.include_router(agents.router)
 app.include_router(embeddings.router)
 
 # Hybrid GraphRAG retrieval routes

@@ -13,7 +13,7 @@ from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 
-from backend.investigation.workflow import get_workflow
+from backend.investigation_agents.workflow import get_workflow
 
 log = logging.getLogger(__name__)
 router = APIRouter(prefix="/investigation", tags=["investigation"])

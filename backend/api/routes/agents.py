@@ -9,7 +9,8 @@ from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
 
-from backend.agents.base_agent import Message
+# Message type: {"role": "system"|"user"|"assistant", "content": str}
+Message = dict
 from backend.services.model_router import VALID_AGENTS, AgentId
 from backend.services.streaming import make_sse_stream
 

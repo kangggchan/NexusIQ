@@ -63,9 +63,11 @@ class InvestigationState(TypedDict):
 
     # ── Orchestrator plan (set by plan node) ──────────────────────────────────
     plan: str
-    # "direct" → orchestrator answers alone; "full" → fan-out to all 3 agents
+    # "direct" → orchestrator answers alone; "full" → fan-out to specialist agents
     decision: str
     direct_answer: str
+    # Subset of ["graph", "incident", "risk"] to actually run; empty = all three
+    active_agents: list[str]
 
     # ── Parallel specialist outputs (each writes its own key) ─────────────────
     graph_analysis: str

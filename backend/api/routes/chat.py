@@ -11,7 +11,8 @@ from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
 
-from backend.agents.base_agent import Message
+# Message type: {"role": "system"|"user"|"assistant", "content": str}
+Message = dict
 from backend.services.streaming import make_sse_stream, sse_event, sse_done
 
 router = APIRouter(prefix="/chat", tags=["chat"])

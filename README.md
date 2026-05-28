@@ -248,7 +248,7 @@ python -m uvicorn backend.main:app --reload --port 8000
 
 **Terminal 2 — Frontend:**
 ```bash
-pnpm dev
+npm run dev
 ```
 
 ### Build for production
