@@ -59,8 +59,8 @@ Data Sources
 ### 1 — Clone & install frontend
 
 ```bash
-git clone https://github.com/your-org/graphrag-workbench.git
-cd graphrag-workbench
+git clone https://github.com/kangggchan/NexusIQ.git
+cd NexusIQ
 
 pnpm install
 ```
