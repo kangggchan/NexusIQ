@@ -6,6 +6,7 @@ from pydantic import BaseModel
 
 from retrieval.graph.neo4j_client import get_session
 from retrieval.graph import cypher_queries as q
+from retrieval.graph.graph_cache import get_graph_cache
 from retrieval.schema.neo4j_schema import NodeLabel
 
 log = logging.getLogger(__name__)
@@ -141,5 +142,9 @@ async def graph_visualization():
             "combined_degree":  int(r["weight"]),
             "text_unit_ids":    [],
         })
+
+    # Populate the shared in-memory cache so the graph inspector can reuse
+    # this data without issuing a second Neo4j query.
+    get_graph_cache().populate(entities, relationships)
 
     return {"entities": entities, "relationships": relationships}

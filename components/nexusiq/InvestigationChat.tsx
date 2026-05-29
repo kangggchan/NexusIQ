@@ -4,15 +4,20 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
 import { ScrollArea } from '@/components/ui/scroll-area'
-import { Badge } from '@/components/ui/badge'
 import {
   Loader2, Send, Sparkles, ChevronDown, ChevronRight,
   AlertTriangle, FileText, MessageSquare, GitCommit, Ticket,
   CheckCircle2, XCircle, Clock, Zap, Network, Shield, Activity,
-  Square, Plus,
+  Square, Plus, History, Trash2, X,
 } from 'lucide-react'
+import {
+  type SessionMeta,
+  createSession, getActiveSessionId, setActiveSessionId,
+  getAllSessions, getSessionMessages, saveSessionMessages, deleteSession,
+  formatSessionDate,
+} from '@/lib/chatSessionStore'
 
-// ── Constants ─────────────────────────────────────────────────────────────────
+// ── Types ────────────────────────────────────────────────────────────────────
 
 type AgentStep = {
   agent: string
@@ -121,14 +126,7 @@ const AGENT_ICONS: Record<string, React.ReactNode> = {
   risk_agent:     <Shield className="h-3 w-3" />,
   retrieve:       <Zap className="h-3 w-3" />,
   synthesize:     <Sparkles className="h-3 w-3" />,
-}
-
-const RISK_COLORS: Record<string, string> = {
-  CRITICAL: 'text-red-400 bg-red-500/10 border-red-500/40',
-  HIGH:     'text-orange-400 bg-orange-500/10 border-orange-500/40',
-  MEDIUM:   'text-amber-400 bg-amber-500/10 border-amber-500/40',
-  LOW:      'text-green-400 bg-green-500/10 border-green-500/40',
-  UNKNOWN:  'text-muted-foreground bg-muted/20 border-border/40',
+  query_analyzer: <Sparkles className="h-3 w-3" />,
 }
 
 const EVIDENCE_ICONS: Record<string, React.ReactNode> = {
@@ -206,31 +204,45 @@ function RootCausePanel({ text }: { text: string }) {
 
 // ── Agent pipeline live progress ──────────────────────────────────────────────
 
-function AgentPipeline({ steps }: { steps: AgentStep[] }) {
-  const ALL = ['retrieve', 'orchestrator', 'graph_agent', 'incident_agent', 'risk_agent', 'synthesize']
-  const stepMap = new Map<string, AgentStep>()
-  for (const s of steps) stepMap.set(s.agent, s)
+function AgentPipeline({ steps, busy }: { steps: AgentStep[]; busy?: boolean }) {
+  if (!steps || steps.length === 0) return null
+
+  // Show only steps that have started. The last one is "active" while busy.
+  const lastIdx = steps.length - 1
 
   return (
-    <div className="mt-2 rounded-md border border-border/40 bg-card/40 p-3 space-y-2">
+    <div className="mt-2 rounded-md border border-border/40 bg-card/40 p-3 space-y-1.5">
       <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-2">Agent Pipeline</p>
-      {ALL.map(key => {
-        const step = stepMap.get(key)
-        const label = key.replace('_agent', '').replace('_', ' ')
-        const s = step?.status
+      {steps.map((step, i) => {
+        const isLast   = i === lastIdx
+        const isActive = busy && isLast && step.status !== 'completed' && step.status !== 'error'
+        const label    = step.agent.replace('_agent', '').replace('_', ' ')
         return (
-          <div key={key} className="flex items-start gap-2">
-            <span className="mt-0.5 text-muted-foreground/60">{AGENT_ICONS[key] ?? <Clock className="h-3 w-3" />}</span>
+          <div key={i} className="flex items-start gap-2">
+            <span className={`mt-0.5 ${
+              step.status === 'completed' ? 'text-green-400'
+              : step.status === 'error'   ? 'text-red-400'
+              : isActive                  ? 'text-cyan-400'
+              : 'text-muted-foreground/60'
+            }`}>
+              {isActive
+                ? <Loader2 className="h-3 w-3 animate-spin" />
+                : (AGENT_ICONS[step.agent] ?? <Clock className="h-3 w-3" />)}
+            </span>
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2">
                 <span className={`text-xs font-medium capitalize ${
-                  s === 'completed' ? 'text-green-400' : s === 'error' ? 'text-red-400' : 'text-muted-foreground'
+                  step.status === 'completed' ? 'text-green-400'
+                  : step.status === 'error'   ? 'text-red-400'
+                  : isActive                  ? 'text-cyan-300'
+                  : 'text-muted-foreground'
                 }`}>{label}</span>
-                {s === 'completed' && <CheckCircle2 className="h-3 w-3 text-green-400" />}
-                {s === 'error'     && <XCircle className="h-3 w-3 text-red-400" />}
-                {!s               && <Clock className="h-3 w-3 text-muted-foreground/30" />}
+                {step.status === 'completed' && <CheckCircle2 className="h-3 w-3 text-green-400" />}
+                {step.status === 'error'     && <XCircle className="h-3 w-3 text-red-400" />}
               </div>
-              {step?.summary && <p className="text-[10px] text-muted-foreground/70 mt-0.5 truncate">{step.summary}</p>}
+              {step.summary && (
+                <p className="text-[10px] text-muted-foreground/70 mt-0.5 truncate">{step.summary}</p>
+              )}
             </div>
           </div>
         )
@@ -242,82 +254,44 @@ function AgentPipeline({ steps }: { steps: AgentStep[] }) {
 // ── Investigation report card ─────────────────────────────────────────────────
 
 function InvestigationReportCard({ report }: { report: InvestigationReportData }) {
-  const [tab, setTab] = useState<'summary' | 'timeline' | 'graph' | 'incident' | 'risk'>('summary')
-  const riskColor = RISK_COLORS[report.risk_level] ?? RISK_COLORS.UNKNOWN
-  const tabs = [
-    { key: 'summary'  as const, label: 'Summary' },
-    { key: 'timeline' as const, label: 'Timeline' },
-    { key: 'graph'    as const, label: 'Graph' },
-    { key: 'incident' as const, label: 'Incident' },
-    { key: 'risk'     as const, label: 'Risk' },
-  ]
+  const hasTimeline = report.timeline?.length > 0
+  const text = report.synthesis || report.summary || ''
+
   return (
-    <div className="mt-2 rounded-lg border border-border/60 overflow-hidden bg-card/60">
-      <div className={`px-3 py-2 border-b border-border/40 flex items-center justify-between ${riskColor}`}>
-        <div className="flex items-center gap-2">
-          <Shield className="h-3.5 w-3.5" />
-          <span className="text-xs font-bold tracking-wide">INVESTIGATION REPORT</span>
+    <div className="mt-2 rounded-lg border border-border/60 overflow-hidden bg-card/60 text-xs">
+      {/* Response text */}
+      {text && (
+        <div className="px-3 py-3 text-sm text-foreground leading-relaxed">
+          <MarkdownContent text={text} />
         </div>
-        <Badge variant="outline" className={`text-[10px] font-bold border ${riskColor}`}>{report.risk_level}</Badge>
-      </div>
-      <div className="px-3 py-2 text-xs text-muted-foreground border-b border-border/30 leading-relaxed">{report.summary}</div>
-      {report.affected_services?.length > 0 && (
-        <div className="px-3 py-2 border-b border-border/30">
-          <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-1.5">Affected Services</p>
-          <div className="flex flex-wrap gap-1.5">
-            {report.affected_services.map((svc, i) => (
-              <span key={i} title={svc.reason}
-                className={`text-[10px] px-1.5 py-0.5 rounded border font-mono ${RISK_COLORS[svc.risk_level] ?? RISK_COLORS.UNKNOWN}`}>
-                {svc.name}
-              </span>
+      )}
+
+      {/* Timeline — shown only when present */}
+      {hasTimeline && (
+        <div className="border-t border-border/30 px-3 py-2.5">
+          <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-2">Timeline</p>
+          <div className="space-y-1.5">
+            {report.timeline.map((entry, i) => (
+              <div key={i} className="flex gap-2 items-start">
+                <span className="font-mono text-[10px] text-muted-foreground/60 shrink-0 mt-0.5 w-36 truncate">
+                  {entry.timestamp}
+                </span>
+                <span className="text-xs text-muted-foreground">
+                  {entry.event}
+                  {entry.service && (
+                    <span className="ml-1 font-mono text-cyan-400/80 text-[10px]">({entry.service})</span>
+                  )}
+                </span>
+              </div>
             ))}
           </div>
         </div>
       )}
-      <div className="flex border-b border-border/30 bg-muted/10">
-        {tabs.map(t => (
-          <button key={t.key} onClick={() => setTab(t.key)}
-            className={`px-3 py-1.5 text-[10px] font-medium transition-colors ${
-              tab === t.key ? 'text-cyan-400 border-b-2 border-cyan-400 bg-cyan-500/5' : 'text-muted-foreground hover:text-foreground'
-            }`}>{t.label}</button>
-        ))}
-      </div>
-      <div className="px-3 py-3 max-h-64 overflow-y-auto text-xs text-muted-foreground leading-relaxed">
-        {tab === 'summary' && (
-          <div className="space-y-3">
-            <p className="whitespace-pre-wrap">{report.synthesis}</p>
-            {report.recommendations?.length > 0 && (
-              <div>
-                <p className="font-semibold text-foreground mb-1.5">Recommendations</p>
-                <ul className="space-y-1">
-                  {report.recommendations.map((r, i) => (
-                    <li key={i} className="flex gap-2"><span className="text-cyan-400 shrink-0">→</span><span>{r}</span></li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </div>
-        )}
-        {tab === 'timeline' && (
-          <div className="space-y-2">
-            {report.timeline?.length ? report.timeline.map((entry, i) => (
-              <div key={i} className="flex gap-2 items-start">
-                <span className="font-mono text-[10px] text-muted-foreground/60 shrink-0 mt-0.5 w-36 truncate">{entry.timestamp}</span>
-                <span>{entry.event}{entry.service && <span className="ml-1 font-mono text-cyan-400/80 text-[10px]">({entry.service})</span>}</span>
-              </div>
-            )) : <p className="italic text-muted-foreground/50">No timeline data</p>}
-          </div>
-        )}
-        {tab === 'graph'    && <p className="whitespace-pre-wrap">{report.graph_analysis    || 'No graph analysis'}</p>}
-        {tab === 'incident' && <p className="whitespace-pre-wrap">{report.incident_analysis || 'No incident analysis'}</p>}
-        {tab === 'risk'     && <p className="whitespace-pre-wrap">{report.risk_analysis     || 'No risk analysis'}</p>}
-      </div>
-      {report.evidence?.length > 0 && <EvidencePanel items={report.evidence as EvidenceItem[]} />}
     </div>
   )
 }
 
-function MessageBubble({ msg }: { msg: Message }) {
+function MessageBubble({ msg, isLive }: { msg: Message; isLive?: boolean }) {
   const isUser = msg.role === 'user'
   return (
     <div className={`flex ${isUser ? 'justify-end' : 'justify-start'} mb-3`}>
@@ -337,7 +311,7 @@ function MessageBubble({ msg }: { msg: Message }) {
             {isUser ? msg.content : <MarkdownContent text={msg.content} />}
           </div>
         )}
-        {msg.steps  && msg.steps.length > 0 && <AgentPipeline steps={msg.steps} />}
+        {msg.steps  && msg.steps.length > 0 && <AgentPipeline steps={msg.steps} busy={isLive} />}
         {msg.report && <InvestigationReportCard report={msg.report} />}
         {msg.rootCause && <RootCausePanel text={msg.rootCause} />}
         {msg.evidence && !msg.report && <EvidencePanel items={msg.evidence} />}
@@ -346,17 +320,27 @@ function MessageBubble({ msg }: { msg: Message }) {
   )
 }
 
-const SESSION_KEY = 'nexusiq-investigation-history'
-
 export default function InvestigationChat({ onHighlightServices, onQueryStart, focusedIncidentId }: InvestigationChatProps) {
-  const [messages, setMessages] = useState<Message[]>(() => {
-    // Restore from sessionStorage on mount (cleared automatically on page refresh)
-    if (typeof window === 'undefined') return []
-    try {
-      const saved = sessionStorage.getItem(SESSION_KEY)
-      return saved ? (JSON.parse(saved) as Message[]) : []
-    } catch { return [] }
+  // ── Session state ─────────────────────────────────────────────────────────
+  const [sessionId, setSessionId] = useState<string>(() => {
+    if (typeof window === 'undefined') return ''
+    const active = getActiveSessionId()
+    if (active) return active
+    return createSession().id
   })
+  const [sessions, setSessions] = useState<SessionMeta[]>(() => {
+    if (typeof window === 'undefined') return []
+    return getAllSessions()
+  })
+  const [showHistory, setShowHistory] = useState(false)
+
+  const [messages, setMessages] = useState<Message[]>(() => {
+    if (typeof window === 'undefined') return []
+    const active = getActiveSessionId()
+    if (!active) return []
+    return getSessionMessages(active) as Message[]
+  })
+
   const [input, setInput] = useState('')
   const [busy, setBusy] = useState(false)
   const abortRef = useRef<AbortController | null>(null)
@@ -364,10 +348,12 @@ export default function InvestigationChat({ onHighlightServices, onQueryStart, f
   const [stickToBottom, setStickToBottom] = useState(true)
   const viewportRef = useRef<HTMLDivElement>(null)
 
-  // Persist messages to sessionStorage after every update
+  // Persist messages to localStorage after every update
   useEffect(() => {
-    try { sessionStorage.setItem(SESSION_KEY, JSON.stringify(messages)) } catch { /* quota */ }
-  }, [messages])
+    if (!sessionId) return
+    saveSessionMessages(sessionId, messages as Parameters<typeof saveSessionMessages>[1])
+    setSessions(getAllSessions())
+  }, [messages, sessionId])
 
   useEffect(() => {
     if (!stickToBottom) return
@@ -384,8 +370,8 @@ export default function InvestigationChat({ onHighlightServices, onQueryStart, f
 
   // ── Investigation workflow (LangGraph multi-agent) ─────────────────────────
 
-  const sendInvestigation = useCallback(async (q: string, historyLength: number) => {
-    const stepsIdx = historyLength
+  const sendInvestigation = useCallback(async (q: string, historySnapshot: Message[]) => {
+    const stepsIdx = historySnapshot.length   // index of the assistant bubble we'll update
     setMessages(prev => [...prev, { role: 'assistant', content: '', steps: [] }])
 
     const controller = new AbortController()
@@ -399,11 +385,8 @@ export default function InvestigationChat({ onHighlightServices, onQueryStart, f
         signal: controller.signal,
         body: JSON.stringify({
           query: q,
-          history: messages
+          history: historySnapshot
             .map(m => {
-              // Assistant messages may have no text content but carry a report —
-              // use the report summary as the history text so the backend
-              // understands what was previously answered.
               const text = m.content ||
                 (m.report ? (m.report.summary || m.report.synthesis || '').slice(0, 400) : '')
               return text ? { role: m.role, content: text.slice(0, 400) } : null
@@ -436,6 +419,19 @@ export default function InvestigationChat({ onHighlightServices, onQueryStart, f
         else if (line.startsWith('data: ')) {
           try {
             const payload = JSON.parse(line.slice(6))
+            if (currentEvent === 'investigation-signal') {
+              // Show investigation mode in step list
+              const step: AgentStep = {
+                agent: 'orchestrator',
+                status: 'completed',
+                summary: payload.message ?? `Evidence: ${payload.decision} (${payload.depth} mode)`,
+                timestamp: new Date().toISOString(),
+                node: 'evaluate',
+              }
+              const idx = liveSteps.findIndex(s => s.node === 'evaluate')
+              if (idx >= 0) liveSteps[idx] = step; else liveSteps.push(step)
+              setMessages(prev => { const u = [...prev]; u[stepsIdx] = { role: 'assistant', content: '', steps: [...liveSteps] }; return u })
+            }
             if (currentEvent === 'step-update') {
               const step: AgentStep = { agent: payload.agent, status: payload.status, summary: payload.summary, timestamp: payload.timestamp, node: payload.node }
               const idx = liveSteps.findIndex(s => s.agent === step.agent)
@@ -453,7 +449,7 @@ export default function InvestigationChat({ onHighlightServices, onQueryStart, f
         } else if (line === '') { currentEvent = '' }
       }
     }
-  }, [onHighlightServices, messages])
+  }, [onHighlightServices])
 
   const send = async (overrideInput?: string) => {
     const q = (overrideInput ?? input).trim()
@@ -461,11 +457,13 @@ export default function InvestigationChat({ onHighlightServices, onQueryStart, f
     setInput('')
     onQueryStart?.()                             // clear graph highlights
     if (onHighlightServices) onHighlightServices([]) // clear previous service highlights
+    // Build the next messages array and pass it as snapshot so sendInvestigation
+    // doesn't need to capture the messages closure (avoids stale-state bugs).
     const next = [...messages, { role: 'user' as const, content: q }]
     setMessages(next)
     setBusy(true)
     try {
-      await sendInvestigation(q, next.length)
+      await sendInvestigation(q, next)
     } catch (err) {
       if (err instanceof Error && err.name === 'AbortError') return
       console.error('[InvestigationChat]', err)
@@ -490,21 +488,124 @@ export default function InvestigationChat({ onHighlightServices, onQueryStart, f
     }
   }
 
+  // ── Session management actions ─────────────────────────────────────────────
+
+  const startNewSession = () => {
+    if (busy) { abortRef.current?.abort(); setBusy(false) }
+    const meta = createSession()
+    setSessionId(meta.id)
+    setMessages([])
+    setSessions(getAllSessions())
+    setShowHistory(false)
+  }
+
+  const switchSession = (id: string) => {
+    if (id === sessionId) { setShowHistory(false); return }
+    if (busy) { abortRef.current?.abort(); setBusy(false) }
+    setActiveSessionId(id)
+    setSessionId(id)
+    setMessages(getSessionMessages(id) as Message[])
+    setSessions(getAllSessions())
+    setShowHistory(false)
+  }
+
+  const removeSession = (e: React.MouseEvent, id: string) => {
+    e.stopPropagation()
+    deleteSession(id)
+    const remaining = getAllSessions()
+    setSessions(remaining)
+    if (id === sessionId) {
+      if (remaining.length > 0) {
+        switchSession(remaining[0].id)
+      } else {
+        startNewSession()
+      }
+    }
+  }
+
   return (
-    <div className="h-full flex flex-col">
+    <div className="h-full flex flex-col relative overflow-hidden">
+
+      {/* ── History Sidebar ───────────────────────────────────────────────── */}
+      {showHistory && (
+        <div className="absolute inset-0 z-20 flex flex-col bg-background border-r">
+          <div className="p-3 border-b shrink-0 flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <History className="h-4 w-4 text-cyan-400" />
+              <span className="text-sm font-semibold text-cyan-400">Chat History</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <button
+                onClick={startNewSession}
+                title="Start new session"
+                className="flex items-center gap-1 text-[10px] text-cyan-400/80 hover:text-cyan-300 transition-colors border border-cyan-400/30 rounded px-1.5 py-0.5 hover:border-cyan-400/70 hover:bg-cyan-400/5"
+              >
+                <Plus className="h-2.5 w-2.5" />
+                New
+              </button>
+              <button onClick={() => setShowHistory(false)} className="text-muted-foreground hover:text-foreground transition-colors p-0.5">
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+          </div>
+          <ScrollArea className="flex-1 min-h-0">
+            <div className="p-2 space-y-1">
+              {sessions.length === 0 && (
+                <p className="text-xs text-muted-foreground text-center py-6">No saved sessions</p>
+              )}
+              {sessions.map(s => (
+                <div
+                  key={s.id}
+                  onClick={() => switchSession(s.id)}
+                  className={`group flex items-start justify-between gap-2 px-2 py-2 rounded-md cursor-pointer transition-colors ${
+                    s.id === sessionId
+                      ? 'bg-cyan-500/10 border border-cyan-500/30'
+                      : 'hover:bg-card border border-transparent hover:border-border/40'
+                  }`}
+                >
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs font-medium truncate text-foreground/90">{s.title}</p>
+                    <p className="text-[10px] text-muted-foreground mt-0.5">
+                      {formatSessionDate(s.updatedAt)} · {s.messageCount} msg{s.messageCount !== 1 ? 's' : ''}
+                    </p>
+                  </div>
+                  <button
+                    onClick={e => removeSession(e, s.id)}
+                    title="Delete session"
+                    className="opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground hover:text-red-400 shrink-0 mt-0.5"
+                  >
+                    <Trash2 className="h-3 w-3" />
+                  </button>
+                </div>
+              ))}
+            </div>
+          </ScrollArea>
+        </div>
+      )}
+
       {/* Header */}
       <div className="p-3 border-b shrink-0">
         <div className="flex items-center justify-between">
+
           <div className="flex items-center gap-2">
             <Sparkles className="h-4 w-4 text-cyan-400" />
             <span className="text-sm font-semibold text-cyan-400">AI Investigation</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <span className="text-[10px] text-muted-foreground/50 hidden sm:block">
-              Graph · Incident · Risk
-            </span>
             <button
-              onClick={() => { setMessages([]); sessionStorage.removeItem(SESSION_KEY) }}
+              onClick={() => setShowHistory(h => !h)}
+              title="Chat history"
+              className={`flex items-center gap-1 text-[10px] transition-colors border rounded px-1.5 py-0.5 ${
+                showHistory
+                  ? 'text-cyan-300 border-cyan-400/70 bg-cyan-400/10'
+                  : 'text-cyan-400/80 hover:text-cyan-300 border-cyan-400/30 hover:border-cyan-400/70 hover:bg-cyan-400/5'
+              }`}
+            >
+              <History className="h-2.5 w-2.5" />
+              History
+            </button>
+            <button
+              onClick={startNewSession}
               title="New chat session"
               className="flex items-center gap-1 text-[10px] text-cyan-400/80 hover:text-cyan-300 transition-colors border border-cyan-400/30 rounded px-1.5 py-0.5 hover:border-cyan-400/70 hover:bg-cyan-400/5"
             >
@@ -553,7 +654,7 @@ export default function InvestigationChat({ onHighlightServices, onQueryStart, f
             </div>
           )}
           {messages.map((msg, i) => (
-            <MessageBubble key={i} msg={msg} />
+            <MessageBubble key={i} msg={msg} isLive={busy && i === messages.length - 1} />
           ))}
           {busy && (
             <div className="flex items-center gap-2 text-xs text-muted-foreground/60 mb-3">

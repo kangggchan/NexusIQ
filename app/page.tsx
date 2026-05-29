@@ -102,9 +102,9 @@ export default function Home() {
   // ─── Derived: highlighted node IDs from service names ────────────────────
   const ragHighlightedNodeIds = useMemo(() => {
     if (!layout || highlightedServiceNames.length === 0) return new Set<string>();
-    const names = new Set(highlightedServiceNames.map(s => s.toLowerCase()));
+    const names = new Set(highlightedServiceNames.filter(Boolean).map(s => s.toLowerCase()));
     const ids = layout.nodes
-      .filter(n => names.has(n.title.toLowerCase()))
+      .filter(n => n.title != null && names.has(n.title.toLowerCase()))
       .map(n => n.id);
     return new Set(ids);
   }, [layout, highlightedServiceNames]);
@@ -267,14 +267,16 @@ export default function Home() {
               </TabsList>
             </Tabs>
           </div>
-          <div className="flex-1 min-h-0">
-            {leftTab === 'chat' ? (
+          <div className="flex-1 min-h-0 relative">
+            {/* Always mounted so SSE streams survive tab switches */}
+            <div className={leftTab === 'chat' ? 'h-full' : 'hidden'}>
               <InvestigationChat
                 onHighlightServices={handleHighlightServices}
                 onQueryStart={() => setHighlightedServiceNames([])}
                 focusedIncidentId={focusedIncidentId}
               />
-            ) : (
+            </div>
+            {leftTab === 'agents' && (
               <AgentActivity queryCount={queryCount} />
             )}
           </div>

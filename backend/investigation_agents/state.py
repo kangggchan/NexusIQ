@@ -4,7 +4,7 @@ Investigation workflow shared state and output models.
 from __future__ import annotations
 
 import operator
-from typing import Annotated, TypedDict
+from typing import Annotated, Any, TypedDict
 
 from pydantic import BaseModel, Field
 
@@ -56,17 +56,29 @@ class InvestigationState(TypedDict):
     # Prior turns: list of {"role": "user"|"assistant", "content": str}
     history: list[dict]
 
-    # ── Context retrieval (set by retrieve node) ──────────────────────────────
-    retrieved_context: str
+    # ── Query analyzer outputs (set by query_analyzer node — runs first) ──────
+    # qwen2.5:1.5b reads from shared GraphCache (same Neo4j data as visualization)
+    query_intent: str          # "TOPOLOGY" | "INCIDENT" | "RISK" | "PERFORMANCE" | "GENERAL"
+    query_entities: list[str]  # entity names found in the Neo4j graph cache
+    graph_insights: str        # insights from the Neo4j graph cache lookup
+    has_graph_match: bool      # True if the cache had relevant entities
+
+    # ── Shared investigation context (set by shared_retrieve node) ───────────
+    # SharedInvestigationContext object — reused by all agents (no re-retrieval)
+    shared_ctx: Any
+    retrieved_context: str     # formatted string (extracted from shared_ctx)
     entities: dict
     sources: list[dict]
 
-    # ── Orchestrator plan (set by plan node) ──────────────────────────────────
+    # ── Evidence evaluation (set by evaluate node, heuristic — no LLM) ───────
+    investigation_depth: str   # "FAST" | "STANDARD" | "DEEP"
+    evidence_decision: str     # "DIRECT_RESPONSE" | "PARTIAL" | "DEEP"
+
+    # ── Orchestrator plan (set by plan node — DEEP path only) ─────────────────
     plan: str
     # "direct" → orchestrator answers alone; "full" → fan-out to specialist agents
     decision: str
-    direct_answer: str
-    # Subset of ["graph", "incident", "risk"] to actually run; empty = all three
+    # Subset of ["graph", "incident", "risk"] to actually run
     active_agents: list[str]
 
     # ── Parallel specialist outputs (each writes its own key) ─────────────────
