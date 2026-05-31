@@ -389,14 +389,18 @@ async def _service_results_shallow(session: Any, svc: dict) -> list[GraphResult]
     # Owners
     owners = await q.get_service_owners(session, name)
     if owners:
+        owner_count = len(owners)
         owner_list = ", ".join(
             f"{o.get('name', '')} ({o.get('role', '')})" for o in owners[:4]
         )
         results.append(GR(
             id=f"{name}_owners",
             type="ownership",
-            content=f"[OWNERSHIP] {name} owned by: {owner_list}",
-            metadata={"service": name, "owners": owners},
+            content=(
+                f"[OWNERSHIP] {name} has {owner_count} linked owner"
+                f"{'s' if owner_count != 1 else ''}: {owner_list}"
+            ),
+            metadata={"service": name, "owners": owners, "owner_count": owner_count},
             score=0.95,
         ))
 

@@ -8,6 +8,7 @@
  * Storage layout:
  *   localStorage["nexusiq:sessions"]          → SessionMeta[]  (index)
  *   localStorage["nexusiq:session:<id>"]      → Message[]      (messages)
+ *   localStorage["nexusiq:context:<id>"]      → string         (compacted session context)
  *   sessionStorage["nexusiq:active-session"]  → string         (current session ID)
  */
 
@@ -30,6 +31,7 @@ export type SessionMeta = {
 
 const INDEX_KEY   = 'nexusiq:sessions'
 const SESSION_PREFIX = 'nexusiq:session:'
+const CONTEXT_PREFIX = 'nexusiq:context:'
 const ACTIVE_KEY  = 'nexusiq:active-session'
 const MAX_SESSIONS = 50
 
@@ -75,7 +77,12 @@ export function createSession(): SessionMeta {
   const all = getAllSessions()
   // Trim oldest if over limit
   const trimmed = [meta, ...all].slice(0, MAX_SESSIONS)
+  const removed = all.slice(Math.max(MAX_SESSIONS - 1, 0))
   saveIndex(trimmed)
+  removed.forEach(session => {
+    localStorage.removeItem(`${SESSION_PREFIX}${session.id}`)
+    localStorage.removeItem(`${CONTEXT_PREFIX}${session.id}`)
+  })
   setActiveSessionId(id)
   return meta
 }
@@ -106,9 +113,20 @@ export function saveSessionMessages(id: string, messages: SessionMessage[]) {
   }, undefined)
 }
 
+export function getSessionContext(id: string): string {
+  return safe(() => localStorage.getItem(`${CONTEXT_PREFIX}${id}`) ?? '', '')
+}
+
+export function saveSessionContext(id: string, context: string) {
+  safe(() => {
+    localStorage.setItem(`${CONTEXT_PREFIX}${id}`, context)
+  }, undefined)
+}
+
 export function deleteSession(id: string) {
   safe(() => {
     localStorage.removeItem(`${SESSION_PREFIX}${id}`)
+    localStorage.removeItem(`${CONTEXT_PREFIX}${id}`)
     const all = getAllSessions().filter(s => s.id !== id)
     saveIndex(all)
     if (getActiveSessionId() === id) {

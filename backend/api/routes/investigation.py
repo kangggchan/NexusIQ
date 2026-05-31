@@ -11,7 +11,7 @@ import logging
 
 from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import StreamingResponse
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from backend.investigation_agents.workflow import get_workflow
 
@@ -27,7 +27,8 @@ SSE_HEADERS = {
 
 class InvestigationRequest(BaseModel):
     query: str
-    history: list[dict] = []   # prior conversation turns: [{role, content}, ...]
+    history: list[dict] = Field(default_factory=list)   # recent conversation turns
+    session_context: str = ""
 
 
 # ── POST /investigation/run ───────────────────────────────────────────────────
@@ -49,7 +50,11 @@ async def run_investigation(req: InvestigationRequest):
     async def event_stream():
         try:
             workflow = get_workflow()
-            async for event in workflow.stream(req.query, history=req.history):
+            async for event in workflow.stream(
+                req.query,
+                history=req.history,
+                conversation_context=req.session_context,
+            ):
                 payload = json.dumps(event["data"], ensure_ascii=False)
                 yield f"event: {event['type']}\ndata: {payload}\n\n"
         except Exception as exc:

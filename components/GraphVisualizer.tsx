@@ -132,6 +132,8 @@ interface LinkProps {
   hasSelectedNode: boolean;
 }
 
+const DEFAULT_LINK_COLOR = '#8c959f';
+
 function Link({ link, isHighlighted, communityMode, nodesInHierarchy, hasSelectedNode }: LinkProps) {
   // Use refs to avoid creating new Vector3 objects unnecessarily
   const sourcePoint = useRef(new THREE.Vector3());
@@ -146,10 +148,11 @@ function Link({ link, isHighlighted, communityMode, nodesInHierarchy, hasSelecte
 
   // Pre-calculate thickness once per weight change
   const thickness = useMemo(() => calculateLinkThickness(link.weight), [link.weight]);
+  const baseLineWidth = useMemo(() => Math.max(0.9, thickness), [thickness]);
 
   // Memoize opacity calculation to avoid repeated conditional logic
   const opacity = useMemo(() => {
-    if (isHighlighted) return 0.95;
+    if (isHighlighted) return 0.98;
     
     if (hasSelectedNode && communityMode === 'auto') {
       const sourceInHierarchy = nodesInHierarchy.has(link.source.id);
@@ -159,16 +162,16 @@ function Link({ link, isHighlighted, communityMode, nodesInHierarchy, hasSelecte
       if (!sourceInHierarchy || !targetInHierarchy) return 0.25; // Same transparency as nodes
       
       // Both nodes in hierarchy - normal visibility
-      return 0.7;
+      return 0.9;
     }
-    return 0.7;
+    return 0.9;
   }, [isHighlighted, hasSelectedNode, communityMode, nodesInHierarchy, link.source.id, link.target.id]);
 
   return (
     <Line
       points={points}
-      color={isHighlighted ? "#ffffff" : "#888888"}
-      lineWidth={isHighlighted ? thickness * 2 : thickness}
+      color={isHighlighted ? "#ffffff" : DEFAULT_LINK_COLOR}
+      lineWidth={isHighlighted ? Math.max(baseLineWidth * 1.8, thickness * 2) : baseLineWidth}
       transparent
       opacity={opacity}
       onUpdate={(m: THREE.Object3D) => {
@@ -410,7 +413,6 @@ export default function GraphVisualizer({
   hoveredNode,
 }: GraphVisualizerProps) {
   // All hooks must be called first, before any conditional returns
-  const [highlightedLinks, setHighlightedLinks] = useState<Set<string>>(new Set());
   const [autoOrbit, setAutoOrbit] = useState<boolean>(true);
   const [hasInteracted, setHasInteracted] = useState<boolean>(false);
   const orbitControlsRef = useRef<{ target: THREE.Vector3; update: () => void } | null>(null);
@@ -501,17 +503,39 @@ export default function GraphVisualizer({
   // Compute a key for Canvas remount when filters change (no extra hooks).
   const canvasKeyStr = `types:${Array.from(selectedEntityTypes).sort().join(',')}|lvl:${selectedLevel ?? 'all'}|w:${minRelationshipWeight}|b:${showCommunityBoundaries ? 1 : 0}`
 
-  const [heroEdgeIds, setHeroEdgeIds] = useState<Set<string>>(new Set());
-  // Pick top-weighted edges as "hero" edges for energy tubes
-  useEffect(() => {
-    if (!layout) return;
-    const weights = layout.links.map(l => l.weight).sort((a,b)=>a-b);
-    if (weights.length === 0) { setHeroEdgeIds(new Set()); return; }
-    const qIndex = Math.floor(weights.length * 0.9); // top 10%
-    const threshold = weights[Math.min(weights.length - 1, Math.max(0, qIndex))];
-    const ids = new Set(layout.links.filter(l => l.weight >= threshold).map(l => l.id));
-    setHeroEdgeIds(ids);
-  }, [layout]);
+  const highlightedLinks = useMemo(() => {
+    if (!selectedNode) return new Set<string>();
+
+    const visitedNodeIds = new Set<string>([selectedNode.id]);
+    let frontierNodeIds = new Set<string>([selectedNode.id]);
+    const linkIds = new Set<string>();
+
+    for (let depth = 0; depth < 2; depth += 1) {
+      const nextFrontierNodeIds = new Set<string>();
+
+      frontierNodeIds.forEach(nodeId => {
+        filteredLinks.forEach(link => {
+          const sourceId = link.source.id;
+          const targetId = link.target.id;
+
+          if (sourceId !== nodeId && targetId !== nodeId) return;
+
+          linkIds.add(link.id);
+
+          const neighbourId = sourceId === nodeId ? targetId : sourceId;
+          if (!visitedNodeIds.has(neighbourId)) {
+            visitedNodeIds.add(neighbourId);
+            nextFrontierNodeIds.add(neighbourId);
+          }
+        });
+      });
+
+      frontierNodeIds = nextFrontierNodeIds;
+      if (frontierNodeIds.size === 0) break;
+    }
+
+    return linkIds;
+  }, [filteredLinks, selectedNode]);
 
   // Calculate center and bounds of the knowledge graph
   const graphBounds = useMemo(() => {
@@ -555,14 +579,6 @@ export default function GraphVisualizer({
     };
   }, [filteredNodes, layout]);
 
-  // Clear highlighted links when no node is selected
-  useEffect(() => {
-    if (!selectedNode) {
-      setHighlightedLinks(new Set());
-    }
-  }, [selectedNode]);
-
-
   // Detect user interaction to stop auto-orbit
   const handleUserInteraction = () => {
     if (!hasInteracted) {
@@ -574,16 +590,6 @@ export default function GraphVisualizer({
   // Event handlers
   const handleNodeClick = (node: Node3D) => {
     onNodeSelect(node);
-    
-    // Highlight connected links
-    const connectedLinks = new Set<string>();
-    
-    filteredLinks.forEach(link => {
-      if (link.source.id === node.id || link.target.id === node.id) {
-        connectedLinks.add(link.id);
-      }
-    });
-    setHighlightedLinks(connectedLinks);
   };
 
   const handleNodeHover = (node: Node3D) => {
@@ -706,7 +712,6 @@ export default function GraphVisualizer({
         onWheel={handleUserInteraction}
         onPointerMissed={() => {
           onNodeSelect(null);
-          setHighlightedLinks(new Set());
         }}
       >
         {/* Auto-orbit controller */}
@@ -781,7 +786,7 @@ export default function GraphVisualizer({
           // Check if energy edge should be shown in isolator mode
           const sourceInHierarchy = nodesInHierarchy.has(link.source.id);
           const targetInHierarchy = nodesInHierarchy.has(link.target.id);
-          const showEnergyEdge = (heroEdgeIds.has(link.id) || highlightedLinks.has(link.id)) && 
+          const showEnergyEdge = highlightedLinks.has(link.id) && 
             // In isolator mode, only show energy edges within hierarchy
             (communityMode !== 'auto' || !selectedNode || (sourceInHierarchy && targetInHierarchy));
           
@@ -789,11 +794,7 @@ export default function GraphVisualizer({
             <group key={link.id} visible={isVisible}>
               <Link
                 link={link}
-                isHighlighted={
-                  highlightedLinks.has(link.id) ||
-                  (ragHighlightedNodeIds?.has(link.source.id) ?? false) ||
-                  (ragHighlightedNodeIds?.has(link.target.id) ?? false)
-                }
+                isHighlighted={highlightedLinks.has(link.id)}
                 communityMode={communityMode}
                 nodesInHierarchy={nodesInHierarchy}
                 hasSelectedNode={selectedNode !== null}

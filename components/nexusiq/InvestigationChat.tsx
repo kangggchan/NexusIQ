@@ -3,19 +3,12 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
-import { ScrollArea } from '@/components/ui/scroll-area'
 import {
   Loader2, Send, Sparkles, ChevronDown, ChevronRight,
   AlertTriangle, FileText, MessageSquare, GitCommit, Ticket,
   CheckCircle2, XCircle, Clock, Zap, Network, Shield, Activity,
-  Square, Plus, History, Trash2, X,
+  Square, Plus,
 } from 'lucide-react'
-import {
-  type SessionMeta,
-  createSession, getActiveSessionId, setActiveSessionId,
-  getAllSessions, getSessionMessages, saveSessionMessages, deleteSession,
-  formatSessionDate,
-} from '@/lib/chatSessionStore'
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
@@ -54,6 +47,8 @@ type Message = {
   steps?: AgentStep[]
 }
 
+export type InvestigationChatMessage = Message
+
 interface EvidenceItem {
   type: 'incident' | 'commit' | 'slack' | 'jira' | 'deployment' | 'service'
   id: string
@@ -62,6 +57,15 @@ interface EvidenceItem {
 }
 
 interface InvestigationChatProps {
+  sessionId: string
+  messages: Message[]
+  setMessages: React.Dispatch<React.SetStateAction<Message[]>>
+  sessionContext: string
+  setSessionContext: React.Dispatch<React.SetStateAction<string>>
+  busy: boolean
+  setBusy: React.Dispatch<React.SetStateAction<boolean>>
+  abortRef: React.MutableRefObject<AbortController | null>
+  onStartNewSession: () => void
   onHighlightServices?: (serviceNames: string[]) => void
   onQueryStart?: () => void
   focusedIncidentId?: string | null
@@ -120,6 +124,7 @@ function MarkdownContent({ text }: { text: string }) {
 // ── Constants ────────────────────────────────────────────────────────────────
 
 const AGENT_ICONS: Record<string, React.ReactNode> = {
+  context_agent:  <Sparkles className="h-3 w-3" />,
   orchestrator:   <Sparkles className="h-3 w-3" />,
   graph_agent:    <Network className="h-3 w-3" />,
   incident_agent: <Activity className="h-3 w-3" />,
@@ -211,7 +216,7 @@ function AgentPipeline({ steps, busy }: { steps: AgentStep[]; busy?: boolean }) 
   const lastIdx = steps.length - 1
 
   return (
-    <div className="mt-2 rounded-md border border-border/40 bg-card/40 p-3 space-y-1.5">
+    <div className="mt-2 w-full min-w-0 self-stretch rounded-md border border-border/40 bg-card/40 p-3 space-y-1.5">
       <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-2">Agent Pipeline</p>
       {steps.map((step, i) => {
         const isLast   = i === lastIdx
@@ -241,7 +246,7 @@ function AgentPipeline({ steps, busy }: { steps: AgentStep[]; busy?: boolean }) 
                 {step.status === 'error'     && <XCircle className="h-3 w-3 text-red-400" />}
               </div>
               {step.summary && (
-                <p className="text-[10px] text-muted-foreground/70 mt-0.5 truncate">{step.summary}</p>
+                <p className="mt-0.5 min-w-0 break-words text-[10px] text-muted-foreground/70 whitespace-normal">{step.summary}</p>
               )}
             </div>
           </div>
@@ -272,11 +277,11 @@ function InvestigationReportCard({ report }: { report: InvestigationReportData }
           <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-2">Timeline</p>
           <div className="space-y-1.5">
             {report.timeline.map((entry, i) => (
-              <div key={i} className="flex gap-2 items-start">
-                <span className="font-mono text-[10px] text-muted-foreground/60 shrink-0 mt-0.5 w-36 truncate">
+              <div key={i} className="flex flex-col gap-0.5 sm:flex-row sm:gap-2 sm:items-start">
+                <span className="min-w-0 font-mono text-[10px] text-muted-foreground/60 break-all sm:mt-0.5">
                   {entry.timestamp}
                 </span>
-                <span className="text-xs text-muted-foreground">
+                <span className="min-w-0 text-xs text-muted-foreground">
                   {entry.event}
                   {entry.service && (
                     <span className="ml-1 font-mono text-cyan-400/80 text-[10px]">({entry.service})</span>
@@ -294,19 +299,21 @@ function InvestigationReportCard({ report }: { report: InvestigationReportData }
 function MessageBubble({ msg, isLive }: { msg: Message; isLive?: boolean }) {
   const isUser = msg.role === 'user'
   return (
-    <div className={`flex ${isUser ? 'justify-end' : 'justify-start'} mb-3`}>
-      <div className={`max-w-[92%] ${isUser ? 'items-end' : 'items-start'} flex flex-col`}>
-        {!isUser && (
-          <div className="flex items-center gap-1.5 mb-1">
-            <Sparkles className="h-3 w-3 text-cyan-400" />
-            <span className="text-xs font-medium text-cyan-400">NexusIQ</span>
-          </div>
-        )}
+    <div className={`flex w-full min-w-0 ${isUser ? 'justify-end' : 'justify-start'} mb-4`}>
+      <div className={`min-w-0 max-w-[92%] ${isUser ? 'items-end' : 'items-start'} flex flex-col gap-2`}>
+        <div className={`flex items-center gap-1.5 px-1 ${isUser ? 'text-cyan-200/80' : 'text-cyan-400'}`}>
+          {isUser ? (
+            <span className="h-1.5 w-1.5 rounded-full bg-cyan-300/70" />
+          ) : (
+            <Sparkles className="h-3 w-3" />
+          )}
+          <span className="text-[11px] font-medium">{isUser ? 'You' : 'NexusIQ'}</span>
+        </div>
         {msg.content && (
-          <div className={`rounded-lg px-3 py-2 text-sm leading-relaxed ${
+          <div className={`min-w-0 max-w-full break-words rounded-2xl px-3 py-2.5 text-sm leading-relaxed shadow-sm ${
             isUser
-              ? 'bg-cyan-500/20 border border-cyan-500/30 text-foreground'
-              : 'bg-card border border-border/50 text-foreground'
+              ? 'bg-cyan-500/18 border border-cyan-500/30 text-foreground'
+              : 'bg-card/85 border border-border/60 text-foreground'
           }`}>
             {isUser ? msg.content : <MarkdownContent text={msg.content} />}
           </div>
@@ -320,40 +327,30 @@ function MessageBubble({ msg, isLive }: { msg: Message; isLive?: boolean }) {
   )
 }
 
-export default function InvestigationChat({ onHighlightServices, onQueryStart, focusedIncidentId }: InvestigationChatProps) {
-  // ── Session state ─────────────────────────────────────────────────────────
-  const [sessionId, setSessionId] = useState<string>(() => {
-    if (typeof window === 'undefined') return ''
-    const active = getActiveSessionId()
-    if (active) return active
-    return createSession().id
-  })
-  const [sessions, setSessions] = useState<SessionMeta[]>(() => {
-    if (typeof window === 'undefined') return []
-    return getAllSessions()
-  })
-  const [showHistory, setShowHistory] = useState(false)
-
-  const [messages, setMessages] = useState<Message[]>(() => {
-    if (typeof window === 'undefined') return []
-    const active = getActiveSessionId()
-    if (!active) return []
-    return getSessionMessages(active) as Message[]
-  })
-
+export default function InvestigationChat({
+  sessionId,
+  messages,
+  setMessages,
+  sessionContext,
+  setSessionContext,
+  busy,
+  setBusy,
+  abortRef,
+  onStartNewSession,
+  onHighlightServices,
+  onQueryStart,
+  focusedIncidentId,
+}: InvestigationChatProps) {
   const [input, setInput] = useState('')
-  const [busy, setBusy] = useState(false)
-  const abortRef = useRef<AbortController | null>(null)
   const endRef = useRef<HTMLDivElement>(null)
   const [stickToBottom, setStickToBottom] = useState(true)
   const viewportRef = useRef<HTMLDivElement>(null)
+  const activeSessionRef = useRef(sessionId)
+  const hasSessionContext = sessionContext.trim().length > 0
 
-  // Persist messages to localStorage after every update
   useEffect(() => {
-    if (!sessionId) return
-    saveSessionMessages(sessionId, messages as Parameters<typeof saveSessionMessages>[1])
-    setSessions(getAllSessions())
-  }, [messages, sessionId])
+    activeSessionRef.current = sessionId
+  }, [sessionId])
 
   useEffect(() => {
     if (!stickToBottom) return
@@ -370,9 +367,38 @@ export default function InvestigationChat({ onHighlightServices, onQueryStart, f
 
   // ── Investigation workflow (LangGraph multi-agent) ─────────────────────────
 
-  const sendInvestigation = useCallback(async (q: string, historySnapshot: Message[]) => {
+  const sendInvestigation = useCallback(async (
+    q: string,
+    historySnapshot: Message[],
+    sessionIdSnapshot: string,
+    sessionContextSnapshot: string,
+  ) => {
     const stepsIdx = historySnapshot.length   // index of the assistant bubble we'll update
     setMessages(prev => [...prev, { role: 'assistant', content: '', steps: [] }])
+
+    const updateAssistantMessage = (updater: (current: Message) => Message) => {
+      setMessages(prev => {
+        if (activeSessionRef.current !== sessionIdSnapshot) {
+          return prev
+        }
+        const next = [...prev]
+        const current = next[stepsIdx] ?? { role: 'assistant', content: '', steps: [] }
+        next[stepsIdx] = updater(current)
+        return next
+      })
+    }
+
+    const serializedHistory = historySnapshot
+      .map((m): { role: 'user' | 'assistant'; content: string } | null => {
+        const text = m.content ||
+          (m.report ? (m.report.summary || m.report.synthesis || '').slice(0, 400) : '')
+        return text ? { role: m.role, content: text.slice(0, 400) } : null
+      })
+      .filter((turn): turn is { role: 'user' | 'assistant'; content: string } => Boolean(turn))
+
+    const historyWindow = sessionContextSnapshot
+      ? serializedHistory.slice(-8)
+      : serializedHistory.slice(-40)
 
     const controller = new AbortController()
     abortRef.current = controller
@@ -385,19 +411,21 @@ export default function InvestigationChat({ onHighlightServices, onQueryStart, f
         signal: controller.signal,
         body: JSON.stringify({
           query: q,
-          history: historySnapshot
-            .map(m => {
-              const text = m.content ||
-                (m.report ? (m.report.summary || m.report.synthesis || '').slice(0, 400) : '')
-              return text ? { role: m.role, content: text.slice(0, 400) } : null
-            })
-            .filter(Boolean)
-            .slice(-10),
+          history: historyWindow,
+          sessionContext: sessionContextSnapshot,
         }),
       })
     } catch (err) {
       if (err instanceof Error && err.name === 'AbortError') {
-        setMessages(prev => { const u = [...prev]; u[stepsIdx] = { role: 'assistant', content: '_(stopped)_', steps: u[stepsIdx]?.steps ?? [] }; return u })
+        setMessages(prev => {
+          if (activeSessionRef.current !== sessionIdSnapshot) {
+            return prev
+          }
+          const next = [...prev]
+          const current = next[stepsIdx] ?? { role: 'assistant', content: '', steps: [] }
+          next[stepsIdx] = { ...current, role: 'assistant', content: '_(stopped)_', steps: current.steps ?? [] }
+          return next
+        })
         return
       }
       throw err
@@ -430,30 +458,38 @@ export default function InvestigationChat({ onHighlightServices, onQueryStart, f
               }
               const idx = liveSteps.findIndex(s => s.node === 'evaluate')
               if (idx >= 0) liveSteps[idx] = step; else liveSteps.push(step)
-              setMessages(prev => { const u = [...prev]; u[stepsIdx] = { role: 'assistant', content: '', steps: [...liveSteps] }; return u })
+              updateAssistantMessage(current => ({ ...current, role: 'assistant', steps: [...liveSteps] }))
             }
             if (currentEvent === 'step-update') {
               const step: AgentStep = { agent: payload.agent, status: payload.status, summary: payload.summary, timestamp: payload.timestamp, node: payload.node }
               const idx = liveSteps.findIndex(s => s.agent === step.agent)
               if (idx >= 0) liveSteps[idx] = step; else liveSteps.push(step)
-              setMessages(prev => { const u = [...prev]; u[stepsIdx] = { role: 'assistant', content: '', steps: [...liveSteps] }; return u })
+              updateAssistantMessage(current => ({ ...current, role: 'assistant', steps: [...liveSteps] }))
             }
             if (currentEvent === 'investigation-complete' && payload.report) {
               const report: InvestigationReportData = payload.report
               if (onHighlightServices && report.affected_services?.length)
                 onHighlightServices(report.affected_services.map(s => s.name))
-              setMessages(prev => { const u = [...prev]; u[stepsIdx] = { role: 'assistant', content: '', steps: liveSteps, report }; return u })
+              updateAssistantMessage(current => ({ ...current, role: 'assistant', steps: [...liveSteps], report }))
+            }
+            if (currentEvent === 'session-context-updated') {
+              const nextContext = typeof payload.conversation_context === 'string'
+                ? payload.conversation_context
+                : ''
+              if (activeSessionRef.current === sessionIdSnapshot) {
+                setSessionContext(nextContext)
+              }
             }
             if (currentEvent === 'error') throw new Error(payload.message ?? 'Investigation failed')
           } catch (e) { if (currentEvent === 'error') throw e }
         } else if (line === '') { currentEvent = '' }
       }
     }
-  }, [onHighlightServices])
+  }, [abortRef, onHighlightServices, setMessages, setSessionContext])
 
   const send = async (overrideInput?: string) => {
     const q = (overrideInput ?? input).trim()
-    if (!q || busy) return
+    if (!sessionId || !q || busy) return
     setInput('')
     onQueryStart?.()                             // clear graph highlights
     if (onHighlightServices) onHighlightServices([]) // clear previous service highlights
@@ -463,7 +499,7 @@ export default function InvestigationChat({ onHighlightServices, onQueryStart, f
     setMessages(next)
     setBusy(true)
     try {
-      await sendInvestigation(q, next)
+      await sendInvestigation(q, next, sessionId, sessionContext)
     } catch (err) {
       if (err instanceof Error && err.name === 'AbortError') return
       console.error('[InvestigationChat]', err)
@@ -488,126 +524,31 @@ export default function InvestigationChat({ onHighlightServices, onQueryStart, f
     }
   }
 
-  // ── Session management actions ─────────────────────────────────────────────
-
-  const startNewSession = () => {
-    if (busy) { abortRef.current?.abort(); setBusy(false) }
-    const meta = createSession()
-    setSessionId(meta.id)
-    setMessages([])
-    setSessions(getAllSessions())
-    setShowHistory(false)
-  }
-
-  const switchSession = (id: string) => {
-    if (id === sessionId) { setShowHistory(false); return }
-    if (busy) { abortRef.current?.abort(); setBusy(false) }
-    setActiveSessionId(id)
-    setSessionId(id)
-    setMessages(getSessionMessages(id) as Message[])
-    setSessions(getAllSessions())
-    setShowHistory(false)
-  }
-
-  const removeSession = (e: React.MouseEvent, id: string) => {
-    e.stopPropagation()
-    deleteSession(id)
-    const remaining = getAllSessions()
-    setSessions(remaining)
-    if (id === sessionId) {
-      if (remaining.length > 0) {
-        switchSession(remaining[0].id)
-      } else {
-        startNewSession()
-      }
-    }
-  }
-
   return (
-    <div className="h-full flex flex-col relative overflow-hidden">
-
-      {/* ── History Sidebar ───────────────────────────────────────────────── */}
-      {showHistory && (
-        <div className="absolute inset-0 z-20 flex flex-col bg-background border-r">
-          <div className="p-3 border-b shrink-0 flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <History className="h-4 w-4 text-cyan-400" />
-              <span className="text-sm font-semibold text-cyan-400">Chat History</span>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <button
-                onClick={startNewSession}
-                title="Start new session"
-                className="flex items-center gap-1 text-[10px] text-cyan-400/80 hover:text-cyan-300 transition-colors border border-cyan-400/30 rounded px-1.5 py-0.5 hover:border-cyan-400/70 hover:bg-cyan-400/5"
-              >
-                <Plus className="h-2.5 w-2.5" />
-                New
-              </button>
-              <button onClick={() => setShowHistory(false)} className="text-muted-foreground hover:text-foreground transition-colors p-0.5">
-                <X className="h-4 w-4" />
-              </button>
-            </div>
-          </div>
-          <ScrollArea className="flex-1 min-h-0">
-            <div className="p-2 space-y-1">
-              {sessions.length === 0 && (
-                <p className="text-xs text-muted-foreground text-center py-6">No saved sessions</p>
-              )}
-              {sessions.map(s => (
-                <div
-                  key={s.id}
-                  onClick={() => switchSession(s.id)}
-                  className={`group flex items-start justify-between gap-2 px-2 py-2 rounded-md cursor-pointer transition-colors ${
-                    s.id === sessionId
-                      ? 'bg-cyan-500/10 border border-cyan-500/30'
-                      : 'hover:bg-card border border-transparent hover:border-border/40'
-                  }`}
-                >
-                  <div className="flex-1 min-w-0">
-                    <p className="text-xs font-medium truncate text-foreground/90">{s.title}</p>
-                    <p className="text-[10px] text-muted-foreground mt-0.5">
-                      {formatSessionDate(s.updatedAt)} · {s.messageCount} msg{s.messageCount !== 1 ? 's' : ''}
-                    </p>
-                  </div>
-                  <button
-                    onClick={e => removeSession(e, s.id)}
-                    title="Delete session"
-                    className="opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground hover:text-red-400 shrink-0 mt-0.5"
-                  >
-                    <Trash2 className="h-3 w-3" />
-                  </button>
-                </div>
-              ))}
-            </div>
-          </ScrollArea>
-        </div>
-      )}
+    <div className="h-full min-w-0 flex flex-col relative overflow-hidden bg-gradient-to-b from-background via-background to-card/20">
 
       {/* Header */}
-      <div className="p-3 border-b shrink-0">
-        <div className="flex items-center justify-between">
-
-          <div className="flex items-center gap-2">
-            <Sparkles className="h-4 w-4 text-cyan-400" />
-            <span className="text-sm font-semibold text-cyan-400">AI Investigation</span>
+      <div className="border-b border-border/60 bg-background/85 px-3 py-3 shrink-0 backdrop-blur-sm">
+        <div className="flex items-start justify-between gap-3">
+          <div className="min-w-0 flex-1">
+            <div className="flex items-center gap-2">
+              <Sparkles className="h-4 w-4 text-cyan-400" />
+              <span className="text-sm font-semibold text-cyan-400">AI Investigation</span>
+            </div>
+            <div className="mt-2 flex flex-wrap items-center gap-1.5">
+              <span className="rounded-full border border-cyan-500/25 bg-cyan-500/10 px-2 py-0.5 text-[11px] text-cyan-200/90">
+                Live session
+              </span>
+              <span className="rounded-full border border-border/60 bg-card/70 px-2 py-0.5 text-[11px] text-muted-foreground">
+                {hasSessionContext ? 'Context retained' : 'Fresh session'}
+              </span>
+            </div>
           </div>
           <div className="flex items-center gap-1.5">
             <button
-              onClick={() => setShowHistory(h => !h)}
-              title="Chat history"
-              className={`flex items-center gap-1 text-[10px] transition-colors border rounded px-1.5 py-0.5 ${
-                showHistory
-                  ? 'text-cyan-300 border-cyan-400/70 bg-cyan-400/10'
-                  : 'text-cyan-400/80 hover:text-cyan-300 border-cyan-400/30 hover:border-cyan-400/70 hover:bg-cyan-400/5'
-              }`}
-            >
-              <History className="h-2.5 w-2.5" />
-              History
-            </button>
-            <button
-              onClick={startNewSession}
+              onClick={onStartNewSession}
               title="New chat session"
-              className="flex items-center gap-1 text-[10px] text-cyan-400/80 hover:text-cyan-300 transition-colors border border-cyan-400/30 rounded px-1.5 py-0.5 hover:border-cyan-400/70 hover:bg-cyan-400/5"
+              className="flex shrink-0 items-center gap-1 rounded-md border border-cyan-400/30 px-2 py-1 text-[11px] text-cyan-400/80 transition-colors hover:border-cyan-400/70 hover:bg-cyan-400/5 hover:text-cyan-300"
             >
               <Plus className="h-2.5 w-2.5" />
               New Chat
@@ -615,7 +556,7 @@ export default function InvestigationChat({ onHighlightServices, onQueryStart, f
           </div>
         </div>
         {focusedIncidentId && (
-          <div className="text-xs text-amber-400 flex items-center gap-1 mt-1.5">
+          <div className="mt-2 flex items-center gap-1.5 rounded-md border border-amber-500/30 bg-amber-500/10 px-2.5 py-1.5 text-xs text-amber-300">
             <AlertTriangle className="h-3 w-3" />
             Investigating: {focusedIncidentId}
           </div>
@@ -623,58 +564,68 @@ export default function InvestigationChat({ onHighlightServices, onQueryStart, f
       </div>
 
       {/* Messages */}
-      <ScrollArea className="flex-1 min-h-0">
-        <div
-          ref={viewportRef}
-          onScroll={handleViewportScroll}
-          className="p-3"
-        >
+      <div
+        ref={viewportRef}
+        onScroll={handleViewportScroll}
+        className="flex-1 min-h-0 min-w-0 overflow-x-hidden overflow-y-auto"
+      >
+        <div className="flex min-h-full w-full min-w-0 flex-col px-3 py-4">
           {messages.length === 0 && (
-            <div className="space-y-4">
-              <div className="text-center py-6">
-                <Sparkles className="h-8 w-8 text-cyan-400/50 mx-auto mb-3" />
-                <p className="text-sm text-muted-foreground">
+            <div className="my-auto rounded-2xl border border-border/60 bg-card/65 p-4 shadow-sm">
+              <div className="text-center py-2">
+                <Sparkles className="mx-auto mb-3 h-8 w-8 text-cyan-400/50" />
+                <p className="text-sm font-medium text-foreground">
                   Ask anything about incidents, services, or operational risks
                 </p>
-                <p className="text-xs text-muted-foreground/50 mt-1">
+                <p className="mt-1 text-xs text-muted-foreground/70">
                   Graph · Incident · Risk agents run in parallel
                 </p>
               </div>
-              <div className="grid gap-2">
+              <div className="mt-4">
+                <p className="mb-2 text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground/70">
+                  Suggested investigations
+                </p>
+                <div className="grid gap-2">
                 {STARTER_QUESTIONS.map((q, i) => (
                   <button
                     key={i}
                     onClick={() => send(q)}
-                    className="text-left text-xs px-3 py-2 rounded-md border border-border/50 bg-card/50 hover:bg-card hover:border-cyan-500/30 text-muted-foreground hover:text-foreground transition-all"
+                    className="rounded-xl border border-border/50 bg-background/70 px-3 py-2.5 text-left text-xs text-muted-foreground transition-all hover:border-cyan-500/30 hover:bg-card hover:text-foreground"
                   >
                     {q}
                   </button>
                 ))}
+                </div>
               </div>
             </div>
           )}
-          {messages.map((msg, i) => (
-            <MessageBubble key={i} msg={msg} isLive={busy && i === messages.length - 1} />
-          ))}
-          {busy && (
-            <div className="flex items-center gap-2 text-xs text-muted-foreground/60 mb-3">
-              <Loader2 className="h-3 w-3 animate-spin" />
-              <span>Investigation pipeline running…</span>
+          {messages.length > 0 && (
+            <div className="space-y-1">
+              {messages.map((msg, i) => (
+                <MessageBubble key={i} msg={msg} isLive={busy && i === messages.length - 1} />
+              ))}
+              {busy && (
+                <div className="mb-3 inline-flex max-w-full flex-wrap items-center gap-2 rounded-full border border-border/60 bg-card/70 px-3 py-1.5 text-xs text-muted-foreground/80 shadow-sm">
+                  <Loader2 className="h-3 w-3 animate-spin" />
+                  <span>Investigation pipeline running…</span>
+                </div>
+              )}
             </div>
           )}
-          <div ref={endRef} />
+          <div ref={endRef} className="h-1 shrink-0" />
         </div>
-      </ScrollArea>
+      </div>
 
       {/* Input */}
-      <div className="p-3 border-t shrink-0">
-        <div className="flex gap-2">
+      <div className="border-t border-border/60 bg-background/90 p-3 shrink-0 backdrop-blur-sm">
+        <div className="w-full min-w-0 rounded-2xl border border-border/60 bg-card/70 p-3 shadow-sm">
+          <div className="flex items-end gap-2">
           <Textarea
             value={input}
             onChange={e => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="Investigate an incident, service, or pattern..."
-            className="min-h-[60px] max-h-[120px] resize-none text-sm bg-card/50 border-border/50 focus:border-cyan-500/50"
+            className="min-h-[72px] max-h-[160px] resize-none border-0 bg-transparent px-0 py-0 text-sm shadow-none focus-visible:border-transparent focus-visible:ring-0"
             disabled={busy}
           />
           {busy ? (
@@ -682,7 +633,7 @@ export default function InvestigationChat({ onHighlightServices, onQueryStart, f
               onClick={stop}
               size="icon"
               variant="ghost"
-              className="shrink-0 self-end text-red-400 hover:text-red-300 hover:bg-red-500/10 border border-red-500/30"
+              className="h-11 w-11 shrink-0 self-end rounded-xl border border-red-500/30 text-red-400 hover:bg-red-500/10 hover:text-red-300"
               title="Stop investigation"
             >
               <Square className="h-4 w-4 fill-current" />
@@ -692,15 +643,16 @@ export default function InvestigationChat({ onHighlightServices, onQueryStart, f
               onClick={() => send()}
               disabled={!canSend}
               size="icon"
-              className="shrink-0 self-end bg-cyan-600 hover:bg-cyan-500"
+              className="h-11 w-11 shrink-0 self-end rounded-xl bg-cyan-600 hover:bg-cyan-500"
             >
               <Send className="h-4 w-4" />
             </Button>
           )}
         </div>
-        <p className="text-xs text-muted-foreground mt-1.5">
-          Shift+Enter for new line · Enter to send
-        </p>
+          <p className="mt-2 text-xs text-muted-foreground">
+            Shift+Enter for new line · Enter to send
+          </p>
+        </div>
       </div>
     </div>
   )

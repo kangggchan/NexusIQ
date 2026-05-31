@@ -1,11 +1,11 @@
 """
 Evidence-driven GraphRAG investigation workflow.
 
-Architecture (query-analyzer-first, graph-aware):
+Architecture (persisted-session-context, graph-aware):
 
   START
-    -> query_analyzer    (qwen2.5:1.5b: lookup on Neo4j graph cache — NO extra DB call)
-                          • reads from shared GraphCache populated by /graph/visualization
+    -> query_analyzer    (qwen2.5:1.5b: reads conversation_context from state + Neo4j
+                          graph cache — NO extra DB call)
                           • query decomposition, entity extraction, intent classification
                           • graph lookup planning + retrieval routing
         | conversational (routing=NO_RETRIEVAL, no graph match) -> synthesize
@@ -17,10 +17,12 @@ Architecture (query-analyzer-first, graph-aware):
         | DEEP           -> plan (LLM: only for complex RCA, enriched with graph insights)
                            -> graph_agent + incident_agent + risk_agent
     -> synthesize        (lightweight merge)
+        -> context_agent     (qwen2.5:7b: compacts the full session context AFTER the answer,
+                                                    merging the prior compact context with the latest exchange)
     -> END
 
 Key design guarantees:
-  - query_analyzer runs FIRST: reads shared GraphCache (populated by /graph/visualization — same Neo4j fetch)
+    - query_analyzer reads persisted conversation_context, NOT raw history turns
   - graph_insights from the Neo4j cache flow into orchestrator planning
   - Shared retrieval runs EXACTLY ONCE per query
   - Embedding computation cached (1 hour TTL)
@@ -32,8 +34,10 @@ Key design guarantees:
 """
 from __future__ import annotations
 
+from copy import deepcopy
 import json
 import logging
+import re
 from datetime import datetime, timezone
 from typing import AsyncIterator, Any
 
@@ -42,6 +46,7 @@ from langgraph.graph import StateGraph, START, END
 
 from backend.investigation_agents.state import InvestigationState
 from backend.investigation_agents.prompts import (
+    CONTEXT_AGENT_PROMPT,
     QUERY_ANALYZER_PROMPT,
     ORCHESTRATOR_PLAN_PROMPT,
     GRAPH_AGENT_PROMPT,
@@ -51,6 +56,7 @@ from backend.investigation_agents.prompts import (
 )
 from backend.investigation_agents.graph_inspector import get_graph_inspector
 from backend.retrieval.shared_retriever import get_shared_retriever
+from backend.retrieval.workforce_catalog import get_workforce_catalog
 from backend.investigation.shared_context import SharedInvestigationContext
 from backend.investigation.evidence_evaluator import (
     get_evaluator,
@@ -66,7 +72,8 @@ log = logging.getLogger(__name__)
 # -- Model assignments ---------------------------------------------------------
 
 AGENT_MODELS: dict[str, str] = {
-    "query_analyzer": "qwen2.5:1.5b",
+    "context_agent":  "qwen2.5:7b",
+    "query_analyzer": "qwen2.5:7b",
     "orchestrator":   "llama3.1:8b",
     "graph":          "qwen2.5:7b",
     "incident":       "llama3.1:8b",
@@ -75,15 +82,21 @@ AGENT_MODELS: dict[str, str] = {
 }
 
 # Token budgets
-_FAST_SYNTHESIZE_TOKENS = 512    # DIRECT_RESPONSE path (conversational)
+_FAST_SYNTHESIZE_TOKENS = 900     # DIRECT_RESPONSE path (conversational)
 _AGENT_TOKENS           = 600    # per specialist agent
 _PLAN_TOKENS            = 400    # orchestrator plan
 _SYNTHESIZE_TOKENS      = 2000   # final synthesis — needs room for full narrative
 _AGENT_CONTEXT_CHARS    = 2500   # context slice per agent
 
 _FAST_SYSTEM_PROMPT = (
-    "You are a NexusIQ investigator. Answer the query directly and concisely "
-    "using only the provided context. Do not speculate beyond the evidence."
+    "You are a NexusIQ answer agent. Answer the user's exact question directly "
+    "using only the provided context. Give the answer in the first sentence. "
+    "If the question asks for a count, state the number explicitly. Ignore "
+    "unrelated incidents or background details. If evidence is insufficient, "
+    "say exactly what is known and what is missing. For superlatives or "
+    "comparisons such as busiest/most active/most important, do not infer from "
+    "incidents, failures, or ownership alone unless the evidence explicitly "
+    "supports that comparison."
 )
 
 
@@ -139,6 +152,107 @@ class InvestigationWorkflow:
             resp.raise_for_status()
             return resp.json().get("message", {}).get("content", "")
 
+    # -- Node: context_agent ---------------------------------------------------
+
+    async def _context_agent(self, state: InvestigationState) -> dict:
+        """
+        Session context compactor — runs AFTER synthesize.
+
+        Merges the persisted compact session context with the latest user query,
+        the final assistant answer, and a small backfill window of recent raw turns.
+        The refreshed XML block is persisted by the client for the next turn.
+        """
+        existing_context = state.get("conversation_context") or ""
+        history: list[dict] = state.get("history") or []
+        report = state.get("report") or {}
+        latest_answer = ""
+        if isinstance(report, dict):
+            latest_answer = str(report.get("synthesis") or report.get("summary") or "").strip()
+
+        if not (existing_context.strip() or history or state.get("query", "").strip() or latest_answer):
+            log.info("[context_agent] no session material — skipping")
+            return {
+                "conversation_context": "",
+                "steps": [_step("context_agent", "completed", "Session context unchanged — no history to compact")],
+            }
+
+        formatted = "\n".join(
+            f"{t['role'].upper()}: {str(t.get('content', ''))[:400]}"
+            for t in history[-12:]
+        )
+        current_query: str = state.get("query", "")
+        log.info(
+            "[context_agent] compacting session context: turns=%d existing=%s",
+            len(history),
+            bool(existing_context.strip()),
+        )
+
+        try:
+            raw = await self._chat(
+                AGENT_MODELS["context_agent"],
+                CONTEXT_AGENT_PROMPT,
+                (
+                    f"EXISTING SESSION CONTEXT:\n{existing_context or 'NONE'}\n\n"
+                    f"RECENT SESSION HISTORY:\n{formatted or '(none)'}\n\n"
+                    f"LATEST USER QUERY: {current_query or 'NONE'}\n\n"
+                    f"LATEST ASSISTANT ANSWER:\n{latest_answer or 'NONE'}"
+                ),
+                timeout=60.0,
+                num_predict=400,
+                temperature=0.0,
+            )
+
+            def _tag(text: str, tag: str, default: str = "NONE") -> str:
+                m = re.search(rf"<{tag}>(.*?)</{tag}>", text, re.DOTALL | re.IGNORECASE)
+                return m.group(1).strip() if m else default
+
+            entities_val = _tag(raw, "entities")
+            facts_val    = _tag(raw, "facts")
+            summary_val  = _tag(raw, "summary")
+
+            # Heuristic fallback: if the LLM returned NONE for entities, extract
+            # keywords directly from the session context + latest exchange.
+            if entities_val.upper() == "NONE":
+                fallback_text = " ".join([existing_context, formatted, current_query, latest_answer])
+                kw = self._inspector.extract_keywords(fallback_text)
+                if kw:
+                    entities_val = ", ".join(kw[:12])
+                    log.info(
+                        "[context_agent] LLM returned NONE entities — heuristic fallback: %s",
+                        entities_val,
+                    )
+
+            context_block = (
+                "<context>\n"
+                f"  <entities>{entities_val}</entities>\n"
+                f"  <facts>{facts_val}</facts>\n"
+                f"  <summary>{summary_val}</summary>\n"
+                "</context>"
+            )
+            log.info("[context_agent] context_block=%r", context_block[:120])
+            return {
+                "conversation_context": context_block,
+                "steps": [_step("context_agent", "completed",
+                    f"Session context compacted — entities={entities_val[:60]}")],
+            }
+
+        except Exception as exc:
+            log.warning("[context_agent] LLM call failed: %s — using session fallback", exc)
+            fallback_summary = latest_answer[:400] or current_query[:400] or "NONE"
+            if existing_context.strip():
+                return {
+                    "conversation_context": existing_context,
+                    "steps": [_step("context_agent", "error", f"Compaction failed — kept prior session context: {exc}")],
+                }
+            return {
+                "conversation_context": (
+                    "<context>\n  <entities>NONE</entities>\n"
+                    f"  <facts>Latest query: {current_query[:250] or 'NONE'}.</facts>\n"
+                    f"  <summary>{fallback_summary}</summary>\n</context>"
+                ),
+                "steps": [_step("context_agent", "error", f"Compaction failed, using minimal fallback: {exc}")],
+            }
+
     # -- Node: query_analyzer --------------------------------------------------
 
     async def _query_analyze(self, state: InvestigationState) -> dict:
@@ -154,22 +268,30 @@ class InvestigationWorkflow:
         query = state["query"]
         log.info("[query_analyzer] analyzing query against visualization graph")
 
-        # Build conversation history for the LLM (pronoun/reference resolution)
-        history: list[dict] = state.get("history") or []
-        history_text = ""
-        if history:
-            history_text = "\n".join(
-                f"{t['role'].upper()}: {str(t.get('content', ''))[:300]}"
-                for t in history[-6:]
-            )
+        # Structured session context persisted from the previous turn.
+        conversation_context: str = state.get("conversation_context") or ""
 
-        # 1. Fast keyword lookup on the CURRENT query only (no history injection)
-        #    History is given to the LLM below — it resolves "it"/"that"/etc. itself.
-        keywords = self._inspector.extract_keywords(query)
-        log.info("[query_analyzer] keywords=%s", keywords)
+        # 1. Graph lookup using keywords from the current query PLUS entities that
+        #    the context_agent already extracted from conversation history.
+        #    This ensures follow-up queries ("Tell me more", "Who owns that?") get
+        #    meaningful graph context even when the query itself is short.
+        query_keywords = self._inspector.extract_keywords(query)
 
-        # 2. In-memory graph lookup (no DB call) ───────────────────────────────
-        lookup = self._inspector.lookup(keywords)
+        context_entity_keywords: list[str] = []
+        _m = re.search(r"<entities>(.*?)</entities>", conversation_context, re.DOTALL | re.IGNORECASE)
+        if _m:
+            _raw_ents = _m.group(1).strip()
+            if _raw_ents.upper() != "NONE":
+                context_entity_keywords = self._inspector.extract_keywords(_raw_ents)
+
+        combined_keywords = list(dict.fromkeys(query_keywords + context_entity_keywords))
+        log.info(
+            "[query_analyzer] keywords=%s (query=%s ctx=%s)",
+            combined_keywords, query_keywords, context_entity_keywords,
+        )
+
+        # 2. In-memory graph lookup (no DB call) ─────────────────────────────
+        lookup = self._inspector.lookup(combined_keywords)
         graph_ctx_text = self._inspector.format_for_llm(lookup)
         has_match = lookup["matched"]
 
@@ -180,7 +302,7 @@ class InvestigationWorkflow:
 
         # 3. LLM analysis (qwen2.5:1.5b) ───────────────────────────────────────
         user_msg = (
-            f"CONVERSATION HISTORY:\n{history_text or '(none)'}\n\n"
+            f"CONVERSATION CONTEXT:\n{conversation_context or '(none)'}\n\n"
             f"CURRENT QUERY: {query}\n\n"
             f"{graph_ctx_text}"
         )
@@ -189,8 +311,8 @@ class InvestigationWorkflow:
                 AGENT_MODELS["query_analyzer"],
                 QUERY_ANALYZER_PROMPT,
                 user_msg,
-                timeout=45.0,
-                num_predict=250,
+                timeout=60.0,
+                num_predict=400,
                 temperature=0.0,
             )
 
@@ -202,94 +324,90 @@ class InvestigationWorkflow:
             ]
 
             # Parse structured LLM output
+            answer_goal = query
+            answer_type = "SUMMARY"
             intent   = "GENERAL"
             llm_entities: list[str] = []
+            recommended_agents: list[str] = []
             routing  = "NO_RETRIEVAL" if not has_match else "GRAPH_SUFFICIENT"
             insights = "NONE"
 
-            for line in raw.splitlines():
-                line = line.strip()
-                if line.startswith("INTENT:"):
-                    val = line.split(":", 1)[1].strip().upper()
-                    if val in {"TOPOLOGY", "INCIDENT", "RISK", "PERFORMANCE", "GENERAL"}:
-                        intent = val
-                elif line.startswith("ENTITIES:"):
-                    raw_ents = line.split(":", 1)[1].strip()
-                    if raw_ents.upper() != "NONE":
-                        llm_entities = [e.strip() for e in raw_ents.split(",") if e.strip()]
-                elif line.startswith("ROUTING:"):
-                    val = line.split(":", 1)[1].strip().upper()
-                    if val in {"GRAPH_SUFFICIENT", "RETRIEVE_MORE", "NO_RETRIEVAL"}:
-                        # Only allow the model to *upgrade* routing (ask for more),
-                        # never downgrade a confirmed graph match to NO_RETRIEVAL.
-                        if has_match and val == "NO_RETRIEVAL":
-                            pass  # ignore — we have a real match
-                        else:
-                            routing = val
-                elif line.startswith("GRAPH_INSIGHTS:"):
-                    insights = line.split(":", 1)[1].strip()
+            # Parse XML tags from the LLM response
+            def _tag(text: str, tag: str, default: str = "") -> str:
+                m = re.search(rf"<{tag}>(.*?)</{tag}>", text, re.DOTALL | re.IGNORECASE)
+                return m.group(1).strip() if m else default
+
+            raw_goal     = _tag(raw, "answer_goal",   query)
+            raw_answer_type = _tag(raw, "answer_type", "SUMMARY").upper()
+            raw_intent   = _tag(raw, "intent",        "GENERAL").upper()
+            raw_entities = _tag(raw, "entities",      "NONE")
+            raw_agents   = _tag(raw, "recommended_agents", "NONE")
+            raw_routing  = _tag(raw, "routing",
+                                "NO_RETRIEVAL" if not has_match else "GRAPH_SUFFICIENT").upper()
+            insights     = _tag(raw, "graph_insights", "NONE")
+
+            if raw_goal:
+                answer_goal = raw_goal
+            if raw_answer_type in {"PEOPLE", "PROFILE", "STATUS", "DEPENDENCY", "INCIDENT", "RISK", "PERFORMANCE", "SUMMARY", "GENERAL"}:
+                answer_type = raw_answer_type
+            if raw_intent in {"TOPOLOGY", "INCIDENT", "RISK", "PERFORMANCE", "GENERAL"}:
+                intent = raw_intent
+            if raw_entities.upper() != "NONE":
+                llm_entities = [e.strip() for e in raw_entities.split(",") if e.strip()]
+            if raw_agents.upper() != "NONE":
+                recommended_agents = [
+                    agent.strip()
+                    for agent in raw_agents.split(",")
+                    if agent.strip() in {"graph", "incident", "risk"}
+                ]
+            if raw_routing in {"GRAPH_SUFFICIENT", "RETRIEVE_MORE", "NO_RETRIEVAL"}:
+                # Never downgrade a confirmed graph match to NO_RETRIEVAL.
+                if not (has_match and raw_routing == "NO_RETRIEVAL"):
+                    routing = raw_routing
+
+            # PEOPLE/PROFILE/STATUS answers usually need shared retrieval even when
+            # the graph matched, because workforce and document evidence live there.
+            if answer_type in {"PEOPLE", "PROFILE", "STATUS"}:
+                if routing != "RETRIEVE_MORE":
+                    log.info(
+                        "[query_analyzer] routing forced to RETRIEVE_MORE for answer_type=%s",
+                        answer_type,
+                    )
+                    routing = "RETRIEVE_MORE"
+
+            # Enforce internal consistency: if specialist agents are required,
+            # the answer is not graph-sufficient yet.
+            if routing == "GRAPH_SUFFICIENT" and recommended_agents:
+                log.info(
+                    "[query_analyzer] routing downgraded GRAPH_SUFFICIENT→RETRIEVE_MORE "
+                    "because recommended_agents=%s",
+                    recommended_agents,
+                )
+                routing = "RETRIEVE_MORE"
 
             # Merge: lookup titles are authoritative; LLM extras appended if new
             lookup_set = {t.lower() for t in lookup_entity_titles}
             extra = [e for e in llm_entities if e.lower() not in lookup_set]
             entities_out = lookup_entity_titles + extra
 
-            # ── Investigation-intent safety-net ────────────────────────────────
-            # Queries that contain action/topology words or a named service/agent
-            # should always be routed to retrieval, even if the small LLM
-            # misclassifies them as conversational.
-            _INVESTIGATION_WORDS = {
-                # incidents / failures
-                "incident", "incidents", "investigate", "investigation",
-                "outage", "failure", "failures", "issue", "issues",
-                "problem", "problems", "error", "errors", "crash", "crashes",
-                "alert", "alerts", "fix", "solve", "root cause", "debug",
-                "diagnose", "analyse", "analyze",
-                # topology / ownership
-                "owns", "own", "owner", "owned", "ownership",
-                "team", "teams", "responsible", "manages", "managed",
-                "depends", "dependency", "dependencies", "upstream", "downstream",
-                "topology", "architecture", "graph", "connected", "connects",
-                "calls", "calls-into", "service", "services",
-                # general investigation verbs
-                "why", "how", "point",
-            }
-            import re as _re
-            _query_words = set(_re.findall(r'\w+', query.lower()))
-            # Also flag queries that mention a specific named service/agent by suffix
-            _has_named_service = bool(_re.search(r'\b\w+-(service|agent|api|worker|sidecar)\b', query, _re.I))
-            has_investigation_intent = bool(_query_words & _INVESTIGATION_WORDS) or _has_named_service
-
-            if routing == "NO_RETRIEVAL" and has_investigation_intent:
-                routing = "RETRIEVE_MORE"
-                log.info(
-                    "[query_analyzer] routing upgraded NO_RETRIEVAL→RETRIEVE_MORE "
-                    "due to investigation-intent keywords or named service in query"
-                )
-
-            # Secondary lookup: if the current query had no keyword match but the
-            # LLM resolved entity names from history (e.g. "it" → "ADAS project"),
-            # run a second graph lookup with those LLM-extracted names.
-            # Also try extracting entities from history text directly when the
-            # query uses pronouns ("this", "it", "that") and has no entity match.
-            if not has_match and routing != "NO_RETRIEVAL":
-                candidate_text = " ".join(llm_entities)
-                # Fallback: mine entities from recent history if LLM found none
-                if not llm_entities and history_text:
-                    candidate_text = history_text
-                if candidate_text.strip():
-                    llm_kw = self._inspector.extract_keywords(candidate_text)
-                    if llm_kw:
-                        secondary = self._inspector.lookup(llm_kw)
-                        if secondary["matched"]:
-                            lookup        = secondary
-                            graph_ctx_text = self._inspector.format_for_llm(secondary)
-                            has_match     = True
-                            lookup_entity_titles = [
-                                str(e.get("title", "")) for e in secondary["entities"] if e.get("title")
-                            ]
-                            entities_out = lookup_entity_titles + extra
-                            log.info("[query_analyzer] secondary lookup matched %d entities", len(lookup_entity_titles))
+            # Secondary lookup: if the LLM extracted entity names that weren't in
+            # the initial combined lookup, run a targeted pass on them.
+            if llm_entities and not has_match:
+                llm_kw = self._inspector.extract_keywords(" ".join(llm_entities))
+                if llm_kw:
+                    secondary = self._inspector.lookup(llm_kw)
+                    if secondary["matched"]:
+                        lookup           = secondary
+                        graph_ctx_text   = self._inspector.format_for_llm(secondary)
+                        has_match        = True
+                        lookup_entity_titles = [
+                            str(e.get("title", "")) for e in secondary["entities"] if e.get("title")
+                        ]
+                        entities_out = lookup_entity_titles + extra
+                        log.info(
+                            "[query_analyzer] LLM-entity secondary lookup matched %d entities",
+                            len(lookup_entity_titles),
+                        )
 
             # Build final insights block
             if has_match and insights and insights.upper() != "NONE":
@@ -299,27 +417,28 @@ class InvestigationWorkflow:
             else:
                 full_insights = ""
 
-            # Build routing state for downstream nodes.
-            # Only treat as conversational for genuine greetings/small-talk —
-            # never when investigation-intent words are present in the query.
-            is_conversational = (
-                routing == "NO_RETRIEVAL"
-                and not has_match
-                and not has_investigation_intent
-            )
-            decision           = "direct" if is_conversational else "full"
-            evidence_decision  = "DIRECT_RESPONSE" if is_conversational else "DEEP"
-            investigation_depth = "FAST" if is_conversational else "DEEP"
+            # Trust the LLM routing decision completely.
+            # GRAPH_SUFFICIENT should skip retrieval and answer directly from graph context.
+            is_conversational  = routing == "NO_RETRIEVAL" and not has_match
+            is_graph_sufficient = routing == "GRAPH_SUFFICIENT" and has_match
+            is_direct_answer   = is_conversational or is_graph_sufficient
+            decision           = "direct" if is_direct_answer else "full"
+            evidence_decision  = "DIRECT_RESPONSE" if is_direct_answer else "DEEP"
+            investigation_depth = "FAST" if is_direct_answer else "DEEP"
 
             log.info(
                 "[query_analyzer] intent=%s routing=%s entities=%s conversational=%s",
                 intent, routing, entities_out, is_conversational,
             )
             return {
+                "answer_goal":         answer_goal,
+                "answer_type":         answer_type,
                 "query_intent":        intent,
                 "query_entities":      entities_out,
+                "recommended_agents":  recommended_agents,
                 "graph_insights":      full_insights,
                 "has_graph_match":     has_match,
+                "llm_routing":         routing,
                 "decision":            decision,
                 "evidence_decision":   evidence_decision,
                 "investigation_depth": investigation_depth,
@@ -334,10 +453,14 @@ class InvestigationWorkflow:
                 str(e.get("title", "")) for e in lookup["entities"] if e.get("title")
             ]
             return {
+                "answer_goal":         query,
+                "answer_type":         "SUMMARY",
                 "query_intent":        "GENERAL",
                 "query_entities":      fallback_entities,
+                "recommended_agents":  ["graph"] if has_match else [],
                 "graph_insights":      graph_ctx_text if has_match else "",
                 "has_graph_match":     has_match,
+                "llm_routing":         "RETRIEVE_MORE" if has_match else "NO_RETRIEVAL",
                 "decision":            "full" if has_match else "direct",
                 "evidence_decision":   "DEEP" if has_match else "DIRECT_RESPONSE",
                 "investigation_depth": "DEEP" if has_match else "FAST",
@@ -356,7 +479,15 @@ class InvestigationWorkflow:
         query = state["query"]
         log.info("[shared_retrieve] %s", query[:80])
         try:
-            ctx: SharedInvestigationContext = await self._retriever.retrieve(query)
+            ctx: SharedInvestigationContext = deepcopy(await self._retriever.retrieve(query))
+            if state.get("answer_type") in {"PEOPLE", "PROFILE"}:
+                workforce_docs = get_workforce_catalog().build_people_documents(
+                    query=query,
+                    answer_goal=state.get("answer_goal", query),
+                    query_entities=state.get("query_entities", []),
+                )
+                if workforce_docs:
+                    ctx = _inject_context_documents(ctx, workforce_docs, section_name="WORKFORCE")
             return {
                 "shared_ctx":        ctx,
                 "retrieved_context": ctx.formatted_context,
@@ -407,7 +538,12 @@ class InvestigationWorkflow:
                 "active_agents":       ["graph", "incident", "risk"],
             }
 
-        evaluation = self._evaluator.evaluate(ctx)
+        evaluation = self._evaluator.evaluate(
+            ctx,
+            intent=state.get("query_intent", "GENERAL"),
+            routing=state.get("llm_routing", "RETRIEVE_MORE"),
+            recommended_agents=state.get("recommended_agents", []),
+        )
         log.info(
             "[evaluate] decision=%s agents=%s confidence=%.2f -- %s",
             evaluation.decision.value, evaluation.recommended_agents,
@@ -444,20 +580,15 @@ class InvestigationWorkflow:
             f"{k}:{v}" for k, v in (ctx.entities if ctx else {}).items() if v
         )[:150] or "none"
 
-        history_text = ""
-        if state.get("history"):
-            turns = state["history"][-4:]
-            history_text = "\n".join(
-                f"{t['role'].upper()}: {t['content'][:200]}" for t in turns
-            )
         # Include graph insights from query_analyzer if available
         graph_insights = state.get("graph_insights", "")
         graph_insights_section = (
             f"\nVISUALIZATION GRAPH INSIGHTS:\n{graph_insights[:600]}\n"
             if graph_insights else ""
         )
+        conv_ctx = state.get("conversation_context") or ""
         user_msg = (
-            f"CONVERSATION HISTORY:\n{history_text or '(none)'}\n\n"
+            f"CONVERSATION CONTEXT:\n{conv_ctx or '(none)'}\n\n"
             f"CURRENT QUERY: {state['query']}\n"
             f"QUERY INTENT: {state.get('query_intent', 'GENERAL')}\n"
             f"KEY ENTITIES (from graph): {', '.join(state.get('query_entities', [])) or 'none'}\n"
@@ -501,7 +632,7 @@ class InvestigationWorkflow:
             return {"graph_analysis": "", "steps": []}
 
         ctx: SharedInvestigationContext | None = state.get("shared_ctx")
-        log.info("[graph_agent] analyzing service topology")
+        log.info("[graph_agent] answering graph-focused query")
 
         if ctx and state.get("investigation_depth") in ("STANDARD", "DEEP"):
             try:
@@ -514,6 +645,8 @@ class InvestigationWorkflow:
             if ctx else state.get("retrieved_context", "")[:_AGENT_CONTEXT_CHARS]
         )
         user_msg = (
+            f"ANSWER GOAL: {state.get('answer_goal', state['query'])}\n"
+            f"QUERY INTENT: {state.get('query_intent', 'GENERAL')}\n\n"
             f"INVESTIGATION PLAN:\n{state.get('plan', '')[:250]}\n\n"
             f"RETRIEVED CONTEXT:\n{context_slice}\n\n"
             f"QUERY: {state['query']}"
@@ -526,7 +659,7 @@ class InvestigationWorkflow:
             return {
                 "graph_analysis": analysis,
                 "steps": [_step("graph_agent", "completed",
-                    "Service dependency and topology analysis complete")],
+                    "Graph-grounded answer analysis complete")],
             }
         except Exception as exc:
             log.warning("[graph_agent] %s", exc)
@@ -636,7 +769,7 @@ class InvestigationWorkflow:
             # retrieved docs may not contain the entity's profile data.
             if graph_insights and state.get("has_graph_match"):
                 context_text = (
-                    f"GRAPH KNOWLEDGE BASE:\n{graph_insights[:800]}\n\n"
+                    f"GRAPH KNOWLEDGE BASE:\n{graph_insights[:2000]}\n\n"
                     f"RETRIEVED DOCUMENTS:\n{retrieved_text}"
                 ).strip()
             else:
@@ -647,7 +780,6 @@ class InvestigationWorkflow:
             # Guard: if the query names a specific service/agent or uses topology
             # words but we have no context, it means retrieval found nothing —
             # do NOT hallucinate. Tell the user we have no data.
-            import re as _re2
             _no_context_factual = (
                 not context_text.strip()
                 and not is_conversational
@@ -677,20 +809,13 @@ class InvestigationWorkflow:
                     "steps": [_step("orchestrator", "completed",
                         "No data found in knowledge base for this query")],
                 }
-            # Build history snippet for both paths
-            chat_history: list[dict] = state.get("history") or []
-            history_snippet = ""
-            if chat_history:
-                history_snippet = "\n".join(
-                    f"{t['role'].upper()}: {str(t.get('content', ''))[:400]}"
-                    for t in chat_history[-6:]
-                )
+            conv_ctx = state.get("conversation_context") or ""
             if is_conversational:
                 # Pure greeting / small-talk path — no investigation context.
                 # DO NOT repeat the user's question or ask clarifying questions.
                 # Respond briefly and invite the user to describe what to investigate.
                 user_msg = (
-                    f"CONVERSATION HISTORY:\n{history_snippet or '(none)'}\n\n"
+                    f"CONVERSATION CONTEXT:\n{conv_ctx or '(none)'}\n\n"
                     f"USER: {state['query']}\n\n"
                     "You are the NexusIQ AI assistant for a system observability platform.\n"
                     "This is a greeting or casual message — respond briefly and warmly.\n"
@@ -699,12 +824,15 @@ class InvestigationWorkflow:
                 )
             else:
                 user_msg = (
-                    f"CONVERSATION HISTORY:\n{history_snippet or '(none)'}\n\n"
+                    f"CONVERSATION CONTEXT:\n{conv_ctx or '(none)'}\n\n"
+                    f"ANSWER TYPE: {state.get('answer_type', 'SUMMARY')}\n"
+                    f"QUERY INTENT: {state.get('query_intent', 'GENERAL')}\n"
+                    f"ANSWER GOAL: {state.get('answer_goal', state['query'])}\n\n"
                     f"QUERY: {state['query']}\n\n"
                     f"CONTEXT:\n{context_text}\n\n"
-                    "Answer the query using the provided context and conversation history. "
-                    "Prefer GRAPH KNOWLEDGE BASE information for entity/person details. "
-                    "Be direct and factual."
+                    "Answer the query using the provided context and conversation context. "
+                    "Answer the user's exact question first. Prefer GRAPH KNOWLEDGE BASE "
+                    "information for entity/person details. Ignore unrelated incident details."
                 )
             try:
                 answer = await self._chat(
@@ -714,7 +842,7 @@ class InvestigationWorkflow:
                 return {
                     "report": {
                         "query":             state["query"],
-                        "risk_level":        "LOW",
+                        "risk_level":        "UNKNOWN",
                         "summary":           answer,
                         "synthesis":         answer,
                         "graph_analysis":    "",
@@ -739,10 +867,14 @@ class InvestigationWorkflow:
 
         # Full synthesis: merge agent outputs
         ctx = state.get("shared_ctx")
-        key_context = (
-            ctx.formatted_context[:700] if ctx
-            else state.get("retrieved_context", "")[:700]
-        )
+        active_agents = state.get("active_agents", [])
+        if ctx and active_agents == ["graph"]:
+            key_context = ctx.context_for_agent("graph", max_chars=900)
+        else:
+            key_context = (
+                ctx.formatted_context[:700] if ctx
+                else state.get("retrieved_context", "")[:700]
+            )
         graph_insights = state.get("graph_insights", "")
         graph_kb_section = (
             f"GRAPH KNOWLEDGE BASE:\n{graph_insights[:600]}\n\n"
@@ -750,6 +882,10 @@ class InvestigationWorkflow:
         )
         user_msg = (
             f"ORIGINAL QUERY: {state['query']}\n\n"
+            f"ANSWER GOAL: {state.get('answer_goal', state['query'])}\n"
+            f"ANSWER TYPE: {state.get('answer_type', 'SUMMARY')}\n"
+            f"QUERY INTENT: {state.get('query_intent', 'GENERAL')}\n"
+            f"ACTIVE AGENTS: {', '.join(active_agents) or 'none'}\n\n"
             f"{graph_kb_section}"
             f"GRAPH ANALYSIS:\n{state.get('graph_analysis', '')[:550]}\n\n"
             f"INCIDENT ANALYSIS:\n{state.get('incident_analysis', '')[:550]}\n\n"
@@ -793,17 +929,20 @@ class InvestigationWorkflow:
 
     def _route_after_query_analyze(self, state: InvestigationState) -> list[str]:
         """
-        Route after query_analyzer — classify node is gone.
-        Graph match or any retrieval need → shared_retrieve.
-        Pure conversational (no match, NO_RETRIEVAL) → synthesize directly.
+        Route after query_analyzer.
+        Direct-answer routes (GRAPH_SUFFICIENT or conversational NO_RETRIEVAL)
+        go straight to synthesize. Only RETRIEVE_MORE goes through shared_retrieve.
         """
-        if state.get("has_graph_match") or state.get("decision") != "direct":
+        if state.get("decision") != "direct":
             log.info(
-                "[route] query_analyzer → shared_retrieve (match=%s decision=%s)",
-                state.get("has_graph_match"), state.get("decision"),
+                "[route] query_analyzer → shared_retrieve (routing=%s decision=%s)",
+                state.get("llm_routing"), state.get("decision"),
             )
             return ["shared_retrieve"]
-        log.info("[route] query_analyzer → synthesize (conversational, no graph match)")
+        log.info(
+            "[route] query_analyzer → synthesize (routing=%s decision=%s)",
+            state.get("llm_routing"), state.get("decision"),
+        )
         return ["synthesize"]
 
     def _route_after_evaluate(self, state: InvestigationState) -> list[str]:
@@ -840,8 +979,8 @@ class InvestigationWorkflow:
         wf.add_node("incident_agent",  self._incident_agent)
         wf.add_node("risk_agent",      self._risk_agent)
         wf.add_node("synthesize",      self._synthesize)
+        wf.add_node("context_agent",   self._context_agent)
 
-        # query_analyzer runs first, routes directly — no classify node
         wf.add_edge(START, "query_analyzer")
         wf.add_conditional_edges(
             "query_analyzer",
@@ -862,24 +1001,36 @@ class InvestigationWorkflow:
         wf.add_edge("graph_agent",    "synthesize")
         wf.add_edge("incident_agent", "synthesize")
         wf.add_edge("risk_agent",     "synthesize")
-        wf.add_edge("synthesize", END)
+        wf.add_edge("synthesize", "context_agent")
+        wf.add_edge("context_agent", END)
 
         return wf.compile()
 
     # -- Public streaming interface --------------------------------------------
 
-    async def stream(self, query: str, history: list[dict] | None = None) -> AsyncIterator[dict]:
+    async def stream(
+        self,
+        query: str,
+        history: list[dict] | None = None,
+        conversation_context: str = "",
+    ) -> AsyncIterator[dict]:
         """Execute the investigation and yield SSE-ready event dicts."""
         initial: InvestigationState = {
-            "query":               query,
-            "history":             history or [],
-            # query_analyzer fields (populated by first node)
-            "query_intent":        "GENERAL",
-            "query_entities":      [],
-            "graph_insights":      "",
-            "has_graph_match":     False,
+            "query":                query,
+            "history":              history or [],
+            # persisted session context supplied by the caller
+            "conversation_context": conversation_context or "",
+            # query_analyzer fields (populated by second node)
+            "answer_goal":          query,
+            "answer_type":          "SUMMARY",
+            "query_intent":         "GENERAL",
+            "query_entities":       [],
+            "recommended_agents":   [],
+            "graph_insights":       "",
+            "has_graph_match":      False,
+            "llm_routing":          "RETRIEVE_MORE",
             # retrieval
-            "shared_ctx":          None,
+            "shared_ctx":           None,
             "retrieved_context":   "",
             "entities":            {},
             "sources":             [],
@@ -932,6 +1083,11 @@ class InvestigationWorkflow:
                         "report": node_output["report"],
                     }}
 
+                if node_name == "context_agent" and node_output.get("conversation_context") is not None:
+                    yield {"type": "session-context-updated", "data": {
+                        "conversation_context": node_output.get("conversation_context", ""),
+                    }}
+
 
 # -- Helper functions ---------------------------------------------------------
 
@@ -971,6 +1127,41 @@ def _parse_json(raw: str) -> dict:
     except json.JSONDecodeError:
         log.warning("[parse_json] could not parse JSON response")
         return {}
+
+
+def _inject_context_documents(
+    ctx: SharedInvestigationContext,
+    docs: list[dict[str, Any]],
+    section_name: str,
+) -> SharedInvestigationContext:
+    existing_ids = {str(doc.get("id", "")) for doc in ctx.retrieved_documents}
+    fresh_docs = [doc for doc in docs if str(doc.get("id", "")) not in existing_ids]
+    if not fresh_docs:
+        return ctx
+
+    ctx.retrieved_documents = fresh_docs + ctx.retrieved_documents
+
+    section_lines = [f"=== {section_name} EVIDENCE ==="]
+    fresh_sources: list[dict[str, Any]] = []
+    for idx, doc in enumerate(fresh_docs, 1):
+        section_lines.append(f"[{section_name} #{idx}] {doc.get('content', '')}")
+        fresh_sources.append({
+            "rank": idx,
+            "id": doc.get("id", ""),
+            "source": doc.get("source", ""),
+            "collection": doc.get("collection", ""),
+            "rrf_score": round(float(doc.get("rrf_score", 1.0)), 4),
+        })
+    section_lines.append(f"=== END {section_name} EVIDENCE ===")
+
+    block = "\n\n".join(section_lines)
+    if ctx.formatted_context and ctx.formatted_context != "No relevant context found.":
+        ctx.formatted_context = f"{block}\n\n{ctx.formatted_context}"
+    else:
+        ctx.formatted_context = block
+
+    ctx.sources = fresh_sources + ctx.sources
+    return ctx
 
 
 # -- Module singleton ---------------------------------------------------------

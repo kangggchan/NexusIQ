@@ -96,8 +96,16 @@ class SharedInvestigationContext:
         base = self.formatted_context
 
         if agent == "graph":
-            # Graph agent: service topology + graph neighbors
-            parts = [base[:max_chars]]
+            # Graph agent: graph-derived evidence only, plus topology expansions.
+            graph_docs = [
+                str(doc.get("content", ""))
+                for doc in self.retrieved_documents
+                if doc.get("source") in {"graph", "workforce"} and doc.get("content")
+            ]
+            if graph_docs:
+                parts = ["[GRAPH RESULTS]\n" + "\n\n".join(graph_docs[:6])]
+            else:
+                parts = [base[:max_chars]]
             if self.graph_neighbors or self.expanded_graph:
                 neighbors = {**self.graph_neighbors, **self.expanded_graph}
                 neighbor_text = "\n".join(

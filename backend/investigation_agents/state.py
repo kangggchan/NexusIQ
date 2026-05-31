@@ -53,15 +53,25 @@ class InvestigationReport(BaseModel):
 class InvestigationState(TypedDict):
     # ── Input ─────────────────────────────────────────────────────────────────
     query: str
-    # Prior turns: list of {"role": "user"|"assistant", "content": str}
+    # Recent session turns from the client. Used for compaction backfill after
+    # synthesis; query analysis reads the persisted conversation_context instead.
     history: list[dict]
 
+    # ── Session context (provided by caller, refreshed by context_agent post-synthesis) ──
+    # Compact XML <context> block with <entities>, <facts>, and <summary> tags.
+    # This represents the accumulated session context from previous turns.
+    conversation_context: str
+
     # ── Query analyzer outputs (set by query_analyzer node — runs first) ──────
-    # qwen2.5:1.5b reads from shared GraphCache (same Neo4j data as visualization)
+    # qwen2.5:7b reads from shared GraphCache (same Neo4j data as visualization)
+    answer_goal: str           # one-sentence description of the exact answer needed
+    answer_type: str           # "PEOPLE" | "PROFILE" | "STATUS" | "DEPENDENCY" | "INCIDENT" | "RISK" | "PERFORMANCE" | "SUMMARY" | "GENERAL"
     query_intent: str          # "TOPOLOGY" | "INCIDENT" | "RISK" | "PERFORMANCE" | "GENERAL"
     query_entities: list[str]  # entity names found in the Neo4j graph cache
+    recommended_agents: list[str]  # LLM-selected subset of ["graph", "incident", "risk"]
     graph_insights: str        # insights from the Neo4j graph cache lookup
     has_graph_match: bool      # True if the cache had relevant entities
+    llm_routing: str           # "GRAPH_SUFFICIENT" | "RETRIEVE_MORE" | "NO_RETRIEVAL"
 
     # ── Shared investigation context (set by shared_retrieve node) ───────────
     # SharedInvestigationContext object — reused by all agents (no re-retrieval)

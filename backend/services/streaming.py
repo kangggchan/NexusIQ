@@ -2,8 +2,8 @@
 SSE streaming helpers for FastAPI.
 
 Converts async generators into properly formatted Server-Sent Events streams
-that are compatible with the EventSource API and the existing Next.js
-`app/api/chat/stream` SSE consumer format.
+that are compatible with the EventSource API and the current frontend
+SSE consumer format.
 """
 from __future__ import annotations
 

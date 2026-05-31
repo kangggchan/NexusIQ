@@ -107,7 +107,7 @@ async def chat_pipeline(body: PipelineRequest, request: Request):
       4. Orchestrator  – synthesize into final answer
     
     Each agent step emits separate step-start / answer-chunk / step-end events
-    so the frontend AgentActivity component can animate each stage.
+        so the frontend can animate and render progress for each stage.
     """
     registry: dict = request.app.state.agent_registry
     question = body.question

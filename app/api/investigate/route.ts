@@ -17,7 +17,11 @@ export async function POST(req: NextRequest) {
     upstream = await fetch(`${BACKEND}/investigation/run`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ query: body.query, history: body.history ?? [] }),
+      body: JSON.stringify({
+        query: body.query,
+        history: body.history ?? [],
+        session_context: typeof body.sessionContext === 'string' ? body.sessionContext : '',
+      }),
     });
   } catch {
     return new Response(

@@ -381,38 +381,50 @@ async def _ingest_meeting_notes(session) -> int:
 # ── Relationship ingestor ─────────────────────────────────────────────────────
 
 async def _ingest_relationships(session) -> int:
-    """Process graph_relationships.json for EMPLOYEE_OWNS_SERVICE and SERVICE_DEPENDS_ON."""
-    data = _load("graph_relationships.json")
-    rels = data.get("relationships", [])
+    """
+    Derive and create graph relationships directly from services.json:
+      - Service -[:OWNED_BY]->  Employee   (via service.owner_employee_id)
+      - Service -[:DEPENDS_ON]-> Service   (via service.dependencies[])
+    No separate graph_relationships.json file is required.
+    """
+    data = _load("services.json")
+    services = data.get("services", [])
     count = 0
-    for rel in rels:
-        rel_type = rel.get("type")
-        from_id = rel.get("from", "")
-        to_id = rel.get("to", "")
 
-        if rel_type == "EMPLOYEE_OWNS_SERVICE":
+    for svc in services:
+        svc_name = svc.get("name", "")
+        if not svc_name:
+            continue
+
+        # OWNED_BY: service → employee
+        owner_id = svc.get("owner_employee_id", "")
+        if owner_id:
             await session.run(
                 """
                 MATCH (s:Service {name: $svc})
                 MATCH (e:Employee {employee_id: $emp})
                 MERGE (s)-[:OWNED_BY]->(e)
                 """,
-                svc=to_id,
-                emp=from_id,
+                svc=svc_name,
+                emp=owner_id,
             )
             count += 1
-        elif rel_type == "SERVICE_DEPENDS_ON":
-            await session.run(
-                """
-                MATCH (a:Service {name: $from})
-                MATCH (b:Service {name: $to})
-                MERGE (a)-[:DEPENDS_ON]->(b)
-                """,
-                from_=from_id,
-                to=to_id,
-            )
-            count += 1
-    log.info("  ✓ %d graph relationships", count)
+
+        # DEPENDS_ON: service → service
+        for dep_name in svc.get("dependencies", []):
+            if dep_name:
+                await session.run(
+                    """
+                    MATCH (a:Service {name: $from_svc})
+                    MATCH (b:Service {name: $to_svc})
+                    MERGE (a)-[:DEPENDS_ON]->(b)
+                    """,
+                    from_svc=svc_name,
+                    to_svc=dep_name,
+                )
+                count += 1
+
+    log.info("  ✓ %d graph relationships (ownership + dependencies)", count)
     return count
 
 

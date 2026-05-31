@@ -2,11 +2,11 @@
 
 import React, { useState, useMemo, useEffect, useCallback, useRef } from 'react';
 import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { X, Search, Activity, Zap, AlertTriangle } from 'lucide-react';
+import { X, Search, Activity, Zap, AlertTriangle, ChevronLeft, ChevronRight } from 'lucide-react';
+import { type ImperativePanelHandle } from 'react-resizable-panels';
 import GraphVisualizer from '@/components/GraphVisualizer';
-import InvestigationChat from '@/components/nexusiq/InvestigationChat';
-import AgentActivity from '@/components/nexusiq/AgentActivity';
+import InvestigationChat, { type InvestigationChatMessage } from '@/components/nexusiq/InvestigationChat';
+import SessionHistoryPanel from '@/components/nexusiq/SessionHistoryPanel';
 import IncidentTimeline from '@/components/nexusiq/IncidentTimeline';
 import ContextExplorer from '@/components/nexusiq/ContextExplorer';
 import ServiceInspector from '@/components/nexusiq/ServiceInspector';
@@ -15,6 +15,18 @@ import { Badge } from '@/components/ui/badge';
 import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from '@/components/ui/resizable';
 import { type Entity, type Relationship, type Community, type GraphData } from '../lib/graphData';
 import { ForceSimulation3D, GraphLayout, Node3D, defaultForceConfig } from '../lib/forceSimulation';
+import {
+  type SessionMeta,
+  createSession,
+  deleteSession,
+  getActiveSessionId,
+  getAllSessions,
+  getSessionContext,
+  getSessionMessages,
+  saveSessionContext,
+  saveSessionMessages,
+  setActiveSessionId,
+} from '@/lib/chatSessionStore';
 
 export default function Home() {
   // ─── Graph state ────────────────────────────────────────────────────────
@@ -29,15 +41,23 @@ export default function Home() {
   const [minRelationshipWeight] = useState<number>(1);
 
   // ─── NexusIQ UI state ───────────────────────────────────────────────────
-  const [leftTab, setLeftTab] = useState<'chat' | 'agents'>('chat');
+  const [leftTab, setLeftTab] = useState<'chat' | 'history'>('chat');
   const [rightTab, setRightTab] = useState<'timeline' | 'context' | 'inspector'>('timeline');
   const [highlightedServiceNames, setHighlightedServiceNames] = useState<string[]>([]);
   const [focusedIncidentId, setFocusedIncidentId] = useState<string | null>(null);
   const [contextQuery, setContextQuery] = useState<string>('');
-  const [queryCount, setQueryCount] = useState<number>(0);
   const [nodeCount, setNodeCount] = useState<number>(0);
+  const [sessionId, setSessionId] = useState<string>('');
+  const [sessions, setSessions] = useState<SessionMeta[]>([]);
+  const [messages, setMessages] = useState<InvestigationChatMessage[]>([]);
+  const [sessionContext, setSessionContext] = useState<string>('');
+  const [sessionStoreHydrated, setSessionStoreHydrated] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const [isRightPanelCollapsed, setRightPanelCollapsed] = useState(false);
 
   const searchInputRef = useRef<HTMLInputElement>(null);
+  const abortRef = useRef<AbortController | null>(null);
+  const rightPanelRef = useRef<ImperativePanelHandle | null>(null);
 
   // ─── Load NexusIQ graph data ─────────────────────────────────────────────
   useEffect(() => {
@@ -80,6 +100,27 @@ export default function Home() {
     };
     load();
   }, []);
+
+  useEffect(() => {
+    const active = getActiveSessionId();
+    const id = active ?? createSession().id;
+    setSessionId(id);
+    setSessions(getAllSessions());
+    setMessages((getSessionMessages(id) as InvestigationChatMessage[]) ?? []);
+    setSessionContext(getSessionContext(id));
+    setSessionStoreHydrated(true);
+  }, []);
+
+  useEffect(() => {
+    if (!sessionStoreHydrated || !sessionId) return;
+    saveSessionMessages(sessionId, messages as Parameters<typeof saveSessionMessages>[1]);
+    setSessions(getAllSessions());
+  }, [messages, sessionId, sessionStoreHydrated]);
+
+  useEffect(() => {
+    if (!sessionStoreHydrated || !sessionId) return;
+    saveSessionContext(sessionId, sessionContext);
+  }, [sessionContext, sessionId, sessionStoreHydrated]);
 
   // ─── Keyboard shortcuts ──────────────────────────────────────────────────
   useEffect(() => {
@@ -132,19 +173,39 @@ export default function Home() {
   // ─── Derived: connected node IDs for selected node (after filteredLayout) ───
   const connectedNodeIds = useMemo(() => {
     if (!selectedNode || !filteredLayout) return new Set<string>()
-    const ids = new Set<string>()
-    filteredLayout.links.forEach(l => {
-      if (l.source.id === selectedNode.id) ids.add(l.target.id)
-      if (l.target.id === selectedNode.id) ids.add(l.source.id)
-    })
-    return ids
+    const visitedIds = new Set<string>([selectedNode.id])
+    let frontierIds = new Set<string>([selectedNode.id])
+
+    for (let depth = 0; depth < 2; depth += 1) {
+      const nextFrontierIds = new Set<string>()
+
+      frontierIds.forEach(nodeId => {
+        filteredLayout.links.forEach(link => {
+          const sourceId = link.source.id
+          const targetId = link.target.id
+          if (sourceId !== nodeId && targetId !== nodeId) return
+
+          const neighbourId = sourceId === nodeId ? targetId : sourceId
+          if (!visitedIds.has(neighbourId)) {
+            visitedIds.add(neighbourId)
+            nextFrontierIds.add(neighbourId)
+          }
+        })
+      })
+
+      frontierIds = nextFrontierIds
+      if (frontierIds.size === 0) break
+    }
+
+    visitedIds.delete(selectedNode.id)
+    return visitedIds
   }, [selectedNode, filteredLayout])
 
   // Only highlight connected neighbours when a node is selected; no persistent highlights otherwise
   const activeHighlightedNodeIds = useMemo(() => {
     if (selectedNode) return connectedNodeIds
-    return new Set<string>()
-  }, [selectedNode, connectedNodeIds])
+    return ragHighlightedNodeIds
+  }, [selectedNode, connectedNodeIds, ragHighlightedNodeIds])
 
   // ─── Connected links for inspector ───────────────────────────────────────
   const connectedLinks = useMemo(() => {
@@ -157,7 +218,6 @@ export default function Home() {
   // ─── Handlers ────────────────────────────────────────────────────────────
   const handleHighlightServices = useCallback((names: string[]) => {
     setHighlightedServiceNames(names);
-    setQueryCount(c => c + 1); // trigger agent activity
   }, []);
 
   const handleSelectIncident = useCallback((id: string) => {
@@ -175,8 +235,78 @@ export default function Home() {
     // The chat panel will pick up the query via the starter question mechanism
     // We dispatch a custom event that InvestigationChat can listen to
     window.dispatchEvent(new CustomEvent('nexusiq:investigate', { detail: { query } }));
-    setQueryCount(c => c + 1);
   }, []);
+
+  const toggleRightPanel = useCallback(() => {
+    const panel = rightPanelRef.current;
+    if (!panel) return;
+
+    if (panel.isCollapsed()) {
+      panel.expand();
+      return;
+    }
+
+    panel.collapse();
+  }, []);
+
+  const startNewSession = useCallback((openChat = true) => {
+    if (busy) {
+      abortRef.current?.abort();
+      setBusy(false);
+    }
+    const meta = createSession();
+    setSessionId(meta.id);
+    setMessages([]);
+    setSessionContext('');
+    setSessions(getAllSessions());
+    setHighlightedServiceNames([]);
+    setFocusedIncidentId(null);
+    if (openChat) {
+      setLeftTab('chat');
+    }
+  }, [busy]);
+
+  const switchSession = useCallback((id: string, openChat = true) => {
+    if (id === sessionId) {
+      if (openChat) {
+        setLeftTab('chat');
+      }
+      return;
+    }
+    if (busy) {
+      abortRef.current?.abort();
+      setBusy(false);
+    }
+    setActiveSessionId(id);
+    setSessionId(id);
+    setMessages((getSessionMessages(id) as InvestigationChatMessage[]) ?? []);
+    setSessionContext(getSessionContext(id));
+    setSessions(getAllSessions());
+    setHighlightedServiceNames([]);
+    setFocusedIncidentId(null);
+    if (openChat) {
+      setLeftTab('chat');
+    }
+  }, [busy, sessionId]);
+
+  const removeSession = useCallback((id: string) => {
+    deleteSession(id);
+    const remaining = getAllSessions();
+    setSessions(remaining);
+    setHighlightedServiceNames([]);
+    setFocusedIncidentId(null);
+
+    if (id !== sessionId) {
+      return;
+    }
+
+    if (remaining.length > 0) {
+      switchSession(remaining[0].id, false);
+      return;
+    }
+
+    startNewSession(false);
+  }, [sessionId, startNewSession, switchSession]);
 
   const visibleCommunities = useMemo(() => layout?.communities ?? [], [layout]);
 
@@ -256,28 +386,43 @@ export default function Home() {
       {/* ── Main 3-column layout ─────────────────────────────────────────── */}
       <ResizablePanelGroup direction="horizontal" className="flex-1 min-h-0 overflow-hidden">
 
-        {/* ── LEFT PANEL: Investigation Chat + Agents ── */}
-        <ResizablePanel defaultSize={25} minSize={15} maxSize={45}>
-          <div className="h-full border-r flex flex-col z-40">
+        {/* ── LEFT PANEL: Investigation Chat + History ── */}
+        <ResizablePanel defaultSize={25} minSize={10} maxSize={45}>
+          <div className="h-full min-w-0 border-r flex flex-col z-40">
           <div className="p-2 border-b shrink-0">
-            <Tabs value={leftTab} onValueChange={v => setLeftTab(v as 'chat' | 'agents')} className="w-full">
+            <Tabs value={leftTab} onValueChange={v => setLeftTab(v as 'chat' | 'history')} className="w-full">
               <TabsList className="grid grid-cols-2 w-full h-8">
                 <TabsTrigger value="chat" className="text-xs">Investigation</TabsTrigger>
-                <TabsTrigger value="agents" className="text-xs">Agents</TabsTrigger>
+                <TabsTrigger value="history" className="text-xs">History</TabsTrigger>
               </TabsList>
             </Tabs>
           </div>
-          <div className="flex-1 min-h-0 relative">
+          <div className="flex-1 min-h-0 min-w-0 relative">
             {/* Always mounted so SSE streams survive tab switches */}
-            <div className={leftTab === 'chat' ? 'h-full' : 'hidden'}>
+            <div className={leftTab === 'chat' ? 'h-full min-w-0' : 'hidden'}>
               <InvestigationChat
+                sessionId={sessionId}
+                messages={messages}
+                setMessages={setMessages}
+                sessionContext={sessionContext}
+                setSessionContext={setSessionContext}
+                busy={busy}
+                setBusy={setBusy}
+                abortRef={abortRef}
+                onStartNewSession={() => startNewSession(true)}
                 onHighlightServices={handleHighlightServices}
                 onQueryStart={() => setHighlightedServiceNames([])}
                 focusedIncidentId={focusedIncidentId}
               />
             </div>
-            {leftTab === 'agents' && (
-              <AgentActivity queryCount={queryCount} />
+            {leftTab === 'history' && (
+              <SessionHistoryPanel
+                sessions={sessions}
+                activeSessionId={sessionId}
+                onSelectSession={id => switchSession(id, true)}
+                onStartNewSession={() => startNewSession(true)}
+                onDeleteSession={removeSession}
+              />
             )}
           </div>
           </div>
@@ -288,7 +433,7 @@ export default function Home() {
 
         {/* ── CENTER: 3D Service Dependency Graph ── */}
         <ResizablePanel defaultSize={50} minSize={25}>
-          <div className="h-full relative z-0">
+          <div className="h-full min-w-0 relative z-0">
           <GraphVisualizer
             layout={filteredLayout}
             loading={loading}
@@ -309,6 +454,17 @@ export default function Home() {
             hoveredNode={hoveredNode}
           />
 
+          {isRightPanelCollapsed && (
+            <button
+              onClick={toggleRightPanel}
+              className="absolute top-4 right-4 z-20 flex items-center gap-1.5 rounded-md border border-border/60 bg-background/85 px-3 py-1.5 text-xs text-muted-foreground shadow-sm backdrop-blur-sm transition-colors hover:border-cyan-500/40 hover:text-foreground"
+              title="Open right sidebar"
+            >
+              <ChevronLeft className="h-3.5 w-3.5" />
+              <span>Open panel</span>
+            </button>
+          )}
+
           {/* Graph legend overlay */}
           <div className="absolute bottom-4 left-4 z-10 flex items-center gap-3 bg-background/80 backdrop-blur-sm border border-border/40 rounded-md px-3 py-2">
             <span className="text-xs text-muted-foreground font-medium">Legend</span>
@@ -325,21 +481,39 @@ export default function Home() {
 
         </ResizablePanel>
 
-        <ResizableHandle withHandle />
+        <ResizableHandle withHandle={!isRightPanelCollapsed} disabled={isRightPanelCollapsed} className={isRightPanelCollapsed ? 'pointer-events-none opacity-0' : undefined} />
 
         {/* ── RIGHT PANEL: Timeline + Context + Inspector ── */}
-        <ResizablePanel defaultSize={25} minSize={15} maxSize={45}>
-          <div className="h-full border-l flex flex-col z-40">
+        <ResizablePanel
+          ref={rightPanelRef}
+          defaultSize={25}
+          minSize={15}
+          maxSize={45}
+          collapsible
+          collapsedSize={0}
+          onCollapse={() => setRightPanelCollapsed(true)}
+          onExpand={() => setRightPanelCollapsed(false)}
+        >
+          <div className="h-full min-w-0 border-l flex flex-col z-40 overflow-hidden">
           <div className="p-2 border-b shrink-0">
-            <Tabs value={rightTab} onValueChange={v => setRightTab(v as 'timeline' | 'context' | 'inspector')} className="w-full">
+            <div className="flex items-center gap-2">
+              <Tabs value={rightTab} onValueChange={v => setRightTab(v as 'timeline' | 'context' | 'inspector')} className="min-w-0 flex-1">
               <TabsList className="grid grid-cols-3 w-full h-8">
                 <TabsTrigger value="timeline" className="text-xs">Timeline</TabsTrigger>
                 <TabsTrigger value="context" className="text-xs">Context</TabsTrigger>
                 <TabsTrigger value="inspector" className="text-xs">Inspector</TabsTrigger>
               </TabsList>
             </Tabs>
+              <button
+                onClick={toggleRightPanel}
+                className="shrink-0 rounded-md border border-border/60 p-1.5 text-muted-foreground transition-colors hover:border-cyan-500/40 hover:text-foreground"
+                title="Hide right sidebar"
+              >
+                <ChevronRight className="h-3.5 w-3.5" />
+              </button>
+            </div>
           </div>
-          <div className="flex-1 min-h-0">
+          <div className="flex-1 min-h-0 min-w-0">
             {rightTab === 'timeline' && (
               <IncidentTimeline
                 onSelectIncident={handleSelectIncident}
