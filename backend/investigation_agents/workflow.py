@@ -83,10 +83,11 @@ AGENT_MODELS: dict[str, str] = {
 
 # Token budgets
 _FAST_SYNTHESIZE_TOKENS = 900     # DIRECT_RESPONSE path (conversational)
-_AGENT_TOKENS           = 600    # per specialist agent
-_PLAN_TOKENS            = 400    # orchestrator plan
-_SYNTHESIZE_TOKENS      = 2000   # final synthesis — needs room for full narrative
-_AGENT_CONTEXT_CHARS    = 2500   # context slice per agent
+_QUERY_ANALYZER_TOKENS  = 220    # query analysis structure extraction
+_AGENT_TOKENS           = 400    # per specialist agent
+_PLAN_TOKENS            = 320    # orchestrator plan
+_SYNTHESIZE_TOKENS      = 900    # final synthesis
+_AGENT_CONTEXT_CHARS    = 1400   # context slice per agent
 
 _FAST_SYSTEM_PROMPT = (
     "You are a NexusIQ answer agent. Answer the user's exact question directly "
@@ -312,7 +313,7 @@ class InvestigationWorkflow:
                 QUERY_ANALYZER_PROMPT,
                 user_msg,
                 timeout=60.0,
-                num_predict=400,
+                num_predict=_QUERY_ANALYZER_TOKENS,
                 temperature=0.0,
             )
 

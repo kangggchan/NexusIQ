@@ -11,6 +11,7 @@ import IncidentTimeline from '@/components/nexusiq/IncidentTimeline';
 import ContextExplorer from '@/components/nexusiq/ContextExplorer';
 import ServiceInspector from '@/components/nexusiq/ServiceInspector';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Switch } from '@/components/ui/switch';
 import { Badge } from '@/components/ui/badge';
 import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from '@/components/ui/resizable';
 import { type Entity, type Relationship, type Community, type GraphData } from '../lib/graphData';
@@ -39,6 +40,7 @@ export default function Home() {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [selectedEntityTypes] = useState<Set<string>>(new Set());
   const [minRelationshipWeight] = useState<number>(1);
+  const [showAllRelationships, setShowAllRelationships] = useState<boolean>(true);
 
   // ─── NexusIQ UI state ───────────────────────────────────────────────────
   const [leftTab, setLeftTab] = useState<'chat' | 'history'>('chat');
@@ -173,32 +175,16 @@ export default function Home() {
   // ─── Derived: connected node IDs for selected node (after filteredLayout) ───
   const connectedNodeIds = useMemo(() => {
     if (!selectedNode || !filteredLayout) return new Set<string>()
-    const visitedIds = new Set<string>([selectedNode.id])
-    let frontierIds = new Set<string>([selectedNode.id])
+    const neighborIds = new Set<string>()
 
-    for (let depth = 0; depth < 2; depth += 1) {
-      const nextFrontierIds = new Set<string>()
+    filteredLayout.links.forEach(link => {
+      const sourceId = link.source.id
+      const targetId = link.target.id
+      if (sourceId !== selectedNode.id && targetId !== selectedNode.id) return
+      neighborIds.add(sourceId === selectedNode.id ? targetId : sourceId)
+    })
 
-      frontierIds.forEach(nodeId => {
-        filteredLayout.links.forEach(link => {
-          const sourceId = link.source.id
-          const targetId = link.target.id
-          if (sourceId !== nodeId && targetId !== nodeId) return
-
-          const neighbourId = sourceId === nodeId ? targetId : sourceId
-          if (!visitedIds.has(neighbourId)) {
-            visitedIds.add(neighbourId)
-            nextFrontierIds.add(neighbourId)
-          }
-        })
-      })
-
-      frontierIds = nextFrontierIds
-      if (frontierIds.size === 0) break
-    }
-
-    visitedIds.delete(selectedNode.id)
-    return visitedIds
+    return neighborIds
   }, [selectedNode, filteredLayout])
 
   // Only highlight connected neighbours when a node is selected; no persistent highlights otherwise
@@ -452,6 +438,7 @@ export default function Home() {
             searchTerm={searchTerm}
             onNodeHover={setHoveredNode}
             hoveredNode={hoveredNode}
+            showAllRelationships={showAllRelationships}
           />
 
           {isRightPanelCollapsed && (
@@ -476,6 +463,15 @@ export default function Home() {
               <span className="w-2.5 h-2.5 rounded-full bg-[#a855f7]" />
               <span className="text-xs text-muted-foreground">Employee</span>
             </div>
+          </div>
+
+          <div className="absolute bottom-4 right-4 z-10 flex items-center gap-2 bg-background/80 backdrop-blur-sm border border-border/40 rounded-md px-3 py-2">
+            <span className="text-xs text-muted-foreground">Show all relationships</span>
+            <Switch
+              checked={showAllRelationships}
+              onCheckedChange={setShowAllRelationships}
+              aria-label="Toggle all relationships visibility"
+            />
           </div>
           </div>
 

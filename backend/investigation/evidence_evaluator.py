@@ -25,6 +25,25 @@ from backend.investigation.shared_context import SharedInvestigationContext, Sig
 log = logging.getLogger(__name__)
 
 
+def _primary_agent_for_intent(intent: str, agents: list[str]) -> str | None:
+    """Choose the most relevant specialist for the detected intent."""
+    if not agents:
+        return None
+    preferred_by_intent = {
+        "RISK": "risk",
+        "INCIDENT": "incident",
+        "TOPOLOGY": "graph",
+        "PERFORMANCE": "risk",
+    }
+    preferred = preferred_by_intent.get(intent)
+    if preferred in agents:
+        return preferred
+    for candidate in ("risk", "incident", "graph"):
+        if candidate in agents:
+            return candidate
+    return agents[0]
+
+
 class EvidenceDecision(str, Enum):
     DIRECT_RESPONSE = "DIRECT_RESPONSE"
     PARTIAL         = "PARTIAL"
@@ -133,14 +152,32 @@ class EvidenceEvaluator:
                 reasoning=f"LLM requested full multi-agent analysis — agents={agents}",
             )
 
+        selected_agents = agents
+        reasoning_suffix = ""
+
+        # High-confidence retrieval usually needs one specialist only.
+        if signal.signal_strength == SignalStrength.HIGH and len(agents) > 1:
+            primary = _primary_agent_for_intent(intent, agents)
+            selected_agents = [primary] if primary else agents[:1]
+
+            # For risk questions with no incident evidence yet, keep incident as fallback.
+            if primary == "risk" and "incident" in agents and len(ctx.incidents) == 0:
+                selected_agents = ["risk", "incident"]
+                reasoning_suffix = " + incident fallback enabled (no incident evidence found)"
+            else:
+                reasoning_suffix = " (high-signal partial path: primary specialist only)"
+
         return EvaluationResult(
             decision=EvidenceDecision.PARTIAL,
-            recommended_agents=agents,
-            needs_graph_expansion="graph" in agents,
-            needs_incident_expansion="incident" in agents,
-            needs_risk_expansion="risk" in agents,
+            recommended_agents=selected_agents,
+            needs_graph_expansion="graph" in selected_agents,
+            needs_incident_expansion="incident" in selected_agents,
+            needs_risk_expansion="risk" in selected_agents,
             confidence=signal.evidence_density,
-            reasoning=f"LLM-recommended targeted analysis — intent={intent} agents={agents}",
+            reasoning=(
+                f"LLM-recommended targeted analysis — intent={intent} "
+                f"agents={selected_agents}{reasoning_suffix}"
+            ),
         )
 
 

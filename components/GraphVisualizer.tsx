@@ -2,7 +2,7 @@
 
 import React, { useRef, useState, useEffect, useMemo } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { OrbitControls, Text, Sphere, Line } from '@react-three/drei';
+import { OrbitControls, Text, Sphere } from '@react-three/drei';
 import * as THREE from 'three';
 import { Node3D, Link3D, GraphLayout, calculateLinkThickness } from '../lib/forceSimulation';
 import { Community } from '../lib/graphData';
@@ -124,65 +124,8 @@ function Node({ node, isSelected, isHighlighted, isInHierarchy, communityMode, h
   );
 }
 
-interface LinkProps {
-  link: Link3D;
-  isHighlighted: boolean;
-  communityMode: 'off' | 'auto' | 'all';
-  nodesInHierarchy: Set<string>;
-  hasSelectedNode: boolean;
-}
-
-const DEFAULT_LINK_COLOR = '#8c959f';
-
-function Link({ link, isHighlighted, communityMode, nodesInHierarchy, hasSelectedNode }: LinkProps) {
-  // Use refs to avoid creating new Vector3 objects unnecessarily
-  const sourcePoint = useRef(new THREE.Vector3());
-  const targetPoint = useRef(new THREE.Vector3());
-  
-  const points = useMemo(() => {
-    // Reuse existing Vector3 objects and update their values
-    sourcePoint.current.set(link.source.x, link.source.y, link.source.z);
-    targetPoint.current.set(link.target.x, link.target.y, link.target.z);
-    return [sourcePoint.current, targetPoint.current];
-  }, [link.source.x, link.source.y, link.source.z, link.target.x, link.target.y, link.target.z]);
-
-  // Pre-calculate thickness once per weight change
-  const thickness = useMemo(() => calculateLinkThickness(link.weight), [link.weight]);
-  const baseLineWidth = useMemo(() => Math.max(0.9, thickness), [thickness]);
-
-  // Memoize opacity calculation to avoid repeated conditional logic
-  const opacity = useMemo(() => {
-    if (isHighlighted) return 0.98;
-    
-    if (hasSelectedNode && communityMode === 'auto') {
-      const sourceInHierarchy = nodesInHierarchy.has(link.source.id);
-      const targetInHierarchy = nodesInHierarchy.has(link.target.id);
-      
-      // In isolator mode: make edges outside hierarchy transparent like nodes
-      if (!sourceInHierarchy || !targetInHierarchy) return 0.25; // Same transparency as nodes
-      
-      // Both nodes in hierarchy - normal visibility
-      return 0.9;
-    }
-    return 0.9;
-  }, [isHighlighted, hasSelectedNode, communityMode, nodesInHierarchy, link.source.id, link.target.id]);
-
-  return (
-    <Line
-      points={points}
-      color={isHighlighted ? "#ffffff" : DEFAULT_LINK_COLOR}
-      lineWidth={isHighlighted ? Math.max(baseLineWidth * 1.8, thickness * 2) : baseLineWidth}
-      transparent
-      opacity={opacity}
-      onUpdate={(m: THREE.Object3D) => {
-        if (m && m.layers) m.layers.disable(BLOOM_SCENE);
-      }}
-    />
-  );
-}
-
-// Animated energy tube for "hero" edges
-function EnergyEdge({ link }: { link: Link3D }) {
+// Animated energy tube for relationship links
+function EnergyEdge({ link, thicknessBoost = 0 }: { link: Link3D; thicknessBoost?: number }) {
   const meshRef = useRef<THREE.Mesh>(null);
   
   // Reuse Vector3 objects for curve points
@@ -197,7 +140,10 @@ function EnergyEdge({ link }: { link: Link3D }) {
 
   // Reduce geometry complexity for better performance
   const tubularSegments = 32; // Reduced from 64
-  const radius = useMemo(() => Math.max(0.06, calculateLinkThickness(link.weight) * 0.2), [link.weight]);
+  const radius = useMemo(
+    () => Math.max(0.06, (calculateLinkThickness(link.weight) + thicknessBoost) * 0.2),
+    [link.weight, thicknessBoost]
+  );
   const radialSegments = 6; // Reduced from 8  
   const closed = false;
 
@@ -391,6 +337,7 @@ interface GraphVisualizerProps {
   searchTerm?: string;
   onNodeHover?: (node: Node3D | null) => void;
   hoveredNode?: Node3D | null;
+  showAllRelationships?: boolean;
 }
 
 export default function GraphVisualizer({ 
@@ -411,11 +358,12 @@ export default function GraphVisualizer({
   searchTerm = '',
   onNodeHover,
   hoveredNode,
+  showAllRelationships = true,
 }: GraphVisualizerProps) {
   // All hooks must be called first, before any conditional returns
   const [autoOrbit, setAutoOrbit] = useState<boolean>(true);
   const [hasInteracted, setHasInteracted] = useState<boolean>(false);
-  const orbitControlsRef = useRef<{ target: THREE.Vector3; update: () => void } | null>(null);
+  const orbitControlsRef = useRef<React.ElementRef<typeof OrbitControls> | null>(null);
   
   // Shared materials for performance optimization
   const sharedNodeMaterial = useMemo(() => createSharedNodeMaterial(), []) as unknown as THREE.ShaderMaterial;
@@ -500,42 +448,17 @@ export default function GraphVisualizer({
     });
   }, [layout, filteredNodes, minRelationshipWeight]);
 
+  const visibleRelationshipLinks = useMemo(() => {
+    if (showAllRelationships) return filteredLinks;
+    if (!selectedNode) return [];
+
+    return filteredLinks.filter(link => (
+      link.source.id === selectedNode.id || link.target.id === selectedNode.id
+    ));
+  }, [filteredLinks, selectedNode, showAllRelationships]);
+
   // Compute a key for Canvas remount when filters change (no extra hooks).
   const canvasKeyStr = `types:${Array.from(selectedEntityTypes).sort().join(',')}|lvl:${selectedLevel ?? 'all'}|w:${minRelationshipWeight}|b:${showCommunityBoundaries ? 1 : 0}`
-
-  const highlightedLinks = useMemo(() => {
-    if (!selectedNode) return new Set<string>();
-
-    const visitedNodeIds = new Set<string>([selectedNode.id]);
-    let frontierNodeIds = new Set<string>([selectedNode.id]);
-    const linkIds = new Set<string>();
-
-    for (let depth = 0; depth < 2; depth += 1) {
-      const nextFrontierNodeIds = new Set<string>();
-
-      frontierNodeIds.forEach(nodeId => {
-        filteredLinks.forEach(link => {
-          const sourceId = link.source.id;
-          const targetId = link.target.id;
-
-          if (sourceId !== nodeId && targetId !== nodeId) return;
-
-          linkIds.add(link.id);
-
-          const neighbourId = sourceId === nodeId ? targetId : sourceId;
-          if (!visitedNodeIds.has(neighbourId)) {
-            visitedNodeIds.add(neighbourId);
-            nextFrontierNodeIds.add(neighbourId);
-          }
-        });
-      });
-
-      frontierNodeIds = nextFrontierNodeIds;
-      if (frontierNodeIds.size === 0) break;
-    }
-
-    return linkIds;
-  }, [filteredLinks, selectedNode]);
 
   // Calculate center and bounds of the knowledge graph
   const graphBounds = useMemo(() => {
@@ -776,30 +699,19 @@ export default function GraphVisualizer({
           );
         })}
 
-        {/* Render links with selective hero energy overlay */}
-        {filteredLinks.map(link => {
-          // Hide link if search is active and neither connected node matches
+        {/* Render links with the energy tube style */}
+        {visibleRelationshipLinks.map(link => {
+          // Preserve existing search behavior: a link is visible only when both endpoints match.
           const sourceVisible = !debouncedSearchTerm.trim() || searchMatchingNodes.has(link.source.id);
           const targetVisible = !debouncedSearchTerm.trim() || searchMatchingNodes.has(link.target.id);
           const isVisible = sourceVisible && targetVisible;
-          
-          // Check if energy edge should be shown in isolator mode
-          const sourceInHierarchy = nodesInHierarchy.has(link.source.id);
-          const targetInHierarchy = nodesInHierarchy.has(link.target.id);
-          const showEnergyEdge = highlightedLinks.has(link.id) && 
-            // In isolator mode, only show energy edges within hierarchy
-            (communityMode !== 'auto' || !selectedNode || (sourceInHierarchy && targetInHierarchy));
-          
+
           return (
             <group key={link.id} visible={isVisible}>
-              <Link
+              <EnergyEdge
                 link={link}
-                isHighlighted={highlightedLinks.has(link.id)}
-                communityMode={communityMode}
-                nodesInHierarchy={nodesInHierarchy}
-                hasSelectedNode={selectedNode !== null}
+                thicknessBoost={!showAllRelationships && selectedNode !== null ? 1 : 0}
               />
-              {showEnergyEdge && <EnergyEdge link={link} />}
             </group>
           );
         })}
@@ -882,7 +794,7 @@ function AutoOrbitController({
   hasInteracted: boolean;
   graphCenter: [number, number, number];
   graphSize: number;
-  orbitControlsRef: React.RefObject<{ target: THREE.Vector3; update: () => void } | null>;
+  orbitControlsRef: React.RefObject<React.ElementRef<typeof OrbitControls> | null>;
 }) {
   useFrame((state) => {
     if (autoOrbit && !hasInteracted && orbitControlsRef.current) {
