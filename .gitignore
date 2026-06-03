@@ -31,7 +31,7 @@ build/
 
 # Logs, caches, outputs
 logs/
-cache/
+#cache/
 output/
 archives/
 update_output/
