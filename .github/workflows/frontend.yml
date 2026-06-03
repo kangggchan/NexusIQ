@@ -45,13 +45,13 @@ jobs:
       - name: Build Frontend Image
         run: |
           docker build \
-            -t asia-northeast3-docker.pkg.dev/knudc-khang-buiphuoc/graphrag-repo/frontend:v1 {{ github.sha }} \
+            -t asia-northeast3-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE_NAME:${{ github.sha }} \
             ./frontend
 
       - name: Push Frontend Image
         run: |
           docker push \
-            asia-northeast3-docker.pkg.dev/knudc-khang-buiphuoc/graphrag-repo/frontend:v1 {{ github.sha }}
+            asia-northeast3-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE_NAME:${{ github.sha }}
 
       - name: Connect to GKE
         run: |
@@ -62,7 +62,7 @@ jobs:
       - name: Update Frontend Deployment
         run: |
           kubectl set image deployment/frontend \
-          frontend=asia-northeast3-docker.pkg.dev/knudc-khang-buiphuoc/graphrag-repo/frontend:v1 {{ github.sha }}
+          frontend=asia-northeast3-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE_NAME:${{ github.sha }}
 
       - name: Wait for Rollout
         run: |
