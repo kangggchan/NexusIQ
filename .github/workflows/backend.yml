@@ -46,13 +46,13 @@ jobs:
       - name: Build Backend Image
         run: |
           docker build \
-            -t asia-northeast3-docker.pkg.dev/knudc-khang-buiphuoc/graphrag-repo/backend:v1{{ github.sha }} \
+            -t asia-northeast3-docker.pkg.dev/knudc-khang-buiphuoc/graphrag-repo/backend:v1 {{ github.sha }} \
             ./backend
 
       - name: Push Backend Image
         run: |
           docker push \
-            asia-northeast3-docker.pkg.dev/knudc-khang-buiphuoc/graphrag-repo/backend:v1{{ github.sha }}
+            asia-northeast3-docker.pkg.dev/knudc-khang-buiphuoc/graphrag-repo/backend:v1 {{ github.sha }}
 
       - name: Connect to GKE
         run: |
@@ -63,7 +63,7 @@ jobs:
       - name: Update Backend Deployment
         run: |
           kubectl set image deployment/backend \
-          backend=asia-northeast3-docker.pkg.dev/knudc-khang-buiphuoc/graphrag-repo/backend:v1{{ github.sha }}
+          backend=asia-northeast3-docker.pkg.dev/knudc-khang-buiphuoc/graphrag-repo/backend:v1 {{ github.sha }}
 
       - name: Wait for Rollout
         run: |
