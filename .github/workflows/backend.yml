@@ -46,8 +46,9 @@ jobs:
       - name: Build Backend Image
         run: |
           docker build \
+            -f deploy/docker/backend/Dockerfile \
             -t asia-northeast3-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE_NAME:${{ github.sha }} \
-            ./backend
+            .
 
       - name: Push Backend Image
         run: |

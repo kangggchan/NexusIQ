@@ -45,8 +45,9 @@ jobs:
       - name: Build Frontend Image
         run: |
           docker build \
+            -f deploy/docker/frontend/Dockerfile \
             -t asia-northeast3-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE_NAME:${{ github.sha }} \
-            ./frontend
+            .
 
       - name: Push Frontend Image
         run: |
