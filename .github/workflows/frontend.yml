@@ -1,0 +1,69 @@
+name: Deploy Frontend
+
+on:
+  push:
+    branches:
+      - deploy
+    paths:
+      - 'frontend/**'
+      - 'services/**'
+      - '.github/workflows/frontend.yml'
+      - 'deploy/k8s/frontend-deployment.yaml'
+      - 'deploy/k8s/frontend-service.yaml'
+
+env:
+  PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+  GKE_CLUSTER: ${{ secrets.GKE_CLUSTER }}
+  GKE_REGION: ${{ secrets.GKE_REGION }}
+  IMAGE_NAME: frontend
+  REPOSITORY: graphrag-repo
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    steps:
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: '${{ secrets.GOOGLE_CLOUD_SA_KEY }}'
+
+      - name: Setup Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Configure Docker
+        run: |
+          gcloud auth configure-docker asia-northeast3-docker.pkg.dev --quiet
+
+      - name: Build Frontend Image
+        run: |
+          docker build \
+            -t asia-northeast3-docker.pkg.dev/knudc-khang-buiphuoc/graphrag-repo/frontend:v1{{ github.sha }} \
+            ./frontend
+
+      - name: Push Frontend Image
+        run: |
+          docker push \
+            asia-northeast3-docker.pkg.dev/knudc-khang-buiphuoc/graphrag-repo/frontend:v1{{ github.sha }}
+
+      - name: Connect to GKE
+        run: |
+          gcloud container clusters get-credentials \
+          $GKE_CLUSTER \
+          --region $GKE_REGION
+
+      - name: Update Frontend Deployment
+        run: |
+          kubectl set image deployment/frontend \
+          frontend=asia-northeast3-docker.pkg.dev/knudc-khang-buiphuoc/graphrag-repo/frontend:v1{{ github.sha }}
+
+      - name: Wait for Rollout
+        run: |
+          kubectl rollout status deployment/frontend --timeout=300s
