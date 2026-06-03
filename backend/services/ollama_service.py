@@ -51,7 +51,7 @@ class GeminiService:
         """
         try:
             response = await self._client.aio.models.generate_content(
-                model="gemini-2.0-flash-lite",
+                model="gemini-2.5-flash",
                 contents="ping",
                 config=types.GenerateContentConfig(max_output_tokens=1),
             )
