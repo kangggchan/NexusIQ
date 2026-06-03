@@ -24,7 +24,7 @@ class Settings(BaseSettings):
     model_graph: str = Field(default="gemini-2.5-flash", alias="MODEL_GRAPH")
     model_incident: str = Field(default="gemini-2.5-flash", alias="MODEL_INCIDENT")
     model_risk: str = Field(default="gemini-2.5-pro", alias="MODEL_RISK")
-    model_embedding: str = Field(default="text-embedding-005", alias="MODEL_EMBEDDING")
+    model_embedding: str = Field(default="gemini-embedding-001", alias="MODEL_EMBEDDING")
 
     # ── Server ────────────────────────────────────────────────────────────────
     backend_host: str = Field(default="0.0.0.0", alias="BACKEND_HOST")
