@@ -10,6 +10,7 @@ on:
       - '.github/workflows/frontend.yml'
       - 'deploy/k8s/frontend-deployment.yaml'
       - 'deploy/k8s/frontend-service.yaml'
+      - 'app/**'
 
 env:
   PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
