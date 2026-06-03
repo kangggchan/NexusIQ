@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import path from 'node:path'
 import fs from 'node:fs/promises'
 
-const BACKEND   = process.env.BACKEND_URL ?? 'http://localhost:8080'
+const BACKEND   = process.env.BACKEND_URL ?? 'http://backend-service'
 const DATA_DIR  = path.join(process.cwd(), 'data', 'nexusiq_dataset')
 
 async function readJson<T>(filename: string): Promise<T> {
