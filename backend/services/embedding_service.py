@@ -1,5 +1,5 @@
 """
-EmbeddingService – high-level text embedding pipeline backed by Ollama.
+EmbeddingService – high-level text embedding pipeline backed by Vertex AI Gemini.
 
 Features:
 - Single-text and batch embedding
@@ -12,23 +12,23 @@ import math
 from typing import Sequence
 
 from backend.config import settings
-from backend.services.ollama_service import OllamaService
+from backend.services.ollama_service import GeminiService
 
 
 class EmbeddingService:
     """
-    Wraps OllamaService to provide a dedicated embedding interface.
+    Wraps GeminiService to provide a dedicated embedding interface.
 
     Usage::
 
-        svc = EmbeddingService(ollama_service)
+        svc = EmbeddingService(gemini_service)
         vec = await svc.embed("What is the blast radius of a payment service failure?")
         vecs = await svc.embed_batch(["text a", "text b"])
         score = EmbeddingService.cosine_similarity(vec_a, vec_b)
     """
 
-    def __init__(self, ollama: OllamaService, model: str | None = None) -> None:
-        self._ollama = ollama
+    def __init__(self, gemini: GeminiService, model: str | None = None) -> None:
+        self._ollama = gemini  # keep attribute name for call-site compat
         self._model = model or settings.model_embedding
 
     # ── Public API ────────────────────────────────────────────────────────────

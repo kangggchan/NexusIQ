@@ -1,116 +1,84 @@
 """
-OllamaService – Centralized Ollama connection manager.
+GeminiService – Vertex AI / Gemini inference client.
 
-Responsibilities:
-- Health checking & readiness probing
-- Lazy model pulling (first-use pull if not present)
-- Streaming and non-streaming inference via ollama-python
-- Retry with exponential back-off via tenacity
-- Async-first; all public methods are coroutines
+Drop-in replacement for the previous OllamaService – same public interface,
+Vertex AI Gemini backend.  OllamaService and OllamaServiceError are kept as
+aliases so any import that has not yet been updated continues to work.
 """
 from __future__ import annotations
 
-import asyncio
 import logging
 from typing import AsyncIterator, Sequence
 
-import ollama
-from tenacity import (
-    AsyncRetrying,
-    retry_if_exception_type,
-    stop_after_attempt,
-    wait_exponential,
-)
+from google import genai
+from google.genai import types
 
 from backend.config import settings
 
 log = logging.getLogger(__name__)
 
-# Models that have already been verified as present in this session
-_pulled_models: set[str] = set()
-_pull_locks: dict[str, asyncio.Lock] = {}
+
+class GeminiServiceError(RuntimeError):
+    """Raised when the Gemini / Vertex AI API is unreachable or returns an error."""
 
 
-class OllamaServiceError(RuntimeError):
-    """Raised when Ollama is unreachable or returns an unexpected error."""
-
-
-class OllamaService:
+class GeminiService:
     """
-    Thin async wrapper around the ollama-python AsyncClient.
+    Async Vertex AI Gemini client.
 
-    Usage::
+    Provides chat, streaming chat, and text embedding via the google-genai SDK.
+    Instantiate once and reuse across requests – the underlying HTTP session is
+    shared automatically by the SDK.
 
-        svc = OllamaService()
-        await svc.ensure_model("llama3.1:8b")
-        async for chunk in svc.stream_chat("llama3.1:8b", messages=[...]):
-            print(chunk, end="", flush=True)
+    Authentication uses Application Default Credentials (ADC).  On Cloud Run
+    the service-account attached to the revision is used automatically; locally
+    run ``gcloud auth application-default login`` once.
     """
 
     def __init__(self) -> None:
-        self._client = ollama.AsyncClient(host=settings.ollama_host)
-        self._timeout = settings.ollama_timeout
+        self._client = genai.Client(
+            vertexai=True,
+            project="knudc-khang-buiphuoc",
+            location="us-central1",
+        )
 
     # ── Health ────────────────────────────────────────────────────────────────
 
     async def health_check(self) -> dict:
-        """Return server info dict or raise OllamaServiceError."""
+        """
+        Verify Vertex AI connectivity with a minimal generate call.
+        Raises GeminiServiceError on failure.
+        """
         try:
-            result = await asyncio.wait_for(
-                self._client.list(),
-                timeout=5.0,
+            response = await self._client.aio.models.generate_content(
+                model="gemini-2.0-flash-lite",
+                contents="ping",
+                config=types.GenerateContentConfig(max_output_tokens=1),
             )
-            return {"status": "ok", "models": [m.model for m in result.models]}
+            _ = response.text  # confirm we can read the response
+            return {
+                "status": "ok",
+                "provider": "vertex-ai",
+                "project": settings.google_cloud_project,
+                "location": settings.google_cloud_location,
+            }
         except Exception as exc:
-            raise OllamaServiceError(f"Ollama unreachable at {settings.ollama_host}: {exc}") from exc
+            raise GeminiServiceError(f"Vertex AI unreachable: {exc}") from exc
 
     async def list_models(self) -> list[str]:
-        """Return names of all locally available models."""
-        try:
-            result = await self._client.list()
-            return [m.model for m in result.models]
-        except Exception as exc:
-            log.warning("Could not list Ollama models: %s", exc)
-            return []
-
-    # ── Lazy model loading ────────────────────────────────────────────────────
-
-    async def ensure_model(self, model: str) -> None:
         """
-        Pull *model* if it is not already present locally.
-        Only one pull per model name runs at a time (lock-guarded).
-        Subsequent callers wait for the first pull to finish.
+        Return the names of the configured agent models.
+        (Gemini models are always available via API — no local pull needed.)
         """
-        if model in _pulled_models:
-            return
+        return [
+            settings.model_orchestrator,
+            settings.model_graph,
+            settings.model_incident,
+            settings.model_risk,
+            settings.model_embedding,
+        ]
 
-        if model not in _pull_locks:
-            _pull_locks[model] = asyncio.Lock()
-
-        async with _pull_locks[model]:
-            # Re-check inside lock in case another coroutine just finished pulling
-            if model in _pulled_models:
-                return
-
-            available = await self.list_models()
-            # Ollama stores names like "llama3.1:8b" – exact or prefix match
-            if any(m == model or m.startswith(model.split(":")[0]) for m in available):
-                _pulled_models.add(model)
-                log.info("Model '%s' already available.", model)
-                return
-
-            log.info("Pulling model '%s' from Ollama registry…", model)
-            try:
-                # ollama.pull streams progress; we consume it silently
-                async for _ in await self._client.pull(model, stream=True):
-                    pass
-                _pulled_models.add(model)
-                log.info("Model '%s' pulled successfully.", model)
-            except Exception as exc:
-                log.error("Failed to pull model '%s': %s", model, exc)
-                raise OllamaServiceError(f"Cannot pull model '{model}': {exc}") from exc
-
-    # ── Inference ─────────────────────────────────────────────────────────────
+    # ── Chat ──────────────────────────────────────────────────────────────────
 
     async def chat(
         self,
@@ -119,26 +87,32 @@ class OllamaService:
         *,
         temperature: float | None = None,
         max_tokens: int | None = None,
-        keep_alive: str | None = None,
+        **_kwargs,  # absorb legacy keep_alive / other Ollama-only params
     ) -> str:
         """
         Blocking (non-streaming) chat completion.
-        Returns the assistant's reply as a plain string.
+
+        :param model: Gemini model name, e.g. ``"gemini-2.5-flash"``.
+        :param messages: List of ``{"role": "system"|"user"|"assistant", "content": str}``.
+        :returns: Assistant reply as a plain string.
         """
-        await self.ensure_model(model)
-        options = self._build_options(temperature, max_tokens)
-
-        async def _call() -> str:
-            response = await self._client.chat(
-                model=model,
-                messages=list(messages),
-                stream=False,
-                options=options,
-                keep_alive=keep_alive or settings.ollama_keep_alive,
+        try:
+            system_text, contents = _split_messages(list(messages))
+            config = types.GenerateContentConfig(
+                system_instruction=system_text or None,
+                temperature=temperature if temperature is not None else settings.default_temperature,
+                max_output_tokens=max_tokens or settings.default_max_tokens,
             )
-            return response.message.content or ""
-
-        return await self._with_retry(_call)
+            response = await self._client.aio.models.generate_content(
+                model=model,
+                contents=contents,
+                config=config,
+            )
+            return response.text or ""
+        except GeminiServiceError:
+            raise
+        except Exception as exc:
+            raise GeminiServiceError(f"chat failed: {exc}") from exc
 
     async def stream_chat(
         self,
@@ -147,32 +121,34 @@ class OllamaService:
         *,
         temperature: float | None = None,
         max_tokens: int | None = None,
-        keep_alive: str | None = None,
+        **_kwargs,
     ) -> AsyncIterator[str]:
         """
-        Async generator that yields text chunks as they arrive from Ollama.
+        Async generator that yields text chunks as they arrive from Gemini.
 
         Example::
 
-            async for chunk in svc.stream_chat("llama3.1:8b", messages):
+            async for chunk in svc.stream_chat("gemini-2.5-flash", messages):
                 sys.stdout.write(chunk)
         """
-        await self.ensure_model(model)
-        options = self._build_options(temperature, max_tokens)
-
-        # We cannot wrap a generator in tenacity easily, so we do a single
-        # attempt here; callers that need retry should wrap at a higher level.
-        async_stream = await self._client.chat(
-            model=model,
-            messages=list(messages),
-            stream=True,
-            options=options,
-            keep_alive=keep_alive or settings.ollama_keep_alive,
-        )
-        async for chunk in async_stream:
-            content = chunk.message.content
-            if content:
-                yield content
+        try:
+            system_text, contents = _split_messages(list(messages))
+            config = types.GenerateContentConfig(
+                system_instruction=system_text or None,
+                temperature=temperature if temperature is not None else settings.default_temperature,
+                max_output_tokens=max_tokens or settings.default_max_tokens,
+            )
+            async for chunk in self._client.aio.models.generate_content_stream(
+                model=model,
+                contents=contents,
+                config=config,
+            ):
+                if chunk.text:
+                    yield chunk.text
+        except GeminiServiceError:
+            raise
+        except Exception as exc:
+            raise GeminiServiceError(f"stream_chat failed: {exc}") from exc
 
     async def generate(
         self,
@@ -183,82 +159,91 @@ class OllamaService:
         temperature: float | None = None,
         max_tokens: int | None = None,
     ) -> str:
-        """Raw generate (no chat format). Returns complete response string."""
-        await self.ensure_model(model)
-        options = self._build_options(temperature, max_tokens)
+        """Convenience wrapper – single prompt string, no chat format."""
+        msgs = []
+        if system:
+            msgs.append({"role": "system", "content": system})
+        msgs.append({"role": "user", "content": prompt})
+        return await self.chat(model, msgs, temperature=temperature, max_tokens=max_tokens)
 
-        async def _call() -> str:
-            response = await self._client.generate(
-                model=model,
-                prompt=prompt,
-                system=system,
-                stream=False,
-                options=options,
-                keep_alive=settings.ollama_keep_alive,
-            )
-            return response.response or ""
-
-        return await self._with_retry(_call)
+    # ── Embeddings ────────────────────────────────────────────────────────────
 
     async def embed(self, model: str, text: str) -> list[float]:
-        """Return embedding vector for *text* using *model*."""
-        await self.ensure_model(model)
-
-        async def _call() -> list[float]:
-            response = await self._client.embed(model=model, input=text)
-            # ollama-python returns embeddings as list[list[float]]
-            embeddings = response.embeddings
-            if not embeddings:
-                raise OllamaServiceError("Ollama returned empty embeddings")
-            return embeddings[0]
-
-        return await self._with_retry(_call)
+        """Return the embedding vector for *text*."""
+        vecs = await self.embed_batch(model, [text])
+        return vecs[0]
 
     async def embed_batch(self, model: str, texts: list[str]) -> list[list[float]]:
-        """Embed a list of texts. Uses a single Ollama call per batch."""
-        await self.ensure_model(model)
+        """
+        Embed a list of texts via Vertex AI text-embedding.
 
-        async def _call() -> list[list[float]]:
-            response = await self._client.embed(model=model, input=texts)
-            return response.embeddings
+        Vertex AI ``text-embedding-005`` accepts up to 250 inputs per call.
+        Inputs are chunked automatically.
+        """
+        if not texts:
+            return []
 
-        return await self._with_retry(_call)
+        MAX_BATCH = 250
+        all_vectors: list[list[float]] = []
 
-    # ── Internal helpers ──────────────────────────────────────────────────────
+        try:
+            for i in range(0, len(texts), MAX_BATCH):
+                chunk = texts[i : i + MAX_BATCH]
+                response = await self._client.aio.models.embed_content(
+                    model=model,
+                    contents=chunk,
+                    config=types.EmbedContentConfig(
+                        task_type="RETRIEVAL_DOCUMENT",
+                    ),
+                )
+                all_vectors.extend(e.values for e in response.embeddings)
+            return all_vectors
+        except GeminiServiceError:
+            raise
+        except Exception as exc:
+            raise GeminiServiceError(f"embed_batch failed: {exc}") from exc
 
-    @staticmethod
-    def _build_options(temperature: float | None, max_tokens: int | None) -> dict:
-        opts: dict = {}
-        if temperature is not None:
-            opts["temperature"] = temperature
+
+# ── Helpers ───────────────────────────────────────────────────────────────────
+
+def _split_messages(messages: list[dict]) -> tuple[str, object]:
+    """
+    Separate the system turn from the conversation.
+
+    Returns ``(system_text, contents)`` where *contents* is either a plain
+    string (single-turn) or a ``list[types.Content]`` (multi-turn).
+    """
+    system_parts: list[str] = []
+    conversation: list[dict] = []
+
+    for msg in messages:
+        role = msg.get("role", "user")
+        content = msg.get("content", "")
+        if role == "system":
+            system_parts.append(content)
         else:
-            opts["temperature"] = settings.default_temperature
-        if max_tokens is not None:
-            opts["num_predict"] = max_tokens
-        else:
-            opts["num_predict"] = settings.default_max_tokens
-        return opts
+            conversation.append({
+                "role": "model" if role == "assistant" else "user",
+                "content": content,
+            })
 
-    async def _with_retry(self, coro_factory):
-        """Run *coro_factory* with exponential back-off retry."""
-        last_exc: Exception | None = None
-        async for attempt in AsyncRetrying(
-            stop=stop_after_attempt(settings.max_retries),
-            wait=wait_exponential(
-                min=settings.retry_wait_min,
-                max=settings.retry_wait_max,
-            ),
-            retry=retry_if_exception_type((OSError, ConnectionError, TimeoutError)),
-            reraise=False,
-        ):
-            with attempt:
-                try:
-                    return await coro_factory()
-                except OllamaServiceError:
-                    raise
-                except Exception as exc:
-                    last_exc = exc
-                    log.warning("Ollama call failed (attempt %d): %s", attempt.retry_state.attempt_number, exc)
-                    raise
+    system_text = "\n\n".join(system_parts)
 
-        raise OllamaServiceError(f"All retries exhausted: {last_exc}") from last_exc
+    if len(conversation) == 1:
+        return system_text, conversation[0]["content"]
+
+    contents = [
+        types.Content(
+            role=msg["role"],
+            parts=[types.Part(text=msg["content"])],
+        )
+        for msg in conversation
+    ]
+    return system_text, contents
+
+
+# ── Backward-compat aliases ───────────────────────────────────────────────────
+# Keeps existing ``from backend.services.ollama_service import OllamaService``
+# imports working without requiring a simultaneous rename everywhere.
+OllamaService = GeminiService
+OllamaServiceError = GeminiServiceError

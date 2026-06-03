@@ -1,6 +1,6 @@
 import { NextRequest } from "next/server";
 
-const BACKEND = process.env.OLLAMA_BACKEND_URL ?? "http://localhost:8000";
+const BACKEND = process.env.BACKEND_URL ?? "http://localhost:8080";
 
 export async function POST(req: NextRequest) {
   const body = await req.json();

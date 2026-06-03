@@ -15,23 +15,26 @@ class Settings(BaseSettings):
         extra="ignore",
     )
 
-    # ── Ollama ───────────────────────────────────────────────────────────────
-    ollama_host: str = Field(default="http://localhost:11434", alias="OLLAMA_HOST")
-    ollama_timeout: float = Field(default=120.0, alias="OLLAMA_TIMEOUT")
-    ollama_keep_alive: str = Field(default="5m", alias="OLLAMA_KEEP_ALIVE")
+    # ── Google Cloud / Vertex AI ─────────────────────────────────────────────
+    google_cloud_project: str = Field(default="", alias="GOOGLE_CLOUD_PROJECT")
+    google_cloud_location: str = Field(default="us-central1", alias="GOOGLE_CLOUD_LOCATION")
 
     # ── Agent model assignments ──────────────────────────────────────────────
-    model_orchestrator: str = Field(default="llama3.1:8b", alias="MODEL_ORCHESTRATOR")
-    model_graph: str = Field(default="qwen2.5:7b", alias="MODEL_GRAPH")
-    model_incident: str = Field(default="llama3.1:8b", alias="MODEL_INCIDENT")
-    model_risk: str = Field(default="gemma3:12b", alias="MODEL_RISK")
-    model_embedding: str = Field(default="nomic-embed-text", alias="MODEL_EMBEDDING")
+    model_orchestrator: str = Field(default="gemini-2.5-flash", alias="MODEL_ORCHESTRATOR")
+    model_graph: str = Field(default="gemini-2.5-flash", alias="MODEL_GRAPH")
+    model_incident: str = Field(default="gemini-2.5-flash", alias="MODEL_INCIDENT")
+    model_risk: str = Field(default="gemini-2.5-pro", alias="MODEL_RISK")
+    model_embedding: str = Field(default="text-embedding-005", alias="MODEL_EMBEDDING")
 
     # ── Server ────────────────────────────────────────────────────────────────
     backend_host: str = Field(default="0.0.0.0", alias="BACKEND_HOST")
     backend_port: int = Field(default=8000, alias="BACKEND_PORT")
     backend_reload: bool = Field(default=False, alias="BACKEND_RELOAD")
     log_level: str = Field(default="info", alias="LOG_LEVEL")
+    backend_cors_origins: str = Field(
+        default="http://localhost:3000,http://127.0.0.1:3000",
+        alias="BACKEND_CORS_ORIGINS",
+    )
 
     # ── Retry / resilience ───────────────────────────────────────────────────
     max_retries: int = Field(default=3, alias="MAX_RETRIES")
@@ -41,7 +44,7 @@ class Settings(BaseSettings):
     # ── Inference defaults ───────────────────────────────────────────────────
     default_temperature: float = Field(default=0.7, alias="DEFAULT_TEMPERATURE")
     default_max_tokens: int = Field(default=2048, alias="DEFAULT_MAX_TOKENS")
-    embedding_batch_size: int = Field(default=16, alias="EMBEDDING_BATCH_SIZE")
+    embedding_batch_size: int = Field(default=100, alias="EMBEDDING_BATCH_SIZE")
 
 
 # Singleton – import this everywhere

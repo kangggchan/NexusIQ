@@ -32,11 +32,11 @@ class RetrievalSettings(BaseSettings):
     chroma_tenant: str = Field(default="default_tenant", alias="CHROMA_TENANT")
     chroma_database: str = Field(default="nexusiq", alias="CHROMA_DATABASE")
 
-    # ── Ollama embeddings ─────────────────────────────────────────────────────
-    ollama_host: str = Field(default="http://localhost:11434", alias="OLLAMA_HOST")
-    embedding_model: str = Field(default="nomic-embed-text", alias="MODEL_EMBEDDING")
-    embedding_batch_size: int = Field(default=16, alias="EMBEDDING_BATCH_SIZE")
-    embedding_timeout: float = Field(default=60.0, alias="EMBEDDING_TIMEOUT")
+    # ── Google Cloud / Vertex AI embeddings ──────────────────────────────────
+    google_cloud_project: str = Field(default="", alias="GOOGLE_CLOUD_PROJECT")
+    google_cloud_location: str = Field(default="us-central1", alias="GOOGLE_CLOUD_LOCATION")
+    embedding_model: str = Field(default="text-embedding-005", alias="MODEL_EMBEDDING")
+    embedding_batch_size: int = Field(default=100, alias="EMBEDDING_BATCH_SIZE")
 
     # ── Retrieval tuning ──────────────────────────────────────────────────────
     vector_top_k: int = Field(default=10, alias="VECTOR_TOP_K")

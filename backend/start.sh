@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Start the NexusIQ FastAPI backend (Ollama multi-agent service)
+# Start the NexusIQ FastAPI backend (Gemini multi-agent service)
 # Run from the project root: bash backend/start.sh
 
 set -euo pipefail
@@ -14,9 +14,9 @@ if [[ -f ".venv/bin/activate" ]]; then
   source .venv/bin/activate
 fi
 
-echo "Starting NexusIQ Ollama backend on http://0.0.0.0:8000 …"
+echo "Starting NexusIQ Gemini backend on http://0.0.0.0:8080 …"
 exec python -m uvicorn backend.main:app \
   --host "${BACKEND_HOST:-0.0.0.0}" \
-  --port "${BACKEND_PORT:-8000}" \
+  --port "${BACKEND_PORT:-8080}" \
   --reload \
   --log-level "${LOG_LEVEL:-info}"

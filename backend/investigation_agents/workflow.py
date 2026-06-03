@@ -41,7 +41,8 @@ import re
 from datetime import datetime, timezone
 from typing import AsyncIterator, Any
 
-import httpx
+from google import genai
+from google.genai import types
 from langgraph.graph import StateGraph, START, END
 
 from backend.investigation_agents.state import InvestigationState
@@ -66,19 +67,20 @@ from backend.retrieval.context_expanders.graph_expander import get_graph_expande
 from backend.retrieval.context_expanders.incident_expander import get_incident_expander
 from backend.retrieval.context_expanders.risk_expander import get_risk_expander
 from retrieval.config import settings as retrieval_settings
+from backend.config import settings as backend_settings
 
 log = logging.getLogger(__name__)
 
 # -- Model assignments ---------------------------------------------------------
 
 AGENT_MODELS: dict[str, str] = {
-    "context_agent":  "qwen2.5:7b",
-    "query_analyzer": "qwen2.5:7b",
-    "orchestrator":   "llama3.1:8b",
-    "graph":          "qwen2.5:7b",
-    "incident":       "llama3.1:8b",
-    "risk":           "qwen2.5:7b",
-    "synthesize":     "qwen2.5:7b",
+    "context_agent":  "gemini-2.5-flash",
+    "query_analyzer": "gemini-2.5-flash",
+    "orchestrator":   "gemini-2.5-flash",
+    "graph":          "gemini-2.5-flash",
+    "incident":       "gemini-2.5-flash",
+    "risk":           "gemini-2.5-pro",
+    "synthesize":     "gemini-2.5-flash",
 }
 
 # Token budgets
@@ -122,13 +124,17 @@ class InvestigationWorkflow:
     """
 
     def __init__(self) -> None:
-        self._ollama    = retrieval_settings.ollama_host.rstrip("/")
+        self._gemini_client = genai.Client(
+            vertexai=True,
+            project="knudc-khang-buiphuoc",
+            location="us-central1",
+        )
         self._retriever = get_shared_retriever()
         self._evaluator = get_evaluator()
         self._inspector = get_graph_inspector()
         self._graph     = self._compile()
 
-    # -- Ollama helper ---------------------------------------------------------
+    # -- Gemini helper ---------------------------------------------------------
 
     async def _chat(
         self,
@@ -139,19 +145,17 @@ class InvestigationWorkflow:
         num_predict: int = 400,
         temperature: float = 0.1,
     ) -> str:
-        payload = {
-            "model":  model,
-            "stream": False,
-            "options": {"num_predict": num_predict, "temperature": temperature},
-            "messages": [
-                {"role": "system", "content": system},
-                {"role": "user",   "content": user},
-            ],
-        }
-        async with httpx.AsyncClient(timeout=timeout) as client:
-            resp = await client.post(f"{self._ollama}/api/chat", json=payload)
-            resp.raise_for_status()
-            return resp.json().get("message", {}).get("content", "")
+        config = types.GenerateContentConfig(
+            system_instruction=system or None,
+            temperature=temperature,
+            max_output_tokens=num_predict,
+        )
+        response = await self._gemini_client.aio.models.generate_content(
+            model=model,
+            contents=user,
+            config=config,
+        )
+        return response.text or ""
 
     # -- Node: context_agent ---------------------------------------------------
 

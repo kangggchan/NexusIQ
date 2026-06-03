@@ -1,0 +1,31 @@
+.git
+.gitignore
+.github
+.next
+node_modules
+.venv
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+*.log
+.DS_Store
+
+# Local runtime/state dirs
+archives
+cache
+logs
+output
+input
+
+# Local secrets
+auth.json
+.env
+.env.*
+
+# Python tooling
+.pytest_cache
+.mypy_cache
+
+# Frontend build cache
+tsconfig.tsbuildinfo

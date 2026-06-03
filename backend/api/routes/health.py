@@ -1,11 +1,10 @@
 """
 GET /health            – liveness probe
-GET /health/ollama     – Ollama connectivity check
-GET /models/status     – per-agent model availability
+GET /health/gemini     – Vertex AI Gemini connectivity check
+GET /models/status     – per-agent model configuration
 """
 from __future__ import annotations
 
-import asyncio
 import time
 
 from fastapi import APIRouter, Request
@@ -20,13 +19,13 @@ async def liveness():
     return {"status": "ok", "timestamp": int(time.time() * 1000)}
 
 
-@router.get("/health/ollama")
-async def ollama_health(request: Request):
+@router.get("/health/gemini")
+async def gemini_health(request: Request):
     """
-    Check that Ollama is reachable and list available models.
-    Returns 503 if Ollama cannot be contacted.
+    Check that Vertex AI / Gemini is reachable.
+    Returns 503 if the API cannot be contacted.
     """
-    svc = request.app.state.ollama
+    svc = request.app.state.gemini
     try:
         info = await svc.health_check()
         return {"status": "ok", **info}
@@ -40,27 +39,21 @@ async def ollama_health(request: Request):
 @router.get("/models/status")
 async def models_status(request: Request):
     """
-    Return per-agent model name and whether the model is already pulled locally.
+    Return per-agent model name and provider configuration.
+    Gemini models are always available via API – no local pull required.
     """
-    svc = request.app.state.ollama
     router_obj = request.app.state.model_router
-
-    available = await svc.list_models()
-    available_set = set(available)
 
     statuses = []
     for cfg in router_obj.all_configs():
-        # Fuzzy match: "llama3.1:8b" matches "llama3.1:8b" or "llama3.1"
-        base = cfg.model.split(":")[0]
-        pulled = any(m == cfg.model or m.startswith(base) for m in available_set)
         statuses.append(
             {
                 "agent_id": cfg.agent_id,
                 "model": cfg.model,
                 "description": cfg.description,
                 "tags": cfg.tags,
-                "pulled": pulled,
+                "provider": "vertex-ai",
             }
         )
 
-    return {"models": statuses, "available_count": len(available)}
+    return {"models": statuses}

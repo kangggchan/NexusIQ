@@ -48,3 +48,7 @@ yarn-error.log*
 .pnpm-debug.log*
 .vercel/
 input/_pdfs/
+
+# Credentials
+github-key.json
+deploy/k8s/github-key.json

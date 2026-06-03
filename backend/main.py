@@ -2,7 +2,7 @@
 NexusIQ FastAPI Backend – main application entry point.
 
 Startup sequence:
-  1. Create OllamaService + verify Ollama is reachable (non-fatal warning if not)
+  1. Create GeminiService (Vertex AI)
   2. Create ModelRouter
   3. Create EmbeddingService
   4. Instantiate all four agent classes
@@ -11,7 +11,7 @@ Startup sequence:
 Run with::
 
     cd graphrag-workbench
-    uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload
+    uvicorn backend.main:app --host 0.0.0.0 --port 8080 --reload
 """
 from __future__ import annotations
 
@@ -23,7 +23,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from backend.config import settings
-from backend.services.ollama_service import OllamaService, OllamaServiceError
+from backend.services.ollama_service import GeminiService, GeminiServiceError
 from backend.services.embedding_service import EmbeddingService
 
 from backend.api.routes import health, embeddings
@@ -39,32 +39,40 @@ logging.basicConfig(
 log = logging.getLogger(__name__)
 
 
+def _cors_origins() -> list[str]:
+    origins = [o.strip() for o in settings.backend_cors_origins.split(",") if o.strip()]
+    if origins:
+        return origins
+    return ["http://localhost:3000", "http://127.0.0.1:3000"]
+
+
 # ── Lifespan ──────────────────────────────────────────────────────────────────
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """
     Startup: initialise services and inject them into app.state.
-    Shutdown: clean up (nothing required for Ollama HTTP client).
+    Shutdown: clean up.
     """
     log.info("NexusIQ backend starting…")
 
     # Services
-    ollama = OllamaService()
-    embedding_svc = EmbeddingService(ollama)
+    gemini = GeminiService()
+    embedding_svc = EmbeddingService(gemini)
 
-    # Verify Ollama connectivity (non-fatal — embeddings will fail gracefully at runtime)
+    # Verify Vertex AI connectivity (non-fatal — requests will fail gracefully at runtime)
     try:
-        info = await ollama.health_check()
-        log.info("Ollama connected. Available models: %s", info.get("models", []))
-    except OllamaServiceError as exc:
+        info = await gemini.health_check()
+        log.info("Vertex AI connected. Project=%s location=%s", info.get("project"), info.get("location"))
+    except GeminiServiceError as exc:
         log.warning(
-            "Ollama not reachable at startup: %s — embeddings will fail until Ollama is running.",
+            "Vertex AI not reachable at startup: %s — LLM calls will fail until credentials are configured.",
             exc,
         )
 
     # Inject into app state so routes can access them via request.app.state.*
-    app.state.ollama = ollama
+    app.state.gemini = gemini
+    app.state.ollama = gemini  # backward-compat alias for any route using app.state.ollama
     app.state.embedding_service = embedding_svc
 
     log.info("NexusIQ backend ready on http://%s:%d", settings.backend_host, settings.backend_port)
@@ -76,8 +84,8 @@ async def lifespan(app: FastAPI):
 # ── App ───────────────────────────────────────────────────────────────────────
 
 app = FastAPI(
-    title="NexusIQ Ollama Backend",
-    description="Multi-agent local LLM inference service for NexusIQ operational intelligence.",
+    title="NexusIQ Backend",
+    description="Multi-agent Vertex AI Gemini investigation service for NexusIQ operational intelligence.",
     version="1.0.0",
     lifespan=lifespan,
 )
@@ -85,10 +93,7 @@ app = FastAPI(
 # Allow requests from the Next.js dev server and production origin
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:3000",
-        "http://127.0.0.1:3000",
-    ],
+    allow_origins=_cors_origins(),
     allow_credentials=False,
     allow_methods=["GET", "POST", "OPTIONS"],
     allow_headers=["Content-Type", "Accept"],

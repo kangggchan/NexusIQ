@@ -1,8 +1,8 @@
 """
-ModelRouter – maps agent IDs to Ollama model names and inference parameters.
+ModelRouter – maps agent IDs to Gemini model names and inference parameters.
 
 Each agent entry defines:
-  - model: the Ollama model tag to use
+  - model: the Gemini model name to use
   - temperature: generation temperature (creativity vs determinism)
   - max_tokens: max output tokens
   - description: human-readable summary shown in the API /models/status response
