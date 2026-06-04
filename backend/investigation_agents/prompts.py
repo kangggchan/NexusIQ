@@ -110,11 +110,23 @@ CRITICAL ROUTING RULES — apply in order:
      to an ongoing investigation; always retrieve for full continuity.
    • The query asks about people, team size, ownership, who works on something,
      incidents, services, errors, deployments, or any technical subject.
+   • The query requires deep troubleshooting, chronology, root-cause analysis,
+     commit details, Slack conversations, or Jira descriptions.
    • The query is short or ambiguous but conversation context reveals a technical
      thread (e.g. "Can you count?", "Tell me more", "Who owns that?").
 3. ROUTING=GRAPH_SUFFICIENT: ONLY when the graph context text explicitly and
    completely answers the query — the answer must be readable from the provided
    graph text, not inferred. If in doubt, use RETRIEVE_MORE.
+
+   ⚠️ IMPORTANT LIMITATION OF GRAPH CONTEXT:
+   The Neo4j graph context provided is a lightweight visualization cache containing
+   only basic entity properties (title, type, description) and topological relationships.
+   It NEVER contains:
+     - Root cause analyses or detailed incident postmortems
+     - Chronological event timelines
+     - Commit messages, Slack chat logs, or Jira work tickets
+   If the user asks for root cause, timeline, or deep logs of an entity, the graph
+   context is NEVER sufficient. You must select RETRIEVE_MORE.
 
 CRITICAL AGENT SELECTION RULES:
 - If ANSWER TYPE is PEOPLE and the user asks for a factual roster, count, owner, role, or project list, use ROUTING=RETRIEVE_MORE and `recommended_agents=NONE` unless graph reasoning is specifically needed.
