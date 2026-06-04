@@ -85,12 +85,56 @@ AGENT_MODELS: dict[str, str] = {
 }
 
 # Token budgets
-_FAST_SYNTHESIZE_TOKENS = 1200     # DIRECT_RESPONSE path (conversational)
+_FAST_SYNTHESIZE_TOKENS = 2200     # DIRECT_RESPONSE path (conversational/fact answer)
 _QUERY_ANALYZER_TOKENS  = 450    # query analysis structure extraction
 _AGENT_TOKENS           = 800    # per specialist agent
 _PLAN_TOKENS            = 600    # orchestrator plan
-_SYNTHESIZE_TOKENS      = 1500    # final synthesis
-_AGENT_CONTEXT_CHARS    = 2000   # context slice per agent
+_SYNTHESIZE_TOKENS      = 2400    # final synthesis
+_AGENT_CONTEXT_CHARS    = 3200   # context slice per agent
+_FAST_RETRIEVED_CONTEXT_CHARS = 2200
+_FAST_GRAPH_CONTEXT_CHARS = 2800
+_FAST_COMBINED_CONTEXT_CHARS = 4200
+_FULL_SYNTHESIS_GRAPH_ONLY_CHARS = 1800
+_FULL_SYNTHESIS_KEY_CONTEXT_CHARS = 1400
+_FULL_SYNTHESIS_ANALYSIS_CHARS = 1100
+_FULL_SYNTHESIS_GRAPH_KB_CHARS = 1200
+_RAW_SYNTHESIS_FALLBACK_CHARS = 1600
+
+_DETAIL_QUERY_MARKERS = (
+    "tell me more",
+    "more about",
+    "details on",
+    "details about",
+    "detail on",
+    "detail about",
+    "expand on",
+    "explain more",
+    "drill into",
+)
+
+_COMPARISON_QUERY_MARKERS = (
+    "most ",
+    "least ",
+    "highest ",
+    "lowest ",
+    "compare ",
+    "comparison",
+    " versus ",
+    " vs ",
+    "rank ",
+    "top ",
+)
+
+_RISK_QUERY_MARKERS = (
+    "risk",
+    "at risk",
+    "blast radius",
+    "impact",
+    "deployment",
+    "deployments",
+    "failed deploy",
+    "failed deployment",
+)
 
 _FAST_SYSTEM_PROMPT = (
     "You are a NexusIQ answer agent. Answer the user's exact question directly "
@@ -124,6 +168,42 @@ Rules:
     return sufficient=false.
 - Be conservative: when uncertain, return sufficient=false.
 """
+
+
+def _extract_finish_reason(response: Any) -> str:
+    candidates = getattr(response, "candidates", None) or []
+    if not candidates:
+        return "UNKNOWN"
+    finish_reason = getattr(candidates[0], "finish_reason", None)
+    if finish_reason is None:
+        return "UNKNOWN"
+    return str(getattr(finish_reason, "name", finish_reason) or "UNKNOWN")
+
+
+def _extract_candidate_token_count(response: Any) -> int | None:
+    usage = getattr(response, "usage_metadata", None)
+    if usage is None:
+        return None
+    for attr in ("candidates_token_count", "candidate_token_count", "output_token_count"):
+        value = getattr(usage, attr, None)
+        if isinstance(value, int):
+            return value
+    return None
+
+
+def _is_detail_query(query: str) -> bool:
+    lowered = query.lower()
+    return any(marker in lowered for marker in _DETAIL_QUERY_MARKERS)
+
+
+def _is_comparison_query(query: str) -> bool:
+    lowered = query.lower()
+    return any(marker in lowered for marker in _COMPARISON_QUERY_MARKERS)
+
+
+def _is_risk_query(query: str) -> bool:
+    lowered = query.lower()
+    return any(marker in lowered for marker in _RISK_QUERY_MARKERS)
 
 
 def _ts() -> str:
@@ -178,7 +258,26 @@ class InvestigationWorkflow:
             contents=user,
             config=config,
         )
-        return response.text or ""
+        text = response.text or ""
+        finish_reason = _extract_finish_reason(response)
+        candidate_tokens = _extract_candidate_token_count(response)
+        log.info(
+            "[llm] model=%s finish_reason=%s candidate_tokens=%s chars=%d max_output_tokens=%d",
+            model,
+            finish_reason,
+            candidate_tokens,
+            len(text),
+            num_predict,
+        )
+        if finish_reason.upper() not in {"STOP", "FINISH_REASON_STOP", "UNKNOWN"}:
+            log.warning(
+                "[llm] non-stop finish reason for model=%s: %s (chars=%d max_output_tokens=%d)",
+                model,
+                finish_reason,
+                len(text),
+                num_predict,
+            )
+        return text
 
     async def _verify_graph_sufficiency(
         self,
@@ -334,6 +433,7 @@ class InvestigationWorkflow:
         stored in state and forwarded to the orchestrator planning step.
         """
         query = state["query"]
+        query_lower = query.lower()
         log.info("[query_analyzer] analyzing query against visualization graph")
 
         # Structured session context persisted from the previous turn.
@@ -507,6 +607,43 @@ class InvestigationWorkflow:
             lookup_set = {t.lower() for t in lookup_entity_titles}
             extra = [e for e in llm_entities if e.lower() not in lookup_set]
             entities_out = lookup_entity_titles + extra
+
+            detail_query = _is_detail_query(query)
+            comparison_query = _is_comparison_query(query)
+            risk_query = _is_risk_query(query)
+
+            if intent == "GENERAL" and risk_query:
+                log.info("[query_analyzer] forcing intent GENERAL→RISK for query=%s", query[:120])
+                intent = "RISK"
+
+            if has_match and (detail_query or comparison_query):
+                if routing == "GRAPH_SUFFICIENT":
+                    log.info(
+                        "[query_analyzer] forcing routing GRAPH_SUFFICIENT→RETRIEVE_MORE for detail/comparison query"
+                    )
+                    routing = "RETRIEVE_MORE"
+
+                if not recommended_agents:
+                    recommended_agents = ["risk"] if risk_query or comparison_query else ["graph"]
+                    log.info(
+                        "[query_analyzer] forcing recommended_agents=%s for detail/comparison query",
+                        recommended_agents,
+                    )
+
+                if answer_type == "GENERAL":
+                    answer_type = "RISK" if risk_query else "SUMMARY"
+
+            if (
+                has_match
+                and routing == "RETRIEVE_MORE"
+                and not recommended_agents
+                and len(entities_out) >= 2
+                and (detail_query or comparison_query or "more" in query_lower)
+            ):
+                recommended_agents = ["graph"]
+                log.info(
+                    "[query_analyzer] forcing recommended_agents=graph for multi-entity follow-up query"
+                )
 
             # Secondary lookup: if the LLM extracted entity names that weren't in
             # the initial combined lookup, run a targeted pass on them.
@@ -900,8 +1037,8 @@ class InvestigationWorkflow:
         if state.get("evidence_decision") == "DIRECT_RESPONSE":
             ctx: SharedInvestigationContext | None = state.get("shared_ctx")
             retrieved_text = (
-                ctx.formatted_context[:1200] if ctx
-                else state.get("retrieved_context", "")[:1200]
+                ctx.formatted_context[:_FAST_RETRIEVED_CONTEXT_CHARS] if ctx
+                else state.get("retrieved_context", "")[:_FAST_RETRIEVED_CONTEXT_CHARS]
             )
 
             # Keep direct-response cheap, but never drop explicitly requested
@@ -924,18 +1061,18 @@ class InvestigationWorkflow:
                     retrieved_text = (
                         f"=== INCIDENT-FOCUSED EVIDENCE ===\n{focus_block}\n\n"
                         f"=== RETRIEVED CONTEXT (TRUNCATED) ===\n{retrieved_text}"
-                    )[:2200]
+                    )[:_FAST_COMBINED_CONTEXT_CHARS]
 
             graph_insights = state.get("graph_insights", "")
             # Always prepend graph_insights when the graph cache had a match —
             # retrieved docs may not contain the entity's profile data.
             if graph_insights and state.get("has_graph_match"):
                 context_text = (
-                    f"GRAPH KNOWLEDGE BASE:\n{graph_insights[:2000]}\n\n"
+                    f"GRAPH KNOWLEDGE BASE:\n{graph_insights[:_FAST_GRAPH_CONTEXT_CHARS]}\n\n"
                     f"RETRIEVED DOCUMENTS:\n{retrieved_text}"
-                ).strip()
+                ).strip()[:_FAST_COMBINED_CONTEXT_CHARS]
             else:
-                context_text = retrieved_text or graph_insights[:1000]
+                context_text = (retrieved_text or graph_insights[:_FAST_GRAPH_CONTEXT_CHARS])[:_FAST_COMBINED_CONTEXT_CHARS]
 
             is_conversational = state.get("decision") == "direct" and not context_text.strip()
 
@@ -1031,15 +1168,15 @@ class InvestigationWorkflow:
         ctx = state.get("shared_ctx")
         active_agents = state.get("active_agents", [])
         if ctx and active_agents == ["graph"]:
-            key_context = ctx.context_for_agent("graph", max_chars=900)
+            key_context = ctx.context_for_agent("graph", max_chars=_FULL_SYNTHESIS_GRAPH_ONLY_CHARS)
         else:
             key_context = (
-                ctx.formatted_context[:700] if ctx
-                else state.get("retrieved_context", "")[:700]
+                ctx.formatted_context[:_FULL_SYNTHESIS_KEY_CONTEXT_CHARS] if ctx
+                else state.get("retrieved_context", "")[:_FULL_SYNTHESIS_KEY_CONTEXT_CHARS]
             )
         graph_insights = state.get("graph_insights", "")
         graph_kb_section = (
-            f"GRAPH KNOWLEDGE BASE:\n{graph_insights[:600]}\n\n"
+            f"GRAPH KNOWLEDGE BASE:\n{graph_insights[:_FULL_SYNTHESIS_GRAPH_KB_CHARS]}\n\n"
             if graph_insights and state.get("has_graph_match") else ""
         )
         user_msg = (
@@ -1049,9 +1186,9 @@ class InvestigationWorkflow:
             f"QUERY INTENT: {state.get('query_intent', 'GENERAL')}\n"
             f"ACTIVE AGENTS: {', '.join(active_agents) or 'none'}\n\n"
             f"{graph_kb_section}"
-            f"GRAPH ANALYSIS:\n{state.get('graph_analysis', '')[:550]}\n\n"
-            f"INCIDENT ANALYSIS:\n{state.get('incident_analysis', '')[:550]}\n\n"
-            f"RISK ANALYSIS:\n{state.get('risk_analysis', '')[:550]}\n\n"
+            f"GRAPH ANALYSIS:\n{state.get('graph_analysis', '')[:_FULL_SYNTHESIS_ANALYSIS_CHARS]}\n\n"
+            f"INCIDENT ANALYSIS:\n{state.get('incident_analysis', '')[:_FULL_SYNTHESIS_ANALYSIS_CHARS]}\n\n"
+            f"RISK ANALYSIS:\n{state.get('risk_analysis', '')[:_FULL_SYNTHESIS_ANALYSIS_CHARS]}\n\n"
             f"KEY EVIDENCE:\n{key_context}"
         )
         try:
@@ -1064,7 +1201,7 @@ class InvestigationWorkflow:
             synthesis = (
                 report.get("synthesis")
                 or report.get("executive_summary", "")
-                or raw[:800]  # last-resort: use raw text if JSON failed to parse
+                or raw[:_RAW_SYNTHESIS_FALLBACK_CHARS]  # last-resort: use raw text if JSON failed to parse
             )
             report.update({
                 "query":             state["query"],
