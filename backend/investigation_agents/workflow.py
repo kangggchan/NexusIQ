@@ -75,13 +75,13 @@ log = logging.getLogger(__name__)
 # -- Model assignments ---------------------------------------------------------
 
 AGENT_MODELS: dict[str, str] = {
-    "context_agent":  "gemini-3.5-pro",
-    "query_analyzer": "gemini-3.5-pro",
-    "orchestrator":   "gemini-3.5-pro",
+    "context_agent":  "gemini-3.1-pro",
+    "query_analyzer": "gemini-3.1-pro",
+    "orchestrator":   "gemini-3.1-pro",
     "graph":          "gemini-3.5-flash",
     "incident":       "gemini-3.5-flash",
-    "risk":           "gemini-3.5-pro",
-    "synthesize":     "gemini-3.5-pro",
+    "risk":           "gemini-3.1-pro",
+    "synthesize":     "gemini-3.1-pro",
 }
 
 # Token budgets
