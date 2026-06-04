@@ -1,11 +1,11 @@
 """
 Visualization Graph Inspector.
 
-Reads from the shared in-memory GraphCache that is populated by the
-/graph/visualization endpoint after its single Neo4j fetch.
+Performs lightweight Neo4j lookups for the query analyzer.
 
-No direct Neo4j or ChromaDB calls are made here — this module is
-purely a fast keyword-lookup layer on top of already-cached data.
+Unlike the UI visualization cache, this path queries Neo4j directly so
+entity matches are not limited by the visualization endpoint's sampling
+budget.
 """
 from __future__ import annotations
 
@@ -13,7 +13,7 @@ import logging
 import re
 from typing import Any
 
-from retrieval.graph.graph_cache import get_graph_cache
+from retrieval.graph.neo4j_client import get_session
 
 log = logging.getLogger(__name__)
 
@@ -49,8 +49,8 @@ class VisualizationGraphInspector:
     # ── Public API ────────────────────────────────────────────────────────────
 
     def is_available(self) -> bool:
-        """True if the cache has been populated (i.e. /graph/visualization was called)."""
-        return get_graph_cache().is_populated
+        """Inspector is always available when the backend can reach Neo4j."""
+        return True
 
     def extract_keywords(self, query: str) -> list[str]:
         """
@@ -61,10 +61,9 @@ class VisualizationGraphInspector:
         keywords = [t for t in tokens if t.lower() not in _STOPWORDS and len(t) > 2]
         return list(dict.fromkeys(keywords))  # deduplicate, preserve order
 
-    def lookup(self, keywords: list[str], max_entities: int = 15) -> dict[str, Any]:
+    async def lookup(self, keywords: list[str], max_entities: int = 15) -> dict[str, Any]:
         """
-        Return entities and relationships matching keywords from the
-        shared graph cache.  No Neo4j call is made.
+        Return entities and relationships matching keywords from Neo4j.
 
         Scoring (case-insensitive):
           +10 — exact title match
@@ -73,23 +72,73 @@ class VisualizationGraphInspector:
           +3  — keyword contained in entity type
           +1  — keyword contained in description
         """
-        cache = get_graph_cache()
-        entities      = cache.entities
-        relationships = cache.relationships
-
-        if not keywords or not entities:
+        if not keywords:
             return {"entities": [], "relationships": [], "matched": False}
 
         kw_lower = [k.lower() for k in keywords if k and len(k) > 2]
         if not kw_lower:
             return {"entities": [], "relationships": [], "matched": False}
 
-        # Score every entity
+        async with get_session() as session:
+            node_result = await session.run(
+                """
+                MATCH (n)
+                WHERE any(kw in $keywords WHERE
+                    toLower(coalesce(n.name, '')) CONTAINS kw OR
+                    toLower(coalesce(n.employee_id, '')) CONTAINS kw OR
+                    toLower(coalesce(n.incident_id, '')) CONTAINS kw OR
+                    toLower(coalesce(n.deployment_id, '')) CONTAINS kw OR
+                    toLower(coalesce(n.commit_sha, '')) CONTAINS kw OR
+                    toLower(coalesce(n.ticket_id, '')) CONTAINS kw OR
+                    toLower(coalesce(n.channel, '')) CONTAINS kw OR
+                    toLower(coalesce(n.id, '')) CONTAINS kw OR
+                    toLower(coalesce(n.team, '')) CONTAINS kw OR
+                    toLower(coalesce(n.project, '')) CONTAINS kw OR
+                    toLower(coalesce(n.role, '')) CONTAINS kw OR
+                    toLower(coalesce(n.description, '')) CONTAINS kw OR
+                    toLower(coalesce(n.summary, '')) CONTAINS kw OR
+                    toLower(coalesce(n.status, '')) CONTAINS kw
+                )
+                RETURN
+                    coalesce(n.id, toString(id(n))) AS id,
+                    labels(n)[0] AS label,
+                    COALESCE(
+                        n.name,
+                        n.employee_id,
+                        n.incident_id,
+                        n.deployment_id,
+                        n.commit_sha,
+                        n.ticket_id,
+                        n.channel,
+                        n.id,
+                        toString(id(n))
+                    ) AS title,
+                    COALESCE(n.description, n.summary, n.status, n.role, '') AS description,
+                    n.name AS name,
+                    n.employee_id AS employee_id,
+                    n.team AS team,
+                    n.project AS project,
+                    n.role AS role,
+                    n.email AS email
+                LIMIT 100
+                """,
+                keywords=kw_lower,
+            )
+            raw_entities = [dict(record) async for record in node_result]
+
         scored: list[tuple[int, dict]] = []
-        for entity in entities:
+        for entity in raw_entities:
             title = str(entity.get("title", "")).lower()
-            etype = str(entity.get("type", "")).lower()
+            etype = str(entity.get("label") or "NODE").lower()
             desc  = str(entity.get("description", "")).lower()
+            aliases = [
+                str(entity.get("name", "")).lower(),
+                str(entity.get("employee_id", "")).lower(),
+                str(entity.get("team", "")).lower(),
+                str(entity.get("project", "")).lower(),
+                str(entity.get("role", "")).lower(),
+                str(entity.get("email", "")).lower(),
+            ]
             score = 0
             for kw in kw_lower:
                 if title == kw:
@@ -98,11 +147,21 @@ class VisualizationGraphInspector:
                     score += 7
                 elif kw in title:
                     score += 5
+                for alias in aliases:
+                    if not alias:
+                        continue
+                    if alias == kw:
+                        score += 8
+                    elif alias.startswith(kw) or kw.startswith(alias):
+                        score += 6
+                    elif kw in alias:
+                        score += 4
                 if kw in etype:
                     score += 3
                 if kw in desc:
                     score += 1
             if score > 0:
+                entity["type"] = str(entity.get("label") or "NODE")
                 scored.append((score, entity))
 
         scored.sort(key=lambda x: x[0], reverse=True)
@@ -111,19 +170,56 @@ class VisualizationGraphInspector:
         if not matched_entities:
             return {"entities": [], "relationships": [], "matched": False}
 
-        # Collect relationships that touch any matched entity (by id or title)
-        matched_ids    = {str(e.get("id", ""))            for e in matched_entities}
-        matched_titles = {str(e.get("title", "")).lower() for e in matched_entities}
+        matched_ids = [str(e.get("id", "")) for e in matched_entities if e.get("id")]
 
-        related_rels: list[dict] = []
-        for rel in relationships:
-            src = str(rel.get("source", ""))
-            tgt = str(rel.get("target", ""))
-            if src in matched_ids or tgt in matched_ids \
-                    or src.lower() in matched_titles or tgt.lower() in matched_titles:
-                related_rels.append(rel)
-            if len(related_rels) >= 30:
-                break
+        async with get_session() as session:
+            rel_result = await session.run(
+                """
+                MATCH (a)-[r]-(b)
+                WHERE coalesce(a.id, toString(id(a))) IN $entity_ids
+                RETURN DISTINCT
+                    toString(id(r)) AS id,
+                    coalesce(a.id, toString(id(a))) AS source,
+                    coalesce(b.id, toString(id(b))) AS target,
+                    type(r) AS rel_type,
+                    COALESCE(
+                        a.name,
+                        a.employee_id,
+                        a.incident_id,
+                        a.deployment_id,
+                        a.commit_sha,
+                        a.ticket_id,
+                        a.channel,
+                        a.id,
+                        toString(id(a))
+                    ) AS source_title,
+                    COALESCE(
+                        b.name,
+                        b.employee_id,
+                        b.incident_id,
+                        b.deployment_id,
+                        b.commit_sha,
+                        b.ticket_id,
+                        b.channel,
+                        b.id,
+                        toString(id(b))
+                    ) AS target_title,
+                    coalesce(r.description, replace(type(r), '_', ' ')) AS description
+                LIMIT 30
+                """,
+                entity_ids=matched_ids,
+            )
+            related_rels = [
+                {
+                    "id": str(record["id"]),
+                    "source": str(record["source"]),
+                    "target": str(record["target"]),
+                    "source_title": str(record["source_title"]),
+                    "target_title": str(record["target_title"]),
+                    "description": str(record["description"]).replace("_", " ").lower(),
+                }
+                async for record in rel_result
+            ]
 
         return {
             "entities":      matched_entities,
@@ -151,15 +247,15 @@ class VisualizationGraphInspector:
         if rels:
             lines.append(f"\nRELATIONSHIPS ({len(rels)}):")
             for r in rels[:15]:
-                src  = r.get("source", "?")
-                tgt  = r.get("target", "?")
+                src  = r.get("source_title") or r.get("source", "?")
+                tgt  = r.get("target_title") or r.get("target", "?")
                 desc = str(r.get("description", ""))[:80]
                 lines.append(f"  {src} → {tgt}: {desc}")
 
         return "\n".join(lines)[:max_chars]
 
     def stats(self) -> dict[str, Any]:
-        return get_graph_cache().stats()
+        return {"source": "neo4j"}
 
 
 # Module singleton

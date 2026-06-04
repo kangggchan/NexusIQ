@@ -205,12 +205,51 @@ async def get_jira_tickets_for_service(session: AsyncSession, service_name: str)
 async def get_employee_services(session: AsyncSession, employee_id: str) -> list[dict]:
     result = await session.run(
         """
-        MATCH (e:Employee {employee_id: $id})<-[:OWNED_BY]-(s:Service)
+        MATCH (e:Employee)
+        WHERE toUpper(e.employee_id) = toUpper($id)
+           OR toLower(e.name) = toLower($id)
+        OPTIONAL MATCH (e)<-[:OWNED_BY]-(s:Service)
         RETURN s.service_id AS id, s.name AS name, s.status AS status, s.team AS team
         """,
         id=employee_id,
     )
-    return [dict(r) async for r in result]
+    return [dict(r) async for r in result if r.get("name")]
+
+
+async def get_employee_profile(session: AsyncSession, employee_ref: str) -> dict | None:
+    result = await session.run(
+        """
+        MATCH (e:Employee)
+        WHERE toUpper(e.employee_id) = toUpper($ref)
+           OR toLower(e.name) = toLower($ref)
+        OPTIONAL MATCH (e)<-[:OWNED_BY]-(s:Service)
+        RETURN
+            e.employee_id AS employee_id,
+            e.name AS name,
+            e.role AS role,
+            e.team AS team,
+            e.email AS email,
+            collect(DISTINCT {
+                id: s.service_id,
+                name: s.name,
+                status: s.status,
+                team: s.team
+            }) AS services
+        LIMIT 1
+        """,
+        ref=employee_ref,
+    )
+    record = await result.single()
+    if not record:
+        return None
+    return {
+        "employee_id": record["employee_id"],
+        "name": record["name"],
+        "role": record["role"],
+        "team": record["team"],
+        "email": record["email"],
+        "services": [svc for svc in record["services"] if svc.get("name")],
+    }
 
 
 # ── Generic entity lookup ─────────────────────────────────────────────────────

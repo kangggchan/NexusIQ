@@ -139,14 +139,17 @@ class WorkforceCatalog:
             unique_docs.append(doc)
         return unique_docs
 
-    def _resolve_employees(self, query: str, answer_goal: str, query_entities: list[str]) -> list[str]:
-        combined = _norm(" ".join([query, answer_goal, *query_entities]))
+    def resolve_employee_names(self, *texts: str) -> list[str]:
+        combined = _norm(" ".join(text for text in texts if text))
         employees = [
             employee.get("name", "")
             for key, employee in self._employees_by_name.items()
             if key and key in combined
         ]
         return _dedupe(employees)
+
+    def _resolve_employees(self, query: str, answer_goal: str, query_entities: list[str]) -> list[str]:
+        return self.resolve_employee_names(query, answer_goal, *query_entities)
 
     def _is_company_wide_query(self, query: str, answer_goal: str, query_entities: list[str]) -> bool:
         combined = _norm(" ".join([query, answer_goal, *query_entities]))

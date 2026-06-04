@@ -21,7 +21,7 @@ log = logging.getLogger(__name__)
 class DetectedEntities:
     incidents:    list[str] = field(default_factory=list)   # INC-xxx
     services:     list[str] = field(default_factory=list)   # service names
-    employees:    list[str] = field(default_factory=list)   # EMP-xxx
+    employees:    list[str] = field(default_factory=list)   # EMP-xxx or employee names
     jira_tickets: list[str] = field(default_factory=list)   # LID-xxx / ADAS-xxx
     deployments:  list[str] = field(default_factory=list)   # DEP-xxx
     commits:      list[str] = field(default_factory=list)   # short SHA or full SHA
@@ -111,6 +111,13 @@ class EntityDetector:
             if name in query_lower
         ]
         entities.services = _unique(svc_ids + svc_by_name)
+
+        employee_by_name = [
+            self._employee_names[i]
+            for i, name in enumerate(self._employee_lower)
+            if name in query_lower
+        ]
+        entities.employees = _unique(entities.employees + employee_by_name)
 
         # Commit SHAs (avoid matching plain numbers; require hex pattern)
         commit_candidates = _RE_COMMIT_SHA.findall(query)

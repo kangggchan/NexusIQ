@@ -299,16 +299,26 @@ class SharedLightweightRetriever:
             return cached
         results: list[GraphResult] = []
         async with get_session() as session:
-            svcs = await q.get_employee_services(session, emp_id.upper())
-            if svcs:
+            employee = await q.get_employee_profile(session, emp_id)
+            if employee:
+                svcs = employee.get("services", [])
+                employee_name = employee.get("name") or emp_id
+                services_text = ", ".join(s.get("name", "") for s in svcs) or "NONE"
                 results.append(GraphResult(
-                    id=emp_id,
+                    id=employee.get("employee_id") or employee_name,
                     type="employee",
                     content=(
-                        f"Employee {emp_id} owns services: "
-                        + ", ".join(s.get("name", "") for s in svcs)
+                        f"[EMPLOYEE] {employee_name} is a {employee.get('role', '')} "
+                        f"on {employee.get('team', '')}. Owned services: {services_text}."
                     ),
-                    metadata={"employee_id": emp_id, "services": svcs},
+                    metadata={
+                        "employee_id": employee.get("employee_id", ""),
+                        "name": employee_name,
+                        "role": employee.get("role", ""),
+                        "team": employee.get("team", ""),
+                        "email": employee.get("email", ""),
+                        "services": svcs,
+                    },
                 ))
         await self._graph_cache.set(cache_k, results, ttl=GRAPH_TTL)
         return results

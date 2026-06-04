@@ -325,12 +325,12 @@ class InvestigationWorkflow:
 
     async def _query_analyze(self, state: InvestigationState) -> dict:
         """
-        First node: qwen2.5:1.5b reads from the shared GraphCache (same data
-        already fetched from Neo4j by /graph/visualization — zero extra DB calls)
+        First node: qwen2.5:1.5b reads lightweight graph matches directly from
+        Neo4j so query routing is not limited by the visualization cache.
         to perform query decomposition, entity extraction, intent classification,
         graph lookup planning, and retrieval routing.
 
-        If the graph cache has relevant entities/relationships the insights are
+        If graph lookup has relevant entities/relationships the insights are
         stored in state and forwarded to the orchestrator planning step.
         """
         query = state["query"]
@@ -359,7 +359,7 @@ class InvestigationWorkflow:
         )
 
         # 2. In-memory graph lookup (no DB call) ─────────────────────────────
-        lookup = self._inspector.lookup(combined_keywords)
+        lookup = await self._inspector.lookup(combined_keywords)
         graph_ctx_text = self._inspector.format_for_llm(lookup)
         has_match = lookup["matched"]
 
@@ -422,6 +422,34 @@ class InvestigationWorkflow:
                 intent = raw_intent
             if raw_entities.upper() != "NONE":
                 llm_entities = [e.strip() for e in raw_entities.split(",") if e.strip()]
+
+            workforce_catalog = await get_workforce_catalog()
+            resolved_employee_names = workforce_catalog.resolve_employee_names(
+                query,
+                answer_goal,
+                *llm_entities,
+            )
+            if resolved_employee_names:
+                existing_entities = {entity.lower() for entity in llm_entities}
+                for employee_name in resolved_employee_names:
+                    if employee_name.lower() not in existing_entities:
+                        llm_entities.append(employee_name)
+                        existing_entities.add(employee_name.lower())
+
+                if answer_type in {"SUMMARY", "GENERAL"}:
+                    log.info(
+                        "[query_analyzer] forcing answer_type SUMMARY/GENERAL→PROFILE for employees=%s",
+                        resolved_employee_names,
+                    )
+                    answer_type = "PROFILE"
+
+                if routing == "NO_RETRIEVAL":
+                    log.info(
+                        "[query_analyzer] forcing routing NO_RETRIEVAL→RETRIEVE_MORE for employees=%s",
+                        resolved_employee_names,
+                    )
+                    routing = "RETRIEVE_MORE"
+
             if raw_agents.upper() != "NONE":
                 recommended_agents = [
                     agent.strip()
@@ -485,7 +513,7 @@ class InvestigationWorkflow:
             if llm_entities and not has_match:
                 llm_kw = self._inspector.extract_keywords(" ".join(llm_entities))
                 if llm_kw:
-                    secondary = self._inspector.lookup(llm_kw)
+                    secondary = await self._inspector.lookup(llm_kw)
                     if secondary["matched"]:
                         lookup           = secondary
                         graph_ctx_text   = self._inspector.format_for_llm(secondary)
