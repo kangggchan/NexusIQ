@@ -793,6 +793,29 @@ class InvestigationWorkflow:
                 ctx.formatted_context[:1200] if ctx
                 else state.get("retrieved_context", "")[:1200]
             )
+
+            # Keep direct-response cheap, but never drop explicitly requested
+            # incident evidence (for example "INC-001") due to context truncation.
+            incident_refs = {
+                inc.upper() for inc in re.findall(r"\bINC-\d+\b", state.get("query", ""), re.IGNORECASE)
+            }
+            if ctx and incident_refs:
+                focused_docs: list[str] = []
+                for doc in ctx.retrieved_documents:
+                    doc_id = str(doc.get("id", "")).upper()
+                    doc_content = str(doc.get("content", ""))
+                    upper_content = doc_content.upper()
+                    if doc_id in incident_refs or any(ref in upper_content for ref in incident_refs):
+                        focused_docs.append(
+                            f"[INCIDENT MATCH: {doc.get('id', 'unknown')}]\n{doc_content[:520]}"
+                        )
+                if focused_docs:
+                    focus_block = "\n\n".join(focused_docs[:3])
+                    retrieved_text = (
+                        f"=== INCIDENT-FOCUSED EVIDENCE ===\n{focus_block}\n\n"
+                        f"=== RETRIEVED CONTEXT (TRUNCATED) ===\n{retrieved_text}"
+                    )[:2200]
+
             graph_insights = state.get("graph_insights", "")
             # Always prepend graph_insights when the graph cache had a match —
             # retrieved docs may not contain the entity's profile data.

@@ -129,6 +129,25 @@ class EvidenceEvaluator:
 
         # If the LLM did not request any specialist, shared retrieval alone should
         # answer the query directly after evidence is gathered.
+        # Exception: incident-intent queries with explicit incident entities should
+        # still run the incident specialist to reconstruct timeline/root-cause details.
+        if (
+            not agents
+            and intent == "INCIDENT"
+            and routing == "RETRIEVE_MORE"
+            and bool((ctx.entities or {}).get("incidents"))
+        ):
+            return EvaluationResult(
+                decision=EvidenceDecision.PARTIAL,
+                recommended_agents=["incident"],
+                needs_incident_expansion=True,
+                confidence=signal.evidence_density,
+                reasoning=(
+                    "Incident intent with explicit incident entity detected "
+                    "— forcing incident specialist for timeline fidelity"
+                ),
+            )
+
         if not agents:
             return EvaluationResult(
                 decision=EvidenceDecision.DIRECT_RESPONSE,
