@@ -103,6 +103,28 @@ _FAST_SYSTEM_PROMPT = (
     "supports that comparison."
 )
 
+_GRAPH_SUFFICIENCY_CHECK_PROMPT = """
+You are a strict evidence sufficiency checker.
+
+Decide whether the provided graph context ALONE can fully answer the current query.
+Do not infer missing facts.
+
+Return ONLY valid JSON in this schema:
+{
+    "sufficient": true|false,
+    "confidence": 0.0,
+    "reason": "short reason"
+}
+
+Rules:
+- sufficient=true ONLY when the graph context explicitly contains the final answer.
+- If the query asks for counts, names, ownership, status, timeline, or root cause and
+    the required facts are not explicit, return sufficient=false.
+- If the graph context appears semantically related but lacks direct answer facts,
+    return sufficient=false.
+- Be conservative: when uncertain, return sufficient=false.
+"""
+
 
 def _ts() -> str:
     return datetime.now(timezone.utc).isoformat()
@@ -157,6 +179,46 @@ class InvestigationWorkflow:
             config=config,
         )
         return response.text or ""
+
+    async def _verify_graph_sufficiency(
+        self,
+        *,
+        query: str,
+        answer_goal: str,
+        answer_type: str,
+        intent: str,
+        conversation_context: str,
+        graph_context: str,
+    ) -> tuple[bool, float, str]:
+        """
+        LLM guardrail for GRAPH_SUFFICIENT routing.
+        Returns: (is_sufficient, confidence, reason).
+        """
+        user_msg = (
+            f"QUERY: {query}\n"
+            f"ANSWER_GOAL: {answer_goal}\n"
+            f"ANSWER_TYPE: {answer_type}\n"
+            f"INTENT: {intent}\n\n"
+            f"CONVERSATION_CONTEXT:\n{conversation_context or '(none)'}\n\n"
+            f"GRAPH_CONTEXT:\n{graph_context or '(none)'}"
+        )
+        try:
+            raw = await self._chat(
+                AGENT_MODELS["query_analyzer"],
+                _GRAPH_SUFFICIENCY_CHECK_PROMPT,
+                user_msg,
+                timeout=25.0,
+                num_predict=120,
+                temperature=0.0,
+            )
+            parsed = _parse_json(raw)
+            sufficient = bool(parsed.get("sufficient", False))
+            confidence = float(parsed.get("confidence", 0.0) or 0.0)
+            reason = str(parsed.get("reason", "no reason provided"))[:200]
+            return sufficient, confidence, reason
+        except Exception as exc:
+            # Fail-safe: prefer retrieval over direct answer when verifier fails.
+            return False, 0.0, f"sufficiency-check-failed: {exc}"
 
     # -- Node: context_agent ---------------------------------------------------
 
@@ -445,8 +507,28 @@ class InvestigationWorkflow:
             else:
                 full_insights = ""
 
-            # Trust the LLM routing decision completely.
-            # GRAPH_SUFFICIENT should skip retrieval and answer directly from graph context.
+            # Second-stage LLM verification for GRAPH_SUFFICIENT.
+            # This prevents false-direct answers when graph matches are stale/irrelevant.
+            if routing == "GRAPH_SUFFICIENT" and has_match:
+                ok, conf, reason = await self._verify_graph_sufficiency(
+                    query=query,
+                    answer_goal=answer_goal,
+                    answer_type=answer_type,
+                    intent=intent,
+                    conversation_context=conversation_context,
+                    graph_context=full_insights,
+                )
+                if not ok or conf < 0.55:
+                    log.info(
+                        "[query_analyzer] GRAPH_SUFFICIENT→RETRIEVE_MORE by verifier "
+                        "(ok=%s conf=%.2f reason=%s)",
+                        ok,
+                        conf,
+                        reason,
+                    )
+                    routing = "RETRIEVE_MORE"
+
+            # Final routing to execution mode.
             is_conversational  = routing == "NO_RETRIEVAL" and not has_match
             is_graph_sufficient = routing == "GRAPH_SUFFICIENT" and has_match
             is_direct_answer   = is_conversational or is_graph_sufficient
