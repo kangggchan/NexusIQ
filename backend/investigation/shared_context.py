@@ -117,7 +117,26 @@ class SharedInvestigationContext:
 
         elif agent == "incident":
             # Incident agent: incidents + deployments + timeline
-            parts = [base[:max_chars]]
+            parts: list[str] = []
+
+            # Promote documents that match explicitly requested incident IDs
+            # (for example INC-001) so the incident agent can reconstruct the
+            # timeline even when graph-derived incident rows are empty.
+            target_incidents = [
+                str(i).upper() for i in (self.entities or {}).get("incidents", []) if i
+            ]
+            if target_incidents:
+                focused_docs: list[str] = []
+                for doc in self.retrieved_documents:
+                    doc_id = str(doc.get("id", "")).upper()
+                    content = str(doc.get("content", ""))
+                    upper_content = content.upper()
+                    if doc_id in target_incidents or any(ref in upper_content for ref in target_incidents):
+                        focused_docs.append(f"  [{doc.get('id', 'unknown')}] {content[:420]}")
+                if focused_docs:
+                    parts.append("[TARGET INCIDENT DOCUMENTS]\n" + "\n\n".join(focused_docs[:4]))
+
+            parts.append(base[:max_chars])
             if self.incidents:
                 inc_text = "\n".join(
                     f"  [{i.get('incident_id', '')}] {i.get('title', '')} "
