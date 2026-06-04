@@ -371,6 +371,28 @@ class InvestigationWorkflow:
                 if not (has_match and raw_routing == "NO_RETRIEVAL"):
                     routing = raw_routing
 
+            # Post-LLM Guardrail: prevent routing to NO_RETRIEVAL if the query is factual.
+            if routing == "NO_RETRIEVAL":
+                has_context_entities = False
+                if conversation_context.strip():
+                    _m_check = re.search(r"<entities>(.*?)</entities>", conversation_context, re.DOTALL | re.IGNORECASE)
+                    if _m_check and _m_check.group(1).strip().upper() != "NONE":
+                        has_context_entities = True
+                
+                # Check for any non-greeting keywords in the combined keywords
+                non_greeting_keywords = [
+                    kw for kw in combined_keywords
+                    if kw.lower() not in {"hello", "hi", "hey", "thanks", "thank", "greetings", "bye", "goodbye", "please", "yes", "no"}
+                ]
+                
+                if has_context_entities or non_greeting_keywords:
+                    log.info(
+                        "[query_analyzer] guard: NO_RETRIEVAL→RETRIEVE_MORE "
+                        "(has_context_entities=%s, non_greeting_keywords=%s)",
+                        has_context_entities, non_greeting_keywords,
+                    )
+                    routing = "RETRIEVE_MORE"
+
             # PEOPLE/PROFILE/STATUS answers usually need shared retrieval even when
             # the graph matched, because workforce and document evidence live there.
             if answer_type in {"PEOPLE", "PROFILE", "STATUS"}:

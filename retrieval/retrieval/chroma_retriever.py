@@ -58,6 +58,10 @@ class ChromaRetriever:
         k = top_k or settings.vector_top_k
         target_keys = collections or _infer_collections(entities)
 
+        # Print/log Chroma search start
+        log.info("[ChromaRetriever] SEARCH CALLED - Query: %r | Collections: %s | top_k: %d", query, target_keys, k)
+        print(f"\n[ChromaRetriever] >>> SEARCH CALLED <<<\n  Query: {query!r}\n  Collections: {target_keys}\n  top_k: {k}\n")
+
         query_embedding = await self._embedder.embed(query)
 
         all_results: list[VectorResult] = []
@@ -65,16 +69,23 @@ class ChromaRetriever:
             col_def = COLLECTIONS.get(col_key)
             if col_def is None:
                 log.warning("Unknown collection key: %s", col_key)
+                print(f"[ChromaRetriever] WARNING: Unknown collection key: {col_key}")
                 continue
             try:
+                log.info("[ChromaRetriever] Querying collection: %s", col_def.name)
+                print(f"[ChromaRetriever] Querying collection: {col_def.name} ...")
                 results = await self._query_collection(
                     col_def.name, query_embedding, k
                 )
+                log.info("[ChromaRetriever] Collection %s returned %d results", col_def.name, len(results))
+                print(f"[ChromaRetriever] Collection {col_def.name} returned {len(results)} results")
                 all_results.extend(results)
             except Exception as exc:
                 log.warning("ChromaDB query failed for %s: %s", col_key, exc)
+                print(f"[ChromaRetriever] ERROR: ChromaDB query failed for {col_key}: {exc}")
 
-        log.debug("ChromaDB retriever returned %d results", len(all_results))
+        log.info("[ChromaRetriever] Search finished. Total results: %d", len(all_results))
+        print(f"[ChromaRetriever] >>> SEARCH FINISHED <<< Total results: {len(all_results)}\n")
         return all_results
 
     async def _query_collection(

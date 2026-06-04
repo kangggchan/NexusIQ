@@ -26,7 +26,7 @@ _STOPWORDS = frozenset({
     "above", "below", "from", "up", "down", "out", "off", "over", "under",
     "again", "further", "then", "once", "here", "there", "when", "where",
     "why", "how", "all", "both", "each", "few", "more", "most", "other",
-    "some", "such", "no", "nor", "not", "only", "own", "same", "so", "than",
+    "some", "such", "no", "nor", "not", "only", "same", "so", "than",
     "too", "very", "just", "what", "which", "who", "whom", "this", "that",
     "these", "those", "and", "but", "if", "or", "because", "as", "until",
     "while", "i", "me", "my", "myself", "we", "our", "ours", "ourselves",
