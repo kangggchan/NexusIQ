@@ -100,19 +100,10 @@ export default function ServiceInspector({
 
       try {
         if (selectedNode.type === 'SERVICE') {
-          // Load services and find match by id or name
-          const [svcRes, incRes] = await Promise.all([
-            fetch('/api/nexusiq/graph', { cache: 'no-store' }),
-            fetch('/api/nexusiq/incidents', { cache: 'no-store' }),
-          ])
+          // Load incidents to find related ones
+          const incRes = await fetch('/api/nexusiq/incidents', { cache: 'no-store' })
 
-          // Load from services.json via the graph API data
-          const svcGraphData = svcRes.ok ? null : null // we don't have direct services endpoint
-
-          // Fetch services directly
-          const svcRaw = await fetch('/api/data/services.json').catch(() => null)
-
-          // Fallback: use node data
+          // Use node data from graph - no direct services endpoint needed
           if (incRes.ok) {
             const allIncidents: Array<Record<string, unknown>> = await incRes.json()
             const nodeTitle = selectedNode.title

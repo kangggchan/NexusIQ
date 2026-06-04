@@ -1,15 +1,20 @@
+"""
+Workforce catalog — Neo4j-backed workforce evidence for people, profile, team, and project questions.
+
+Data Source:
+  - Neo4j: Employee, Service, and Team nodes
+  - No local data folder access
+"""
 from __future__ import annotations
 
-import json
 import re
-from pathlib import Path
 from typing import Any
 
-from retrieval.config import DATASET_DIR
+from retrieval.graph.neo4j_client import get_session
 
 
 class WorkforceCatalog:
-    """Dataset-backed workforce evidence for people, profile, team, and project questions."""
+    """Neo4j-backed workforce evidence for people, profile, team, and project questions."""
 
     def __init__(self) -> None:
         self._loaded = False
@@ -19,58 +24,73 @@ class WorkforceCatalog:
         self._teams_by_name: dict[str, dict[str, Any]] = {}
         self._project_aliases: dict[str, str] = {}
 
-    def load(self) -> None:
+    async def load(self) -> None:
         if self._loaded:
             return
 
-        employee_data = json.loads((DATASET_DIR / "employee_db.json").read_text())
-        service_data = json.loads((DATASET_DIR / "services.json").read_text())
+        try:
+            async with get_session() as session:
+                # Load employees from Neo4j
+                emp_result = await session.run("MATCH (e:Employee) RETURN e")
+                self._employees = [dict(record["e"]) async for record in emp_result]
+                
+                self._employees_by_name = {
+                    _norm(emp.get("name", "")): emp
+                    for emp in self._employees
+                    if emp.get("name")
+                }
+                
+                # Extract teams from employees
+                teams_set = {emp.get("team", "") for emp in self._employees if emp.get("team")}
+                self._teams_by_name = {
+                    _norm(team): {"name": team}
+                    for team in teams_set
+                    if team
+                }
 
-        self._employees = employee_data.get("employees", [])
-        self._employees_by_name = {
-            _norm(employee.get("name", "")): employee
-            for employee in self._employees
-            if employee.get("name")
-        }
-        self._services_by_name = {
-            _norm(s.get("name", "")): s
-            for s in service_data.get("services", [])
-            if s.get("name")
-        }
-        self._teams_by_name = {
-            _norm(t.get("name", "")): t
-            for t in employee_data.get("teams", [])
-            if t.get("name")
-        }
+                # Load services from Neo4j
+                svc_result = await session.run("MATCH (s:Service) RETURN s")
+                services = [dict(record["s"]) async for record in svc_result]
+                
+                self._services_by_name = {
+                    _norm(s.get("name", "")): s
+                    for s in services
+                    if s.get("name")
+                }
 
-        project_names = {
-            s.get("project", "")
-            for s in service_data.get("services", [])
-            if s.get("project")
-        }
-        for employee in self._employees:
-            project_names.update(p for p in employee.get("projects", []) if p)
+                # Build project aliases
+                project_names = {
+                    s.get("project", "")
+                    for s in services
+                    if s.get("project")
+                }
+                for employee in self._employees:
+                    project_names.update(p for p in employee.get("projects", []) if p)
 
-        for project in project_names:
-            norm = _norm(project)
-            if not norm:
-                continue
-            self._project_aliases[norm] = project
-            tokens = set(re.findall(r"[a-z0-9]+", norm))
-            for family in ("adas", "lidar"):
-                if family in tokens:
-                    self._project_aliases[f"{family} project"] = project
+                for project in project_names:
+                    norm = _norm(project)
+                    if not norm:
+                        continue
+                    self._project_aliases[norm] = project
+                    tokens = set(re.findall(r"[a-z0-9]+", norm))
+                    for family in ("adas", "lidar"):
+                        if family in tokens:
+                            self._project_aliases[f"{family} project"] = project
 
-        self._loaded = True
+            self._loaded = True
+        except Exception as exc:
+            # Log but don't fail - workforce catalog is optional
+            import logging
+            logging.getLogger(__name__).warning("WorkforceCatalog could not load from Neo4j: %s", exc)
 
-    def build_people_documents(
+    async def build_people_documents(
         self,
         *,
         query: str,
         answer_goal: str,
         query_entities: list[str],
     ) -> list[dict[str, Any]]:
-        self.load()
+        await self.load()
 
         employees = self._resolve_employees(query, answer_goal, query_entities)
         services = self._resolve_services(query, answer_goal, query_entities)
@@ -341,10 +361,11 @@ class WorkforceCatalog:
 _catalog: WorkforceCatalog | None = None
 
 
-def get_workforce_catalog() -> WorkforceCatalog:
+async def get_workforce_catalog() -> WorkforceCatalog:
     global _catalog
     if _catalog is None:
         _catalog = WorkforceCatalog()
+        await _catalog.load()
     return _catalog
 
 

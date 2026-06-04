@@ -4,13 +4,13 @@ Evidence-driven GraphRAG investigation workflow.
 Architecture (persisted-session-context, graph-aware):
 
   START
-    -> query_analyzer    (qwen2.5:1.5b: reads conversation_context from state + Neo4j
-                          graph cache — NO extra DB call)
+    -> query_analyzer    (qwen2.5:1.5b: reads conversation_context from state + in-memory
+                          GraphCache populated from Neo4j — NO extra DB call)
                           • query decomposition, entity extraction, intent classification
                           • graph lookup planning + retrieval routing
         | conversational (routing=NO_RETRIEVAL, no graph match) -> synthesize
         | graph match OR retrieve needed                        -> shared_retrieve
-    -> shared_retrieve   (SharedLightweightRetriever: 1 embedding + 1-hop graph, cached)
+    -> shared_retrieve   (SharedLightweightRetriever: Neo4j graph + ChromaDB semantic search, cached)
     -> evaluate          (EvidenceEvaluator: heuristic gate, NO LLM call)
         | DIRECT_RESPONSE -> synthesize (lightweight: context already sufficient)
         | PARTIAL        -> graph_agent + incident_agent + risk_agent (filtered slices)
@@ -23,14 +23,15 @@ Architecture (persisted-session-context, graph-aware):
 
 Key design guarantees:
     - query_analyzer reads persisted conversation_context, NOT raw history turns
-  - graph_insights from the Neo4j cache flow into orchestrator planning
-  - Shared retrieval runs EXACTLY ONCE per query
-  - Embedding computation cached (1 hour TTL)
-  - Graph results cached per entity (2 min TTL)
-  - Context object cached per query (5 min TTL)
-  - Agents receive FILTERED slices, not duplicated full context
-  - Selective expanders fetch ONLY missing evidence
-  - FAST queries never reach agents
+    - GraphCache populated from Neo4j (no local data folder access)
+    - ChromaDB provides semantic search for document content (no local files)
+    - Shared retrieval runs EXACTLY ONCE per query
+    - Embedding computation cached (1 hour TTL)
+    - Graph results cached per entity (2 min TTL)
+    - Context object cached per query (5 min TTL)
+    - Agents receive FILTERED slices, not duplicated full context
+    - Selective expanders fetch ONLY missing evidence from Neo4j/ChromaDB
+    - FAST queries never reach agents
 """
 from __future__ import annotations
 
@@ -486,7 +487,8 @@ class InvestigationWorkflow:
         try:
             ctx: SharedInvestigationContext = deepcopy(await self._retriever.retrieve(query))
             if state.get("answer_type") in {"PEOPLE", "PROFILE"}:
-                workforce_docs = get_workforce_catalog().build_people_documents(
+                workforce_catalog = await get_workforce_catalog()
+                workforce_docs = await workforce_catalog.build_people_documents(
                     query=query,
                     answer_goal=state.get("answer_goal", query),
                     query_entities=state.get("query_entities", []),

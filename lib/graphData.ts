@@ -75,24 +75,23 @@ export interface GraphData {
 export class GraphDataLoader {
   private basePath: string;
 
-  constructor(basePath: string = '/api/data') {
+  constructor(basePath: string = '/api/nexusiq/graph') {
     this.basePath = basePath;
   }
 
   async loadGraphData(): Promise<GraphData> {
     try {
-      const [entitiesData, relationshipsData, communitiesData, reportsData] = 
-        await Promise.all([
-          this.fetchJsonFile('entities.json'),
-          this.fetchJsonFile('relationships.json'),
-          this.fetchJsonFile('communities.json'),
-          this.fetchJsonFile('community_reports.json'),
-        ]);
+      // Fetch from backend API instead of local JSON files
+      const response = await fetch(this.basePath, { cache: 'no-store' });
+      if (!response.ok) {
+        throw new Error(`Failed to fetch graph data: ${response.statusText}`);
+      }
+      const data = await response.json();
 
-      const entities = this.parseJsonToEntities(entitiesData);
-      const relationships = this.parseJsonToRelationships(relationshipsData);
-      const communities = this.parseJsonToCommunities(communitiesData);
-      const communityReports = this.parseJsonToCommunityReports(reportsData);
+      const entities = this.parseJsonToEntities(data.entities || []);
+      const relationships = this.parseJsonToRelationships(data.relationships || []);
+      const communities = this.parseJsonToCommunities(data.communities || []);
+      const communityReports = this.parseJsonToCommunityReports(data.communityReports || []);
 
       // Merge community report titles with communities
       const communityTitleMap = new Map<number, string>();
@@ -116,14 +115,6 @@ export class GraphDataLoader {
       console.error('Error loading graph data:', error);
       throw error;
     }
-  }
-
-  private async fetchJsonFile(filename: string): Promise<unknown[]> {
-    const response = await fetch(`${this.basePath}/${filename}`);
-    if (!response.ok) {
-      throw new Error(`Failed to fetch ${filename}: ${response.statusText}`);
-    }
-    return await response.json();
   }
 
   private parseJsonToEntities(data: Array<Record<string, unknown>>): Entity[] {

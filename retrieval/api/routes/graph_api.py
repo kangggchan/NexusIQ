@@ -1,3 +1,17 @@
+"""
+Graph API routes — Backend endpoints for NexusIQ graph and document data.
+
+Data Sources:
+  - Neo4j: Graph relationships, entities, incidents, timeline structure
+  - ChromaDB: Semantic search for document content (context documents)
+  - No local data folder access in runtime
+
+Endpoints:
+  - /graph/visualization: Full graph structure from Neo4j
+  - /graph/incidents: All incidents from Neo4j
+  - /graph/context: Context documents from ChromaDB (semantic search)
+  - /graph/timeline: Timeline events (Neo4j structure + ChromaDB content)
+"""
 from __future__ import annotations
 
 import logging

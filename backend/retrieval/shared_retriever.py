@@ -14,13 +14,18 @@ reused by all downstream agents. Key optimizations vs the old HybridRetriever:
     - Called once per workflow run (but agents had no reuse mechanism)
 
   SharedLightweightRetriever:
-    - ChromaDB top_k=4 (focused retrieval)
+    - ChromaDB top_k=4 (focused retrieval from vector DB)
     - Neo4j 1-hop only (DEPENDS_ON*1..1) — 5-10x faster
     - Embedding cached (reused for 1 hour)
     - Full context cached (reused for 5 minutes)
     - Produces RetrievalSignal for evidence evaluation
     - Returns SharedInvestigationContext shared across ALL agents
     - NEVER repeats graph traversal or vector search within a pipeline run
+
+Data Sources:
+  - Neo4j: Graph relationships, entity connections, timestamps
+  - ChromaDB: Semantic search for document content (slack, meeting, technical docs, etc.)
+  - No local data folder access (all data from databases)
 
 Performance targets:
     - cache hit:  < 10ms
@@ -62,9 +67,9 @@ log = logging.getLogger(__name__)
 
 # ── Retrieval budget constants ────────────────────────────────────────────────
 # Significantly lower than the old defaults to reduce latency
-LIGHTWEIGHT_VECTOR_TOP_K = 4     # was 10 per collection
-LIGHTWEIGHT_RERANK_TOP_K = 5     # was 8 fused
-SHALLOW_GRAPH_DEPTH      = 1     # was 3 (DEPENDS_ON*1..1 instead of *1..3)
+LIGHTWEIGHT_VECTOR_TOP_K = 10     # was 10 per collection
+LIGHTWEIGHT_RERANK_TOP_K = 8     # was 8 fused
+SHALLOW_GRAPH_DEPTH      = 3     # was 3 (DEPENDS_ON*1..1 instead of *1..3)
 
 
 class SharedLightweightRetriever:
@@ -80,7 +85,7 @@ class SharedLightweightRetriever:
     def __init__(self) -> None:
         self._chroma  = ChromaRetriever()
         self._neo4j   = Neo4jRetriever()
-        self._detector = get_detector()
+        self._detector = None  # Will be loaded async
         self._ctx_cache   = get_context_cache()
         self._emb_cache   = get_embedding_cache()
         self._graph_cache = get_graph_cache()
@@ -99,7 +104,11 @@ class SharedLightweightRetriever:
         """
         t0 = time.monotonic()
 
-        # ── Step 1: Fast entity extraction (regex-based, no LLM) ─────────────
+        # ── Step 1: Load detector if not loaded
+        if self._detector is None:
+            self._detector = await get_detector()
+
+        # ── Step 2: Fast entity extraction (regex-based, no LLM) ─────────────
         entities: DetectedEntities = self._detector.detect(query)
         entity_fp = _entity_fingerprint(entities)
         cache_k   = context_key(query, entity_fp)

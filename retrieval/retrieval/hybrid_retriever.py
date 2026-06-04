@@ -3,6 +3,11 @@ Hybrid retriever — orchestrates the full retrieval pipeline:
 
   Query → Entity Detection → [Neo4j Graph + ChromaDB Vector] (parallel)
         → RRF Reranking → Context Fusion → FusedContext
+
+Data Sources:
+  - Neo4j: Graph relationships and entity data
+  - ChromaDB: Semantic search for document content
+  - No local data folder access
 """
 from __future__ import annotations
 
@@ -45,7 +50,7 @@ class HybridRetriever:
         _top_k = top_k or settings.rerank_top_k
 
         # 1. Entity detection
-        detector = get_detector()
+        detector = await get_detector()
         entities: DetectedEntities = detector.detect(user_query)
         log.info(
             "Entities detected — incidents: %s, services: %s, jira: %s, commits: %s",

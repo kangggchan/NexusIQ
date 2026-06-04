@@ -1,16 +1,18 @@
 """
 Entity detector — extracts NexusIQ entity references from free-text queries.
-Loads known service and employee names at startup for fuzzy name matching.
+Loads known service and employee names from Neo4j at startup for fuzzy name matching.
+
+Data Source:
+  - Neo4j: Service and Employee node names
+  - No local data folder access
 """
 from __future__ import annotations
 
-import json
 import re
 import logging
 from dataclasses import dataclass, field
-from pathlib import Path
 
-from retrieval.config import DATASET_DIR
+from retrieval.graph.neo4j_client import get_session
 
 log = logging.getLogger(__name__)
 
@@ -65,27 +67,30 @@ class EntityDetector:
         self._employee_lower: list[str] = []
         self._loaded = False
 
-    def load(self) -> None:
-        """Load entity catalogs from dataset files (call once at startup)."""
+    async def load(self) -> None:
+        """Load entity catalogs from Neo4j (call once at startup)."""
         if self._loaded:
             return
         try:
-            svc_data = json.loads((DATASET_DIR / "services.json").read_text())
-            self._service_names = [s["name"] for s in svc_data.get("services", [])]
-            self._service_lower = [n.lower() for n in self._service_names]
+            async with get_session() as session:
+                # Load service names from Neo4j
+                svc_result = await session.run("MATCH (s:Service) RETURN s.name AS name")
+                self._service_names = [record["name"] async for record in svc_result if record["name"]]
+                self._service_lower = [n.lower() for n in self._service_names]
 
-            emp_data = json.loads((DATASET_DIR / "employee_db.json").read_text())
-            self._employee_names = [e["name"] for e in emp_data.get("employees", [])]
-            self._employee_lower = [n.lower() for n in self._employee_names]
+                # Load employee names from Neo4j
+                emp_result = await session.run("MATCH (e:Employee) RETURN e.name AS name")
+                self._employee_names = [record["name"] async for record in emp_result if record["name"]]
+                self._employee_lower = [n.lower() for n in self._employee_names]
 
             self._loaded = True
             log.info(
-                "EntityDetector loaded: %d services, %d employees",
+                "EntityDetector loaded from Neo4j: %d services, %d employees",
                 len(self._service_names),
                 len(self._employee_names),
             )
         except Exception as exc:
-            log.warning("EntityDetector could not load catalog: %s", exc)
+            log.warning("EntityDetector could not load catalog from Neo4j: %s", exc)
 
     def detect(self, query: str) -> DetectedEntities:
         """Extract all entity references from *query*."""
@@ -133,9 +138,9 @@ def _unique(items: list[str]) -> list[str]:
 _detector: EntityDetector | None = None
 
 
-def get_detector() -> EntityDetector:
+async def get_detector() -> EntityDetector:
     global _detector
     if _detector is None:
         _detector = EntityDetector()
-        _detector.load()
+        await _detector.load()
     return _detector
