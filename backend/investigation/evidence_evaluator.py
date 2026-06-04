@@ -82,6 +82,8 @@ class EvidenceEvaluator:
         intent: str = "GENERAL",
         routing: str = "RETRIEVE_MORE",
         recommended_agents: list[str] | None = None,
+        answer_type: str = "SUMMARY",
+        query_entities: list[str] | None = None,
     ) -> EvaluationResult:
         """
         Determine investigation depth from the LLM answer contract + retrieval signal.
@@ -93,16 +95,20 @@ class EvidenceEvaluator:
             routing: LLM routing decision from query_analyzer
                      (GRAPH_SUFFICIENT|RETRIEVE_MORE|NO_RETRIEVAL).
             recommended_agents: LLM-selected specialist agents needed for the answer.
+            answer_type: Query analyzer answer type.
+            query_entities: Query analyzer entities for breadth/complexity heuristics.
         """
         signal  = ctx.signal
         intent  = (intent  or "GENERAL").upper()
         routing = (routing or "RETRIEVE_MORE").upper()
+        answer_type = (answer_type or "SUMMARY").upper()
+        entity_count = len(query_entities or [])
         valid_agents = {"graph", "incident", "risk"}
         agents = [agent for agent in (recommended_agents or []) if agent in valid_agents]
 
         log.info(
-            "[evaluator] intent=%s routing=%s agents=%s signal=%s density=%.2f incidents=%d",
-            intent, routing, agents,
+            "[evaluator] intent=%s routing=%s answer_type=%s entities=%d agents=%s signal=%s density=%.2f incidents=%d",
+            intent, routing, answer_type, entity_count, agents,
             signal.signal_strength.value, signal.evidence_density, len(ctx.incidents),
         )
 
@@ -147,6 +153,34 @@ class EvidenceEvaluator:
                     "— forcing incident specialist for timeline fidelity"
                 ),
             )
+
+        if not agents and routing == "RETRIEVE_MORE":
+            if answer_type in {"INCIDENT", "RISK", "DEPENDENCY"}:
+                fallback_agent = _primary_agent_for_intent(intent, ["risk", "incident", "graph"]) or "graph"
+                return EvaluationResult(
+                    decision=EvidenceDecision.PARTIAL,
+                    recommended_agents=[fallback_agent],
+                    needs_graph_expansion=fallback_agent == "graph",
+                    needs_incident_expansion=fallback_agent == "incident",
+                    needs_risk_expansion=fallback_agent == "risk",
+                    confidence=signal.evidence_density,
+                    reasoning=(
+                        f"Routing=RETRIEVE_MORE with answer_type={answer_type} — forcing "
+                        f"{fallback_agent} specialist instead of direct response"
+                    ),
+                )
+
+            if answer_type in {"PROFILE", "STATUS"} and entity_count >= 2:
+                return EvaluationResult(
+                    decision=EvidenceDecision.PARTIAL,
+                    recommended_agents=["graph"],
+                    needs_graph_expansion=True,
+                    confidence=signal.evidence_density,
+                    reasoning=(
+                        f"Routing=RETRIEVE_MORE with answer_type={answer_type} and multiple entities "
+                        "— forcing graph specialist for broader synthesis"
+                    ),
+                )
 
         if not agents:
             return EvaluationResult(

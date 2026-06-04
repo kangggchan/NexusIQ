@@ -136,6 +136,24 @@ _RISK_QUERY_MARKERS = (
     "failed deployment",
 )
 
+_FOLLOWUP_QUERY_MARKERS = (
+    "tell me more",
+    "more about",
+    "what about",
+    "how about",
+    "go on",
+    "continue",
+    "expand on",
+    "who owns that",
+    "who owns it",
+)
+
+_FOLLOWUP_PRONOUNS = {
+    "it", "its", "they", "them", "their", "theirs",
+    "he", "him", "his", "she", "her", "hers",
+    "that", "those", "this", "these",
+}
+
 _FAST_SYSTEM_PROMPT = (
     "You are a NexusIQ answer agent. Answer the user's exact question directly "
     "using only the provided context. Give the answer in the first sentence. "
@@ -204,6 +222,44 @@ def _is_comparison_query(query: str) -> bool:
 def _is_risk_query(query: str) -> bool:
     lowered = query.lower()
     return any(marker in lowered for marker in _RISK_QUERY_MARKERS)
+
+
+def _extract_context_entities(context: str) -> list[str]:
+    if not context.strip():
+        return []
+    match = re.search(r"<entities>(.*?)</entities>", context, re.DOTALL | re.IGNORECASE)
+    if not match:
+        return []
+    raw = match.group(1).strip()
+    if not raw or raw.upper() == "NONE":
+        return []
+    return [entity.strip() for entity in raw.split(",") if entity.strip()]
+
+
+def _is_followup_query(query: str) -> bool:
+    lowered = query.lower().strip()
+    if not lowered:
+        return False
+    if any(marker in lowered for marker in _FOLLOWUP_QUERY_MARKERS):
+        return True
+    tokens = re.findall(r"[a-z]+", lowered)
+    return any(token in _FOLLOWUP_PRONOUNS for token in tokens)
+
+
+def _should_carry_context(
+    inspector: Any,
+    query: str,
+    conversation_context: str,
+) -> bool:
+    context_entities = _extract_context_entities(conversation_context)
+    if not context_entities:
+        return False
+    if _is_followup_query(query):
+        return True
+
+    query_keywords = {kw.lower() for kw in inspector.extract_keywords(query)}
+    context_keywords = {kw.lower() for kw in inspector.extract_keywords(" ".join(context_entities))}
+    return bool(query_keywords & context_keywords)
 
 
 def _ts() -> str:
@@ -348,10 +404,14 @@ class InvestigationWorkflow:
             for t in history[-12:]
         )
         current_query: str = state.get("query", "")
+        carry_context = _should_carry_context(self._inspector, current_query, existing_context)
+        existing_context_input = existing_context if carry_context else ""
+        formatted_input = formatted if carry_context else ""
         log.info(
-            "[context_agent] compacting session context: turns=%d existing=%s",
+            "[context_agent] compacting session context: turns=%d existing=%s carry_context=%s",
             len(history),
             bool(existing_context.strip()),
+            carry_context,
         )
 
         try:
@@ -359,8 +419,8 @@ class InvestigationWorkflow:
                 AGENT_MODELS["context_agent"],
                 CONTEXT_AGENT_PROMPT,
                 (
-                    f"EXISTING SESSION CONTEXT:\n{existing_context or 'NONE'}\n\n"
-                    f"RECENT SESSION HISTORY:\n{formatted or '(none)'}\n\n"
+                    f"EXISTING SESSION CONTEXT:\n{existing_context_input or 'NONE'}\n\n"
+                    f"RECENT SESSION HISTORY:\n{formatted_input or '(none)'}\n\n"
                     f"LATEST USER QUERY: {current_query or 'NONE'}\n\n"
                     f"LATEST ASSISTANT ANSWER:\n{latest_answer or 'NONE'}"
                 ),
@@ -400,7 +460,11 @@ class InvestigationWorkflow:
             return {
                 "conversation_context": context_block,
                 "steps": [_step("context_agent", "completed",
-                    f"Session context compacted — entities={entities_val[:60]}")],
+                    (
+                        f"Session context compacted — entities={entities_val[:60]}"
+                        if carry_context else
+                        f"Session context refreshed for new topic — entities={entities_val[:60]}"
+                    ))],
             }
 
         except Exception as exc:
@@ -438,6 +502,7 @@ class InvestigationWorkflow:
 
         # Structured session context persisted from the previous turn.
         conversation_context: str = state.get("conversation_context") or ""
+        carry_context = _should_carry_context(self._inspector, query, conversation_context)
 
         # 1. Graph lookup using keywords from the current query PLUS entities that
         #    the context_agent already extracted from conversation history.
@@ -446,16 +511,15 @@ class InvestigationWorkflow:
         query_keywords = self._inspector.extract_keywords(query)
 
         context_entity_keywords: list[str] = []
-        _m = re.search(r"<entities>(.*?)</entities>", conversation_context, re.DOTALL | re.IGNORECASE)
-        if _m:
-            _raw_ents = _m.group(1).strip()
-            if _raw_ents.upper() != "NONE":
-                context_entity_keywords = self._inspector.extract_keywords(_raw_ents)
+        if carry_context:
+            context_entities = _extract_context_entities(conversation_context)
+            if context_entities:
+                context_entity_keywords = self._inspector.extract_keywords(", ".join(context_entities))
 
         combined_keywords = list(dict.fromkeys(query_keywords + context_entity_keywords))
         log.info(
-            "[query_analyzer] keywords=%s (query=%s ctx=%s)",
-            combined_keywords, query_keywords, context_entity_keywords,
+            "[query_analyzer] keywords=%s (query=%s ctx=%s carry_context=%s)",
+            combined_keywords, query_keywords, context_entity_keywords, carry_context,
         )
 
         # 2. In-memory graph lookup (no DB call) ─────────────────────────────
@@ -819,6 +883,8 @@ class InvestigationWorkflow:
             intent=state.get("query_intent", "GENERAL"),
             routing=state.get("llm_routing", "RETRIEVE_MORE"),
             recommended_agents=state.get("recommended_agents", []),
+            answer_type=state.get("answer_type", "SUMMARY"),
+            query_entities=state.get("query_entities", []),
         )
         log.info(
             "[evaluate] decision=%s agents=%s confidence=%.2f -- %s",

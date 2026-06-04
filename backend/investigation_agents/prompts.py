@@ -45,7 +45,9 @@ Rules:
 - Output only the <context> XML block — never add prose before or after it.
 - Strip backtick formatting: write lidar-ingestion-service, not `lidar-ingestion-service`.
 - Resolve pronouns to real names: write "lidar project", not "that project" or "it".
-- Merge the prior compact context with the latest exchange; do not discard established facts unless the latest answer clearly corrects them.
+- Merge the prior compact context with the latest exchange only when the latest query is a real follow-up to the same topic.
+- If the latest query starts a new topic and does not refer back to prior entities, drop unrelated prior entities and facts instead of carrying them forward.
+- Keep only the smallest prior context needed for pronoun resolution or direct follow-up continuity.
 - Keep the result compact and useful for the next query; avoid duplicating the same fact in multiple phrasings.
 - Facts must be grounded in the existing context, recent history, or latest answer — do not invent.
 """
