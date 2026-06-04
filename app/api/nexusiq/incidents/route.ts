@@ -1,16 +1,19 @@
 import { NextResponse } from 'next/server'
-import path from 'node:path'
-import fs from 'node:fs/promises'
 
-const DATA_DIR = path.join(process.cwd(), 'data', 'nexusiq_dataset')
+const BACKEND = process.env.BACKEND_URL ?? 'http://backend-service'
 
 export async function GET() {
   try {
-    const raw = await fs.readFile(path.join(DATA_DIR, 'incidents.json'), 'utf-8')
-    const data = JSON.parse(raw)
+    const res = await fetch(`${BACKEND}/graph/incidents`, {
+      next: { revalidate: 60 },
+    })
+    if (!res.ok) {
+      throw new Error(`Backend returned ${res.status}`)
+    }
+    const data = await res.json()
     return NextResponse.json(data.incidents ?? [])
   } catch (err) {
     console.error('[nexusiq/incidents]', err)
-    return NextResponse.json({ error: 'Failed to load incidents' }, { status: 500 })
+    return NextResponse.json({ error: 'Failed to load incidents from backend' }, { status: 500 })
   }
 }
