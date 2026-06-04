@@ -75,22 +75,22 @@ log = logging.getLogger(__name__)
 # -- Model assignments ---------------------------------------------------------
 
 AGENT_MODELS: dict[str, str] = {
-    "context_agent":  "gemini-2.5-flash",
-    "query_analyzer": "gemini-2.5-flash",
-    "orchestrator":   "gemini-2.5-flash",
-    "graph":          "gemini-2.5-flash",
-    "incident":       "gemini-2.5-flash",
-    "risk":           "gemini-2.5-pro",
-    "synthesize":     "gemini-2.5-flash",
+    "context_agent":  "gemini-3.5-pro",
+    "query_analyzer": "gemini-3.5-pro",
+    "orchestrator":   "gemini-3.5-pro",
+    "graph":          "gemini-3.5-flash",
+    "incident":       "gemini-3.5-flash",
+    "risk":           "gemini-3.5-pro",
+    "synthesize":     "gemini-3.5-pro",
 }
 
 # Token budgets
-_FAST_SYNTHESIZE_TOKENS = 900     # DIRECT_RESPONSE path (conversational)
-_QUERY_ANALYZER_TOKENS  = 220    # query analysis structure extraction
-_AGENT_TOKENS           = 400    # per specialist agent
-_PLAN_TOKENS            = 320    # orchestrator plan
-_SYNTHESIZE_TOKENS      = 900    # final synthesis
-_AGENT_CONTEXT_CHARS    = 1400   # context slice per agent
+_FAST_SYNTHESIZE_TOKENS = 1200     # DIRECT_RESPONSE path (conversational)
+_QUERY_ANALYZER_TOKENS  = 450    # query analysis structure extraction
+_AGENT_TOKENS           = 800    # per specialist agent
+_PLAN_TOKENS            = 600    # orchestrator plan
+_SYNTHESIZE_TOKENS      = 1500    # final synthesis
+_AGENT_CONTEXT_CHARS    = 2000   # context slice per agent
 
 _FAST_SYSTEM_PROMPT = (
     "You are a NexusIQ answer agent. Answer the user's exact question directly "
