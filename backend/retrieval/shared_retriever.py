@@ -35,6 +35,7 @@ from __future__ import annotations
 
 import asyncio
 import logging
+import re
 import time
 from typing import Any
 
@@ -171,7 +172,7 @@ class SharedLightweightRetriever:
 
         # ── Step 5: Build shared context ──────────────────────────────────────
         formatted_ctx, sources = _format_context(fused, entities)
-        incidents    = _extract_incidents(graph_results)
+        incidents    = _extract_incidents(graph_results, fused)
         deployments  = _extract_deployments(graph_results)
         signal       = _compute_signal(fused, entities, incidents)
 
@@ -442,12 +443,52 @@ def _format_context(
     return "\n\n".join(sections), sources
 
 
-def _extract_incidents(graph_results: list[GraphResult]) -> list[dict]:
-    return [
+def _extract_incidents(
+    graph_results: list[GraphResult],
+    fused_results: list[RankedResult] | None = None,
+) -> list[dict]:
+    incidents = [
         r.metadata.get("incident", r.metadata)
         for r in graph_results
         if r.type == "incident" and r.metadata
     ]
+
+    # Backfill from vector incident documents when graph-side incident
+    # context is missing or sparse.
+    seen_ids = {
+        str(inc.get("incident_id", "")).upper()
+        for inc in incidents
+        if isinstance(inc, dict)
+    }
+    for r in fused_results or []:
+        if r.source != "vector":
+            continue
+        meta = r.metadata or {}
+        incident_id = str(meta.get("incident_id") or r.id or "").upper()
+        if not incident_id.startswith("INC-") or incident_id in seen_ids:
+            continue
+
+        title = _extract_field_from_doc(r.content, "Incident")
+        root_cause = _extract_field_from_doc(r.content, "Root cause")
+        incidents.append({
+            "incident_id": incident_id,
+            "title": title,
+            "severity": str(meta.get("severity", "")),
+            "started_at": str(meta.get("started_at", "")),
+            "ended_at": str(meta.get("ended_at", "")),
+            "root_cause": root_cause,
+            "timeline": _extract_field_from_doc(r.content, "Timeline"),
+            "source": "vector",
+        })
+        seen_ids.add(incident_id)
+
+    return incidents
+
+
+def _extract_field_from_doc(content: str, label: str) -> str:
+    pattern = rf"^{re.escape(label)}:\s*(.+)$"
+    m = re.search(pattern, content, re.IGNORECASE | re.MULTILINE)
+    return m.group(1).strip() if m else ""
 
 
 def _extract_deployments(graph_results: list[GraphResult]) -> list[dict]:

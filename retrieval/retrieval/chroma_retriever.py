@@ -64,6 +64,27 @@ class ChromaRetriever:
 
         query_embedding = await self._embedder.embed(query)
 
+        pinned_results: list[VectorResult] = []
+        if entities and entities.incidents:
+            incident_def = COLLECTIONS.get("incidents")
+            if incident_def is not None:
+                for incident_id in entities.incidents:
+                    incident_id = str(incident_id).upper()
+                    try:
+                        pinned = await self._query_collection_by_metadata(
+                            incident_def.name,
+                            query_embedding,
+                            where={"incident_id": incident_id},
+                            top_k=1,
+                        )
+                        pinned_results.extend(pinned)
+                    except Exception as exc:
+                        log.warning(
+                            "ChromaDB incident pin lookup failed for %s: %s",
+                            incident_id,
+                            exc,
+                        )
+
         all_results: list[VectorResult] = []
         for col_key in target_keys:
             col_def = COLLECTIONS.get(col_key)
@@ -83,6 +104,11 @@ class ChromaRetriever:
             except Exception as exc:
                 log.warning("ChromaDB query failed for %s: %s", col_key, exc)
                 print(f"[ChromaRetriever] ERROR: ChromaDB query failed for {col_key}: {exc}")
+
+        if pinned_results:
+            pinned_ids = {r.id for r in pinned_results}
+            remaining = [r for r in all_results if r.id not in pinned_ids]
+            all_results = pinned_results + remaining
 
         log.info("[ChromaRetriever] Search finished. Total results: %d", len(all_results))
         print(f"[ChromaRetriever] >>> SEARCH FINISHED <<< Total results: {len(all_results)}\n")
@@ -106,6 +132,36 @@ class ChromaRetriever:
         metas     = (response.get("metadatas") or [[]])[0]
         distances = (response.get("distances") or [[]])[0]
 
+        for doc_id, doc, meta, dist in zip(ids, docs, metas, distances):
+            results.append(VectorResult(
+                id=doc_id,
+                collection=collection_name,
+                document=doc or "",
+                metadata=meta or {},
+                distance=float(dist),
+            ))
+        return results
+
+    async def _query_collection_by_metadata(
+        self,
+        collection_name: str,
+        embedding: list[float],
+        where: dict[str, Any],
+        top_k: int,
+    ) -> list[VectorResult]:
+        collection = await get_or_create_collection(collection_name)
+        response = await collection.query(
+            query_embeddings=[embedding],
+            n_results=top_k,
+            where=where,
+            include=["documents", "metadatas", "distances"],
+        )
+
+        results: list[VectorResult] = []
+        ids = (response.get("ids") or [[]])[0]
+        docs = (response.get("documents") or [[]])[0]
+        metas = (response.get("metadatas") or [[]])[0]
+        distances = (response.get("distances") or [[]])[0]
         for doc_id, doc, meta, dist in zip(ids, docs, metas, distances):
             results.append(VectorResult(
                 id=doc_id,
