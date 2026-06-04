@@ -25,6 +25,61 @@ class RankedResult:
     collection: str = ""  # for vector results
 
 
+def _normalize_id(value: Any) -> str:
+    text = str(value or "").strip()
+    return text.upper()
+
+
+def _fusion_key_from_graph(result: Any) -> str:
+    item_type = str(getattr(result, "type", "") or "").lower()
+    item_id = _normalize_id(getattr(result, "id", ""))
+    if not item_id:
+        return f"graph::{id(result)}"
+    if item_type:
+        return f"{item_type}::{item_id}"
+    return f"graph::{item_id}"
+
+
+def _fusion_key_from_vector(result: Any) -> str:
+    metadata = getattr(result, "metadata", {}) or {}
+    for field_name, item_type in (
+        ("incident_id", "incident"),
+        ("deployment_id", "deployment"),
+        ("commit_id", "commit"),
+        ("ticket_id", "jira"),
+        ("doc_id", "tech_doc"),
+        ("note_id", "meeting_note"),
+        ("message_id", "slack"),
+    ):
+        value = metadata.get(field_name)
+        if value:
+            return f"{item_type}::{_normalize_id(value)}"
+
+    collection = _normalize_id(getattr(result, "collection", ""))
+    item_id = _normalize_id(getattr(result, "id", ""))
+    if collection and item_id:
+        return f"{collection}::{item_id}"
+    if item_id:
+        return f"vector::{item_id}"
+    return f"vector::{id(result)}"
+
+
+def _merge_metadata(existing: dict[str, Any], incoming: dict[str, Any], source: str) -> dict[str, Any]:
+    merged = dict(existing)
+    for key, value in incoming.items():
+        if key not in merged or merged[key] in (None, "", [], {}):
+            merged[key] = value
+
+    sources = list(merged.get("sources") or [])
+    if existing.get("source"):
+        sources.append(existing["source"])
+    if source:
+        sources.append(source)
+    if sources:
+        merged["sources"] = sorted(set(sources))
+    return merged
+
+
 def rrf_fuse(
     graph_results: list,    # list[GraphResult]
     vector_results: list,   # list[VectorResult]
@@ -48,30 +103,39 @@ def rrf_fuse(
 
     # ── Graph results ─────────────────────────────────────────────────────────
     for rank, gr in enumerate(graph_results):
-        doc_id = f"graph::{gr.id}"
+        doc_id = _fusion_key_from_graph(gr)
         scores[doc_id] = scores.get(doc_id, 0.0) + 1.0 / (_k + rank + 1)
-        if doc_id not in ranked:
+        existing = ranked.get(doc_id)
+        if existing is None:
             ranked[doc_id] = RankedResult(
                 id=gr.id,
                 source="graph",
                 content=gr.content,
-                metadata=gr.metadata,
+                metadata={**gr.metadata, "source": "graph"},
                 original_score=gr.score,
             )
+        else:
+            existing.original_score = max(existing.original_score, gr.score)
+            existing.metadata = _merge_metadata(existing.metadata, gr.metadata, "graph")
 
     # ── Vector results ────────────────────────────────────────────────────────
     for rank, vr in enumerate(vector_results):
-        doc_id = f"vector::{vr.id}"
+        doc_id = _fusion_key_from_vector(vr)
         scores[doc_id] = scores.get(doc_id, 0.0) + 1.0 / (_k + rank + 1)
-        if doc_id not in ranked:
+        existing = ranked.get(doc_id)
+        if existing is None:
             ranked[doc_id] = RankedResult(
                 id=vr.id,
                 source="vector",
                 content=vr.document,
-                metadata=vr.metadata,
+                metadata={**vr.metadata, "source": "vector"},
                 original_score=vr.score,
                 collection=vr.collection,
             )
+        else:
+            existing.original_score = max(existing.original_score, vr.score)
+            existing.collection = existing.collection or vr.collection
+            existing.metadata = _merge_metadata(existing.metadata, vr.metadata, "vector")
 
     # ── Sort by RRF score and attach ──────────────────────────────────────────
     for doc_id, rrf_score in scores.items():
