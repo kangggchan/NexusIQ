@@ -72,7 +72,10 @@ class Neo4jRetriever:
                     results.append(_commit_result(commit_ctx))
 
             # ── Deployments ───────────────────────────────────────────────────
-            # (Deployment-specific queries handled via service context above)
+            for deployment_ref in entities.deployments:
+                deployment_ctx = await q.get_deployment_context(session, deployment_ref)
+                if deployment_ctx:
+                    results.append(_deployment_result(deployment_ctx))
 
             # ── Fallback: broad service search when no entities detected ──────
             if entities.is_empty():
@@ -135,6 +138,23 @@ def _commit_result(ctx: dict) -> GraphResult:
     return GraphResult(
         id=ctx.get("id", ""),
         type="commit",
+        content=content,
+        metadata=ctx,
+        score=1.0,
+    )
+
+
+def _deployment_result(ctx: dict) -> GraphResult:
+    commit_label = ctx.get("commit_short_id") or ctx.get("commit_id") or "NONE"
+    content = (
+        f"[DEPLOYMENT {ctx.get('id', '')}] {ctx.get('service', '')} {ctx.get('version', '')}\n"
+        f"Status: {ctx.get('status', '')} | Environment: {ctx.get('env', '')} | Timestamp: {ctx.get('ts', '')}\n"
+        f"Initiated by: {ctx.get('deployed_by', '') or 'UNKNOWN'} | Source commit: {commit_label}\n"
+        f"Notes: {ctx.get('notes', '') or 'NONE'}"
+    )
+    return GraphResult(
+        id=ctx.get("id", ""),
+        type="deployment",
         content=content,
         metadata=ctx,
         score=1.0,

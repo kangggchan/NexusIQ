@@ -155,6 +155,21 @@ class EvidenceEvaluator:
             )
 
         if not agents and routing == "RETRIEVE_MORE":
+            if intent in {"INCIDENT", "RISK", "PERFORMANCE"}:
+                fallback_agent = _primary_agent_for_intent(intent, ["risk", "incident", "graph"]) or "graph"
+                return EvaluationResult(
+                    decision=EvidenceDecision.PARTIAL,
+                    recommended_agents=[fallback_agent],
+                    needs_graph_expansion=fallback_agent == "graph",
+                    needs_incident_expansion=fallback_agent == "incident",
+                    needs_risk_expansion=fallback_agent == "risk",
+                    confidence=signal.evidence_density,
+                    reasoning=(
+                        f"Routing=RETRIEVE_MORE with intent={intent} — forcing "
+                        f"{fallback_agent} specialist instead of direct response"
+                    ),
+                )
+
             if answer_type in {"INCIDENT", "RISK", "DEPENDENCY", "PERFORMANCE"}:
                 fallback_agent = _primary_agent_for_intent(intent, ["risk", "incident", "graph"]) or "graph"
                 return EvaluationResult(

@@ -170,6 +170,46 @@ async def get_recent_deployments(session: AsyncSession, service_name: str, limit
     return [dict(r) async for r in result]
 
 
+async def get_deployment_context(session: AsyncSession, deployment_ref: str) -> dict | None:
+    result = await session.run(
+        """
+        MATCH (d:Deployment)
+        WHERE toUpper(d.deployment_id) = toUpper($ref)
+        OPTIONAL MATCH (d)-[:DEPLOYED_BY]->(e:Employee)
+        OPTIONAL MATCH (d)-[:DEPLOYS]->(s:Service)
+        OPTIONAL MATCH (c:Commit {commit_id: d.commit_id})
+        RETURN
+            d.deployment_id AS id,
+            coalesce(s.name, d.service) AS service,
+            d.version AS version,
+            d.environment AS env,
+            d.status AS status,
+            d.timestamp AS ts,
+            d.notes AS notes,
+            d.commit_id AS commit_id,
+            c.short_id AS commit_short_id,
+            coalesce(e.name, e.employee_id) AS deployed_by
+        LIMIT 1
+        """,
+        ref=deployment_ref,
+    )
+    record = await result.single()
+    if not record:
+        return None
+    return {
+        "id": record["id"],
+        "service": record["service"],
+        "version": record["version"],
+        "env": record["env"],
+        "status": record["status"],
+        "ts": record["ts"],
+        "notes": record["notes"],
+        "commit_id": record["commit_id"],
+        "commit_short_id": record["commit_short_id"],
+        "deployed_by": record["deployed_by"],
+    }
+
+
 # ── Commit / Jira queries ─────────────────────────────────────────────────────
 
 async def get_commits_for_service(session: AsyncSession, service_name: str, limit: int = 10) -> list[dict]:

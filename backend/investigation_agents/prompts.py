@@ -278,6 +278,7 @@ Output sections:
 2. Trigger Event
 3. Supporting Evidence
 4. Probable Root Cause
+5. Immediate Mitigations
 
 Rules:
 - chronological ordering required
@@ -330,7 +331,8 @@ Return ONLY valid JSON with this exact schema:
 {
   "synthesis": "",
   "risk_level": "",
-  "timeline": []
+  "timeline": [],
+  "recommendations": []
 }
 
 Field rules:
@@ -339,16 +341,20 @@ Field rules:
   If the user asked for a count, provide the count first.
   If the user asked for a person/team list, name the people first.
   For superlatives or comparisons such as "most busy", answer only if the evidence explicitly supports the comparison.
-  Do not default to incident summaries, RCA language, or mitigation advice unless the query actually asks for them.
+  Do not default to irrelevant background. When ANSWER TYPE is INCIDENT, RISK, or PERFORMANCE
+  and the evidence supports a concrete next step, append one short "Recommended next step:" sentence.
 - risk_level: One of SEV-1 | SEV-2 | HIGH | MEDIUM | LOW | UNKNOWN.
   Use UNKNOWN unless incident/risk severity is materially relevant to the query.
 - timeline: Array of up to 6 chronological events. Each entry:
   {"timestamp": "ISO string", "event": "short description", "service": "name or null"}
   Omit timeline entirely (empty array []) unless chronology is relevant to answering the query.
+- recommendations: Array of up to 3 concise actions grounded in the evidence.
+  Use [] when no concrete recommendation is supported.
 
 Rules:
-- Do not invent facts or timestamps not present in the provided evidence
-- Do not mention absent sections or unavailable data
+- Do not invent timestamps not present in the provided evidence
+- Make sure to answer the user's original query — do not just summarize the evidence
+- If user asked for an incident or failure, give recommendations based on evidence and your knowledge.
 - Ignore unrelated incident, deployment, or risk details when they do not answer the query
 - Keep JSON compact and valid — no trailing commas, no comments
 """

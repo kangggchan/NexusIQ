@@ -101,6 +101,7 @@ _FULL_SYNTHESIS_GRAPH_KB_CHARS = 1200
 _RAW_SYNTHESIS_FALLBACK_CHARS = 1600
 
 _DETAIL_QUERY_MARKERS = (
+    "tell me about",
     "tell me more",
     "more about",
     "details on",
@@ -176,6 +177,33 @@ _COMMIT_QUERY_MARKERS = (
     "commit#",
     "changeset",
 )
+
+_DEPLOYMENT_QUERY_MARKERS = (
+    "deployment",
+    "deployments",
+    "rollout",
+    "release",
+    "rollback",
+    "dep-",
+)
+
+_CONTEXT_ENTITY_STOPWORDS = {
+    "context",
+    "entities",
+    "facts",
+    "summary",
+    "user",
+    "assistant",
+    "query",
+    "answer",
+    "latest",
+    "recent",
+    "history",
+    "provided",
+    "conversation",
+    "current",
+    "none",
+}
 
 _FOLLOWUP_QUERY_MARKERS = (
     "tell me more",
@@ -285,6 +313,30 @@ def _is_causal_query(query: str) -> bool:
 def _is_commit_query(query: str) -> bool:
     lowered = query.lower()
     return any(marker in lowered for marker in _COMMIT_QUERY_MARKERS)
+
+
+def _is_deployment_query(query: str) -> bool:
+    lowered = query.lower()
+    return any(marker in lowered for marker in _DEPLOYMENT_QUERY_MARKERS)
+
+
+def _clean_context_entities(raw_entities: str) -> str:
+    cleaned_entities: list[str] = []
+    seen: set[str] = set()
+    for part in raw_entities.split(","):
+        cleaned = re.sub(r"<[^>]+>", " ", part)
+        cleaned = re.sub(r"\s+", " ", cleaned).strip(" \t\n\r-:;,.`")
+        if not cleaned:
+            continue
+        lowered = cleaned.lower()
+        if lowered in _CONTEXT_ENTITY_STOPWORDS:
+            continue
+        if len(re.findall(r"[a-z0-9]", lowered)) < 2:
+            continue
+        if lowered not in seen:
+            seen.add(lowered)
+            cleaned_entities.append(cleaned)
+    return ", ".join(cleaned_entities) if cleaned_entities else "NONE"
 
 
 def _extract_context_entities(context: str) -> list[str]:
@@ -503,7 +555,13 @@ class InvestigationWorkflow:
             # Heuristic fallback: if the LLM returned NONE for entities, extract
             # keywords directly from the session context + latest exchange.
             if entities_val.upper() == "NONE":
-                fallback_text = " ".join([existing_context, formatted, current_query, latest_answer])
+                sanitized_existing_context = re.sub(r"<[^>]+>", " ", existing_context_input)
+                fallback_text = " ".join([
+                    sanitized_existing_context,
+                    formatted_input,
+                    current_query,
+                    latest_answer,
+                ])
                 kw = self._inspector.extract_keywords(fallback_text)
                 if kw:
                     entities_val = ", ".join(kw[:12])
@@ -511,6 +569,8 @@ class InvestigationWorkflow:
                         "[context_agent] LLM returned NONE entities — heuristic fallback: %s",
                         entities_val,
                     )
+
+            entities_val = _clean_context_entities(entities_val)
 
             context_block = (
                 "<context>\n"
@@ -742,6 +802,8 @@ class InvestigationWorkflow:
             performance_query = _is_performance_query(query)
             causal_query = _is_causal_query(query)
             commit_query = _is_commit_query(query)
+            deployment_query = _is_deployment_query(query)
+            followup_query = _is_followup_query(query)
 
             if intent == "GENERAL" and risk_query:
                 log.info("[query_analyzer] forcing intent GENERAL→RISK for query=%s", query[:120])
@@ -783,6 +845,44 @@ class InvestigationWorkflow:
                 log.info(
                     "[query_analyzer] forcing recommended_agents=incident for performance query"
                 )
+
+            deployment_investigation_query = (
+                deployment_query and (
+                    detail_query
+                    or causal_query
+                    or followup_query
+                    or "failed" in query_lower
+                    or "failure" in query_lower
+                    or "what happened" in query_lower
+                    or "how did" in query_lower
+                    or "why did" in query_lower
+                    or "when did" in query_lower
+                )
+            )
+            if deployment_investigation_query:
+                if intent != "INCIDENT":
+                    log.info(
+                        "[query_analyzer] forcing intent %s→INCIDENT for deployment investigation query",
+                        intent,
+                    )
+                    intent = "INCIDENT"
+                if answer_type != "INCIDENT":
+                    log.info(
+                        "[query_analyzer] forcing answer_type %s→INCIDENT for deployment investigation query",
+                        answer_type,
+                    )
+                    answer_type = "INCIDENT"
+                if routing != "RETRIEVE_MORE":
+                    log.info(
+                        "[query_analyzer] forcing routing %s→RETRIEVE_MORE for deployment investigation query",
+                        routing,
+                    )
+                    routing = "RETRIEVE_MORE"
+                if "incident" not in recommended_agents:
+                    recommended_agents = ["incident"]
+                    log.info(
+                        "[query_analyzer] forcing recommended_agents=incident for deployment investigation query"
+                    )
 
             if status_query and answer_type in {"GENERAL", "SUMMARY", "PROFILE"}:
                 log.info(
