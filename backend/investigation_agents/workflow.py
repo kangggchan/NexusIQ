@@ -922,6 +922,19 @@ class InvestigationWorkflow:
                     "[query_analyzer] forcing recommended_agents=incident for explicit commit query"
                 )
 
+            if causal_query and not recommended_agents:
+                recommended_agents = ["graph", "incident"] if has_match else ["incident"]
+                log.info(
+                    "[query_analyzer] forcing recommended_agents=%s for causal query",
+                    recommended_agents,
+                )
+            elif performance_query and not recommended_agents:
+                recommended_agents = ["graph", "incident"] if has_match else ["incident"]
+                log.info(
+                    "[query_analyzer] forcing recommended_agents=%s for performance query",
+                    recommended_agents,
+                )
+
             if has_match and (detail_query or comparison_query):
                 if routing == "GRAPH_SUFFICIENT":
                     log.info(

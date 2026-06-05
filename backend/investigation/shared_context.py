@@ -13,10 +13,36 @@ Design principles:
 """
 from __future__ import annotations
 
+import re
 import time
 from dataclasses import dataclass, field
 from enum import Enum
 from typing import Any
+
+
+_QUERY_TERM_STOPWORDS = {
+    "about",
+    "after",
+    "before",
+    "caused",
+    "cause",
+    "current",
+    "from",
+    "have",
+    "latency",
+    "most",
+    "recent",
+    "risk",
+    "services",
+    "spike",
+    "that",
+    "their",
+    "them",
+    "what",
+    "which",
+    "with",
+    "why",
+}
 
 
 class InvestigationDepth(str, Enum):
@@ -118,6 +144,37 @@ class SharedInvestigationContext:
         elif agent == "incident":
             # Incident agent: incidents + deployments + timeline
             parts: list[str] = []
+
+            query_terms = {
+                term.lower()
+                for term in re.findall(r"[a-z0-9-]+", self.query or "")
+                if len(term) >= 3 and term.lower() not in _QUERY_TERM_STOPWORDS
+            }
+            if query_terms:
+                scored_docs: list[tuple[float, dict]] = []
+                for doc in self.retrieved_documents:
+                    content = str(doc.get("content", ""))
+                    if not content:
+                        continue
+                    collection = str(doc.get("collection", "") or "").lower()
+                    source = str(doc.get("source", "") or "").lower()
+                    haystack = f"{doc.get('id', '')} {content}".lower()
+                    overlap = sum(1 for term in query_terms if term in haystack)
+                    if overlap == 0:
+                        continue
+                    source_bonus = 0.0
+                    if source == "vector":
+                        source_bonus += 0.25
+                    if any(key in collection for key in ("incident", "jira", "deployment", "commit", "slack")):
+                        source_bonus += 0.25
+                    scored_docs.append((overlap + source_bonus, doc))
+                scored_docs.sort(key=lambda item: item[0], reverse=True)
+                if scored_docs:
+                    focused_docs = [
+                        f"  [{doc.get('id', 'unknown')}] {str(doc.get('content', ''))[:420]}"
+                        for _, doc in scored_docs[:4]
+                    ]
+                    parts.append("[QUERY-ALIGNED EVIDENCE]\n" + "\n\n".join(focused_docs))
 
             # Promote documents that match explicitly requested incident IDs
             # (for example INC-001) so the incident agent can reconstruct the

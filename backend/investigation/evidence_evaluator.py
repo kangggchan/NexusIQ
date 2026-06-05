@@ -237,6 +237,22 @@ class EvidenceEvaluator:
 
         # High-confidence retrieval usually needs one specialist only.
         if signal.signal_strength == SignalStrength.HIGH and len(agents) > 1:
+            if intent == "PERFORMANCE" and "graph" in agents and "incident" in agents:
+                selected_agents = ["graph", "incident"]
+                reasoning_suffix = " (high-signal performance path: keeping graph+incident specialists)"
+                return EvaluationResult(
+                    decision=EvidenceDecision.PARTIAL,
+                    recommended_agents=selected_agents,
+                    needs_graph_expansion=True,
+                    needs_incident_expansion=True,
+                    needs_risk_expansion=False,
+                    confidence=signal.evidence_density,
+                    reasoning=(
+                        f"LLM-recommended targeted analysis — intent={intent} "
+                        f"agents={selected_agents}{reasoning_suffix}"
+                    ),
+                )
+
             primary = _primary_agent_for_intent(intent, agents)
             selected_agents = [primary] if primary else agents[:1]
 
