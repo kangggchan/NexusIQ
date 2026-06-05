@@ -170,7 +170,19 @@ class EvidenceEvaluator:
                     ),
                 )
 
-            if answer_type in {"PROFILE", "STATUS"} and entity_count >= 2:
+            if answer_type == "STATUS":
+                return EvaluationResult(
+                    decision=EvidenceDecision.PARTIAL,
+                    recommended_agents=["graph"],
+                    needs_graph_expansion=True,
+                    confidence=signal.evidence_density,
+                    reasoning=(
+                        "Routing=RETRIEVE_MORE with answer_type=STATUS — forcing graph specialist "
+                        "instead of direct response"
+                    ),
+                )
+
+            if answer_type == "PROFILE" and entity_count >= 2:
                 return EvaluationResult(
                     decision=EvidenceDecision.PARTIAL,
                     recommended_agents=["graph"],

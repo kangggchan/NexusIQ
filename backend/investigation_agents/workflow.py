@@ -136,6 +136,18 @@ _RISK_QUERY_MARKERS = (
     "failed deployment",
 )
 
+_STATUS_QUERY_MARKERS = (
+    "progress",
+    "status",
+    "current state",
+    "update on",
+    "updates on",
+    "how is",
+    "how are",
+    "contribution",
+    "contributions",
+)
+
 _FOLLOWUP_QUERY_MARKERS = (
     "tell me more",
     "more about",
@@ -222,6 +234,11 @@ def _is_comparison_query(query: str) -> bool:
 def _is_risk_query(query: str) -> bool:
     lowered = query.lower()
     return any(marker in lowered for marker in _RISK_QUERY_MARKERS)
+
+
+def _is_status_query(query: str) -> bool:
+    lowered = query.lower()
+    return any(marker in lowered for marker in _STATUS_QUERY_MARKERS)
 
 
 def _extract_context_entities(context: str) -> list[str]:
@@ -675,10 +692,30 @@ class InvestigationWorkflow:
             detail_query = _is_detail_query(query)
             comparison_query = _is_comparison_query(query)
             risk_query = _is_risk_query(query)
+            status_query = _is_status_query(query)
 
             if intent == "GENERAL" and risk_query:
                 log.info("[query_analyzer] forcing intent GENERAL→RISK for query=%s", query[:120])
                 intent = "RISK"
+
+            if status_query and answer_type in {"GENERAL", "SUMMARY", "PROFILE"}:
+                log.info(
+                    "[query_analyzer] forcing answer_type %s→STATUS for status/progress query",
+                    answer_type,
+                )
+                answer_type = "STATUS"
+
+            if status_query and routing == "GRAPH_SUFFICIENT":
+                log.info(
+                    "[query_analyzer] forcing routing GRAPH_SUFFICIENT→RETRIEVE_MORE for status/progress query"
+                )
+                routing = "RETRIEVE_MORE"
+
+            if status_query and has_match and not recommended_agents:
+                recommended_agents = ["graph"]
+                log.info(
+                    "[query_analyzer] forcing recommended_agents=graph for status/progress query"
+                )
 
             if has_match and (detail_query or comparison_query):
                 if routing == "GRAPH_SUFFICIENT":
