@@ -65,6 +65,7 @@ class EntityDetector:
         self._service_lower: list[str] = []
         self._employee_names: list[str] = []
         self._employee_lower: list[str] = []
+        self._commit_aliases: dict[str, str] = {}
         self._loaded = False
 
     async def load(self) -> None:
@@ -83,11 +84,24 @@ class EntityDetector:
                 self._employee_names = [record["name"] async for record in emp_result if record["name"]]
                 self._employee_lower = [n.lower() for n in self._employee_names]
 
+                commit_result = await session.run(
+                    "MATCH (c:Commit) RETURN c.commit_id AS id, c.short_id AS short_id"
+                )
+                self._commit_aliases = {}
+                async for record in commit_result:
+                    commit_id = str(record["id"] or "").strip()
+                    short_id = str(record.get("short_id") or "").strip()
+                    if commit_id:
+                        self._commit_aliases[commit_id.lower()] = commit_id
+                    if short_id:
+                        self._commit_aliases[short_id.lower()] = commit_id or short_id
+
             self._loaded = True
             log.info(
-                "EntityDetector loaded from Neo4j: %d services, %d employees",
+                "EntityDetector loaded from Neo4j: %d services, %d employees, %d commit aliases",
                 len(self._service_names),
                 len(self._employee_names),
+                len(self._commit_aliases),
             )
         except Exception as exc:
             log.warning("EntityDetector could not load catalog from Neo4j: %s", exc)
@@ -121,10 +135,16 @@ class EntityDetector:
 
         # Commit SHAs (avoid matching plain numbers; require hex pattern)
         commit_candidates = _RE_COMMIT_SHA.findall(query)
+        explicit_commit_refs = re.findall(r"\bcommit\s+([a-z0-9-]+)\b", query_lower)
         # Filter out pure decimal strings that happen to match 7-8 digits
-        entities.commits = _unique([
-            c for c in commit_candidates if not c.isdigit()
-        ])
+        resolved_commits: list[str] = []
+        for ref in explicit_commit_refs + commit_candidates:
+            canonical = self._commit_aliases.get(ref.lower())
+            if canonical:
+                resolved_commits.append(canonical)
+            elif not ref.isdigit():
+                resolved_commits.append(ref)
+        entities.commits = _unique(resolved_commits)
 
         return entities
 

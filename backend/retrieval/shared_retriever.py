@@ -248,6 +248,11 @@ class SharedLightweightRetriever:
             cache_keys.append(k)
             tasks.append(self._fetch_or_cache_employee(emp, k))
 
+        for commit_ref in entities.commits:
+            k = graph_key(commit_ref, 0, "commit")
+            cache_keys.append(k)
+            tasks.append(self._fetch_or_cache_commit(commit_ref, k))
+
         if not tasks:
             return await self._neo4j.retrieve(entities, query)
 
@@ -320,6 +325,21 @@ class SharedLightweightRetriever:
                         "services": svcs,
                     },
                 ))
+        await self._graph_cache.set(cache_k, results, ttl=GRAPH_TTL)
+        return results
+
+    async def _fetch_or_cache_commit(
+        self, commit_ref: str, cache_k: str
+    ) -> list[GraphResult]:
+        cached = await self._graph_cache.get(cache_k)
+        if cached is not None:
+            return cached
+        results: list[GraphResult] = []
+        async with get_session() as session:
+            commit_ctx = await q.get_commit_context(session, commit_ref)
+            if commit_ctx:
+                from retrieval.retrieval.neo4j_retriever import _commit_result
+                results.append(_commit_result(commit_ctx))
         await self._graph_cache.set(cache_k, results, ttl=GRAPH_TTL)
         return results
 
@@ -606,6 +626,8 @@ def _entity_summary(entities: DetectedEntities) -> str:
         parts.append(f"services={entities.services}")
     if entities.employees:
         parts.append(f"employees={entities.employees}")
+    if entities.commits:
+        parts.append(f"commits={entities.commits}")
     return ", ".join(parts) or "none"
 
 

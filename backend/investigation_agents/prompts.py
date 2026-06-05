@@ -183,8 +183,9 @@ or whether specialist agents are needed for deeper analysis. When agents
 are needed, activate ONLY the ones relevant to the question.
 
 Investigation modes:
-  DIRECT — The retrieved context + conversation history is sufficient to give
-           a complete, accurate answer. Use for narrow, factual lookups:
+  DIRECT — The retrieved context is sufficient to give
+           a complete, accurate answer. Conversation history is reference-only
+           for pronoun/topic resolution, never evidence. Use for narrow, factual lookups:
            status of a single service, a specific incident ID, a single metric.
 
   FULL   — Requires specialist agents. Activate ONLY the agents relevant:

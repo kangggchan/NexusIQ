@@ -187,6 +187,44 @@ async def get_commits_for_service(session: AsyncSession, service_name: str, limi
     return [dict(r) async for r in result]
 
 
+async def get_commit_context(session: AsyncSession, commit_ref: str) -> dict | None:
+    result = await session.run(
+        """
+        MATCH (c:Commit)
+        WHERE toString(c.commit_id) = $ref
+           OR toLower(coalesce(c.commit_id, '')) = toLower($ref)
+           OR toLower(coalesce(c.short_id, '')) = toLower($ref)
+        OPTIONAL MATCH (c)-[:MODIFIES]->(s:Service)
+        OPTIONAL MATCH (c)-[:AUTHORED_BY]->(e:Employee)
+        OPTIONAL MATCH (c)-[:REFERENCES]->(t:JiraTicket)
+        RETURN
+            c.commit_id AS id,
+            c.short_id AS short_id,
+            c.message AS message,
+            c.timestamp AS ts,
+            c.branch AS branch,
+            coalesce(e.name, c.author_name) AS author,
+            collect(DISTINCT s.name) AS services,
+            collect(DISTINCT t.ticket_id) AS jira_ticket_ids
+        LIMIT 1
+        """,
+        ref=commit_ref,
+    )
+    record = await result.single()
+    if not record:
+        return None
+    return {
+        "id": record["id"],
+        "short_id": record["short_id"],
+        "message": record["message"],
+        "ts": record["ts"],
+        "branch": record["branch"],
+        "author": record["author"],
+        "services": [svc for svc in record["services"] if svc],
+        "jira_ticket_ids": [ticket for ticket in record["jira_ticket_ids"] if ticket],
+    }
+
+
 async def get_jira_tickets_for_service(session: AsyncSession, service_name: str) -> list[dict]:
     result = await session.run(
         """

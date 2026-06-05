@@ -65,6 +65,12 @@ class Neo4jRetriever:
                         metadata={"employee_id": emp_id, "services": svcs},
                     ))
 
+            # ── Commits ───────────────────────────────────────────────────────
+            for commit_ref in entities.commits:
+                commit_ctx = await q.get_commit_context(session, commit_ref)
+                if commit_ctx:
+                    results.append(_commit_result(commit_ctx))
+
             # ── Deployments ───────────────────────────────────────────────────
             # (Deployment-specific queries handled via service context above)
 
@@ -109,6 +115,26 @@ def _incident_result(ctx: dict) -> GraphResult:
     return GraphResult(
         id=inc.get("incident_id", ""),
         type="incident",
+        content=content,
+        metadata=ctx,
+        score=1.0,
+    )
+
+
+def _commit_result(ctx: dict) -> GraphResult:
+    services = ", ".join(ctx.get("services", [])) or "NONE"
+    jira_tickets = ", ".join(ctx.get("jira_ticket_ids", [])) or "NONE"
+    short_id = ctx.get("short_id") or ""
+    label = f"{ctx.get('id', '')} ({short_id})" if short_id else ctx.get("id", "")
+    content = (
+        f"[COMMIT {label}] {ctx.get('message', '')}\n"
+        f"Author: {ctx.get('author', '')} | Branch: {ctx.get('branch', '')} | Timestamp: {ctx.get('ts', '')}\n"
+        f"Services modified: {services}\n"
+        f"Linked Jira tickets: {jira_tickets}"
+    )
+    return GraphResult(
+        id=ctx.get("id", ""),
+        type="commit",
         content=content,
         metadata=ctx,
         score=1.0,

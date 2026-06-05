@@ -148,6 +148,35 @@ _STATUS_QUERY_MARKERS = (
     "contributions",
 )
 
+_PERFORMANCE_QUERY_MARKERS = (
+    "latency",
+    "throughput",
+    "p95",
+    "p99",
+    "slow",
+    "slowness",
+    "spike",
+    "regression",
+    "performance",
+)
+
+_CAUSAL_QUERY_MARKERS = (
+    "what caused",
+    "cause of",
+    "caused",
+    "why did",
+    "why was",
+    "why is",
+    "root cause",
+    "reason for",
+)
+
+_COMMIT_QUERY_MARKERS = (
+    "commit ",
+    "commit#",
+    "changeset",
+)
+
 _FOLLOWUP_QUERY_MARKERS = (
     "tell me more",
     "more about",
@@ -168,7 +197,9 @@ _FOLLOWUP_PRONOUNS = {
 
 _FAST_SYSTEM_PROMPT = (
     "You are a NexusIQ answer agent. Answer the user's exact question directly "
-    "using only the provided context. Give the answer in the first sentence. "
+    "using only the provided evidence from retrieved documents and graph results. "
+    "Conversation context is reference-only for pronouns and topic continuity, "
+    "never factual evidence. Give the answer in the first sentence. "
     "If the question asks for a count, state the number explicitly. Ignore "
     "unrelated incidents or background details. If evidence is insufficient, "
     "say exactly what is known and what is missing. For superlatives or "
@@ -239,6 +270,21 @@ def _is_risk_query(query: str) -> bool:
 def _is_status_query(query: str) -> bool:
     lowered = query.lower()
     return any(marker in lowered for marker in _STATUS_QUERY_MARKERS)
+
+
+def _is_performance_query(query: str) -> bool:
+    lowered = query.lower()
+    return any(marker in lowered for marker in _PERFORMANCE_QUERY_MARKERS)
+
+
+def _is_causal_query(query: str) -> bool:
+    lowered = query.lower()
+    return any(marker in lowered for marker in _CAUSAL_QUERY_MARKERS)
+
+
+def _is_commit_query(query: str) -> bool:
+    lowered = query.lower()
+    return any(marker in lowered for marker in _COMMIT_QUERY_MARKERS)
 
 
 def _extract_context_entities(context: str) -> list[str]:
@@ -693,10 +739,50 @@ class InvestigationWorkflow:
             comparison_query = _is_comparison_query(query)
             risk_query = _is_risk_query(query)
             status_query = _is_status_query(query)
+            performance_query = _is_performance_query(query)
+            causal_query = _is_causal_query(query)
+            commit_query = _is_commit_query(query)
 
             if intent == "GENERAL" and risk_query:
                 log.info("[query_analyzer] forcing intent GENERAL→RISK for query=%s", query[:120])
                 intent = "RISK"
+
+            if intent == "GENERAL" and (performance_query or causal_query):
+                log.info(
+                    "[query_analyzer] forcing intent GENERAL→PERFORMANCE for performance/causal query"
+                )
+                intent = "PERFORMANCE"
+
+            if performance_query and answer_type in {"GENERAL", "SUMMARY"}:
+                log.info(
+                    "[query_analyzer] forcing answer_type %s→PERFORMANCE for performance query",
+                    answer_type,
+                )
+                answer_type = "PERFORMANCE"
+
+            if causal_query and answer_type in {"GENERAL", "SUMMARY", "PERFORMANCE"}:
+                log.info(
+                    "[query_analyzer] forcing answer_type %s→INCIDENT for causal query",
+                    answer_type,
+                )
+                answer_type = "INCIDENT"
+
+            if (performance_query or causal_query) and routing == "GRAPH_SUFFICIENT":
+                log.info(
+                    "[query_analyzer] forcing routing GRAPH_SUFFICIENT→RETRIEVE_MORE for performance/causal query"
+                )
+                routing = "RETRIEVE_MORE"
+
+            if causal_query and not recommended_agents:
+                recommended_agents = ["incident"]
+                log.info(
+                    "[query_analyzer] forcing recommended_agents=incident for causal query"
+                )
+            elif performance_query and not recommended_agents:
+                recommended_agents = ["incident"]
+                log.info(
+                    "[query_analyzer] forcing recommended_agents=incident for performance query"
+                )
 
             if status_query and answer_type in {"GENERAL", "SUMMARY", "PROFILE"}:
                 log.info(
@@ -715,6 +801,25 @@ class InvestigationWorkflow:
                 recommended_agents = ["graph"]
                 log.info(
                     "[query_analyzer] forcing recommended_agents=graph for status/progress query"
+                )
+
+            if commit_query and answer_type in {"GENERAL", "SUMMARY"}:
+                log.info(
+                    "[query_analyzer] forcing answer_type %s→INCIDENT for explicit commit query",
+                    answer_type,
+                )
+                answer_type = "INCIDENT"
+
+            if commit_query and routing == "GRAPH_SUFFICIENT":
+                log.info(
+                    "[query_analyzer] forcing routing GRAPH_SUFFICIENT→RETRIEVE_MORE for explicit commit query"
+                )
+                routing = "RETRIEVE_MORE"
+
+            if commit_query and not recommended_agents:
+                recommended_agents = ["incident"]
+                log.info(
+                    "[query_analyzer] forcing recommended_agents=incident for explicit commit query"
                 )
 
             if has_match and (detail_query or comparison_query):
@@ -1226,15 +1331,17 @@ class InvestigationWorkflow:
                 )
             else:
                 user_msg = (
-                    f"CONVERSATION CONTEXT:\n{conv_ctx or '(none)'}\n\n"
+                    f"REFERENCE CONTEXT (for pronoun/topic resolution only; not evidence):\n{conv_ctx or '(none)'}\n\n"
                     f"ANSWER TYPE: {state.get('answer_type', 'SUMMARY')}\n"
                     f"QUERY INTENT: {state.get('query_intent', 'GENERAL')}\n"
                     f"ANSWER GOAL: {state.get('answer_goal', state['query'])}\n\n"
                     f"QUERY: {state['query']}\n\n"
-                    f"CONTEXT:\n{context_text}\n\n"
-                    "Answer the query using the provided context and conversation context. "
-                    "Answer the user's exact question first. Prefer GRAPH KNOWLEDGE BASE "
-                    "information for entity/person details. Ignore unrelated incident details."
+                    f"EVIDENCE:\n{context_text}\n\n"
+                    "Answer the query using only the EVIDENCE block. Use REFERENCE CONTEXT "
+                    "only to resolve what the user is referring to. If a fact is not present "
+                    "in EVIDENCE, say the evidence does not show it. Answer the user's exact "
+                    "question first. Prefer GRAPH KNOWLEDGE BASE information for entity/person "
+                    "details. Ignore unrelated incident details."
                 )
             try:
                 answer = await self._chat(

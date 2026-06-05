@@ -33,7 +33,7 @@ def _primary_agent_for_intent(intent: str, agents: list[str]) -> str | None:
         "RISK": "risk",
         "INCIDENT": "incident",
         "TOPOLOGY": "graph",
-        "PERFORMANCE": "risk",
+        "PERFORMANCE": "incident",
     }
     preferred = preferred_by_intent.get(intent)
     if preferred in agents:
@@ -155,7 +155,7 @@ class EvidenceEvaluator:
             )
 
         if not agents and routing == "RETRIEVE_MORE":
-            if answer_type in {"INCIDENT", "RISK", "DEPENDENCY"}:
+            if answer_type in {"INCIDENT", "RISK", "DEPENDENCY", "PERFORMANCE"}:
                 fallback_agent = _primary_agent_for_intent(intent, ["risk", "incident", "graph"]) or "graph"
                 return EvaluationResult(
                     decision=EvidenceDecision.PARTIAL,
